@@ -16,19 +16,15 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
 
-/**
- *
- * @author author
- */
 public class Question implements Serializable {
 
   public enum QuestionSource {
     GRE_1986("1986"), GRE_1991("1991"), GRE_1995("1995"), GRE_2001("2001"), GRE_2008("2008"),
-    SAMPLE_1("PT1"), SAMPLE_2("PT2"), SAMPLE_3("PT3"), PRACTICE_BOOK("BOOK"), 
+    SAMPLE_1("PT1"), SAMPLE_2("PT2"), SAMPLE_3("PT3"), PRACTICE_BOOK("BOOK"),
     TEXTBOOK("TEXT"), CUSTOM("CUST"), OTHER("OTHER");
 
     private String name;
-    
+
     QuestionSource(String name) {
       this.name = name;
     }
@@ -36,20 +32,20 @@ public class Question implements Serializable {
       return name;
     }
   }
-  
+
   public enum Answer {
     A, B, C, D, E
   }
-  
+
   public enum Subject {
     MECHANICS, FLUIDS, ROTATIONAL, EM, CIRCUITS, WAVES, OPTICS, RELATIVITY, QM, ATOMIC, THERMO,
     SPECIAL, LAB_METHODS, MATH, OTHER
   }
-  
+
   public enum Tag {
     WRONG, HARD, TIME, UNSURE, IMPORTANT
   }
-  
+
   // Permanent fields central to class.
   public Integer id = null;
   public QuestionSource source = null;
@@ -59,12 +55,12 @@ public class Question implements Serializable {
   public ArrayList<Subject> subjects = new ArrayList<>();
   public ArrayList<Tag> tags = new ArrayList<>();
   public ArrayList<String> notes = new ArrayList<>();
-  
+
   // Transient fields which do not get serialized.
   public String originalImageFilename = null;
   public BufferedImage questionImage = null;
   public Boolean persistent = false;
-  
+
   /**
    * Constructor designed for importing questions.
    * @param source The {QuestionSource} representing where question originated from.
@@ -76,11 +72,11 @@ public class Question implements Serializable {
     this.questionNumber = questionNumber;
     this.answer = answer;
     this.originalImageFilename = imageFilename;
-    
+
     this.persistent = false;
     this.databaseImageFilename = null;
   }
-  
+
   /**
    * Constructor designed for reading questions from database.
    */
@@ -89,7 +85,7 @@ public class Question implements Serializable {
     this.persistent = true;
     this._loadFromQuestionFile();
   }
-  
+
   private void _loadFromQuestionFile() {
     try {
       BufferedReader br = IO.getBufferedReaderOrDie(Constants.getQuestionDataFilename(this));
@@ -98,12 +94,12 @@ public class Question implements Serializable {
       throw new FatalError("loadFromQuestionFile failed", ex);
     }
   }
-  
+
   public final static String GET_QUESTION_IMAGE_FILENAME(Question q) {
     if (q.getId() == null) {
       throw new IllegalArgumentException("Cannot generate filename for question without id");
     }
-    
+
     String fname = QUESTION_IMAGE_DIR + "/";
     if (q.source != null) {
       fname += q.source.getOuputName();
@@ -114,23 +110,24 @@ public class Question implements Serializable {
     fname += " ID-" + q.getId();
     return fname;
   }
-   
+
   public BufferedImage getImage() {
     if (this.questionImage != null) {
       return this.questionImage;
     } else {
       System.out.printf("LOG: No bufferered image found for question: %s", this);
-      return IO.loadImageOrDie(this.databaseImageFilename);
+      this.questionImage = IO.loadImageOrDie(this.databaseImageFilename);
+      return this.questionImage;
     }
   }
-  
+
   public boolean hasId() { return this.id != null; }
   public void setId(int id) { this.id = id; }
   public Integer getId() { return this.id; }
-  
+
   private void _setFromQuestionFileLine(String field, String value) {
     switch (field) {
-      case "id": 
+      case "id":
         this.id = Integer.parseInt(value);
         break;
       case "source":
@@ -172,7 +169,7 @@ public class Question implements Serializable {
         throw new IllegalStateException("Unknown object line: " + field);
     }
   }
-  
+
   private void _fromQuestionFile(BufferedReader fileReader) throws IOException {
     String line;
     while ((line = fileReader.readLine()) != null) {
@@ -184,6 +181,6 @@ public class Question implements Serializable {
       this._setFromQuestionFileLine(key, value);
     }
   }
-  
-  
+
+
 }

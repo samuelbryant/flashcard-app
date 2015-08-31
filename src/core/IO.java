@@ -21,29 +21,25 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import core.FatalError;
 
-/**
- *
- * @author author
- */
 public class IO {
-  
+
   public static boolean fileExists(String name) {
     File f = new File(name);
     return f.exists();
   }
-  
+
   public static void createDirOrDie(String dirname) {
     File dir = new File(dirname);
     if (dir.exists() && dir.isDirectory()) {
       return;
     } else if (dir.exists()) {
-      throw new FatalError("createDirOrDie failed for file: " + dirname 
+      throw new FatalError("createDirOrDie failed for file: " + dirname
             + ". (Tried to create dir with same name as non-dir)");
-    }    
+    }
     dir.mkdir();
     existsOrDie(dir);
   }
-  
+
   public static void createOrDie(String filename) {
     File file = new File(filename);
     if (file.exists()) {
@@ -56,7 +52,7 @@ public class IO {
       throw new FatalError("createOrDie failed for file: " + filename, ex);
     }
   }
-  
+
   public static void existsOrDie(String filename) {
     existsOrDie(new File(filename));
   }
@@ -74,7 +70,7 @@ public class IO {
       throw new FatalError("notExistsOrDie failed for file: " + file);
     }
   }
-  
+
   public static void deleteOrDie(String filename) {
     File file = new File(filename);
     if (file.exists()) {
@@ -82,17 +78,17 @@ public class IO {
     }
     notExistsOrDie(file);
   }
-  
+
   public static void copyOrDie(String srcFilename, String dstFilename) {
     File src = new File(srcFilename);
     File dst = new File(dstFilename);
     if (!src.exists()) {
       return;
     }
-   
+
     // Ensure target file is non-existent.
     deleteOrDie(dstFilename);
-   
+
     // Copy file.
     try {
       Files.copy(src.toPath(), dst.toPath());
@@ -100,32 +96,32 @@ public class IO {
       throw new FatalError(
           "copyOrDie failed for '" + srcFilename + "' -> '" + dstFilename + "'", ex);
     }
-    
+
     // Check if target exists.
     existsOrDie(dst);
   }
-  
+
   public static void backupAndRecreateOrDie(String filename) {
     File file = new File(filename);
     if (!file.exists()) {
       return;
     }
-    
+
     String backupFilename = filename + ".backup";
-    
-    // Delete backup file if it exists. 
+
+    // Delete backup file if it exists.
     deleteOrDie(backupFilename);
-    
+
     // Copy current file to backup file.
     copyOrDie(filename, backupFilename);
-    
+
     // Delete target file.
     deleteOrDie(filename);
-    
+
     // Recreate file.
     createOrDie(filename);
   }
-  
+
   public static void closeOrLive(Closeable c) {
     try {
       c.close();
@@ -133,7 +129,7 @@ public class IO {
       System.out.printf("LOG: Could not close closeable %o", c);
     }
   }
-  
+
   public static BufferedReader getBufferedReaderOrLive(String filename) {
     try {
       return new BufferedReader(new FileReader(filename));
@@ -153,7 +149,7 @@ public class IO {
   public static PrintWriter getPrintWriterOrDie(String filename) {
     try {
       createOrDie(filename);
-      
+
       PrintWriter pw = new PrintWriter(filename);
       if (pw == null) throw new IOException();
       return pw;
@@ -165,7 +161,7 @@ public class IO {
   public static ObjectOutputStream getObjectOutputStreamOrDie(String filename) {
     try {
       createOrDie(filename);
-      
+
       ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename));
       if (oos == null) throw new IOException();
       return oos;
@@ -182,7 +178,7 @@ public class IO {
     } catch(IOException ex) {
       throw new FatalError("loadImageOrDie failed for: " + filename, ex);
     }
-  }  
+  }
 
   public static BufferedReader getBufferedReaderOrDie(String filename) {
     try {

@@ -14,25 +14,24 @@ import core.IO;
  * @author author
  */
 public class Constants {
-  
-  public static final String OUTPUT_DIR = "output";
-  public static final String QUESTION_DATA_DIR = "output/questions";
-  public static final String QUESTION_IMAGE_DIR = "output/question_images";
-  public static final String QUESTION_DATABASE_MAIN_FILE = "output/questions/database.txt";
-  public static final String QUESTION_DATABASE_DATA_FILE = "output/questions/serialized.bin";
-  
+
+  public static final String OUTPUT_DIR = "database";
+  public static final String QUESTION_DATA_DIR = "database/question_data";
+  public static final String QUESTION_IMAGE_DIR = "database/question_images";
+  public static final String QUESTION_DATABASE_MAIN_FILE = "database/database.txt";
+
   // Ensure that output file hierarchy exists.
   public final static void setupProjectDirectories() {
     core.IO.createDirOrDie(OUTPUT_DIR);
     core.IO.createDirOrDie(QUESTION_DATA_DIR);
-    IO.createDirOrDie(QUESTION_IMAGE_DIR);
+    core.IO.createDirOrDie(QUESTION_IMAGE_DIR);
   }
-  
+
   public final static String getQuestionImageFilename(Question q) {
     if (q.getId() == null) {
       throw new IllegalArgumentException("Cannot generate filename for question without id");
     }
-    
+
     String fname = QUESTION_IMAGE_DIR + "/";
     if (q.source != null) {
       fname += q.source.getOuputName();
@@ -43,7 +42,7 @@ public class Constants {
     fname += " ID-" + q.getId() + ".png";
     return fname;
   }
-  
+
   public final static String getQuestionDataFilename(Question q) {
     if (q.getId() == null) {
       throw new IllegalArgumentException("Cannot generate filename for question without id");
@@ -52,9 +51,9 @@ public class Constants {
     fname += " ID-" + q.getId() + ".txt";
     return fname;
   }
-  
+
   public static void main(String[] args) {
     setupProjectDirectories();
   }
-  
+
 }

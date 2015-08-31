@@ -2,7 +2,7 @@ id:1013
 source:GRE_1986
 questionNumber:13
 answer:E
-databaseImageFilename:output/question_images/1986 Q-13 ID-1013.png
+databaseImageFilename:database/question_images/1986 Q-13 ID-1013.png
 subjects:
 tags:
 notes:

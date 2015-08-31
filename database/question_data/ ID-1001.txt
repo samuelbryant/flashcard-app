@@ -2,7 +2,7 @@ id:1001
 source:GRE_1986
 questionNumber:1
 answer:B
-databaseImageFilename:output/question_images/1986 Q-1 ID-1001.png
+databaseImageFilename:database/question_images/1986 Q-1 ID-1001.png
 subjects:
 tags:
 notes:

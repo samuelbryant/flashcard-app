@@ -1,50 +1,67 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui.questions.components;
 
 import flashcard.question.Question;
 import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import ui.components.FAButton;
 import ui.questions.QuestionListController;
 import ui.questions.QuestionListDisplay;
 
-/**
- *
- * @author author
- */
 public class AnswerPanel extends JPanel {
-  
-  private QuestionListController ctrl;
-  
+
+  private final QuestionListController _ctrl;
+
+  public class AnswerButton extends FAButton implements ActionListener {
+
+    private final Question.Answer _answer;
+
+    public AnswerButton(Question.Answer answer) {
+      super(answer.name());
+      this._answer = answer;
+    }
+
+    @Override
+    public void paintComponent(Graphics gr) {
+      this.setBackground(Color.WHITE);
+
+      if (AnswerPanel.this._ctrl.isAnswered()) {
+        boolean isSelected = this._answer == AnswerPanel.this._ctrl.getSelectedAnswer();
+        boolean isCorrect = this._answer == AnswerPanel.this._ctrl.getCorrectAnswer();
+
+        if (isSelected && !isCorrect) {
+          this.setBackground(Color.RED);
+        } else if (isCorrect) {
+          this.setBackground(Color.GREEN);
+        }
+      }
+
+      super.paintComponent(gr);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+      AnswerPanel.this._ctrl.answerQuestion(this._answer);
+    }
+  }
+
   public AnswerPanel(QuestionListController ctrl) {
-    this.ctrl = ctrl;
-    
+    this._ctrl = ctrl;
+
     this.setLayout(new FlowLayout());
-      
+
     Question.Answer[] answers = Question.Answer.values();
-    JButton answerButtons[] = new JButton[answers.length];
+    AnswerButton answerButtons[] = new AnswerButton[answers.length];
 
     for (int i = 0; i < answers.length; i++) {
-      final Question.Answer answer = answers[i];
-      answerButtons[i] = new JButton(answer.name());
-
-      answerButtons[i].addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          Question q = AnswerPanel.this.ctrl.getCurrentQuestion();
-          AnswerPanel.this.ctrl.answerQuestion(q, answer);
-        }
-      });
-
+      answerButtons[i] = new AnswerButton(answers[i]);
+      answerButtons[i].addActionListener(answerButtons[i]);
       this.add(answerButtons[i]);
 
     }
   }
-  
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package imports;
 
 import flashcard.database.Database;
@@ -14,9 +9,9 @@ import flashcard.question.Question;
  * @author author
  */
 public class TestImport1 {
-  
+
   static String SRC_DIR = "imports/test1 B";
-  
+
   static String[][] QUESTIONS = new String[][] {
     {"1", "B", "1986 1.png"},
     {"2", "A", "1986 2.png"},
@@ -33,36 +28,33 @@ public class TestImport1 {
     {"13", "E", "1986 13.png"},
     {"14", "A", "1986 14.png"},
     {"15", "C", "1986 15.png"}
-  };  
-  
-  static String[] imgList = new String[]{ 
-    "1986 10.png", "1986 100.png", "1986 12.png", "1986 13.png", "1986 2.png", "1986 20.png", 
+  };
+
+  static String[] imgList = new String[]{
+    "1986 10.png", "1986 100.png", "1986 12.png", "1986 13.png", "1986 2.png", "1986 20.png",
     "1986 24.png", "1986 26.png", "1986 28.png", "1986 29.png"
   };
-  
+
   public static void main(String[] args) {
-  
+
     flashcard.Constants.setupProjectDirectories();
-    
+
     Database d = DatabaseIO.loadDatabase();
-    
+
     Question.QuestionSource source = Question.QuestionSource.GRE_1986;
-    
+
     for (String[] question: QUESTIONS) {
       int number = Integer.parseInt(question[0]);
       Question.Answer answer = Question.Answer.valueOf(question[1]);
       String imgFilename = SRC_DIR + "/" + question[2];
-      
+
       Question q = new Question(source, number, answer, imgFilename);
-      
+
       d.addQuestionToSession(q);
+      System.out.println("Added quesiton: " + q);
     }
-    
+
     DatabaseIO.saveDatabase(d);
   }
-  
-  
-  
-  
-  
+
 }
