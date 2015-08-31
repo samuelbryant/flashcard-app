@@ -1,0 +1,8 @@
+id:1010
+source:GRE_1986
+questionNumber:10
+answer:C
+databaseImageFilename:output/question_images/1986 Q-10 ID-1010.png
+subjects:
+tags:
+notes:

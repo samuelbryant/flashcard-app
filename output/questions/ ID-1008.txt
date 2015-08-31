@@ -1,0 +1,8 @@
+id:1008
+source:GRE_1986
+questionNumber:8
+answer:D
+databaseImageFilename:output/question_images/1986 Q-8 ID-1008.png
+subjects:
+tags:
+notes:

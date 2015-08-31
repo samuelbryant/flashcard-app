@@ -1,0 +1,8 @@
+id:1012
+source:GRE_1986
+questionNumber:12
+answer:E
+databaseImageFilename:output/question_images/1986 Q-12 ID-1012.png
+subjects:
+tags:
+notes:
