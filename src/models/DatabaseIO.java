@@ -1,7 +1,6 @@
-package flashcard.database;
+package models;
 
 import flashcard.Constants;
-import flashcard.question.Question;
 import core.IO;
 import java.io.BufferedReader;
 import java.io.IOException;

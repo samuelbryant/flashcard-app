@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package flashcard.question;
+package models;
 
 import core.FatalError;
 import java.awt.image.BufferedImage;

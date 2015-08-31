@@ -1,7 +1,5 @@
 package test;
 
-import imports.TestImport1;
-
 public class MainTest {
 
   public static void badUsage() {
@@ -17,7 +15,7 @@ public class MainTest {
     } else if (args[0].compareTo("display") == 0) {
       ui.questions.TestDisplayAllQuestions.main(args);
     } else if (args[0].compareTo("database") == 0) {
-      flashcard.database.Database.main(args);
+      models.Database.main(args);
     } else {
       badUsage();
     }

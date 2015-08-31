@@ -5,7 +5,7 @@
  */
 package ui.questions;
 
-import flashcard.question.Question;
+import models.Question;
 
 /**
  *

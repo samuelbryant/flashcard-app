@@ -5,11 +5,9 @@
  */
 package ui.questions;
 
-import flashcard.question.Question;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;

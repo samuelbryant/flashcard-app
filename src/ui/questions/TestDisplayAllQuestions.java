@@ -5,8 +5,8 @@
  */
 package ui.questions;
 
-import flashcard.database.Database;
-import flashcard.database.DatabaseIO;
+import models.Database;
+import models.DatabaseIO;
 import ui.MainWindow;
 
 /**

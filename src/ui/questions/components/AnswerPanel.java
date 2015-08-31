@@ -1,16 +1,14 @@
 package ui.questions.components;
 
-import flashcard.question.Question;
+import models.Question;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import ui.components.FAButton;
 import ui.questions.QuestionListController;
-import ui.questions.QuestionListDisplay;
 
 public class AnswerPanel extends JPanel {
 
@@ -27,6 +25,8 @@ public class AnswerPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics gr) {
+      super.paintComponent(gr);
+
       this.setBackground(Color.WHITE);
 
       if (AnswerPanel.this._ctrl.isAnswered()) {
@@ -35,12 +35,11 @@ public class AnswerPanel extends JPanel {
 
         if (isSelected && !isCorrect) {
           this.setBackground(Color.RED);
+          System.out.println("SETting to red");
         } else if (isCorrect) {
           this.setBackground(Color.GREEN);
         }
       }
-
-      super.paintComponent(gr);
     }
 
     @Override

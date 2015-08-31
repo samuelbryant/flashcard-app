@@ -1,8 +1,8 @@
 package imports;
 
-import flashcard.database.Database;
-import flashcard.database.DatabaseIO;
-import flashcard.question.Question;
+import models.Database;
+import models.DatabaseIO;
+import models.Question;
 
 /**
  *

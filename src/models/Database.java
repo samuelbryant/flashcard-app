@@ -1,9 +1,8 @@
 /*
  * Database - Contains database of questions and methods for reading/writing.
  */
-package flashcard.database;
+package models;
 
-import flashcard.question.Question;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
