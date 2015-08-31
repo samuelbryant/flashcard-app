@@ -18,10 +18,6 @@ import ui.ImageDisplay;
 import ui.components.FAButton;
 import ui.questions.components.AnswerPanel;
 
-/**
- *
- * @author author
- */
 public class QuestionListDisplay extends Display<QuestionListController> {
 
   private JPanel answerPanel;

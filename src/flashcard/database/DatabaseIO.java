@@ -102,7 +102,7 @@ public class DatabaseIO {
     // For objects not in database yet, we need to copy their images to proper location.
     if (q.databaseImageFilename == null || !IO.fileExists(q.databaseImageFilename)) {
       String originalImageFilename = q.originalImageFilename;
-      String databaseImageFilename = flashcard.Constants.getQuestionImageFilename(q);
+      String databaseImageFilename = flashcard.Constants.getQuestionImageFilename(q.id);
 
       IO.existsOrDie(originalImageFilename);
       IO.copyOrDie(originalImageFilename, databaseImageFilename);
@@ -110,7 +110,7 @@ public class DatabaseIO {
       q.databaseImageFilename = databaseImageFilename;
     }
 
-    String dataFilename = Constants.getQuestionDataFilename(q);
+    String dataFilename = Constants.getQuestionDataFilename(q.id);
 
     IO.backupAndRecreateOrDie(dataFilename);
     PrintWriter questionWriter = IO.getPrintWriterOrDie(dataFilename);

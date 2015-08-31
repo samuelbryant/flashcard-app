@@ -88,27 +88,11 @@ public class Question implements Serializable {
 
   private void _loadFromQuestionFile() {
     try {
-      BufferedReader br = IO.getBufferedReaderOrDie(Constants.getQuestionDataFilename(this));
+      BufferedReader br = IO.getBufferedReaderOrDie(Constants.getQuestionDataFilename(this.id));
       this._fromQuestionFile(br);
     } catch(IOException ex) {
       throw new FatalError("loadFromQuestionFile failed", ex);
     }
-  }
-
-  public final static String GET_QUESTION_IMAGE_FILENAME(Question q) {
-    if (q.getId() == null) {
-      throw new IllegalArgumentException("Cannot generate filename for question without id");
-    }
-
-    String fname = QUESTION_IMAGE_DIR + "/";
-    if (q.source != null) {
-      fname += q.source.getOuputName();
-      if (q.questionNumber != null) {
-        fname += " Q-" + q.questionNumber;
-      }
-    }
-    fname += " ID-" + q.getId();
-    return fname;
   }
 
   public BufferedImage getImage() {

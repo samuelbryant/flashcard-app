@@ -6,7 +6,6 @@
 package flashcard;
 
 import static flashcard.Constants.OUTPUT_DIR;
-import flashcard.question.Question;
 import core.IO;
 
 /**
@@ -27,29 +26,12 @@ public class Constants {
     core.IO.createDirOrDie(QUESTION_IMAGE_DIR);
   }
 
-  public final static String getQuestionImageFilename(Question q) {
-    if (q.getId() == null) {
-      throw new IllegalArgumentException("Cannot generate filename for question without id");
-    }
-
-    String fname = QUESTION_IMAGE_DIR + "/";
-    if (q.source != null) {
-      fname += q.source.getOuputName();
-      if (q.questionNumber != null) {
-        fname += " Q-" + q.questionNumber;
-      }
-    }
-    fname += " ID-" + q.getId() + ".png";
-    return fname;
+  public final static String getQuestionImageFilename(int id) {
+    return QUESTION_IMAGE_DIR + "/" + "ID-" + id + ".png";
   }
 
-  public final static String getQuestionDataFilename(Question q) {
-    if (q.getId() == null) {
-      throw new IllegalArgumentException("Cannot generate filename for question without id");
-    }
-    String fname = QUESTION_DATA_DIR + "/";
-    fname += " ID-" + q.getId() + ".txt";
-    return fname;
+  public final static String getQuestionDataFilename(int id) {
+    return QUESTION_DATA_DIR + "/" + "ID-" + id + ".png";
   }
 
   public static void main(String[] args) {
