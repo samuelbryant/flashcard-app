@@ -1,44 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui;
 
 import javax.swing.JFrame;
 
-/**
- *
- * @author author
- */
 public class MainWindow extends JFrame {
-  
+
   private FAController ctrl = null;
   private FADisplay display = null;
-  private final int maxHeight;
-  private final int maxWidth;
-  
-  public MainWindow(int maxWidth, int maxHeight) {
-    this.maxWidth = maxWidth;
-    this.maxHeight = maxHeight;
-    this.setSize(maxWidth, maxHeight);
+
+  public MainWindow() {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
-  
-  public void setDisplay(FADisplay d) {
-    // Remove old controller / display.
+
+  public void showDisplay(FADisplay d) {
+    // Remove old display.
     if (this.display != null) {
       this.getContentPane().remove(this.display);
     }
-    
+
     // Set new controller / display.
     this.display = d;
     this.ctrl = d.getController();
-    
+
+    // Setup this component based on display.
+    this.display.preDisplay();
+    this.setSize(d.getDisplaySize());
+    this.setJMenuBar(d.getDisplayMenuBar());
+
     // Redo UI stuff.
     this.getContentPane().add(d);
-    
     this.repaint();
+
+    // Display window.
+    this.setVisible(true);
   }
-  
+
 }

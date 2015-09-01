@@ -7,18 +7,36 @@ import java.awt.image.BufferedImage;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JComponent;
+import models.Database;
+import models.DatabaseIO;
+import ui.MainWindow;
 import ui.FADisplay;
 import ui.FAImageDisplay;
 import ui.components.FAButton;
 
 public class QuestionListDisplay extends FADisplay<QuestionListController> {
 
-  protected int totalWidth;
-  protected int totalHeight;
   protected final FAImageDisplay questionPanel;
   protected final ActionButtonPanel actionPanel;
 
-  public void setupGUI() {
+  public QuestionListDisplay(final QuestionListController ctrl, int totalWidth, int totalHeight) {
+    super(ctrl, totalWidth, totalHeight);
+    this.actionPanel = new ActionButtonPanel();
+    this.questionPanel = new FAImageDisplay() {
+      @Override
+      public BufferedImage generateDisplayImage() {
+        return ctrl.getCurrentQuestion().getImage();
+      }
+    };
+  }
+
+  @Override
+  protected void setupMenuBar() {
+
+  }
+
+  @Override
+  protected void setupGUI() {
     Dimension questionImageSize = new Dimension(totalWidth, totalHeight - 100);
     Dimension actionPanelSize = new Dimension(totalWidth, 100);
 
@@ -31,26 +49,6 @@ public class QuestionListDisplay extends FADisplay<QuestionListController> {
     this.add(actionPanel);
 
     this.repaint();
-  }
-
-  protected void sizeComponent(JComponent comp, Dimension size) {
-    comp.setSize(size);
-    comp.setPreferredSize(size);
-    comp.setMinimumSize(size);
-  }
-
-  public QuestionListDisplay(final QuestionListController ctrl, int maxWidth, int maxHeight) {
-    super(ctrl, maxWidth, maxHeight);
-    this.actionPanel = new ActionButtonPanel();
-    this.questionPanel = new FAImageDisplay() {
-      @Override
-      public BufferedImage generateDisplayImage() {
-        return ctrl.getCurrentQuestion().getImage();
-      }
-    };
-    this.totalWidth = maxWidth;
-    this.totalHeight = maxHeight;
-    this.setSize(totalWidth, totalHeight);
   }
 
   public class ActionButtonPanel extends JPanel {
@@ -84,5 +82,19 @@ public class QuestionListDisplay extends FADisplay<QuestionListController> {
       QuestionListDisplay.this.ctrl.addKeyAction(37, prevB);
       QuestionListDisplay.this.ctrl.addKeyAction(39, nextB);
     }
+  }
+
+  public static void main(String[] args) {
+    // Load/initialize models.
+    Database db = DatabaseIO.loadDatabase();
+    QuestionIterator iter = new QuestionListIterator(db.getQuestionListCopy());
+
+    // Load/initialize controller/display.
+    QuestionListController ctrl = new QuestionListController(iter);
+    QuestionListDisplay display = new QuestionListDisplay(ctrl, 600, 600);
+
+    // Bring it all home.
+    MainWindow window = new MainWindow();
+    window.showDisplay(display);
   }
 }

@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui;
 
 import javax.swing.JPanel;
+import javax.swing.JMenuBar;
+import java.awt.Dimension;
+import javax.swing.JComponent;
 
 /**
  *
@@ -13,22 +11,49 @@ import javax.swing.JPanel;
  * @param <T>
  */
 public abstract class FADisplay <T extends FAController> extends JPanel {
-  
+
   protected T ctrl;
-  protected int maxWidth;
-  protected int maxHeight;
-  
-  public FADisplay(T ctrl, int maxWidth, int maxHeight) {
+  protected int totalWidth;
+  protected int totalHeight;
+  protected final JMenuBar menuBar;
+
+  public FADisplay(T ctrl, int totalWidth, int totalHeight) {
     this.ctrl = ctrl;
     this.ctrl.setDisplay(this);
-    this.maxWidth = maxWidth;
-    this.maxHeight = maxHeight;
-    this.setSize(maxWidth, maxHeight);
+    this.totalWidth = totalWidth;
+    this.totalHeight = totalHeight;
+    this.menuBar = new JMenuBar();
+    this.sizeComponent(this, new Dimension(totalWidth, totalHeight));
     this.setFocusable(true);
     this.addKeyListener(this.ctrl);
   }
-  
+
+  protected abstract void setupGUI();
+
+  protected abstract void setupMenuBar();
+
   public FAController getController() {
     return this.ctrl;
-  }  
+  }
+
+  public Dimension getDisplaySize() {
+    return new Dimension(totalWidth, totalHeight);
+  }
+
+  public JMenuBar getDisplayMenuBar() {
+    return this.menuBar;
+  }
+
+  public void preDisplay() {
+    this.setupMenuBar();
+    this.setupGUI();
+    this.setSize(this.getDisplaySize());
+  }
+
+  protected void sizeComponent(JComponent comp, Dimension size) {
+    comp.setSize(size);
+    comp.setPreferredSize(size);
+    comp.setMinimumSize(size);
+  }
+
 }

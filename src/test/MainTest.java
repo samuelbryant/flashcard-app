@@ -13,7 +13,7 @@ public class MainTest {
     } else if (args[0].compareTo("import1") == 0) {
       imports.TestImport1.main(args);
     } else if (args[0].compareTo("display") == 0) {
-      ui.questions.TestDisplayAllQuestions.main(args);
+      ui.questions.QuestionListDisplay.main(args);
     } else if (args[0].compareTo("quiz") == 0) {
       ui.questions.QuizDisplay.main(args);
     } else if (args[0].compareTo("subjects") == 0) {

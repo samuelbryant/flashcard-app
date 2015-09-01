@@ -22,7 +22,12 @@ public class QuizDisplay extends QuestionListDisplay {
   }
 
   @Override
-  public void setupGUI() {
+  protected void setupMenuBar() {
+
+  }
+
+  @Override
+  protected void setupGUI() {
     // |Answer Panel|
     // |------------|
     // |            |
@@ -52,17 +57,17 @@ public class QuizDisplay extends QuestionListDisplay {
   }
 
   public static void main(String[] args) {
+    // Load/initialize models.
     Database db = DatabaseIO.loadDatabase();
-
-    MainWindow window = new MainWindow(TOTAL_WIDTH, TOTAL_HEIGHT);
     QuestionIterator iter = new QuestionListIterator(db.getQuestionListCopy());
+
+    // Load/initialize controller/display.
     QuestionListController ctrl = new QuestionListController(iter);
     QuestionListDisplay display = new QuizDisplay(ctrl);
-    window.setDisplay(display);
 
-    display.setupGUI();
-
-    window.setVisible(true);
+    // Bring it all home.
+    MainWindow window = new MainWindow();
+    window.showDisplay(display);
   }
 
 }
