@@ -11,26 +11,26 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import ui.Display;
-import ui.ImageDisplay;
+import ui.FADisplay;
+import ui.FAImageDisplay;
 import ui.components.FAButton;
 import ui.questions.components.AnswerPanel;
 
-public class QuestionListDisplay extends Display<QuestionListController> {
+public class QuestionListDisplay extends FADisplay<QuestionListController> {
 
-  private JPanel answerPanel;
-
+  private final AnswerPanel _answerPanel;
+  
   public QuestionListDisplay(final QuestionListController ctrl, int maxWidth, int maxHeight) {
     super(ctrl, maxWidth, maxHeight);
     JPanel buttonPanel = new ActionButtonPanel();
-    JPanel questionPanel = new ImageDisplay() {
+    JPanel questionPanel = new FAImageDisplay() {
       @Override
       public BufferedImage generateDisplayImage() {
         return ctrl.getCurrentQuestion().getImage();
       }
     };
 
-    answerPanel = new AnswerPanel(ctrl);
+    _answerPanel = new AnswerPanel(ctrl);
 
     this.setSize(maxWidth, maxHeight);
 
@@ -45,12 +45,12 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     buttonPanel.setMinimumSize(actionPanelSize);
 
     Dimension answerPanelSize = new Dimension(maxWidth, 50);
-    answerPanel.setSize(answerPanelSize);
-    answerPanel.setPreferredSize(answerPanelSize);
-    answerPanel.setMinimumSize(answerPanelSize);
+    _answerPanel.setSize(answerPanelSize);
+    _answerPanel.setPreferredSize(answerPanelSize);
+    _answerPanel.setMinimumSize(answerPanelSize);
 
     this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-    this.add(answerPanel);
+    this.add(_answerPanel);
     this.add(questionPanel);
     this.add(buttonPanel);
 
@@ -83,6 +83,10 @@ public class QuestionListDisplay extends Display<QuestionListController> {
       this.add(nextB);
       this.add(prevB);
       this.add(shufB);
+      
+      // Add key shortcuts for button presses.
+      QuestionListDisplay.this.ctrl.addKeyAction(37, prevB);
+      QuestionListDisplay.this.ctrl.addKeyAction(39, nextB);
     }
   }
 }

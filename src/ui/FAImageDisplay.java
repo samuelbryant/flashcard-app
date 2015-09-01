@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  *
  * @author author
  */
-public abstract class ImageDisplay extends JPanel {
+public abstract class FAImageDisplay extends JPanel {
     
   public abstract BufferedImage generateDisplayImage();
   
@@ -41,9 +41,6 @@ public abstract class ImageDisplay extends JPanel {
       height = (int) (height / maxRatio);
       gr.drawImage(img, 0, 0, width, height, null);
     }
-    
-    
-    
     
     System.out.printf("Image details: %d, %d\n", img.getHeight(), img.getWidth());
   }

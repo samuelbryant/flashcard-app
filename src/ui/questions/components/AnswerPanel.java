@@ -3,18 +3,16 @@ package ui.questions.components;
 import models.Question;
 import java.awt.FlowLayout;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JPanel;
 import ui.components.FAButton;
 import ui.questions.QuestionListController;
 
 public class AnswerPanel extends JPanel {
 
-  private final QuestionListController _ctrl;
-
-  public class AnswerButton extends FAButton implements ActionListener {
+  public class AnswerButton extends FAButton implements Observer {
 
     private final Question.Answer _answer;
 
@@ -24,9 +22,12 @@ public class AnswerPanel extends JPanel {
     }
 
     @Override
-    public void paintComponent(Graphics gr) {
-      super.paintComponent(gr);
+    public void actionPerformed(ActionEvent ev) {
+      AnswerPanel.this._ctrl.answerQuestion(this._answer);
+    }
 
+    @Override
+    public void update(Observable o, Object arg) {
       this.setBackground(Color.WHITE);
 
       if (AnswerPanel.this._ctrl.isAnswered()) {
@@ -35,18 +36,16 @@ public class AnswerPanel extends JPanel {
 
         if (isSelected && !isCorrect) {
           this.setBackground(Color.RED);
-          System.out.println("SETting to red");
         } else if (isCorrect) {
           this.setBackground(Color.GREEN);
         }
       }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ev) {
-      AnswerPanel.this._ctrl.answerQuestion(this._answer);
-    }
   }
+  
+  private final QuestionListController _ctrl;
+  private final AnswerButton[] _answerButtons;
 
   public AnswerPanel(QuestionListController ctrl) {
     this._ctrl = ctrl;
@@ -54,13 +53,14 @@ public class AnswerPanel extends JPanel {
     this.setLayout(new FlowLayout());
 
     Question.Answer[] answers = Question.Answer.values();
-    AnswerButton answerButtons[] = new AnswerButton[answers.length];
+    _answerButtons = new AnswerButton[answers.length];
 
     for (int i = 0; i < answers.length; i++) {
-      answerButtons[i] = new AnswerButton(answers[i]);
-      answerButtons[i].addActionListener(answerButtons[i]);
-      this.add(answerButtons[i]);
-
+      _answerButtons[i] = new AnswerButton(answers[i]);
+      this._ctrl.addObserver(_answerButtons[i]);
+      this.add(_answerButtons[i]);
     }
+    
+    this.setFocusable(false);
   }
 }

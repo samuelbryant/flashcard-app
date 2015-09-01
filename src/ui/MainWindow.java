@@ -13,8 +13,8 @@ import javax.swing.JFrame;
  */
 public class MainWindow extends JFrame {
   
-  private Controller ctrl = null;
-  private Display display = null;
+  private FAController ctrl = null;
+  private FADisplay display = null;
   private final int maxHeight;
   private final int maxWidth;
   
@@ -25,7 +25,7 @@ public class MainWindow extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
   
-  public void setDisplay(Display d) {
+  public void setDisplay(FADisplay d) {
     // Remove old controller / display.
     if (this.display != null) {
       this.getContentPane().remove(this.display);

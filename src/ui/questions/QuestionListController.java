@@ -5,13 +5,13 @@
  */
 package ui.questions;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import models.Question;
 import java.awt.event.KeyEvent;
-import java.util.Iterator;
-import java.util.List;
-import ui.Controller;
+import ui.FAController;
 
-public class QuestionListController extends Controller<QuestionListDisplay> {
+public class QuestionListController extends FAController<QuestionListDisplay> {
 
   /**
    * Enum capturing state of question list controller.
@@ -35,7 +35,7 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
     private final Question _question;
     private AnsweredState _answeredState;
     private Question.Answer _selectedAnswer;
-    private Question.Answer _correctAnswer;
+    private final Question.Answer _correctAnswer;
 
     public QuestionDisplay(Question q) {
       this._question = q;
@@ -56,15 +56,26 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
     }
   }
 
-  private QuestionListDisplay _display;
   private QuestionDisplay _currentQuestion;
   private final QuestionIterator _questionIterator;
   private State _state;
 
   public QuestionListController(QuestionIterator questionIterator) {
+    super();
     this._questionIterator = questionIterator;
     this._currentQuestion = new QuestionDisplay(this._questionIterator.next());
     this._state = State.IN_PROGRESS;
+    this._setupKeyMap();
+      }
+  
+  private final void _setupKeyMap() {
+    this.addKeyAction(39, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        QuestionListController.this.nextClick();
+      }
+    });
+  
   }
 
   public Question.Answer getCorrectAnswer() {
@@ -86,48 +97,31 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   public Question getCurrentQuestion() {
     return this._currentQuestion._question;
   }
-
-  public void setDisplay(QuestionListDisplay d) {
-    this._display = d;
-  }
-
-  @Override
-  public void keyTyped(KeyEvent e) {
-  }
-
-  @Override
-  public void keyPressed(KeyEvent e) {
-    if (e.getKeyCode() == 39) {
-      System.out.println("Setting next image");
-      this._currentQuestion = new QuestionDisplay(this._questionIterator.next());
-      this._display.repaint();
-    }
-    System.out.printf("KEY TYPED: %d\n", e.getKeyCode());
-  }
-
-  @Override
-  public void keyReleased(KeyEvent e) {
-  }
+  
 
   public void nextClick() {
     this._currentQuestion = new QuestionDisplay(this._questionIterator.next());
-    this._display.repaint();
+    this.setChanged();
+    this.update();
   }
 
   public void previousClick() {
     this._currentQuestion = new QuestionDisplay(this._questionIterator.prev());
-    this._display.repaint();
+    this.setChanged();
+    this.update();
   }
 
   public void shuffleClick() {
     this._questionIterator.shuffle();
     this._currentQuestion = new QuestionDisplay(this._questionIterator.next());
-    this._display.repaint();
+    this.setChanged();
+    this.update();
   }
 
   public void answerQuestion(Question.Answer answer) {
     this._currentQuestion.answer(answer);
-    this._display.repaint();
+    this.setChanged();
+    this.update();
   }
 
 }

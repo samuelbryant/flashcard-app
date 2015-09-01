@@ -10,14 +10,15 @@ import javax.swing.JPanel;
 /**
  *
  * @author author
+ * @param <T>
  */
-public abstract class Display <T extends Controller> extends JPanel {
+public abstract class FADisplay <T extends FAController> extends JPanel {
   
   protected T ctrl;
   protected int maxWidth;
   protected int maxHeight;
   
-  public Display(T ctrl, int maxWidth, int maxHeight) {
+  public FADisplay(T ctrl, int maxWidth, int maxHeight) {
     this.ctrl = ctrl;
     this.ctrl.setDisplay(this);
     this.maxWidth = maxWidth;
@@ -27,7 +28,7 @@ public abstract class Display <T extends Controller> extends JPanel {
     this.addKeyListener(this.ctrl);
   }
   
-  public Controller getController() {
+  public FAController getController() {
     return this.ctrl;
   }  
 }
