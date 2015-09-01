@@ -2,11 +2,11 @@ package models;
 
 import core.FatalError;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import engine.QuestionFilter;
+import java.util.TreeMap;
 
 public final class Database {
 
@@ -16,7 +16,7 @@ public final class Database {
   Integer revisionNumber = 0;
   Integer questionNumber = 0;
   Integer nextQuestionId = 0;
-  Map<Integer, Question> questions = new HashMap<>();
+  Map<Integer, Question> questions = new TreeMap<>();
 
   // Private fields.
   boolean isPersistent = false;
@@ -28,7 +28,7 @@ public final class Database {
     db.revisionNumber = 0;
     db.questionNumber = 0;
     db.nextQuestionId = _ID_START;
-    db.questions = new HashMap<>();
+    db.questions = new TreeMap<>();
     db.isPersistent = false;
     return db;
   }

@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import models.Subject;
 import ui.components.FACheckbox;
-import ui.questions.subjects.SubjectsController;
 
 public class SubjectsPanel extends JPanel {
 
@@ -25,6 +24,7 @@ public class SubjectsPanel extends JPanel {
       super(label);
       this._ctrl = SubjectsPanel.this._ctrl;
       this._ctrl.addObserver(this);
+      this.update(null, null);
     }
 
     @Override
@@ -39,10 +39,11 @@ public class SubjectsPanel extends JPanel {
 
   }
 
-  public class InfoLabel extends JLabel implements Observer {
+  public final class InfoLabel extends JLabel implements Observer {
     public InfoLabel() {
       super();
       SubjectsPanel.this._ctrl.addObserver(this);
+      this.update(null, null);
     }
     @Override
     public void update(Observable o, Object arg) {
@@ -62,6 +63,7 @@ public class SubjectsPanel extends JPanel {
       this._subject = subject;
       this._ctrl = SubjectsPanel.this._ctrl;
       this._ctrl.addObserver(this);
+      this.update(null, null);
     }
 
     @Override

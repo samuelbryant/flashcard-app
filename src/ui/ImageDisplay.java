@@ -21,6 +21,8 @@ public abstract class ImageDisplay extends JPanel {
   public void paintComponent(Graphics gr) {
     int w = this.getWidth();
     int h = this.getHeight();
+    
+    System.out.printf("PC: %d, %d\n", w, h);
 
     gr.setColor(Color.WHITE);
     gr.fillRect(0, 0, w, h);

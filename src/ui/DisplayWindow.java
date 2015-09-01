@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class DisplayWindow extends JFrame {
@@ -23,7 +24,9 @@ public class DisplayWindow extends JFrame {
 
     // Setup this component based on display.
     this.display.preDisplay();
-    this.setSize(d.getDisplaySize());
+    Dimension displaySize = d.getDisplaySize();
+    Dimension thisSize = new Dimension(displaySize.width, displaySize.height + 50);
+    this.setSize(thisSize);
     this.setJMenuBar(d.getDisplayMenuBar());
 
     // Redo UI stuff.
