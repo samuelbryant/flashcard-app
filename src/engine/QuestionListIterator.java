@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.questions;
+package engine;
 
+import engine.QuestionIterator;
 import models.Question;
 import java.util.Collections;
 import java.util.List;

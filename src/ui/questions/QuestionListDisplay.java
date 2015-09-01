@@ -12,20 +12,20 @@ import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import models.Database;
 import models.DatabaseIO;
-import ui.MainWindow;
-import ui.FADisplay;
-import ui.FAImageDisplay;
+import ui.DisplayWindow;
+import ui.Display;
+import ui.ImageDisplay;
 import ui.components.FAButton;
 
-public class QuestionListDisplay extends FADisplay<QuestionListController> {
+public class QuestionListDisplay extends Display<QuestionListController> {
 
-  protected final FAImageDisplay questionPanel;
+  protected final ImageDisplay questionPanel;
   protected final ActionButtonPanel actionPanel;
 
   public QuestionListDisplay(final QuestionListController ctrl, int totalWidth, int totalHeight) {
     super(ctrl, totalWidth, totalHeight);
     this.actionPanel = new ActionButtonPanel();
-    this.questionPanel = new FAImageDisplay() {
+    this.questionPanel = new ImageDisplay() {
       @Override
       public BufferedImage generateDisplayImage() {
         return ctrl.getCurrentQuestion().getImage();
@@ -105,7 +105,7 @@ public class QuestionListDisplay extends FADisplay<QuestionListController> {
     QuestionListDisplay display = new QuestionListDisplay(ctrl, 600, 600);
 
     // Bring it all home.
-    MainWindow window = new MainWindow();
+    DisplayWindow window = new DisplayWindow();
     window.showDisplay(display);
   }
 }

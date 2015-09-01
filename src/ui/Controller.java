@@ -18,12 +18,12 @@ import ui.components.FAKeyMap;
  * @author sambryant
  * @param <T>
  */
-public abstract class FAController <T extends FADisplay> extends Observable implements KeyListener, FAKeyMap {
+public abstract class Controller <T extends Display> extends Observable implements KeyListener, FAKeyMap {
 
   private final Map<Integer, ActionListener> _keyMap;
   protected T display;
 
-  public FAController() {
+  public Controller() {
     super();
     this._keyMap = new HashMap<>();
   }

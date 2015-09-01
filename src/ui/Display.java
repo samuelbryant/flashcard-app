@@ -10,14 +10,14 @@ import javax.swing.JComponent;
  * @author author
  * @param <T>
  */
-public abstract class FADisplay <T extends FAController> extends JPanel {
+public abstract class Display <T extends Controller> extends JPanel {
 
   protected T ctrl;
   protected int totalWidth;
   protected int totalHeight;
   protected final JMenuBar menuBar;
 
-  public FADisplay(T ctrl, int totalWidth, int totalHeight) {
+  public Display(T ctrl, int totalWidth, int totalHeight) {
     this.ctrl = ctrl;
     this.ctrl.setDisplay(this);
     this.totalWidth = totalWidth;
@@ -32,7 +32,7 @@ public abstract class FADisplay <T extends FAController> extends JPanel {
 
   protected abstract void setupMenuBar();
 
-  public FAController getController() {
+  public Controller getController() {
     return this.ctrl;
   }
 

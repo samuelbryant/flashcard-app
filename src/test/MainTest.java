@@ -15,9 +15,9 @@ public class MainTest {
     } else if (args[0].compareTo("display") == 0) {
       ui.questions.QuestionListDisplay.main(args);
     } else if (args[0].compareTo("quiz") == 0) {
-      ui.questions.QuizDisplay.main(args);
+      ui.questions.quiz.QuizDisplay.main(args);
     } else if (args[0].compareTo("subjects") == 0) {
-      ui.questions.SubjectsDisplay.main(args);
+      ui.questions.subjects.SubjectsDisplay.main(args);
     } else if (args[0].compareTo("database") == 0) {
       models.Database.main(args);
     } else {

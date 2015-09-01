@@ -1,11 +1,13 @@
-package ui.questions;
+package ui.questions.quiz;
 
 import models.Database;
 import models.DatabaseIO;
-import ui.MainWindow;
+import ui.DisplayWindow;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
-import ui.questions.components.AnswerPanel;
+import ui.questions.QuestionListController;
+import ui.questions.QuestionListDisplay;
+import ui.questions.quiz.AnswerPanel;
 
 public class QuizDisplay extends QuestionListDisplay {
 
@@ -65,7 +67,7 @@ public class QuizDisplay extends QuestionListDisplay {
     QuestionListDisplay display = new QuizDisplay(ctrl);
 
     // Bring it all home.
-    MainWindow window = new MainWindow();
+    DisplayWindow window = new DisplayWindow();
     window.showDisplay(display);
   }
 

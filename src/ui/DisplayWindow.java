@@ -2,16 +2,16 @@ package ui;
 
 import javax.swing.JFrame;
 
-public class MainWindow extends JFrame {
+public class DisplayWindow extends JFrame {
 
-  private FAController ctrl = null;
-  private FADisplay display = null;
+  private Controller ctrl = null;
+  private Display display = null;
 
-  public MainWindow() {
+  public DisplayWindow() {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
-  public void showDisplay(FADisplay d) {
+  public void showDisplay(Display d) {
     // Remove old display.
     if (this.display != null) {
       this.getContentPane().remove(this.display);

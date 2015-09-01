@@ -3,7 +3,7 @@
  * Will be laid out vertically as checkboxes.
  * Key shortcuts for each checkbox.
  */
-package ui.questions.components;
+package ui.questions.subjects;
 
 import javax.swing.BoxLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import models.Subject;
 import ui.components.FACheckbox;
-import ui.questions.SubjectsController;
+import ui.questions.subjects.SubjectsController;
 
 public class SubjectsPanel extends JPanel {
 

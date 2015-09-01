@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  *
  * @author author
  */
-public abstract class FAImageDisplay extends JPanel {
+public abstract class ImageDisplay extends JPanel {
 
   public abstract BufferedImage generateDisplayImage();
 

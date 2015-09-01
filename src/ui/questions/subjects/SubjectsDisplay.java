@@ -1,12 +1,13 @@
-package ui.questions;
+package ui.questions.subjects;
 
 import models.Database;
 import models.DatabaseIO;
-import ui.MainWindow;
+import ui.DisplayWindow;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import ui.questions.components.SubjectsPanel;
+import ui.questions.QuestionListDisplay;
+import ui.questions.subjects.SubjectsPanel;
 
 public class SubjectsDisplay extends QuestionListDisplay {
 
@@ -73,7 +74,7 @@ public class SubjectsDisplay extends QuestionListDisplay {
     SubjectsDisplay display = new SubjectsDisplay(ctrl);
 
     // Bring it all home.
-    MainWindow window = new MainWindow();
+    DisplayWindow window = new DisplayWindow();
     window.showDisplay(display);
   }
 

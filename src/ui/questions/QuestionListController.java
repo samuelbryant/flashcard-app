@@ -1,5 +1,7 @@
 package ui.questions;
 
+import engine.QuestionListIterator;
+import engine.QuestionIterator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import models.Answer;
@@ -7,9 +9,9 @@ import models.Database;
 import models.DatabaseIO;
 import java.util.List;
 import models.Question;
-import ui.FAController;
+import ui.Controller;
 
-public class QuestionListController extends FAController<QuestionListDisplay> {
+public class QuestionListController extends Controller<QuestionListDisplay> {
 
   /**
    * Enum capturing state of question list controller.

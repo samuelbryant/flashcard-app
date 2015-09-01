@@ -1,4 +1,4 @@
-package ui.questions.components;
+package ui.questions.quiz;
 
 import java.awt.FlowLayout;
 import java.awt.Color;
