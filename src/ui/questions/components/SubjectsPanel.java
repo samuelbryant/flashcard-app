@@ -5,9 +5,7 @@
  */
 package ui.questions.components;
 
-import models.Question;
 import javax.swing.BoxLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;

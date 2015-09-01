@@ -4,14 +4,8 @@ import models.Database;
 import models.DatabaseIO;
 import ui.MainWindow;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import ui.FADisplay;
-import ui.FAImageDisplay;
-import ui.components.FAButton;
 import ui.questions.components.SubjectsPanel;
 
 public class SubjectsDisplay extends QuestionListDisplay {

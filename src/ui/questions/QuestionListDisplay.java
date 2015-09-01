@@ -51,53 +51,9 @@ public class QuestionListDisplay extends FADisplay<QuestionListController> {
     this.totalWidth = maxWidth;
     this.totalHeight = maxHeight;
     this.setSize(totalWidth, totalHeight);
-
-    // _answerPanel = new AnswerPanel(ctrl);
-    // _subjectPanel = new SubjectTaggerPanel(ctrl);
-
-    // this.setSize(maxWidth, maxHeight);
-
-
-    // Dimension subjectPanelSize = new Dimension(200, maxHeight);
-    // _subjectPanel.setSize(subjectPanelSize);
-    // _subjectPanel.setPreferredSize(subjectPanelSize);
-    // _subjectPanel.setMinimumSize(subjectPanelSize);
-
-    // JPanel rightPanel = new JPanel();
-    // Dimension rightPanelSize = new Dimension(maxWidth - 200, maxHeight);
-    // rightPanel.setSize(rightPanelSize);
-    // rightPanel.setPreferredSize(rightPanelSize);
-    // rightPanel.setMinimumSize(rightPanelSize);
-
-    // Dimension questionImageSize = new Dimension(maxWidth - 200, maxHeight - 100);
-    // questionPanel.setSize(questionImageSize);
-    // questionPanel.setPreferredSize(questionImageSize);
-    // questionPanel.setMinimumSize(questionImageSize);
-
-    // Dimension actionPanelSize = new Dimension(maxWidth - 200, 50);
-    // actionPanel.setSize(actionPanelSize);
-    // actionPanel.setPreferredSize(actionPanelSize);
-    // actionPanel.setMinimumSize(actionPanelSize);
-
-    // Dimension answerPanelSize = new Dimension(maxWidth - 200, 50);
-    // _answerPanel.setSize(answerPanelSize);
-    // _answerPanel.setPreferredSize(answerPanelSize);
-    // _answerPanel.setMinimumSize(answerPanelSize);
-
-    // rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
-    // rightPanel.add(_answerPanel);
-    // rightPanel.add(questionPanel);
-    // rightPanel.add(actionPanel);
-
-    // this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
-    // this.add(_subjectPanel);
-    // this.add(rightPanel);
-
-    // this.repaint();
   }
 
-  class ActionButtonPanel extends JPanel {
+  public class ActionButtonPanel extends JPanel {
 
     private ActionButtonPanel() {
       FAButton nextB = new FAButton("Next") {

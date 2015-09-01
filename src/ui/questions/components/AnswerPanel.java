@@ -1,6 +1,5 @@
 package ui.questions.components;
 
-import models.Question;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
