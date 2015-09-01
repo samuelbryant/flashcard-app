@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui.questions;
 
 import java.awt.event.ActionEvent;
@@ -59,11 +54,16 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
     }
   }
 
-  private QuestionDisplay _currentQuestion;
-  private final QuestionIterator _questionIterator;
-  private State _state;
+  protected QuestionDisplay _currentQuestion;
+  protected QuestionIterator _questionIterator;
+  protected State _state;
   private Database _database = null;
-  private List<Question> _questionList = null;
+  protected List<Question> _questionList = null;
+
+  protected QuestionListController(Database db) {
+    this._database = db;
+    this._setupKeyMap();
+  }
 
   public QuestionListController(QuestionIterator questionIterator) {
     super();
@@ -96,10 +96,6 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
     if (_database == null) {
       throw new IllegalStateException("Database reference not available");
     }
-    if (_questionList == null) {
-      throw new IllegalStateException("Controller was not provided question list");
-    }
-    this._database.addQuestionsToSession(_questionList);
     DatabaseIO.writeDatabase(this._database);
     System.out.printf("LOG: saveToDatabase completed\n");
   }

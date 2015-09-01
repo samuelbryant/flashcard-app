@@ -19,24 +19,24 @@ import ui.components.FAKeyMap;
  * @param <T>
  */
 public abstract class FAController <T extends FADisplay> extends Observable implements KeyListener, FAKeyMap {
-  
+
   private final Map<Integer, ActionListener> _keyMap;
   protected T display;
-  
+
   public FAController() {
     super();
     this._keyMap = new HashMap<>();
   }
-  
+
   final void setDisplay(T d) {
     this.display = d;
   }
-  
+
   public void update() {
     this.notifyObservers();
     this.display.repaint();
   }
-  
+
   @Override
   public final void addKeyAction(int keyCode, ActionListener al) {
     this._keyMap.put(keyCode, al);
@@ -44,7 +44,7 @@ public abstract class FAController <T extends FADisplay> extends Observable impl
 
   @Override
   public final void keyTyped(KeyEvent e) {}
-  
+
   @Override
   public final void keyPressed(KeyEvent e) {
     ActionListener al = this._keyMap.get(e.getKeyCode());

@@ -11,13 +11,13 @@ import ui.questions.components.SubjectsPanel;
 public class SubjectsDisplay extends QuestionListDisplay {
 
   public static final int TOTAL_WIDTH = 750;
-  public static final int TOTAL_HEIGHT = 600;
+  public static final int TOTAL_HEIGHT = 1000;
   public static final int SUBJECT_PANEL_WIDTH = 150;
   public static final int QUESTION_PANEL_HEIGHT = 500;
 
   protected final SubjectsPanel subjectsPanel;
 
-  public SubjectsDisplay(final QuestionListController ctrl) {
+  public SubjectsDisplay(final SubjectsController ctrl) {
     super(ctrl, TOTAL_WIDTH, TOTAL_HEIGHT);
     this.subjectsPanel = new SubjectsPanel(ctrl);
   }
@@ -69,8 +69,8 @@ public class SubjectsDisplay extends QuestionListDisplay {
     Database db = DatabaseIO.loadDatabase();
 
     // Load/initialize controller/display.
-    QuestionListController ctrl = new QuestionListController(db, db.getQuestionList());
-    QuestionListDisplay display = new SubjectsDisplay(ctrl);
+    SubjectsController ctrl = new SubjectsController(db);
+    SubjectsDisplay display = new SubjectsDisplay(ctrl);
 
     // Bring it all home.
     MainWindow window = new MainWindow();

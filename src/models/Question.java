@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class Question implements Serializable {
 
-  // Permanent fields central to class.  
+  // Permanent fields central to class.
   Integer id = null;  // Non-nullable
   Source source = null;  // Non-nullable
   Integer questionNumber = null;  // Non-nullable
@@ -39,7 +39,7 @@ public class Question implements Serializable {
     this.originalImageFilename = imageFilename;
 
     this.persistent = false;
-    this.databaseImageFilename = null; 
+    this.databaseImageFilename = null;
   }
 
   @Override
@@ -77,6 +77,14 @@ public class Question implements Serializable {
 
   public boolean hasSubject(Subject subject) {
     return this.subjects.contains(subject);
+  }
+
+  public Subject[] getSubjects() {
+    Subject[] subjects = new Subject[this.subjects.size()];
+    for (int i=0; i<this.subjects.size(); i++) {
+      subjects[i] = this.subjects.get(i);
+    }
+    return subjects;
   }
 
   public void setSubject(Subject subject, boolean value) {

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import engine.QuestionFilter;
 
 public final class Database {
 
@@ -59,6 +60,18 @@ public final class Database {
     Iterator<Question> iter = this.getDatabaseIterator();
     while (iter.hasNext()) {
       questionsList.add(iter.next());
+    }
+    return questionsList;
+  }
+
+  public List<Question> getQuestionList(QuestionFilter filter) {
+    List<Question> questionsList = new ArrayList<>();
+    Iterator<Question> iter = this.getDatabaseIterator();
+    while (iter.hasNext()) {
+      Question q = iter.next();
+      if (filter.accept(q)) {
+        questionsList.add(q);
+      }
     }
     return questionsList;
   }
