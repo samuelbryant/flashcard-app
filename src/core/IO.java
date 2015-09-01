@@ -19,7 +19,6 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
-import core.FatalError;
 
 public class IO {
 
@@ -180,11 +179,19 @@ public class IO {
     }
   }
 
-  public static BufferedReader getBufferedReaderOrDie(String filename) {
+  public static Scanner getScannerOrDie(String filename) {
     try {
-      return new BufferedReader(new FileReader(filename));
+      return new Scanner(new File(filename));
     } catch(IOException ex) {
-      throw new FatalError("getBufferedReaderOrDie failed for " + filename, ex);
+      throw new FatalError("getScannerOrDie failed for " + filename, ex);
     }
+  }
+  
+  public static String readEntireFileOrDie(String filename) {
+    Scanner scan = getScannerOrDie(filename);
+    scan.useDelimiter("\\Z");  
+    String contents = scan.next();
+    IO.closeOrLive(scan);
+    return contents;
   }
 }

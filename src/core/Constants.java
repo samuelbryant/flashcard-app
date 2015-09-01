@@ -3,10 +3,7 @@
  * Separate metadata (number of times answered correctly, etc.) from the quesiton data itself.
  * This way the database doesn't have to update and serialization is stable.
  */
-package flashcard;
-
-import static flashcard.Constants.OUTPUT_DIR;
-import core.IO;
+package core;
 
 /**
  *

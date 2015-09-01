@@ -7,8 +7,8 @@ package ui.questions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import models.Answer;
 import models.Question;
-import java.awt.event.KeyEvent;
 import ui.FAController;
 
 public class QuestionListController extends FAController<QuestionListDisplay> {
@@ -34,17 +34,17 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
 
     private final Question _question;
     private AnsweredState _answeredState;
-    private Question.Answer _selectedAnswer;
-    private final Question.Answer _correctAnswer;
+    private Answer _selectedAnswer;
+    private final Answer _correctAnswer;
 
     public QuestionDisplay(Question q) {
       this._question = q;
       this._answeredState = AnsweredState.UNANSWERED;
       this._selectedAnswer = null;
-      this._correctAnswer = _question.answer;
+      this._correctAnswer = _question.getAnswer();
     }
 
-    private void answer(Question.Answer answer) {
+    private void answer(Answer answer) {
       this._selectedAnswer = answer;
       if (answer == _correctAnswer) {
         this._answeredState = AnsweredState.CORRECT;
@@ -66,9 +66,9 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
     this._currentQuestion = new QuestionDisplay(this._questionIterator.next());
     this._state = State.IN_PROGRESS;
     this._setupKeyMap();
-      }
+  }
   
-  private final void _setupKeyMap() {
+  private void _setupKeyMap() {
     this.addKeyAction(39, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -78,11 +78,11 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
   
   }
 
-  public Question.Answer getCorrectAnswer() {
+  public Answer getCorrectAnswer() {
     return this._currentQuestion._correctAnswer;
   }
 
-  public Question.Answer getSelectedAnswer() {
+  public Answer getSelectedAnswer() {
     return this._currentQuestion._selectedAnswer;
   }
 
@@ -118,7 +118,7 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
     this.update();
   }
 
-  public void answerQuestion(Question.Answer answer) {
+  public void answerQuestion(Answer answer) {
     this._currentQuestion.answer(answer);
     this.setChanged();
     this.update();

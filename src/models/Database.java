@@ -1,33 +1,57 @@
-/*
- * Database - Contains database of questions and methods for reading/writing.
- */
 package models;
 
+import core.FatalError;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author author
- */
 public final class Database {
   
   static final int _ID_START = 1001;
   
   // Package private fields.
-  int questionNumber;
-  int nextQuestionId;
-  Map<Integer, Question> questions;
+  Integer revisionNumber = 0;
+  Integer questionNumber = 0;
+  Integer nextQuestionId = 0;
+  Map<Integer, Question> questions = new HashMap<>();
   
   // Private fields.
-  private boolean hasPendingChanges = false;
+  boolean isPersistent = false;
   
   Database() {}
   
+  static Database getFreshDatabase() {
+    Database db = new Database();
+    db.revisionNumber = 0;
+    db.questionNumber = 0;
+    db.nextQuestionId = _ID_START;
+    db.questions = new HashMap<>();
+    db.isPersistent = false;
+    return db;
+  }
+  
   public int getNumberOfQuestions() {
     return this.questions.values().size(); 
+  }
+  
+  public boolean containsQuestion(Source source, Integer questionNumber) {
+    for (Question q: this.questions.values()) {
+      if (q.source == source && q.questionNumber == questionNumber) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  public Question findQuestionCopy(Source source, Integer questionNumber) {
+    for (Question q: this.questions.values()) {
+      if (q.source == source && q.questionNumber == questionNumber) {
+        return core.Utilities.makeDeepCopy(q);
+      }
+    }
+    return null;
   }
   
   public List<Question> getQuestionListCopy() {
@@ -54,39 +78,62 @@ public final class Database {
   }
   
   public void addQuestionToSession(Question q) {
-    // For new questions (no id), we assign the id and add it to database map.
-    if (!q.hasId()) {
-      int id = this.nextQuestionId;
-      q.setId(id);
-      if (this.questions.get(id) != null) {
-        throw new IllegalStateException("Question map already has id: " + id);
+    // For old questions (has id), we ensure question is already in database, then set it to map.
+    if (q.id != null) {
+      if (this.questions.get(q.id) == null) {
+        throw new IllegalStateException("Question w/ id " + q.id + " does not correspond to entry");
       }
-      this.questions.put(id, q);
-      this.hasPendingChanges = true;
+      this.questions.put(q.id, q);
+    }
+    // For new questions (no id), we check if a matching question already exists in DB
+    else {
+      // For non-persistent questions (no id), we assign it the next available ID.
+      q.id = this.nextQuestionId;
+      
+      // Validate to make sure question has all required fields.
+      q.validate();
+
+      // Ensure database doesn't already have this ID (indicates programming error).
+      if (this.questions.get(q.id) != null) {
+        throw new IllegalStateException("Question map already has id: " + q.id);
+      }
+
+      // Ensure database doesn't already have matching question (to avoid duplicates).
+      if (this.containsQuestion(q.source, q.questionNumber)) {
+        // Unset new id so question is unchanged.
+        q.id = null;
+        System.out.printf("WRN: addQuestionToSession: Ignoring duplicate question: %s\n", q);
+        return;
+      }
+      
+      this.questions.put(q.id, q);
       this.nextQuestionId++;
       this.questionNumber++;
     }
-    // For old questions (has id), we ensure question is already in database, then set it to map.
-    else {
-      int id = q.getId();
-      if (this.questions.get(id) == null) {
-        throw new IllegalStateException("Question w/ id " + id + " does not correspond to entry");
+  }
+  
+  public boolean isValid() {
+    System.out.printf("LOG: database isValid NIY\n");
+    for (Question q: this.questions.values()) {
+      if (!q.isValid()) {
+        return false;
       }
-      this.questions.put(id, q);
-      this.hasPendingChanges = true;
+    }
+    return true;
+  }
+  
+  public void validate() {
+    if (!this.isValid()) {
+      throw new FatalError("Database failed validation: " + this);
     }
   }
   
-  public boolean checkIntegrity() {
-    System.out.printf("LOG: _checkIntegrity NIY\n");
-    return true;
-  }
   
   public static void main(String[] args) {
     Database d = DatabaseIO.loadDatabase();
     System.out.println("DATABASE");
     System.out.printf("Total #  : %d\n", d.questionNumber);
-    System.out.printf("Integrity: %s\n", d.checkIntegrity());
+    System.out.printf("Integrity: %s\n", d.isValid());
     System.out.printf("**** Questions ****\n");
     for (Question q: d.questions.values()) {
       System.out.println(q);

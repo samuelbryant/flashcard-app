@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
+import models.Answer;
 import ui.components.FAButton;
 import ui.questions.QuestionListController;
 
@@ -14,9 +15,9 @@ public class AnswerPanel extends JPanel {
 
   public class AnswerButton extends FAButton implements Observer {
 
-    private final Question.Answer _answer;
+    private final Answer _answer;
 
-    public AnswerButton(Question.Answer answer) {
+    public AnswerButton(Answer answer) {
       super(answer.name());
       this._answer = answer;
     }
@@ -52,7 +53,7 @@ public class AnswerPanel extends JPanel {
 
     this.setLayout(new FlowLayout());
 
-    Question.Answer[] answers = Question.Answer.values();
+    Answer[] answers = Answer.values();
     _answerButtons = new AnswerButton[answers.length];
 
     for (int i = 0; i < answers.length; i++) {

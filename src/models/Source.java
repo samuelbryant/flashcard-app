@@ -1,0 +1,7 @@
+package models;
+
+public enum Source {
+  GRE_1986, GRE_1991, GRE_1995, GRE_2001, GRE_2008,
+  SAMPLE_1, SAMPLE_2, SAMPLE_3, PRACTICE_BOOK,
+  TEXTBOOK, CUSTOM, OTHER;
+}

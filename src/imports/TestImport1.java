@@ -1,8 +1,11 @@
 package imports;
 
+import core.Constants;
+import models.Answer;
 import models.Database;
 import models.DatabaseIO;
 import models.Question;
+import models.Source;
 
 /**
  *
@@ -37,24 +40,23 @@ public class TestImport1 {
 
   public static void main(String[] args) {
 
-    flashcard.Constants.setupProjectDirectories();
+    Constants.setupProjectDirectories();
 
     Database d = DatabaseIO.loadDatabase();
 
-    Question.QuestionSource source = Question.QuestionSource.GRE_1986;
+    Source source = Source.GRE_1986;
 
     for (String[] question: QUESTIONS) {
       int number = Integer.parseInt(question[0]);
-      Question.Answer answer = Question.Answer.valueOf(question[1]);
+      Answer answer = Answer.valueOf(question[1]);
       String imgFilename = SRC_DIR + "/" + question[2];
 
       Question q = new Question(source, number, answer, imgFilename);
 
       d.addQuestionToSession(q);
-      System.out.println("Added quesiton: " + q);
     }
 
-    DatabaseIO.saveDatabase(d);
+    DatabaseIO.writeDatabase(d);
   }
 
 }
