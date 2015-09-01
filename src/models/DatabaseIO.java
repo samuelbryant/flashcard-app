@@ -24,9 +24,9 @@ public class DatabaseIO {
     _writeQuestionFiles(db);
     db.isPersistent = true;
   }
-  
+
   //***** DATABASE WRITING METHODS *****/
-  
+
   private static void _writeQuestionFiles(Database db) {
     for (Question q: db.questions.values()) {
       QuestionIO.writeQuestion(q);
@@ -37,23 +37,23 @@ public class DatabaseIO {
     String dataFilename = Constants.QUESTION_DATABASE_MAIN_FILE;
     IO.backupAndRecreateOrDie(dataFilename);
     PrintWriter pw = IO.getPrintWriterOrDie(dataFilename);
-    
+
     String jsonDatabase = _databaseToJSON(db);
     pw.write(jsonDatabase);
     IO.closeOrLive(pw);
   }
 
   private static String _databaseToJSON(Database db) {
-    JSONObject obj = new JSONObject(); 
+    JSONObject obj = new JSONObject();
     obj.put("questionNumber", db.questionNumber);
     obj.put("revisionNumber", db.revisionNumber);
     obj.put("nextQuestionId", db.nextQuestionId);
     obj.put("questions", db.questions.keySet());
     return obj.toString(2);
   }
-  
+
   //***** DATABASE READING METHODS *****/
-  
+
   private static Database _readDatabaseFromFiles() {
     String databaseFilename = Constants.QUESTION_DATABASE_MAIN_FILE;
     if (IO.fileExists(databaseFilename)) {
@@ -80,5 +80,5 @@ public class DatabaseIO {
     }
     return db;
   }
-  
+
 }

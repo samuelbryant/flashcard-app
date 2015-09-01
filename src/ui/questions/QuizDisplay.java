@@ -23,7 +23,7 @@ public class QuizDisplay extends QuestionListDisplay {
 
   @Override
   protected void setupMenuBar() {
-
+    super.setupMenuBar();
   }
 
   @Override
@@ -59,10 +59,9 @@ public class QuizDisplay extends QuestionListDisplay {
   public static void main(String[] args) {
     // Load/initialize models.
     Database db = DatabaseIO.loadDatabase();
-    QuestionIterator iter = new QuestionListIterator(db.getQuestionListCopy());
 
     // Load/initialize controller/display.
-    QuestionListController ctrl = new QuestionListController(iter);
+    QuestionListController ctrl = new QuestionListController(db, db.getQuestionList());
     QuestionListDisplay display = new QuizDisplay(ctrl);
 
     // Bring it all home.

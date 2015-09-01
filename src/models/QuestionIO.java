@@ -18,26 +18,26 @@ import org.json.*;
  * @author sambryant
  */
 public class QuestionIO {
-  
+
   public static Question loadQuestion(int id) {
     Question q = _readQuestionDataFile(id);
     q.persistent = true;
     // SBTAG: Maybe we want to load the image file here as well.
     return q;
   }
-  
+
   public static void writeQuestion(Question q) {
     _writeQuestionImageFile(q);
     _writeQuestionDataFile(q);
     q.persistent = true;
   }
-  
+
   public static void loadQuestionImage(Question q) {
     q.questionImage = IO.loadImageOrDie(q.databaseImageFilename);
   }
-  
+
   //***** QUESTION FILE WRITING METHODS *****/
-  
+
   private static void _writeQuestionImageFile(Question q) {
     // For objects not in database yet, we need to copy their images to proper location.
     if (q.databaseImageFilename == null || !IO.fileExists(q.databaseImageFilename)) {
@@ -48,32 +48,44 @@ public class QuestionIO {
       q.databaseImageFilename = databaseImageFilename;
     }
   }
-  
+
   private static void _writeQuestionDataFile(Question q) {
     String dataFilename = Constants.getQuestionDataFilename(q.id);
     IO.backupAndRecreateOrDie(dataFilename);
     PrintWriter pw = IO.getPrintWriterOrDie(dataFilename);
-    
+
     String jsonQuestion = _questionToJSON(q);
     pw.write(jsonQuestion);
     IO.closeOrLive(pw);
   }
-  
+
   private static String _questionToJSON(Question q) {
-    JSONObject obj = new JSONObject(); 
+    JSONObject obj = new JSONObject();
     obj.put("id", q.id);
     obj.putOpt("source", q.source.toString());
     obj.putOpt("questionNumber", q.questionNumber);
     obj.putOpt("databaseImageFilename", q.databaseImageFilename);
-    obj.putOpt("answer", q.answer);
-    obj.putOpt("notes", q.notes);
-    obj.putOpt("subjects", q.subjects);
-    obj.putOpt("tags", q.tags);
-    obj.putOpt("subjects", q.subjects);
-    obj.putOpt("responses", _responsesToJSONArray(q.responses));
+    if (q.answer != null)
+      obj.put("answer", q.answer.toString());
+    if (q.notes != null)
+      obj.put("notes", _objectsToJSONArray(q.notes));
+    if (q.tags != null)
+      obj.put("tags", _objectsToJSONArray(q.tags));
+    if (q.subjects != null)
+      obj.put("subjects", _objectsToJSONArray(q.subjects));
+    if (q.responses != null)
+      obj.put("responses", _responsesToJSONArray(q.responses));
     return obj.toString(2);
   }
-   
+
+  private static <T> JSONArray _objectsToJSONArray(ArrayList<T> objects) {
+    JSONArray arr = new JSONArray();
+    for (Object o: objects) {
+      arr.put(o.toString());
+    }
+    return arr;
+  }
+
   private static JSONArray _responsesToJSONArray(ArrayList<Response> responses) {
     JSONArray arr = new JSONArray();
     for (Response r: responses) {
@@ -84,15 +96,15 @@ public class QuestionIO {
     }
     return arr;
   }
-  
+
   //***** QUESTION DATA FILE READING METHODS
-  
+
   private static Question _readQuestionDataFile(int id) {
     String dataFilename = Constants.getQuestionDataFilename(id);
     String jsonStr = IO.readEntireFileOrDie(dataFilename);
     return _parseQuestionJSON(jsonStr);
   }
-  
+
   private static Question _parseQuestionJSON(String jsonStr) {
     JSONObject obj = new JSONObject(jsonStr);
     Question q = new Question();
@@ -115,15 +127,15 @@ public class QuestionIO {
     }
     return q;
   }
-  
+
   private static Response _parseResponseJSON(JSONObject obj) {
     return new Response(
         Answer.valueOf(obj.getString("response")),
         obj.getInt("responseTime"));
   }
-  
+
   /***** HELPER METHODS *****/
-  
+
   private static String _getStringOpt(JSONObject obj, String key) {
     if (obj.has(key)) {
       String value = obj.getString(key);
@@ -133,13 +145,23 @@ public class QuestionIO {
     }
     return null;
   }
-  
+
   private static Integer _getIntOpt(JSONObject obj, String key) {
     return obj.has(key) ? obj.getInt(key) : null;
   }
-  
+
   private static JSONArray _getArrOpt(JSONObject obj, String key) {
     return obj.has(key) ? obj.getJSONArray(key) : new JSONArray();
   }
-  
+
+  public static void main(String[] args) {
+    Question q = new Question();
+    q.subjects.add(Subject.MECHANICS);
+    q.subjects.add(Subject.QM);
+    q.source = Source.OTHER;
+    q.questionNumber = 89;
+    String json = _questionToJSON(q);
+    System.out.println(json);
+  }
+
 }

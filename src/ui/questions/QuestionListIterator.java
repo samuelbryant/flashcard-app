@@ -14,15 +14,15 @@ import java.util.List;
  * @author author
  */
 public class QuestionListIterator implements QuestionIterator {
-  
+
   private List<Question> questions;
   private int index;
-  
+
   public QuestionListIterator(List<Question> questions) {
     this.questions = questions;
     this.index = 0;
   }
-  
+
   @Override
   public Question current() {
     return this.questions.get(index);
@@ -63,5 +63,5 @@ public class QuestionListIterator implements QuestionIterator {
     Collections.shuffle(questions);
     this.index = 0;
   }
-  
+
 }

@@ -8,6 +8,9 @@ package ui.questions;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import models.Answer;
+import models.Database;
+import models.DatabaseIO;
+import java.util.List;
 import models.Question;
 import ui.FAController;
 
@@ -59,6 +62,8 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
   private QuestionDisplay _currentQuestion;
   private final QuestionIterator _questionIterator;
   private State _state;
+  private Database _database = null;
+  private List<Question> _questionList = null;
 
   public QuestionListController(QuestionIterator questionIterator) {
     super();
@@ -67,7 +72,17 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
     this._state = State.IN_PROGRESS;
     this._setupKeyMap();
   }
-  
+
+  public QuestionListController(Database db, List<Question> questionList) {
+    super();
+    this._questionIterator = new QuestionListIterator(questionList);
+    this._questionList = questionList;
+    this._database = db;
+    this._currentQuestion = new QuestionDisplay(this._questionIterator.next());
+    this._state = State.IN_PROGRESS;
+    this._setupKeyMap();
+  }
+
   private void _setupKeyMap() {
     this.addKeyAction(39, new ActionListener() {
       @Override
@@ -75,7 +90,18 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
         QuestionListController.this.nextClick();
       }
     });
-  
+  }
+
+  public void saveToDatabase() {
+    if (_database == null) {
+      throw new IllegalStateException("Database reference not available");
+    }
+    if (_questionList == null) {
+      throw new IllegalStateException("Controller was not provided question list");
+    }
+    this._database.addQuestionsToSession(_questionList);
+    DatabaseIO.writeDatabase(this._database);
+    System.out.printf("LOG: saveToDatabase completed\n");
   }
 
   public Answer getCorrectAnswer() {
@@ -97,7 +123,6 @@ public class QuestionListController extends FAController<QuestionListDisplay> {
   public Question getCurrentQuestion() {
     return this._currentQuestion._question;
   }
-  
 
   public void nextClick() {
     this._currentQuestion = new QuestionDisplay(this._questionIterator.next());

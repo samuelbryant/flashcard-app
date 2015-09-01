@@ -1,5 +1,6 @@
 package ui.questions;
 
+import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 import models.Database;
 import models.DatabaseIO;
 import ui.MainWindow;
@@ -32,7 +35,16 @@ public class QuestionListDisplay extends FADisplay<QuestionListController> {
 
   @Override
   protected void setupMenuBar() {
-
+    JMenu file = new JMenu("File");
+    JMenuItem menuItem = new JMenuItem("Save");
+    menuItem.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent ev) {
+        QuestionListDisplay.this.ctrl.saveToDatabase();
+      }
+      });
+    file.add(menuItem);
+    this.menuBar.add(file);
   }
 
   @Override
@@ -87,10 +99,9 @@ public class QuestionListDisplay extends FADisplay<QuestionListController> {
   public static void main(String[] args) {
     // Load/initialize models.
     Database db = DatabaseIO.loadDatabase();
-    QuestionIterator iter = new QuestionListIterator(db.getQuestionListCopy());
 
     // Load/initialize controller/display.
-    QuestionListController ctrl = new QuestionListController(iter);
+    QuestionListController ctrl = new QuestionListController(db, db.getQuestionList());
     QuestionListDisplay display = new QuestionListDisplay(ctrl, 600, 600);
 
     // Bring it all home.

@@ -8,20 +8,20 @@ import java.util.List;
 import java.util.Map;
 
 public final class Database {
-  
+
   static final int _ID_START = 1001;
-  
+
   // Package private fields.
   Integer revisionNumber = 0;
   Integer questionNumber = 0;
   Integer nextQuestionId = 0;
   Map<Integer, Question> questions = new HashMap<>();
-  
+
   // Private fields.
   boolean isPersistent = false;
-  
+
   Database() {}
-  
+
   static Database getFreshDatabase() {
     Database db = new Database();
     db.revisionNumber = 0;
@@ -31,11 +31,11 @@ public final class Database {
     db.isPersistent = false;
     return db;
   }
-  
+
   public int getNumberOfQuestions() {
-    return this.questions.values().size(); 
+    return this.questions.values().size();
   }
-  
+
   public boolean containsQuestion(Source source, Integer questionNumber) {
     for (Question q: this.questions.values()) {
       if (q.source == source && q.questionNumber == questionNumber) {
@@ -44,7 +44,29 @@ public final class Database {
     }
     return false;
   }
-  
+
+  public Question findQuestion(Source source, Integer questionNumber) {
+    for (Question q: this.questions.values()) {
+      if (q.source == source && q.questionNumber == questionNumber) {
+        return q;
+      }
+    }
+    return null;
+  }
+
+  public List<Question> getQuestionList() {
+    List<Question> questionsList = new ArrayList<>();
+    Iterator<Question> iter = this.getDatabaseIterator();
+    while (iter.hasNext()) {
+      questionsList.add(iter.next());
+    }
+    return questionsList;
+  }
+
+  public Iterator<Question> getDatabaseIterator() {
+    return this.questions.values().iterator();
+  }
+
   public Question findQuestionCopy(Source source, Integer questionNumber) {
     for (Question q: this.questions.values()) {
       if (q.source == source && q.questionNumber == questionNumber) {
@@ -53,7 +75,7 @@ public final class Database {
     }
     return null;
   }
-  
+
   public List<Question> getQuestionListCopy() {
     List<Question> questionsCopy = new ArrayList<>();
     Iterator<Question> iter = this.getDatabaseCopyIterator();
@@ -62,9 +84,9 @@ public final class Database {
     }
     return questionsCopy;
   }
-  
+
   public Iterator<Question> getDatabaseCopyIterator() {
-    final Iterator<Question> baseIterator = this.questions.values().iterator(); 
+    final Iterator<Question> baseIterator = this.questions.values().iterator();
     return new Iterator<Question>() {
       @Override
       public boolean hasNext() {return baseIterator.hasNext();}
@@ -76,7 +98,13 @@ public final class Database {
       public void remove() {throw new UnsupportedOperationException("Not supported yet.");}
     };
   }
-  
+
+  public void addQuestionsToSession(List<Question> questions) {
+    for (Question q: questions) {
+      this.addQuestionToSession(q);
+    }
+  }
+
   public void addQuestionToSession(Question q) {
     // For old questions (has id), we ensure question is already in database, then set it to map.
     if (q.id != null) {
@@ -89,7 +117,7 @@ public final class Database {
     else {
       // For non-persistent questions (no id), we assign it the next available ID.
       q.id = this.nextQuestionId;
-      
+
       // Validate to make sure question has all required fields.
       q.validate();
 
@@ -105,13 +133,13 @@ public final class Database {
         System.out.printf("WRN: addQuestionToSession: Ignoring duplicate question: %s\n", q);
         return;
       }
-      
+
       this.questions.put(q.id, q);
       this.nextQuestionId++;
       this.questionNumber++;
     }
   }
-  
+
   public boolean isValid() {
     System.out.printf("LOG: database isValid NIY\n");
     for (Question q: this.questions.values()) {
@@ -121,14 +149,13 @@ public final class Database {
     }
     return true;
   }
-  
+
   public void validate() {
     if (!this.isValid()) {
       throw new FatalError("Database failed validation: " + this);
     }
   }
-  
-  
+
   public static void main(String[] args) {
     Database d = DatabaseIO.loadDatabase();
     System.out.println("DATABASE");
