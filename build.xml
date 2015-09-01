@@ -9,6 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="GREPrepApp" default="default" basedir=".">
     <description>Builds, tests, and runs the project GREPrepApp.</description>
+    <property name="javadoc.excludes" value="**/org/json/**" />
     <import file="nbproject/build-impl.xml"/>
     <!--
 
