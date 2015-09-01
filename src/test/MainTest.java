@@ -14,6 +14,10 @@ public class MainTest {
       imports.TestImport1.main(args);
     } else if (args[0].compareTo("display") == 0) {
       ui.questions.TestDisplayAllQuestions.main(args);
+    } else if (args[0].compareTo("quiz") == 0) {
+      ui.questions.QuizDisplay.main(args);
+    } else if (args[0].compareTo("subjects") == 0) {
+      ui.questions.SubjectsDisplay.main(args);
     } else if (args[0].compareTo("database") == 0) {
       models.Database.main(args);
     } else {

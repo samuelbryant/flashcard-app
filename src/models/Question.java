@@ -24,7 +24,7 @@ public class Question implements Serializable {
   Boolean persistent = false;
 
   Question() {}
-  
+
   /**
    * Constructor designed for importing questions.
    * @param source The {QuestionSource} representing where question originated from.
@@ -41,12 +41,12 @@ public class Question implements Serializable {
     this.persistent = false;
     this.databaseImageFilename = null; 
   }
-  
+
   @Override
   public String toString() {
     return String.format("ID: %05d  (%s  -  #%d)", id, source, questionNumber);
   }
-  
+
   public BufferedImage getImage() {
     if (this.questionImage != null) {
       return this.questionImage;
@@ -56,7 +56,7 @@ public class Question implements Serializable {
       return this.questionImage;
     }
   }
-  
+
   public boolean isValid() {
     // Ensure proper fields are non-null.
     if (this.id == null) return false;
@@ -64,7 +64,7 @@ public class Question implements Serializable {
     if (this.questionNumber == null) return false;
     return true;
   }
-  
+
   public void validate() {
     if (!this.isValid()) {
       throw new FatalError("Question failed validation: " + this);
@@ -73,5 +73,19 @@ public class Question implements Serializable {
 
   public Answer getAnswer() {
     return this.answer;
+  }
+
+  public boolean hasSubject(Subject subject) {
+    return this.subjects.contains(subject);
+  }
+
+  public void setSubject(Subject subject, boolean value) {
+    if (this.subjects.contains(subject)) {
+      if (!value) {
+        this.subjects.remove(subject);
+      }
+    } else if (value) {
+      this.subjects.add(subject);
+    }
   }
 }

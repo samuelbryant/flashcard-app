@@ -44,7 +44,7 @@ public class AnswerPanel extends JPanel {
     }
 
   }
-  
+
   private final QuestionListController _ctrl;
   private final AnswerButton[] _answerButtons;
 
