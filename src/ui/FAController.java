@@ -51,6 +51,8 @@ public abstract class FAController <T extends FADisplay> extends Observable impl
     if (al != null) {
       System.out.printf("Found actionlistener for key code: %d\n", e.getKeyCode());
       al.actionPerformed(null);
+    } else {
+      System.out.printf("Unknown key code: %d\n", e.getKeyCode());
     }
   }
   

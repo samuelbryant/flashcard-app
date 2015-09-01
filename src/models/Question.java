@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import core.IO;
 import flashcard.Constants;
-import static flashcard.Constants.QUESTION_IMAGE_DIR;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
@@ -23,13 +22,10 @@ public class Question implements Serializable {
     SAMPLE_1("PT1"), SAMPLE_2("PT2"), SAMPLE_3("PT3"), PRACTICE_BOOK("BOOK"),
     TEXTBOOK("TEXT"), CUSTOM("CUST"), OTHER("OTHER");
 
-    private String name;
+    private final String name;
 
     QuestionSource(String name) {
       this.name = name;
-    }
-    public String getOuputName() {
-      return name;
     }
   }
 
@@ -74,7 +70,7 @@ public class Question implements Serializable {
     this.originalImageFilename = imageFilename;
 
     this.persistent = false;
-    this.databaseImageFilename = null;
+    this.databaseImageFilename = null; 
   }
 
   /**

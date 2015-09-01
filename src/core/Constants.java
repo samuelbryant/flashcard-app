@@ -31,7 +31,7 @@ public class Constants {
   }
 
   public final static String getQuestionDataFilename(int id) {
-    return QUESTION_DATA_DIR + "/" + "ID-" + id + ".png";
+    return QUESTION_DATA_DIR + "/" + "ID-" + id + ".txt";
   }
 
   public static void main(String[] args) {
