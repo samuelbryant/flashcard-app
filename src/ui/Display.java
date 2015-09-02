@@ -29,6 +29,7 @@ public abstract class Display <T extends Controller> extends JPanel implements O
     this.sizeComponent(this, new Dimension(totalWidth, totalHeight));
     this.setFocusable(true);
     this.addKeyListener(this.ctrl);
+    this.addFocusListener(this.ctrl);
     this.ctrl.addObserver(this);
   }
   

@@ -79,7 +79,7 @@ public class Question implements Serializable {
     return this.subjects.contains(subject);
   }
 
-  public Subject[] getSubjects() {
+  public Subject[] getSubjectsArray() {
     Subject[] subjects = new Subject[this.subjects.size()];
     for (int i=0; i<this.subjects.size(); i++) {
       subjects[i] = this.subjects.get(i);
@@ -99,5 +99,39 @@ public class Question implements Serializable {
   
   public void addResponse(Response r) {
     this.responses.add(r);
+  }
+  
+  public Source getSource() {
+    return this.source;
+  }
+  
+  public ArrayList<Response> getResponses() {
+    return this.responses;
+  }
+  
+  public ArrayList<Subject> getSubjects() {
+    return this.subjects;
+  }
+  
+  public ArrayList<Tag> getTags() {
+    return this.tags;
+  }
+  
+  public int getId() {
+    return this.id;
+  }
+
+  public boolean hasTag(Tag tag) {
+    return this.tags.contains(tag);
+  }
+
+  public void setTag(Tag tag, boolean value) {
+    if (this.tags.contains(tag)) {
+      if (!value) {
+        this.tags.remove(tag);
+      }
+    } else if (value) {
+      this.tags.add(tag);
+    }
   }
 }

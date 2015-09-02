@@ -12,6 +12,7 @@ import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import models.Subject;
+import models.Tag;
 import ui.components.FACheckbox;
 
 public class SubjectsPanel extends JPanel {
@@ -77,29 +78,55 @@ public class SubjectsPanel extends JPanel {
     }
 
   }
+  
+  public class TagCheckbox extends FACheckbox implements Observer {
+
+    private final SubjectsController _ctrl;
+    private final Tag _tag;
+
+    public TagCheckbox(Tag tag) {
+      super(tag.name());
+      this._tag = tag;
+      this._ctrl = SubjectsPanel.this._ctrl;
+      this._ctrl.addObserver(this);
+      this.update(null, null);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+      this._ctrl.getCurrentQuestion().setTag(this._tag, this.isSelected());
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+      this.setSelected(this._ctrl.getCurrentQuestion().hasTag(this._tag));
+    }
+
+  }
 
   private final SubjectsController _ctrl;
-  private final SubjectCheckbox[] _subjectCheckboxes;
 
   public SubjectsPanel(SubjectsController ctrl) {
     this._ctrl = ctrl;
 
+    Subject[] subjects = Subject.values();
+    Tag[] tags = Tag.values();
+    
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
     InfoLabel label = new InfoLabel();
     this.add(label);
 
-    ToggleShownCheckbox toggle = new ToggleShownCheckbox("Only show no subjects");
-    this.add(toggle);
-
-    Subject[] subjects = Subject.values();
-    _subjectCheckboxes = new SubjectCheckbox[subjects.length];
-
-    for (int i = 0; i < subjects.length; i++) {
-      _subjectCheckboxes[i] = new SubjectCheckbox(subjects[i]);
-      this.add(_subjectCheckboxes[i]);
+    this.add(new JLabel("Subjects"));
+    this.add(new ToggleShownCheckbox("SHOW MISSING"));
+    for (Subject subject: subjects) {
+      this.add(new SubjectCheckbox(subject));
     }
 
+    this.add(new JLabel("Tags"));
+    for (Tag tag: tags) {
+      this.add(new TagCheckbox(tag));
+    }
     this.setFocusable(false);
   }
 

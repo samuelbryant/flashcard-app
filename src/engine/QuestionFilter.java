@@ -17,5 +17,5 @@ public abstract class QuestionFilter {
     }
     return newList;
   }
-
+  
 }

@@ -12,7 +12,6 @@ import models.Question;
 import ui.Controller;
 
 public class QuestionListController extends Controller<QuestionListDisplay> {
-
   /**
    * Enum capturing state of question list controller.
    */
@@ -113,6 +112,14 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
     DatabaseIO.writeDatabase(this._database);
     System.out.printf("LOG: saveToDatabase completed\n");
   }
+  
+  public void setQuestionList(List<Question> list) {
+    this._currentQuestion = null;
+    this._state = State.NOT_STARTED;
+    this._questionList = list;
+    this._questionIterator = new QuestionListIterator(this._questionList);
+    this.update();
+  }
 
   public Answer getCorrectAnswer() {
     return this._currentQuestion._correctAnswer;
@@ -157,6 +164,10 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
     this._currentQuestion.answer(answer);
     this.setChanged();
     this.update();
+  }
+  
+  public Database getDatabase() {
+    return this._database;
   }
 
 }

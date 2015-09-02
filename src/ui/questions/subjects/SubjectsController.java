@@ -11,7 +11,7 @@ public class SubjectsController extends QuestionListController {
   public class NoSubjectFilter extends QuestionFilter {
     @Override
     public boolean accept(Question q) {
-      return (q.getSubjects().length == 0);
+      return (q.getSubjectsArray().length == 0);
     }
   }
 
@@ -42,6 +42,17 @@ public class SubjectsController extends QuestionListController {
         this._updateCurrent();
       }
     }
+  }
+  
+  @Override
+  public void setQuestionList(List<Question> list) {
+    super.setQuestionList(list);
+    System.out.printf("Set question list to %d\n", list.size());
+    this.fullQuestionList = list;
+    this.currentQuestionList = list;
+    this.index = 0;
+    this._state = QuestionListController.State.IN_PROGRESS;
+    this._updateCurrent();
   }
 
   public boolean isOnlyShowingNoSubjects() {

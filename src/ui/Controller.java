@@ -5,7 +5,10 @@
  */
 package ui;
 
+import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
@@ -18,7 +21,7 @@ import ui.components.FAKeyMap;
  * @author sambryant
  * @param <T>
  */
-public abstract class Controller <T extends Display> extends Observable implements KeyListener, FAKeyMap {
+public abstract class Controller <T extends Display> extends Observable implements KeyListener, FAKeyMap, FocusListener {
 
   private final Map<Integer, ActionListener> _keyMap;
   protected T display = null;
@@ -59,5 +62,15 @@ public abstract class Controller <T extends Display> extends Observable implemen
   
   @Override
   public final void keyReleased(KeyEvent e) {}
+
+  @Override
+  public void focusGained(FocusEvent e) {
+  }
+
+  @Override
+  public void focusLost(FocusEvent e) {
+    Component c = e.getComponent();
+    c.requestFocus();
+  }
   
 }
