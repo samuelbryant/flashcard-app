@@ -1,22 +1,16 @@
 package ui.components;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import java.awt.Color;
+import ui.Constants;
 
-public abstract class FAButton extends JButton implements ActionListener {
+public class FAButton extends JButton {
 
   public FAButton(String label) {
     super(label);
-    this.setBackground(Color.WHITE);
+    this.setBackground(Constants.BUTTON_COLOR);
     this.setOpaque(true);
     this.setBorderPainted(false);
     this.setFocusable(false);
-    this.addActionListener(this);
   }
-
-  @Override
-  public abstract void actionPerformed(ActionEvent ev);
 
 }

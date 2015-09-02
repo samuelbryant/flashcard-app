@@ -1,6 +1,7 @@
 package ui.questions.filter;
 
-import java.awt.event.ActionEvent;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
@@ -8,81 +9,99 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import models.Subject;
 import models.Tag;
+import ui.Constants;
 import ui.components.FAButton;
-import ui.components.FAPanel;
 import ui.questions.QuestionListController;
+import ui.questions.SubPanel;
 
-public class FilterPanel extends FAPanel {
+public class FilterPanel <T extends QuestionListController> extends SubPanel<T, FilterController<T>>  {
   
-  protected FilterController ctrl;
+  protected FAButton applyFiltersButton;
+  protected JLabel topLabel;
+  protected JLabel subjectsLabel;
+  protected JLabel tagsLabel;
+  protected final Map<Subject, JCheckBox> subjectCheckboxes;
+  protected final Map<Tag, JCheckBox> tagCheckboxes;
   
-  private final Map<Subject, JCheckBox> subjectCheckboxes;
-  private final Map<Tag, JCheckBox> tagCheckboxes;
-  // private final Map<Source, JCheckBox> sourceCheckboxes;
-  
-  public FilterPanel(final QuestionListController qlCtrl) {
-    this.ctrl = new FilterController(qlCtrl);
-    
-    Subject subjects[] = Subject.values();
-    Tag tags[] = Tag.values();
-    // Source sources[] = Source.values();
-    
+  public FilterPanel(FilterController<T> filterController) {
+    super(filterController);
     subjectCheckboxes = new TreeMap<>();
     tagCheckboxes = new TreeMap<>();
-    // sourceCheckboxes = new TreeMap<>();
+  }
+
+  @Override
+  public void buildComponents() {
+    Subject subjects[] = Subject.values();
+    Tag tags[] = Tag.values();
     
-    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    // Build labels.
+    topLabel = new JLabel("Apply List Filters");
+    topLabel.setFont(Constants.SECTION_FONT);
     
-    this.add(new JLabel("Subjects"));
+    subjectsLabel = new JLabel("Subjects");
+    subjectsLabel.setFont(Constants.SUBSECTION_FONT);
+    
+    tagsLabel = new JLabel("Tags");
+    tagsLabel.setFont(Constants.SUBSECTION_FONT);
+    
+    // Build checkbox components.
     for (Subject subject: subjects) {
       subjectCheckboxes.put(subject, new JCheckBox(subject.name()));
-      this.add(subjectCheckboxes.get(subject));
     }
-    
-    this.add(new JLabel("Tags"));
     for (Tag tag: tags) {
       tagCheckboxes.put(tag, new JCheckBox(tag.name()));
+    }
+
+    // Build filter button.
+    this.applyFiltersButton = new FAButton("Apply Filters");
+    this.applyFiltersButton.addActionListener(this.updateControllerListener);
+  }
+
+  @Override
+  public void layoutComponents() {
+    Subject subjects[] = Subject.values();
+    Tag tags[] = Tag.values();
+    
+    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    this.add(this.topLabel);
+    this.add(this.subjectsLabel);
+    for (Subject subject: subjects) {
+      this.add(subjectCheckboxes.get(subject));
+    }
+    this.add(this.tagsLabel);
+    for (Tag tag: tags) {
       this.add(tagCheckboxes.get(tag));
     }
+    this.add(applyFiltersButton);
     
-//    this.add(new JLabel("Sources"));
-//    for (Source source: sources) {
-//      sourceCheckboxes.put(source, new JCheckBox(source.name()));
-//      this.add(sourceCheckboxes.get(source));
-//    }
-    
-    this.add(new FAButton("Filter Questions") {
-      @Override
-      public void actionPerformed(ActionEvent ev) {
-        _syncToController();
-        ctrl.filter();
-      }
-    });
-    _syncFromController();
+    this.setAlignmentY(Component.TOP_ALIGNMENT);
+  }
+
+  @Override
+  public void sizeComponents(Dimension totalDimension) {
+    this.setSize(totalDimension);
+    this.setPreferredSize(totalDimension);
   }
   
-  private void _syncToController() {
+  @Override
+  protected void syncToController() {
     for (Subject subject: Subject.values()) {
-      this.ctrl.subjectFilters.put(subject, this.subjectCheckboxes.get(subject).isSelected());
+      this.componentController.subjectFilters.put(subject, this.subjectCheckboxes.get(subject).isSelected());
     }
     for (Tag tag: Tag.values()) {
-      this.ctrl.tagFilters.put(tag, this.tagCheckboxes.get(tag).isSelected());
+      this.componentController.tagFilters.put(tag, this.tagCheckboxes.get(tag).isSelected());
     }
-//    for (Source source: Source.values()) {
-//      this.ctrl.sourceFilters.put(source, this.sourceCheckboxes.get(source).isSelected());
-//    }
+    this.componentController.applyFilters();
   }
   
-  private void _syncFromController() {
+  @Override
+  protected void syncFromController() {
     for (Subject subject: Subject.values()) {
-      this.subjectCheckboxes.get(subject).setSelected(this.ctrl.subjectFilters.get(subject));
+      this.subjectCheckboxes.get(subject).setSelected(this.componentController.subjectFilters.get(subject));
     }
     for (Tag tag: Tag.values()) {
-      this.tagCheckboxes.get(tag).setSelected(this.ctrl.tagFilters.get(tag));
+      this.tagCheckboxes.get(tag).setSelected(this.componentController.tagFilters.get(tag));
     }
-//    for (Source source: Source.values()) {
-//      this.sourceCheckboxes.get(source).setSelected(this.ctrl.sourceFilters.get(source));
-//    }
   }
 
 }

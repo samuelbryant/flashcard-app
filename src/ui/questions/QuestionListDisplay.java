@@ -20,7 +20,7 @@ import models.DatabaseIO;
 import ui.DisplayWindow;
 import ui.Display;
 import ui.ImageDisplay;
-import ui.components.FAButton;
+import ui.components.FAActionButton;
 import ui.components.FAPanel;
 
 public class QuestionListDisplay extends Display<QuestionListController> {
@@ -79,7 +79,7 @@ public class QuestionListDisplay extends Display<QuestionListController> {
 
   public class ActionButtonPanel extends FAPanel {
     
-    public class AnswerButton extends FAButton implements Observer {
+    public class AnswerButton extends FAActionButton implements Observer {
 
       private final Answer _answer;
 
@@ -126,19 +126,19 @@ public class QuestionListDisplay extends Display<QuestionListController> {
       AnswerButton answerD = new AnswerButton(Answer.D);
       AnswerButton answerE = new AnswerButton(Answer.E);
       
-      FAButton nextB = new FAButton("Next") {
+      FAActionButton nextB = new FAActionButton("Next") {
         @Override
         public void actionPerformed(ActionEvent e) {
           QuestionListDisplay.this.ctrl.nextClick();
         }
       };
-      FAButton prevB = new FAButton("Prev") {
+      FAActionButton prevB = new FAActionButton("Prev") {
         @Override
         public void actionPerformed(ActionEvent e) {
           QuestionListDisplay.this.ctrl.previousClick();
         }
       };
-      FAButton shufB = new FAButton("Shuffle") {
+      FAActionButton shufB = new FAActionButton("Shuffle") {
         @Override
         public void actionPerformed(ActionEvent e) {
           QuestionListDisplay.this.ctrl.shuffleClick();

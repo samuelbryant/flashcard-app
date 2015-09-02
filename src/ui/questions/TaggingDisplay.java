@@ -10,7 +10,7 @@ import ui.DisplayWindow;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import ui.questions.QuestionListDisplay;
+import ui.questions.filter.FilterController;
 import ui.questions.filter.FilterPanel;
 
 public class TaggingDisplay extends QuestionListDisplay {
@@ -27,7 +27,9 @@ public class TaggingDisplay extends QuestionListDisplay {
   public TaggingDisplay(final TaggerController ctrl) {
     super(ctrl, TOTAL_WIDTH, TOTAL_HEIGHT);
     this.subjectsPanel = new TaggerPanel(ctrl);
-    this.filterPanel = new FilterPanel(ctrl);
+    
+    FilterController<TaggerController> filterController = new FilterController<>(ctrl);
+    this.filterPanel = new FilterPanel(filterController);
   }
 
   @Override
@@ -77,8 +79,9 @@ public class TaggingDisplay extends QuestionListDisplay {
     this.add(middlePanel);
     
     // BUILD RIGHT PANEL.
-    this.sizeComponent(this.filterPanel, filterPanelDim);
-    this.filterPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+    this.filterPanel.buildComponents();
+    this.filterPanel.layoutComponents();
+    this.filterPanel.sizeComponents(filterPanelDim);
     this.add(this.filterPanel);
 
     this.repaint();
