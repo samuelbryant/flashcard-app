@@ -8,17 +8,14 @@ package ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import javax.swing.JPanel;
+import ui.components.FAPanel;
 
-/**
- *
- * @author author
- */
-public abstract class ImageDisplay extends JPanel {
+public abstract class ImageDisplay extends FAPanel {
   
   public final boolean resizeImage;
   
   public ImageDisplay(boolean resizeImage) {
+    super();
     this.resizeImage = resizeImage;
   }
 

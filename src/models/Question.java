@@ -134,4 +134,12 @@ public class Question implements Serializable {
       this.tags.add(tag);
     }
   }
+
+  public void setQuestionTags(ArrayList<Tag> tags) {
+    this.tags = tags;
+  }
+
+  public void setQuestionSubjects(ArrayList<Subject> subjects) {
+    this.subjects = subjects;
+  }
 }

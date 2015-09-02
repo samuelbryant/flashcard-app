@@ -6,13 +6,14 @@ import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JComponent;
+import ui.components.FAPanel;
 
 /**
  *
  * @author author
  * @param <T>
  */
-public abstract class Display <T extends Controller> extends JPanel implements Observer {
+public abstract class Display <T extends Controller> extends FAPanel implements Observer {
 
   protected DisplayWindow window;
   protected T ctrl;
@@ -21,6 +22,7 @@ public abstract class Display <T extends Controller> extends JPanel implements O
   protected final JMenuBar menuBar;
 
   public Display(T ctrl, int totalWidth, int totalHeight) {
+    super();
     this.ctrl = ctrl;
     this.ctrl.setDisplay(this);
     this.totalWidth = totalWidth;

@@ -1,12 +1,15 @@
-package ui.questions.subjects;
+package ui.questions.tagger;
 
 import engine.QuestionFilter;
+import java.util.ArrayList;
 import models.Database;
 import models.Question;
 import java.util.List;
+import models.Subject;
+import models.Tag;
 import ui.questions.QuestionListController;
 
-public class SubjectsController extends QuestionListController {
+public class TaggerController extends QuestionListController {
 
   public class NoSubjectFilter extends QuestionFilter {
     @Override
@@ -21,7 +24,7 @@ public class SubjectsController extends QuestionListController {
   protected boolean onlyShowNoSubject = false;
   protected final NoSubjectFilter noSubjectFilter = new NoSubjectFilter();
 
-  public SubjectsController(Database db) {
+  public TaggerController(Database db) {
     super(db);
     this.fullQuestionList = db.getQuestionList();
     this.currentQuestionList = fullQuestionList;
@@ -55,6 +58,22 @@ public class SubjectsController extends QuestionListController {
     this._updateCurrent();
   }
 
+  public void setQuestionTags(ArrayList<Tag> tags) {
+    this.getCurrentQuestion().setQuestionTags(tags);
+  }
+  
+  public void setQuestionSubjects(ArrayList<Subject> subjects) {
+    this.getCurrentQuestion().setQuestionSubjects(subjects);
+  }
+  
+  ArrayList<Subject> getQuestionSubjects() {
+    return this.getCurrentQuestion().getSubjects();
+  }
+
+  ArrayList<Tag> getQuestionTags() {
+    return this.getCurrentQuestion().getTags();
+  }
+  
   public boolean isOnlyShowingNoSubjects() {
     return this.onlyShowNoSubject;
   }

@@ -21,6 +21,7 @@ import ui.DisplayWindow;
 import ui.Display;
 import ui.ImageDisplay;
 import ui.components.FAButton;
+import ui.components.FAPanel;
 
 public class QuestionListDisplay extends Display<QuestionListController> {
 
@@ -76,7 +77,7 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     this.repaint();
   }
 
-  public class ActionButtonPanel extends JPanel {
+  public class ActionButtonPanel extends FAPanel {
     
     public class AnswerButton extends FAButton implements Observer {
 
@@ -118,6 +119,7 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     }
 
     private ActionButtonPanel() {
+      super();
       AnswerButton answerA = new AnswerButton(Answer.A);
       AnswerButton answerB = new AnswerButton(Answer.B);
       AnswerButton answerC = new AnswerButton(Answer.C);

@@ -44,7 +44,7 @@ public class FilterController {
   SortType sortType;
   Boolean sortAscending;
   
-  private QuestionListController questionListController;
+  private final QuestionListController questionListController;
   
   public FilterController(QuestionListController ctrl) {
     this.questionListController = ctrl;

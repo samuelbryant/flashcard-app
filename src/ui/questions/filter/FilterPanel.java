@@ -6,31 +6,30 @@ import java.util.TreeMap;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import models.Source;
 import models.Subject;
 import models.Tag;
 import ui.components.FAButton;
+import ui.components.FAPanel;
 import ui.questions.QuestionListController;
 
-public class FilterDisplay extends JPanel {
+public class FilterPanel extends FAPanel {
   
   protected FilterController ctrl;
   
   private final Map<Subject, JCheckBox> subjectCheckboxes;
   private final Map<Tag, JCheckBox> tagCheckboxes;
-  private final Map<Source, JCheckBox> sourceCheckboxes;
+  // private final Map<Source, JCheckBox> sourceCheckboxes;
   
-  public FilterDisplay(final QuestionListController qlCtrl) {
+  public FilterPanel(final QuestionListController qlCtrl) {
     this.ctrl = new FilterController(qlCtrl);
     
     Subject subjects[] = Subject.values();
     Tag tags[] = Tag.values();
-    Source sources[] = Source.values();
+    // Source sources[] = Source.values();
     
     subjectCheckboxes = new TreeMap<>();
     tagCheckboxes = new TreeMap<>();
-    sourceCheckboxes = new TreeMap<>();
+    // sourceCheckboxes = new TreeMap<>();
     
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     
@@ -46,11 +45,11 @@ public class FilterDisplay extends JPanel {
       this.add(tagCheckboxes.get(tag));
     }
     
-    this.add(new JLabel("Sources"));
-    for (Source source: sources) {
-      sourceCheckboxes.put(source, new JCheckBox(source.name()));
-      this.add(sourceCheckboxes.get(source));
-    }
+//    this.add(new JLabel("Sources"));
+//    for (Source source: sources) {
+//      sourceCheckboxes.put(source, new JCheckBox(source.name()));
+//      this.add(sourceCheckboxes.get(source));
+//    }
     
     this.add(new FAButton("Filter Questions") {
       @Override
@@ -59,7 +58,6 @@ public class FilterDisplay extends JPanel {
         ctrl.filter();
       }
     });
-    this.setFocusable(false);
     _syncFromController();
   }
   
@@ -70,9 +68,9 @@ public class FilterDisplay extends JPanel {
     for (Tag tag: Tag.values()) {
       this.ctrl.tagFilters.put(tag, this.tagCheckboxes.get(tag).isSelected());
     }
-    for (Source source: Source.values()) {
-      this.ctrl.sourceFilters.put(source, this.sourceCheckboxes.get(source).isSelected());
-    }
+//    for (Source source: Source.values()) {
+//      this.ctrl.sourceFilters.put(source, this.sourceCheckboxes.get(source).isSelected());
+//    }
   }
   
   private void _syncFromController() {
@@ -82,9 +80,9 @@ public class FilterDisplay extends JPanel {
     for (Tag tag: Tag.values()) {
       this.tagCheckboxes.get(tag).setSelected(this.ctrl.tagFilters.get(tag));
     }
-    for (Source source: Source.values()) {
-      this.sourceCheckboxes.get(source).setSelected(this.ctrl.sourceFilters.get(source));
-    }
+//    for (Source source: Source.values()) {
+//      this.sourceCheckboxes.get(source).setSelected(this.ctrl.sourceFilters.get(source));
+//    }
   }
 
 }
