@@ -1,15 +1,20 @@
 package ui.questions;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+import models.Answer;
 import models.Database;
 import models.DatabaseIO;
 import ui.DisplayWindow;
@@ -25,10 +30,18 @@ public class QuestionListDisplay extends Display<QuestionListController> {
   public QuestionListDisplay(final QuestionListController ctrl, int totalWidth, int totalHeight) {
     super(ctrl, totalWidth, totalHeight);
     this.actionPanel = new ActionButtonPanel();
-    this.questionPanel = new ImageDisplay() {
+    this.questionPanel = new ImageDisplay(true) {
       @Override
       public BufferedImage generateDisplayImage() {
-        return ctrl.getCurrentQuestion().getImage();
+        if (QuestionListDisplay.this.ctrl.getState() == QuestionListController.State.NOT_STARTED) {
+          BufferedImage img = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+          Graphics2D gr = img.createGraphics();
+          gr.setColor(Color.BLACK);
+          gr.drawString("Questions List Not Started", 40, 40);
+          return img;
+        } else {
+          return ctrl.getCurrentQuestion().getImage();
+        }
       }
     };
   }
@@ -64,8 +77,53 @@ public class QuestionListDisplay extends Display<QuestionListController> {
   }
 
   public class ActionButtonPanel extends JPanel {
+    
+    public class AnswerButton extends FAButton implements Observer {
+
+      private final Answer _answer;
+
+      public AnswerButton(Answer answer) {
+        super(answer.name());
+        this._answer = answer;
+        QuestionListDisplay.this.ctrl.addObserver(this);
+      }
+
+      @Override
+      public void actionPerformed(ActionEvent ev) {
+        QuestionListDisplay.this.ctrl.answerQuestion(this._answer);
+      }
+
+      @Override
+      public void update(Observable o, Object arg) {
+        this.setBackground(Color.WHITE);
+
+        if (QuestionListDisplay.this.ctrl.isAnswered()) {
+          
+          System.out.printf("Answered: %s, %s\n", 
+              QuestionListDisplay.this.ctrl.getSelectedAnswer(),
+              QuestionListDisplay.this.ctrl.getCorrectAnswer());
+          boolean isSelected = 
+              this._answer == QuestionListDisplay.this.ctrl.getSelectedAnswer();
+          boolean isCorrect = 
+              this._answer == QuestionListDisplay.this.ctrl.getCorrectAnswer();
+
+          if (isSelected && !isCorrect) {
+            this.setBackground(Color.RED);
+          } else if (isCorrect) {
+            this.setBackground(Color.GREEN);
+          }
+        }
+      }
+
+    }
 
     private ActionButtonPanel() {
+      AnswerButton answerA = new AnswerButton(Answer.A);
+      AnswerButton answerB = new AnswerButton(Answer.B);
+      AnswerButton answerC = new AnswerButton(Answer.C);
+      AnswerButton answerD = new AnswerButton(Answer.D);
+      AnswerButton answerE = new AnswerButton(Answer.E);
+      
       FAButton nextB = new FAButton("Next") {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -86,11 +144,22 @@ public class QuestionListDisplay extends Display<QuestionListController> {
       };
 
       this.setLayout(new FlowLayout());
+      
+      this.add(answerA);
+      this.add(answerB);
+      this.add(answerC);
+      this.add(answerD);
+      this.add(answerE);
       this.add(nextB);
       this.add(prevB);
       this.add(shufB);
 
       // Add key shortcuts for button presses.
+      QuestionListDisplay.this.ctrl.addKeyAction(KeyEvent.VK_1, answerA);
+      QuestionListDisplay.this.ctrl.addKeyAction(KeyEvent.VK_2, answerB);
+      QuestionListDisplay.this.ctrl.addKeyAction(KeyEvent.VK_3, answerC);
+      QuestionListDisplay.this.ctrl.addKeyAction(KeyEvent.VK_4, answerD);
+      QuestionListDisplay.this.ctrl.addKeyAction(KeyEvent.VK_5, answerE);
       QuestionListDisplay.this.ctrl.addKeyAction(37, prevB);
       QuestionListDisplay.this.ctrl.addKeyAction(39, nextB);
     }
@@ -102,7 +171,7 @@ public class QuestionListDisplay extends Display<QuestionListController> {
 
     // Load/initialize controller/display.
     QuestionListController ctrl = new QuestionListController(db, db.getQuestionList());
-    QuestionListDisplay display = new QuestionListDisplay(ctrl, 600, 600);
+    QuestionListDisplay display = new QuestionListDisplay(ctrl, 700, 600);
 
     // Bring it all home.
     DisplayWindow window = new DisplayWindow();

@@ -122,7 +122,7 @@ public class QuestionIO {
   private static Response _parseResponseJSON(JSONObject obj) {
     return new Response(
         Answer.valueOf(obj.getString("response")),
-        obj.getInt("responseTime"));
+        obj.getLong("responseTime"));
   }
 
   /***** HELPER METHODS *****/

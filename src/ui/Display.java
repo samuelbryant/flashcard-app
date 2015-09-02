@@ -3,6 +3,8 @@ package ui;
 import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JComponent;
 
 /**
@@ -10,8 +12,9 @@ import javax.swing.JComponent;
  * @author author
  * @param <T>
  */
-public abstract class Display <T extends Controller> extends JPanel {
+public abstract class Display <T extends Controller> extends JPanel implements Observer {
 
+  protected DisplayWindow window;
   protected T ctrl;
   protected int totalWidth;
   protected int totalHeight;
@@ -26,6 +29,18 @@ public abstract class Display <T extends Controller> extends JPanel {
     this.sizeComponent(this, new Dimension(totalWidth, totalHeight));
     this.setFocusable(true);
     this.addKeyListener(this.ctrl);
+    this.ctrl.addObserver(this);
+  }
+  
+  void setDisplayWindow(DisplayWindow window) {
+    this.window = window;
+  }
+  
+  @Override
+  public void update(Observable o, Object args) {
+    if (this.window != null) {
+      this.window.pack();
+    }
   }
 
   protected abstract void setupGUI();

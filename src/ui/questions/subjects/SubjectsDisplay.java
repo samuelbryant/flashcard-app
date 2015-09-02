@@ -10,8 +10,8 @@ import ui.questions.QuestionListDisplay;
 
 public class SubjectsDisplay extends QuestionListDisplay {
 
-  public static final int TOTAL_WIDTH = 600;
-  public static final int TOTAL_HEIGHT = 600;
+  public static final int TOTAL_WIDTH = 900;
+  public static final int TOTAL_HEIGHT = 800;
   public static final int SUBJECT_PANEL_WIDTH = 150;
   public static final int ACTION_PANEL_HEIGHT = 50;
 

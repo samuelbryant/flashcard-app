@@ -9,9 +9,9 @@ package models;
 public class Response {
 
   final Answer response;
-  final Integer responseTime;
+  final Long responseTime;
 
-  public Response(Answer response, Integer responseTime) {
+  public Response(Answer response, Long responseTime) {
     this.response = response;
     this.responseTime = responseTime;
   }

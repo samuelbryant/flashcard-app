@@ -96,4 +96,8 @@ public class Question implements Serializable {
       this.subjects.add(subject);
     }
   }
+  
+  public void addResponse(Response r) {
+    this.responses.add(r);
+  }
 }

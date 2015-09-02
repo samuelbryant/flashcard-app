@@ -4,7 +4,6 @@ import engine.QuestionFilter;
 import models.Database;
 import models.Question;
 import java.util.List;
-import java.util.ArrayList;
 import ui.questions.QuestionListController;
 
 public class SubjectsController extends QuestionListController {

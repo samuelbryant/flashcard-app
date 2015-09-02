@@ -15,14 +15,19 @@ import javax.swing.JPanel;
  * @author author
  */
 public abstract class ImageDisplay extends JPanel {
+  
+  public final boolean resizeImage;
+  
+  public ImageDisplay(boolean resizeImage) {
+    this.resizeImage = resizeImage;
+  }
 
   public abstract BufferedImage generateDisplayImage();
 
+  @Override
   public void paintComponent(Graphics gr) {
     int w = this.getWidth();
     int h = this.getHeight();
-    
-    System.out.printf("PC: %d, %d\n", w, h);
 
     gr.setColor(Color.WHITE);
     gr.fillRect(0, 0, w, h);
@@ -30,21 +35,25 @@ public abstract class ImageDisplay extends JPanel {
     BufferedImage img = generateDisplayImage();
     int width = img.getWidth();
     int height = img.getHeight();
-    if (width < w && height < h) {
+    
+    if (this.resizeImage) {
+      if (width < w && height < h) {
+        System.out.printf("Image within bounds (%d, %d)\n", width, height);
+        gr.drawImage(img, 0, 0, null);
+      } else {
+        System.out.printf("Image not within bounds (%d, %d) (%d, %d)\n", width, height, w, h);
+        double heightRatio = ((double) height) / h;
+        double widthRatio = ((double) width) / w;
+        double maxRatio = Math.max(widthRatio, heightRatio);
+
+        width = (int) (width / maxRatio);
+        height = (int) (height / maxRatio);
+        gr.drawImage(img, 0, 0, width, height, null);
+      }
+    } else {
+      this.setSize(width, height);
       gr.drawImage(img, 0, 0, null);
     }
-
-    else {
-      double heightRatio = ((double) height) / h;
-      double widthRatio = ((double) width) / w;
-      double maxRatio = Math.max(widthRatio, heightRatio);
-
-      width = (int) (width / maxRatio);
-      height = (int) (height / maxRatio);
-      gr.drawImage(img, 0, 0, width, height, null);
-    }
-
-    System.out.printf("Image details: %d, %d\n", img.getHeight(), img.getWidth());
   }
 
 }

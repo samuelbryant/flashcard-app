@@ -21,7 +21,7 @@ import ui.components.FAKeyMap;
 public abstract class Controller <T extends Display> extends Observable implements KeyListener, FAKeyMap {
 
   private final Map<Integer, ActionListener> _keyMap;
-  protected T display;
+  protected T display = null;
 
   public Controller() {
     super();
@@ -34,7 +34,8 @@ public abstract class Controller <T extends Display> extends Observable implemen
 
   public void update() {
     this.notifyObservers();
-    this.display.repaint();
+    if (this.display != null)
+      this.display.repaint();
   }
 
   @Override

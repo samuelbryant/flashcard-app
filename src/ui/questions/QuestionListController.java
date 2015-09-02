@@ -16,7 +16,7 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   /**
    * Enum capturing state of question list controller.
    */
-  enum State {
+  public enum State {
     NOT_STARTED, COMPLETED, IN_PROGRESS;
   }
 
@@ -42,6 +42,7 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
       this._answeredState = AnsweredState.UNANSWERED;
       this._selectedAnswer = null;
       this._correctAnswer = _question.getAnswer();
+      QuestionListController.this._state = State.IN_PROGRESS;
     }
 
     private void answer(Answer answer) {
@@ -65,14 +66,16 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   protected QuestionListController(Database db) {
     this._database = db;
     this._setupKeyMap();
+    this._currentQuestion = null;
+    this._state = State.NOT_STARTED;
   }
 
   public QuestionListController(QuestionIterator questionIterator) {
     super();
     this._questionIterator = questionIterator;
-    this._currentQuestion = new QuestionDisplay(this._questionIterator.next());
-    this._state = State.IN_PROGRESS;
+    this._currentQuestion = null;
     this._setupKeyMap();
+    this._state = State.NOT_STARTED;
   }
 
   public QuestionListController(Database db, List<Question> questionList) {
@@ -80,11 +83,20 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
     this._questionIterator = new QuestionListIterator(questionList);
     this._questionList = questionList;
     this._database = db;
-    this._currentQuestion = new QuestionDisplay(this._questionIterator.next());
-    this._state = State.IN_PROGRESS;
+    this._currentQuestion = null;
     this._setupKeyMap();
+    this._state = State.NOT_STARTED;
+  }
+  
+  public void start() {
+    this._state = State.IN_PROGRESS;
+    this.nextClick();
   }
 
+  public State getState() {
+    return this._state;
+  }
+  
   private void _setupKeyMap() {
     this.addKeyAction(39, new ActionListener() {
       @Override
