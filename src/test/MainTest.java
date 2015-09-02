@@ -17,7 +17,7 @@ public class MainTest {
     } else if (args[0].compareTo("quiz") == 0) {
       ui.questions.quiz.QuizDisplay.main(args);
     } else if (args[0].compareTo("subjects") == 0) {
-      ui.questions.TaggingDisplay.main(args);
+      ui.questions.TaggingModeDisplay.main(args);
     } else if (args[0].compareTo("database") == 0) {
       models.Database.main(args);
     } else {

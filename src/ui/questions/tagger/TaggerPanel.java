@@ -1,5 +1,6 @@
 package ui.questions.tagger;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,75 +14,93 @@ import javax.swing.JLabel;
 import models.Subject;
 import models.Tag;
 import ui.Constants;
+import ui.components.FAButton;
 import ui.components.FAPanel;
+import ui.questions.QuestionListController;
+import ui.questions.SubPanel;
+import ui.questions.filter.FilterController;
 
-public class TaggerPanel extends FAPanel implements Observer {
+public class TaggerPanel<T extends QuestionListController> extends SubPanel<T, TaggerController<T>>  {
   
-  protected TaggerController ctrl;
+  protected FAButton onlyShowUnchecked;
+  protected JLabel topLabel;
+  protected JLabel subjectsLabel;
+  protected JLabel tagsLabel;
+  protected final Map<Subject, JCheckBox> subjectCheckboxes;
+  protected final Map<Tag, JCheckBox> tagCheckboxes;
   
-  private final Map<Subject, JCheckBox> subjectCheckboxes;
-  private final Map<Tag, JCheckBox> tagCheckboxes;
-  
-  public TaggerPanel(final TaggerController ctrl) {
-    this.ctrl = ctrl;
-    this.ctrl.addObserver(this);
-    
-    Subject subjects[] = Subject.values();
-    Tag tags[] = Tag.values();
-    
+  public TaggerPanel(TaggerController<T> ctrl) {
+    super(ctrl);
     subjectCheckboxes = new TreeMap<>();
     tagCheckboxes = new TreeMap<>();
-    
-    // Class that listens for checkbox changes and updates controller.
-    ActionListener checkboxListener = new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        TaggerPanel.this._syncToController();
-      }
-    };
-    
-    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    
-    JLabel sectionLabel = new JLabel("Add Labels");
-    sectionLabel.setFont(Constants.SECTION_FONT);
-    this.add(sectionLabel);
-    
-    JLabel subjectLabel = new JLabel("Subjects");
-    subjectLabel.setFont(Constants.SUBSECTION_FONT);
-    this.add(subjectLabel);
-    for (Subject subject: subjects) {
-      JCheckBox cb = new JCheckBox(subject.name());
-      cb.addActionListener(checkboxListener);
-      subjectCheckboxes.put(subject, cb);
-      this.add(cb);
-    }
-    
-    JLabel tagLabel = new JLabel("Tags");
-    tagLabel.setFont(Constants.SUBSECTION_FONT);
-    this.add(tagLabel);
-    for (Tag tag: tags) {
-      JCheckBox cb = new JCheckBox(tag.name());
-      // cb.setAlignmentX(Component.LEFT_ALIGNMENT);
-      cb.addActionListener(checkboxListener);
-      tagCheckboxes.put(tag, cb);
-      this.add(cb);
-    }
-    
-    _syncFromController();
   }
   
-  private void _syncFromController() {
-    ArrayList<Subject> subjects = this.ctrl.getQuestionSubjects();
-    ArrayList<Tag> tags = this.ctrl.getQuestionTags();
+  public void buildComponents() {
+    Subject[] subjects = Subject.values();
+    Tag[] tags = Tag.values();
+    
+    topLabel = new JLabel("Add Labels");
+    topLabel.setFont(Constants.SECTION_FONT);
+    
+    subjectsLabel = new JLabel("Subjects");
+    subjectsLabel.setFont(Constants.SUBSECTION_FONT);
+    
+    tagsLabel = new JLabel("Tags");
+    tagsLabel.setFont(Constants.SUBSECTION_FONT);
+    
+    for (Subject subject: subjects) {
+      JCheckBox cb = new JCheckBox(subject.name());
+      cb.addActionListener(updateControllerListener);
+      subjectCheckboxes.put(subject, cb);
+    }
+    
+    for (Tag tag: tags) {
+      JCheckBox cb = new JCheckBox(tag.name());
+      cb.addActionListener(updateControllerListener);
+      tagCheckboxes.put(tag, cb);
+    }
+  }
+  
+  @Override
+  public void layoutComponents() {
+    Subject[] subjects = Subject.values();
+    Tag[] tags = Tag.values();
+   
+    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    
+    this.add(topLabel);
+    this.add(subjectsLabel);
+    for (Subject subject: subjects) {
+      this.add(subjectCheckboxes.get(subject));
+    }
+    this.add(tagsLabel);
+    for (Tag tag: tags) {
+      this.add(tagCheckboxes.get(tag));
+    }
+   
+    this.setAlignmentY(TOP_ALIGNMENT);
+  }
+  
+  @Override
+  public void sizeComponents(Dimension totalDimension) {
+    this.setSize(totalDimension);
+    this.setPreferredSize(totalDimension);
+  }
+  
+  @Override
+  protected void syncFromController() {
+    ArrayList<Subject> subjects = this.componentController.getQuestionSubjects();
+    ArrayList<Tag> tags = this.componentController.getQuestionTags();
     setSelectedCheckboxValues(this.tagCheckboxes, tags);
     setSelectedCheckboxValues(this.subjectCheckboxes, subjects);
   }
   
-  private void _syncToController() {
+  @Override
+  protected void syncToController() {
     ArrayList<Tag> tags = getSelectedCheckboxValues(this.tagCheckboxes);
     ArrayList<Subject> subjects = getSelectedCheckboxValues(this.subjectCheckboxes);
-    this.ctrl.setQuestionSubjects(subjects);
-    this.ctrl.setQuestionTags(tags);
+    this.componentController.setQuestionSubjects(subjects);
+    this.componentController.setQuestionTags(tags);
   }
   
   protected static <T> void setSelectedCheckboxValues(Map<T, JCheckBox> checkboxes, ArrayList<T> values) {
@@ -103,9 +122,4 @@ public class TaggerPanel extends FAPanel implements Observer {
     return list;
   }
 
-  @Override
-  public void update(Observable o, Object arg) {
-    this._syncFromController();
-  }
-  
 }

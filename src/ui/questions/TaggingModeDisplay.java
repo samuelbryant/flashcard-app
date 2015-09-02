@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import ui.questions.filter.FilterController;
 import ui.questions.filter.FilterPanel;
 
-public class TaggingDisplay extends QuestionListDisplay {
+public class TaggingModeDisplay extends QuestionListDisplay {
 
   public static final int TOTAL_WIDTH = 1100;
   public static final int TOTAL_HEIGHT = 800;
@@ -21,14 +21,16 @@ public class TaggingDisplay extends QuestionListDisplay {
   public static final int FILTER_PANEL_WIDTH = 200;
   public static final int ACTION_PANEL_HEIGHT = 50;
 
-  protected final TaggerPanel subjectsPanel;
+  protected final TaggerPanel taggerPanel;
   protected final FilterPanel filterPanel;
 
-  public TaggingDisplay(final TaggerController ctrl) {
+  public TaggingModeDisplay(final QuestionListController ctrl) {
     super(ctrl, TOTAL_WIDTH, TOTAL_HEIGHT);
-    this.subjectsPanel = new TaggerPanel(ctrl);
     
-    FilterController<TaggerController> filterController = new FilterController<>(ctrl);
+    TaggerController<QuestionListController> taggerController = new TaggerController<>(ctrl);
+    this.taggerPanel = new TaggerPanel(taggerController);
+    
+    FilterController<QuestionListController> filterController = new FilterController<>(ctrl);
     this.filterPanel = new FilterPanel(filterController);
   }
 
@@ -63,9 +65,10 @@ public class TaggingDisplay extends QuestionListDisplay {
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     
     // BUILD LEFT PANEL.
-    this.sizeComponent(this.subjectsPanel, subjPanelDim);
-    this.subjectsPanel.setAlignmentY(Component.TOP_ALIGNMENT);
-    this.add(this.subjectsPanel, Component.TOP_ALIGNMENT);
+    this.taggerPanel.buildComponents();
+    this.taggerPanel.layoutComponents();
+    this.taggerPanel.sizeComponents(subjPanelDim);
+    this.add(this.taggerPanel);
     
     // BUILD MIDDLE PANEL.
     JPanel middlePanel = new JPanel();
@@ -92,8 +95,8 @@ public class TaggingDisplay extends QuestionListDisplay {
     Database db = DatabaseIO.loadDatabase();
 
     // Load/initialize controller/display.
-    TaggerController ctrl = new TaggerController(db);
-    TaggingDisplay display = new TaggingDisplay(ctrl);
+    QuestionListController ctrl = new QuestionListController(db);
+    TaggingModeDisplay display = new TaggingModeDisplay(ctrl);
 
     // Bring it all home.
     DisplayWindow window = new DisplayWindow();

@@ -63,10 +63,12 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   protected List<Question> _questionList = null;
 
   protected QuestionListController(Database db) {
+    super();
     this._database = db;
     this._setupKeyMap();
     this._currentQuestion = null;
     this._state = State.NOT_STARTED;
+    this._questionIterator = new QuestionListIterator(db.getQuestionList());
   }
 
   public QuestionListController(QuestionIterator questionIterator) {
