@@ -2,6 +2,8 @@
  */
 package ui.components;
 
+import java.awt.Dimension;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import ui.Constants;
 
@@ -11,6 +13,12 @@ public class FAPanel extends JPanel {
     super();
     this.setFocusable(false);
     this.setBackground(Constants.BACKGROUND_COLOR);
+  }
+  
+  protected void sizeComponent(JComponent comp, Dimension size) {
+    comp.setSize(size);
+    comp.setPreferredSize(size);
+    comp.setMinimumSize(size);
   }
   
 }

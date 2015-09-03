@@ -1,12 +1,8 @@
 package ui.questions.tagger;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
@@ -15,10 +11,8 @@ import models.Subject;
 import models.Tag;
 import ui.Constants;
 import ui.components.FAButton;
-import ui.components.FAPanel;
 import ui.questions.QuestionListController;
 import ui.questions.SubPanel;
-import ui.questions.filter.FilterController;
 
 public class TaggerPanel<T extends QuestionListController> extends SubPanel<T, TaggerController<T>>  {
   
@@ -35,6 +29,7 @@ public class TaggerPanel<T extends QuestionListController> extends SubPanel<T, T
     tagCheckboxes = new TreeMap<>();
   }
   
+  @Override
   public void buildComponents() {
     Subject[] subjects = Subject.values();
     Tag[] tags = Tag.values();

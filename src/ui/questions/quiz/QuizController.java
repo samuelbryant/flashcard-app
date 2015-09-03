@@ -1,6 +1,5 @@
 package ui.questions.quiz;
 
-import java.util.List;
 import models.Answer;
 import models.Database;
 import models.Question;
@@ -11,26 +10,23 @@ public class QuizController extends QuestionListController {
 
   private long startTime;
   
-  public QuizController(Database db, List<Question> questionList) {
-    super(db, questionList);
-    this._state = QuestionListController.State.NOT_STARTED;
+  public QuizController(Database db) {
+    super(db);
   }
   
   @Override
-  public void nextClick() {
-    super.nextClick();
-    startTime = System.nanoTime();
-    System.out.printf("Next click time: %s\n", startTime);
+  public void nextQuestion() {
+    try {
+      super.nextQuestion();
+      startTime = System.nanoTime();
+    } catch (OutOfQuestionsException ex) {
+      System.out.printf("LOG: No more questions\n");
+    }
   }
   
   @Override
-  public void previousClick() {
+  public void previousQuestion() {
     System.out.printf("CANNOT GO BACK\n");
-  }
-  
-  @Override
-  public void shuffleClick() {
-    System.out.printf("CANNOT SHUFFLE\n");
   }
   
   @Override

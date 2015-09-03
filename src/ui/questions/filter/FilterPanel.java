@@ -1,5 +1,6 @@
 package ui.questions.filter;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.Map;
@@ -14,7 +15,7 @@ import ui.components.FAButton;
 import ui.questions.QuestionListController;
 import ui.questions.SubPanel;
 
-public class FilterPanel <T extends QuestionListController> extends SubPanel<T, FilterController<T>>  {
+public class FilterPanel <T extends QuestionListController> extends SubPanel<T, FilterController<T>> {
   
   protected FAButton applyFiltersButton;
   protected JLabel topLabel;

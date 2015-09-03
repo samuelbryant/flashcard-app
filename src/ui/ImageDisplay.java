@@ -6,11 +6,13 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import ui.components.FABuildable;
 import ui.components.FAPanel;
 
-public abstract class ImageDisplay extends FAPanel {
+public abstract class ImageDisplay extends FAPanel implements FABuildable {
   
   public final boolean resizeImage;
   
@@ -51,6 +53,17 @@ public abstract class ImageDisplay extends FAPanel {
       this.setSize(width, height);
       gr.drawImage(img, 0, 0, null);
     }
+  }
+
+  @Override
+  public void buildComponents() {}
+
+  @Override
+  public void layoutComponents() {}
+
+  @Override
+  public void sizeComponents(Dimension totalSize) {
+    this.sizeComponent(this, totalSize);
   }
 
 }

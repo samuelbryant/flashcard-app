@@ -2,7 +2,7 @@ package ui.questions;
 
 public abstract class SubController <T extends QuestionListController> {
   
-  protected T questionListController;
+  public T questionListController;
   
   public SubController(T questionListController) {
     this.questionListController = questionListController;

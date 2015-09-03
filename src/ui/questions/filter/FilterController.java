@@ -47,7 +47,7 @@ public class FilterController <T extends QuestionListController> extends SubCont
   }
   
   public void applyFilters() {
-    ArrayList<Question> list = this.getQuestionList(this.questionListController.getDatabase());
+    ArrayList<Question> list = this.questionListController.getQuestionList();
     this.questionListController.setQuestionList(list);
   }
   
