@@ -33,7 +33,9 @@ public class QuizDisplay extends QuestionListDisplay {
       @Override
       protected void syncFromController() {
         super.syncFromController();
-        this.setVisible(taggerController.questionListController.isAnswered());
+        if (taggerController.questionListController.isInProgress()) {
+          this.setVisible(taggerController.questionListController.isAnswered());
+        }
       }
   
     };

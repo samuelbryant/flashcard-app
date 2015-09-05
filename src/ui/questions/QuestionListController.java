@@ -1,5 +1,6 @@
 package ui.questions;
 
+import ui.questions.sorters.QuestionListSorter;
 import java.util.ArrayList;
 import models.Answer;
 import models.Database;
@@ -25,6 +26,7 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
 
   private QuestionDisplay currentQuestion;
   private State state;
+  private QuestionListSorter questionListSorter = null;
   private ArrayList<Question> questionList = null;
   private Integer totalQuestions = null;
   private Integer currentIndex = null;
@@ -33,17 +35,28 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   protected QuestionListController(Database db) {
     super();
     this.database = db;
+    this.questionListSorter = QuestionListSorter.DEFAULT_SORTER;
     this.setQuestionList(this.database.getQuestionList());
+  }
+  
+  public final void setQuestionListSorter(QuestionListSorter qls) {
+    ArrayList<Question> baseList = this.questionListSorter.getBaseList();
+    this.questionListSorter = qls;
+    this.setQuestionList(baseList);
   }
   
   public final void setQuestionList(List<Question> list) {
     this.state = State.NOT_STARTED;
-    this.questionList = new ArrayList<>();
+    ArrayList<Question> arrList = new ArrayList<>();
     for (Question q: list) {
-      this.questionList.add(q);
+      arrList.add(q);
     }
+    this.questionListSorter.setBaseList(arrList);
+    this.questionList = this.questionListSorter.getSortedArrayList();
     this.totalQuestions = this.questionList.size();
     this.currentIndex = null;
+    this.setChanged();  // TODO: Is this necessary
+    this.update();
   }
   
   public ArrayList<Question> getQuestionList() {

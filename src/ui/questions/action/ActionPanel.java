@@ -8,14 +8,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.input.KeyCode;
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import models.Answer;
 import ui.components.FAActionButton;
 import ui.components.FAButton;
 import ui.questions.QuestionListController;
+import ui.questions.sorters.QuestionListSorter;
 import ui.questions.SubPanel;
 
 public class ActionPanel <T extends QuestionListController> extends SubPanel<T, ActionController<T>> {
@@ -30,10 +29,19 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
   
   protected FAActionButton backButton, nextButton;
   protected final Map<Answer, FAButton> answerButtons;
+  protected JComboBox filtersBox;
+  protected final Map<String, QuestionListSorter> listFilters;
   
   public ActionPanel(ActionController<T> componentController) {
     super(componentController);
     this.answerButtons = new TreeMap<>();
+    this.listFilters = null;
+  }
+
+  public ActionPanel(ActionController<T> componentController, Map<String, QuestionListSorter> listFilters) {
+    super(componentController);
+    this.answerButtons = new TreeMap<>();
+    this.listFilters = listFilters;
   }
 
   @Override
@@ -46,7 +54,9 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
       ActionListener buttonPress = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          ActionPanel.this.componentController.answerQuestion(answer);
+          if (questionListController.isInProgress()) {
+            ActionPanel.this.componentController.answerQuestion(answer);
+          }
         }
       };
       button.addActionListener(buttonPress);
@@ -55,6 +65,19 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
       // Create key shortcut.
       int buttonMnemonic = ANSWER_KEYS[answer.ordinal()];
       this.questionListController.addKeyAction(buttonMnemonic, buttonPress);
+      
+      // Create list filter box.
+      if (this.listFilters != null) {
+        this.filtersBox = new JComboBox(this.listFilters.keySet().toArray());
+        this.filtersBox.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            String filterString = (String) filtersBox.getSelectedItem();
+            questionListController.setQuestionListSorter(listFilters.get(filterString));
+            questionListController.requestFocus();
+          }
+        });
+      }
     }
     
     backButton = new FAActionButton("Back") {  
@@ -90,6 +113,7 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
     this.questionListController.addKeyAction(KeyEvent.VK_LEFT, backButton);
     this.add(nextButton);
     this.questionListController.addKeyAction(KeyEvent.VK_RIGHT, nextButton);
+    this.add(this.filtersBox);
     
     this.setAlignmentX(Component.CENTER_ALIGNMENT);
     this.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -106,21 +130,22 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
 
   @Override
   protected void syncFromController() {
-    Answer selected = this.questionListController.getSelectedAnswer();
-    Answer correct = this.questionListController.getCorrectAnswer();
-    
-    for (Answer answer: Answer.values()) {
-      if (!this.questionListController.isAnswered()) {
-        this.answerButtons.get(answer).setDefaultBackground();
-      } else if (answer == selected && answer != correct) {
-        this.answerButtons.get(answer).setBackground(Color.RED);
-      } else if (answer == correct) {
-        this.answerButtons.get(answer).setBackground(Color.GREEN);
-      } else {
-        this.answerButtons.get(answer).setDefaultBackground();
+    if (this.questionListController.isInProgress()) {
+      Answer selected = this.questionListController.getSelectedAnswer();
+      Answer correct = this.questionListController.getCorrectAnswer();
+
+      for (Answer answer: Answer.values()) {
+        if (!this.questionListController.isAnswered()) {
+          this.answerButtons.get(answer).setDefaultBackground();
+        } else if (answer == selected && answer != correct) {
+          this.answerButtons.get(answer).setBackground(Color.RED);
+        } else if (answer == correct) {
+          this.answerButtons.get(answer).setBackground(Color.GREEN);
+        } else {
+          this.answerButtons.get(answer).setDefaultBackground();
+        }
       }
     }
-  
   }
   
 }

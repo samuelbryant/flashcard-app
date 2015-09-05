@@ -12,6 +12,7 @@ import models.Subject;
 import models.Tag;
 import ui.Constants;
 import ui.components.FAButton;
+import ui.components.FACheckbox;
 import ui.questions.QuestionListController;
 import ui.questions.SubPanel;
 
@@ -21,8 +22,9 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
   protected JLabel topLabel;
   protected JLabel subjectsLabel;
   protected JLabel tagsLabel;
-  protected final Map<Subject, JCheckBox> subjectCheckboxes;
-  protected final Map<Tag, JCheckBox> tagCheckboxes;
+  protected JCheckBox noSubjectCheckbox;
+  protected final Map<Subject, FACheckbox> subjectCheckboxes;
+  protected final Map<Tag, FACheckbox> tagCheckboxes;
   
   public FilterPanel(FilterController<T> filterController) {
     super(filterController);
@@ -46,11 +48,12 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
     tagsLabel.setFont(Constants.SUBSECTION_FONT);
     
     // Build checkbox components.
+    this.noSubjectCheckbox = new JCheckBox("No subject");
     for (Subject subject: subjects) {
-      subjectCheckboxes.put(subject, new JCheckBox(subject.name()));
+      subjectCheckboxes.put(subject, new FACheckbox(subject.name()));
     }
     for (Tag tag: tags) {
-      tagCheckboxes.put(tag, new JCheckBox(tag.name()));
+      tagCheckboxes.put(tag, new FACheckbox(tag.name()));
     }
 
     // Build filter button.
@@ -66,6 +69,7 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     this.add(this.topLabel);
     this.add(this.subjectsLabel);
+    this.add(this.noSubjectCheckbox);
     for (Subject subject: subjects) {
       this.add(subjectCheckboxes.get(subject));
     }
@@ -86,6 +90,7 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
   
   @Override
   protected void syncToController() {
+    this.componentController.noSubjectFilter = this.noSubjectCheckbox.isSelected();
     for (Subject subject: Subject.values()) {
       this.componentController.subjectFilters.put(subject, this.subjectCheckboxes.get(subject).isSelected());
     }

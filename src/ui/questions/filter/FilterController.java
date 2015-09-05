@@ -20,6 +20,7 @@ public class FilterController <T extends QuestionListController> extends SubCont
     LAST_ANSWERED, TIMES_ANSWERED, ID, RANDOM;
   }
   
+  Boolean noSubjectFilter;
   Map<Subject, Boolean> subjectFilters;
   Map<Tag, Boolean> tagFilters;
   Map<Source, Boolean> sourceFilters;
@@ -31,6 +32,7 @@ public class FilterController <T extends QuestionListController> extends SubCont
     
     // Initialize controller fields.
     
+    this.noSubjectFilter = false;
     this.subjectFilters = new TreeMap<>();
     for (Subject subject: Subject.values()) {
       this.subjectFilters.put(subject, false);
@@ -52,6 +54,9 @@ public class FilterController <T extends QuestionListController> extends SubCont
   }
   
   private boolean _hasSubjectFilter() {
+    if (this.noSubjectFilter) {
+      return true;
+    }
     for (Subject subject: Subject.values()) {
       if (this.subjectFilters.get(subject)) {
         return true;
@@ -81,7 +86,8 @@ public class FilterController <T extends QuestionListController> extends SubCont
       Question q = iter.next();
       
       if (hasSubjectFilters) {
-        if (!FilterController._arrayInBoolmap(this.subjectFilters, q.getSubjects())) {
+        if (!(this.noSubjectFilter && q.getSubjects().isEmpty()) &&
+            !(FilterController._arrayInBoolmap(this.subjectFilters, q.getSubjects()))) {
           continue;
         }
       }

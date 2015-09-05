@@ -69,8 +69,12 @@ public abstract class Controller <T extends Display> extends Observable implemen
 
   @Override
   public void focusLost(FocusEvent e) {
-    Component c = e.getComponent();
-    c.requestFocus();
-  }
+//    Component c = e.getComponent();
+//    c.requestFocus();
+  };
+  
+  public final void requestFocus() {
+    this.display.requestFocus();
+  }  
   
 }

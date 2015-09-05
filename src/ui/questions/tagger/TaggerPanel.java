@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import models.Subject;
 import models.Tag;
 import ui.Constants;
 import ui.components.FAButton;
+import ui.components.FACheckbox;
 import ui.questions.QuestionListController;
 import ui.questions.SubPanel;
 
@@ -20,8 +20,8 @@ public class TaggerPanel<T extends QuestionListController> extends SubPanel<T, T
   protected JLabel topLabel;
   protected JLabel subjectsLabel;
   protected JLabel tagsLabel;
-  protected final Map<Subject, JCheckBox> subjectCheckboxes;
-  protected final Map<Tag, JCheckBox> tagCheckboxes;
+  protected final Map<Subject, FACheckbox> subjectCheckboxes;
+  protected final Map<Tag, FACheckbox> tagCheckboxes;
   
   public TaggerPanel(TaggerController<T> ctrl) {
     super(ctrl);
@@ -44,13 +44,13 @@ public class TaggerPanel<T extends QuestionListController> extends SubPanel<T, T
     tagsLabel.setFont(Constants.SUBSECTION_FONT);
     
     for (Subject subject: subjects) {
-      JCheckBox cb = new JCheckBox(subject.name());
+      FACheckbox cb = new FACheckbox(subject.name());
       cb.addActionListener(updateControllerListener);
       subjectCheckboxes.put(subject, cb);
     }
     
     for (Tag tag: tags) {
-      JCheckBox cb = new JCheckBox(tag.name());
+      FACheckbox cb = new FACheckbox(tag.name());
       cb.addActionListener(updateControllerListener);
       tagCheckboxes.put(tag, cb);
     }
@@ -84,10 +84,12 @@ public class TaggerPanel<T extends QuestionListController> extends SubPanel<T, T
   
   @Override
   protected void syncFromController() {
-    ArrayList<Subject> subjects = this.componentController.getQuestionSubjects();
-    ArrayList<Tag> tags = this.componentController.getQuestionTags();
-    setSelectedCheckboxValues(this.tagCheckboxes, tags);
-    setSelectedCheckboxValues(this.subjectCheckboxes, subjects);
+    if (this.questionListController.isInProgress()) {
+      ArrayList<Subject> subjects = this.componentController.getQuestionSubjects();
+      ArrayList<Tag> tags = this.componentController.getQuestionTags();
+      setSelectedCheckboxValues(this.tagCheckboxes, tags);
+      setSelectedCheckboxValues(this.subjectCheckboxes, subjects);
+    }
   }
   
   @Override
@@ -98,8 +100,8 @@ public class TaggerPanel<T extends QuestionListController> extends SubPanel<T, T
     this.componentController.setQuestionTags(tags);
   }
   
-  protected static <T> void setSelectedCheckboxValues(Map<T, JCheckBox> checkboxes, ArrayList<T> values) {
-    for (Map.Entry<T, JCheckBox> entry: checkboxes.entrySet()) {
+  protected static <T> void setSelectedCheckboxValues(Map<T, FACheckbox> checkboxes, ArrayList<T> values) {
+    for (Map.Entry<T, FACheckbox> entry: checkboxes.entrySet()) {
       entry.getValue().setSelected(false);
     }
     for (T t: values) {
@@ -107,9 +109,9 @@ public class TaggerPanel<T extends QuestionListController> extends SubPanel<T, T
     }
   }
   
-  private static <T> ArrayList<T> getSelectedCheckboxValues(Map<T, JCheckBox> checkboxes) {
+  private static <T> ArrayList<T> getSelectedCheckboxValues(Map<T, FACheckbox> checkboxes) {
     ArrayList<T> list = new ArrayList<>();
-    for (Map.Entry<T, JCheckBox> entry : checkboxes.entrySet()) {
+    for (Map.Entry<T, FACheckbox> entry : checkboxes.entrySet()) {
       if (entry.getValue().isSelected()) {
         list.add(entry.getKey());
       }

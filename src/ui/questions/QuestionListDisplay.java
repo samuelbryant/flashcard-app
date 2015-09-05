@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import javafx.scene.input.KeyCode;
 import javax.swing.BoxLayout;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -17,6 +16,7 @@ import ui.Display;
 import ui.ImageDisplay;
 import ui.questions.action.ActionController;
 import ui.questions.action.ActionPanel;
+import ui.questions.sorters.QuestionListSorter;
 
 public class QuestionListDisplay extends Display<QuestionListController> {
   
@@ -48,7 +48,7 @@ public class QuestionListDisplay extends Display<QuestionListController> {
   @Override
   public void buildComponents() {
     ActionController actionController = new ActionController(this.ctrl);
-    this.actionPanel = new ActionPanel(actionController);
+    this.actionPanel = new ActionPanel(actionController, QuestionListSorter.ALL_SORTERS);
     this.actionPanel.buildComponents();
     
     // Build image display in middle.
