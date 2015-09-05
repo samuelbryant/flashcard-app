@@ -50,7 +50,7 @@ public class FilterController <T extends QuestionListController> extends SubCont
   
   public void applyFilters() {
     ArrayList<Question> list = this.questionListController.getQuestionList();
-    this.questionListController.setQuestionList(list);
+    this.questionListController.setQuestionList(this.filterQuestionList(list));
   }
   
   private boolean _hasSubjectFilter() {
@@ -74,17 +74,14 @@ public class FilterController <T extends QuestionListController> extends SubCont
     return false;
   }
   
-  private ArrayList<Question> getQuestionList(Database db) {
+  private ArrayList<Question> filterQuestionList(ArrayList<Question> originalList) {
     ArrayList<Question> list = new ArrayList<>();
-    
-    Iterator<Question> iter = db.getDatabaseIterator();
     
     boolean hasTagFilters = this._hasTagFilter();
     boolean hasSubjectFilters = this._hasSubjectFilter();
     
-    while (iter.hasNext()) {
-      Question q = iter.next();
-      
+    for (Question q : originalList) {
+     
       if (hasSubjectFilters) {
         if (!(this.noSubjectFilter && q.getSubjects().isEmpty()) &&
             !(FilterController._arrayInBoolmap(this.subjectFilters, q.getSubjects()))) {
