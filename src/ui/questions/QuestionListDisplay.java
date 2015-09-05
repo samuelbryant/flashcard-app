@@ -16,6 +16,8 @@ import ui.Display;
 import ui.ImageDisplay;
 import ui.questions.action.ActionController;
 import ui.questions.action.ActionPanel;
+import ui.questions.infobar.InfobarController;
+import ui.questions.infobar.InfobarPanel;
 import ui.questions.sorters.QuestionListSorter;
 
 public class QuestionListDisplay extends Display<QuestionListController> {
@@ -23,9 +25,11 @@ public class QuestionListDisplay extends Display<QuestionListController> {
   public static final int TOTAL_WIDTH = 700;
   public static final int TOTAL_HEIGHT = 700;
   public static final int ACTION_PANEL_HEIGHT = 50;
+  public static final int INFO_PANEL_HEIGHT = 30;
 
   protected ImageDisplay questionPanel;
   protected ActionPanel actionPanel;
+  protected InfobarPanel infoPanel;
 
   public QuestionListDisplay(final QuestionListController ctrl) {
     super(ctrl);
@@ -51,6 +55,10 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     this.actionPanel = new ActionPanel(actionController, QuestionListSorter.ALL_SORTERS);
     this.actionPanel.buildComponents();
     
+    InfobarController infoController = new InfobarController(this.ctrl);
+    this.infoPanel = new InfobarPanel(infoController);
+    this.infoPanel.buildComponents();
+    
     // Build image display in middle.
     this.questionPanel = new ImageDisplay(true) {
       @Override
@@ -73,7 +81,10 @@ public class QuestionListDisplay extends Display<QuestionListController> {
   public void layoutComponents() {
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     
-    // Build action panel on top.
+    // Build info bar panel on top.
+    this.infoPanel.layoutComponents();;
+    this.add(this.infoPanel);
+    
     this.actionPanel.layoutComponents();
     this.add(this.actionPanel);
     
@@ -84,11 +95,14 @@ public class QuestionListDisplay extends Display<QuestionListController> {
 
   @Override
   public void sizeComponents(Dimension totalSize) {
+    Dimension infoPanelSize = new Dimension(
+        totalSize.width, INFO_PANEL_HEIGHT);
     Dimension actionPanelSize = new Dimension(
         totalSize.width, ACTION_PANEL_HEIGHT);
     Dimension questionPanelSize = new Dimension(
-        totalSize.width, totalSize.height - ACTION_PANEL_HEIGHT);
+        totalSize.width, totalSize.height - (ACTION_PANEL_HEIGHT + INFO_PANEL_HEIGHT));
 
+    this.infoPanel.sizeComponents(infoPanelSize);
     this.actionPanel.sizeComponents(actionPanelSize);
     this.questionPanel.sizeComponents(questionPanelSize);
     

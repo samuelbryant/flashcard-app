@@ -79,6 +79,14 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
     this.update();
   }
   
+  public int getCurrentIndex() {
+    return this.currentIndex;
+  }
+  
+  public int getQuestionTotal() {
+    return this.totalQuestions;
+  }
+  
   protected State getState() {
     return this.state;
   }

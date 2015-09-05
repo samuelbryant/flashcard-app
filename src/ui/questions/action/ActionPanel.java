@@ -117,9 +117,9 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
     for (Answer answer: Answer.values()) {
       this.add(this.answerButtons.get(answer));
     }
-    this.add(backButton);
+    // this.add(backButton);
     this.questionListController.addKeyAction(KeyEvent.VK_LEFT, backButton);
-    this.add(nextButton);
+    // this.add(nextButton);
     this.questionListController.addKeyAction(KeyEvent.VK_RIGHT, nextButton);
     this.add(saveButton);
     this.questionListController.addKeyAction(KeyEvent.VK_S, saveButton);

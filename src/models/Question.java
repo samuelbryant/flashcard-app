@@ -142,4 +142,8 @@ public class Question implements Serializable {
   public void setQuestionSubjects(ArrayList<Subject> subjects) {
     this.subjects = subjects;
   }
+
+  public Object getQuestionNumber() {
+    return this.questionNumber;
+  }
 }
