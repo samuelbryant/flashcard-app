@@ -81,8 +81,9 @@ public class QuestionIO {
     JSONArray arr = new JSONArray();
     for (Response r: responses) {
       Map<String, Object> map = new HashMap<>();
-      map.put("response", r.response);
+      map.put("response", r.response.toString());
       map.put("responseTime", r.responseTime);
+      map.put("dateString", r.dateString);
       arr.put(map);
     }
     return arr;
@@ -122,7 +123,8 @@ public class QuestionIO {
   private static Response _parseResponseJSON(JSONObject obj) {
     return new Response(
         Answer.valueOf(obj.getString("response")),
-        obj.getLong("responseTime"));
+        obj.getLong("responseTime"),
+        obj.getString("dateString"));
   }
 
   /***** HELPER METHODS *****/

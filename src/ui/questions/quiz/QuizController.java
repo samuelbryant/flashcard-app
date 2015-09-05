@@ -1,5 +1,6 @@
 package ui.questions.quiz;
 
+import java.util.Date;
 import models.Answer;
 import models.Database;
 import models.Question;
@@ -34,7 +35,7 @@ public class QuizController extends QuestionListController {
     long endTime = System.nanoTime();
     super.answerQuestion(answer);
     Question q = this.getCurrentQuestion();
-    Response r = new Response(answer, endTime - startTime);
+    Response r = new Response(answer, endTime - startTime, new Date());
     q.addResponse(r);
     System.out.printf("Time: %s\n", endTime - startTime);
   }

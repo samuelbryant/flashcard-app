@@ -27,7 +27,7 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
     KeyEvent.VK_5
   };
   
-  protected FAActionButton backButton, nextButton;
+  protected FAActionButton backButton, nextButton, saveButton;
   protected final Map<Answer, FAButton> answerButtons;
   protected JComboBox filtersBox;
   protected final Map<String, QuestionListSorter> listFilters;
@@ -65,19 +65,19 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
       // Create key shortcut.
       int buttonMnemonic = ANSWER_KEYS[answer.ordinal()];
       this.questionListController.addKeyAction(buttonMnemonic, buttonPress);
-      
-      // Create list filter box.
-      if (this.listFilters != null) {
-        this.filtersBox = new JComboBox(this.listFilters.keySet().toArray());
-        this.filtersBox.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            String filterString = (String) filtersBox.getSelectedItem();
-            questionListController.setQuestionListSorter(listFilters.get(filterString));
-            questionListController.requestFocus();
-          }
-        });
-      }
+    }
+    
+    // Create list filter box.
+    if (this.listFilters != null) {
+      this.filtersBox = new JComboBox(this.listFilters.keySet().toArray());
+      this.filtersBox.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          String filterString = (String) filtersBox.getSelectedItem();
+          questionListController.setQuestionListSorter(listFilters.get(filterString));
+          questionListController.requestFocus();
+        }
+      });
     }
     
     backButton = new FAActionButton("Back") {  
@@ -101,6 +101,14 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
         }
       }
     };
+    
+    saveButton = new FAActionButton("Save") {
+      @Override
+      public void actionPerformed(ActionEvent ev) {
+        ActionPanel.this.questionListController.saveToDatabase();
+        System.out.printf("Saved to database!\n");
+      }
+    };
   }
 
   @Override
@@ -113,6 +121,9 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
     this.questionListController.addKeyAction(KeyEvent.VK_LEFT, backButton);
     this.add(nextButton);
     this.questionListController.addKeyAction(KeyEvent.VK_RIGHT, nextButton);
+    this.add(saveButton);
+    this.questionListController.addKeyAction(KeyEvent.VK_S, saveButton);
+    
     this.add(this.filtersBox);
     
     this.setAlignmentX(Component.CENTER_ALIGNMENT);

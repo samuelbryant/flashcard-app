@@ -42,7 +42,7 @@ public class QuestionListDisplay extends Display<QuestionListController> {
       }
       });
     file.add(menuItem);
-    this.menuBar.add(file);
+    System.out.printf("Set up menu bar\n");
   }
 
   @Override

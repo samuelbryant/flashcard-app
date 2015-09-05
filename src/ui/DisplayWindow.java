@@ -26,12 +26,13 @@ public class DisplayWindow extends JFrame {
     this.ctrl = d.getController();
 
     // Setup this component based on display.
+    this.setJMenuBar(d.getDisplayMenuBar());
+    
     this.display.buildComponents();
     this.display.sizeComponents(new Dimension(totalWidth, totalHeight));
     this.display.layoutComponents();
     Dimension thisSize = new Dimension(totalWidth, totalHeight + 50);
     this.setSize(thisSize);
-    this.setJMenuBar(d.getDisplayMenuBar());
 
     // Redo UI stuff.
     this.getContentPane().add(d);
