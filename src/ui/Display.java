@@ -14,9 +14,9 @@ public abstract class Display <T extends Controller> extends FAPanel implements 
     super();
     this.ctrl = ctrl;
     this.menuBar = new JMenuBar();
-    // this.setFocusable(true);
-    // this.addKeyListener(this.ctrl);
-    // this.addFocusListener(this.ctrl);
+    this.setFocusable(true);
+    this.addKeyListener(this.ctrl);
+    this.addFocusListener(this.ctrl);
     this.ctrl.setDisplay(this);
   }
   
