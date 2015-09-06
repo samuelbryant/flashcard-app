@@ -16,6 +16,8 @@ public class DisplayWindow extends JFrame {
   }
 
   public void showDisplay(Display d) {
+    this.addKeyListener(d.ctrl);
+    
     // Remove old display.
     if (this.display != null) {
       this.getContentPane().remove(this.display);

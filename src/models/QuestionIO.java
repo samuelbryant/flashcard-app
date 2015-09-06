@@ -13,6 +13,7 @@ public class QuestionIO {
   public static Question loadQuestion(int id) {
     Question q = _readQuestionDataFile(id);
     q.persistent = true;
+    q.initialize();
     // SBTAG: Maybe we want to load the image file here as well.
     return q;
   }

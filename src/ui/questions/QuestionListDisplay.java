@@ -18,7 +18,7 @@ import ui.questions.action.ActionController;
 import ui.questions.action.ActionPanel;
 import ui.questions.infobar.InfobarController;
 import ui.questions.infobar.InfobarPanel;
-import ui.questions.sorters.QuestionListSorter;
+import engine.QuestionListSorter;
 
 public class QuestionListDisplay extends Display<QuestionListController> {
   

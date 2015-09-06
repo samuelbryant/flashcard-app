@@ -4,6 +4,9 @@ import core.FatalError;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class Question implements Serializable {
 
@@ -40,6 +43,15 @@ public class Question implements Serializable {
 
     this.persistent = false;
     this.databaseImageFilename = null;
+  }
+  
+  /**
+   * Performs necessary post-loading/creating processing work.
+   * This includes:
+   *  - Sorting responses by date
+   */
+  void initialize() {
+    Collections.sort(this.responses);
   }
 
   @Override
@@ -79,6 +91,7 @@ public class Question implements Serializable {
     return this.subjects.contains(subject);
   }
 
+  @Deprecated
   public Subject[] getSubjectsArray() {
     Subject[] subjects = new Subject[this.subjects.size()];
     for (int i=0; i<this.subjects.size(); i++) {
@@ -99,6 +112,8 @@ public class Question implements Serializable {
   
   public void addResponse(Response r) {
     this.responses.add(r);
+    // Keep responses sorted by last answered date.
+    Collections.sort(this.responses);
   }
   
   public Source getSource() {
@@ -150,4 +165,18 @@ public class Question implements Serializable {
   public void addTag(Tag tag) {
     this.tags.add(tag);
   }
+  
+  /**
+   * Gets most recent Date that this question was answered.
+   * @return Date of last response or null if no responses.
+   */
+  public Date getLastResponseTime() {
+    Collections.sort(this.responses);  // should be necessary.
+    if (this.responses.isEmpty()) {
+      return null;
+    } else {
+      return this.responses.get(0).date;
+    }
+  }
+  
 }

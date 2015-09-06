@@ -18,7 +18,7 @@ import ui.questions.filter.FilterPanel;
 import ui.questions.infobar.InfobarController;
 import ui.questions.infobar.InfobarPanel;
 import ui.questions.infobar.QuizInfobarPanel;
-import ui.questions.sorters.QuestionListSorter;
+import engine.QuestionListSorter;
 import ui.questions.tagger.TaggerController;
 import ui.questions.tagger.TaggerPanel;
 

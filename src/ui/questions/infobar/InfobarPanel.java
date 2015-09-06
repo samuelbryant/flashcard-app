@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 import java.util.Map;
 import javax.swing.JLabel;
 import ui.questions.QuestionListController;
-import ui.questions.sorters.QuestionListSorter;
+import engine.QuestionListSorter;
 import ui.questions.SubPanel;
 
 public class InfobarPanel <T extends QuestionListController> extends SubPanel<T, InfobarController<T>> {

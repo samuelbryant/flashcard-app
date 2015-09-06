@@ -5,19 +5,44 @@ import core.IO;
 import java.io.PrintWriter;
 import org.json.JSONObject;
 
-/**
- *
- * @author author
- */
 public class DatabaseIO {
+  
+  protected static Database currentDatabase = null;
 
   public static Database loadDatabase() {
+    if (currentDatabase != null) {
+      throw new IllegalStateException("Database has already been loaded");
+    }
     Database db = _readDatabaseFromFiles();
     db.validate();
+    currentDatabase = db;
     return db;
   }
+  
+  public static Database getDatabase() {
+    if (currentDatabase == null) {
+      loadDatabase();
+    }
+    return currentDatabase;
+  }
 
+  public static void saveDatabase() {
+    if (currentDatabase == null) {
+      throw new IllegalStateException("No database has been loaded");
+    }
+    _writeDatabase(currentDatabase);
+  }
+  
+  @Deprecated
   public static void writeDatabase(Database db) {
+    db.validate();
+    db.revisionNumber++;
+    _writeDatabaseFile(db);
+    _writeQuestionFiles(db);
+    db.isPersistent = true;
+  }
+  
+  private static void _writeDatabase(Database db) {
     db.validate();
     db.revisionNumber++;
     _writeDatabaseFile(db);

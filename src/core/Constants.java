@@ -5,6 +5,10 @@
  */
 package core;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author author
@@ -15,12 +19,25 @@ public class Constants {
   public static final String QUESTION_DATA_DIR = "database/question_data";
   public static final String QUESTION_IMAGE_DIR = "database/question_images";
   public static final String QUESTION_DATABASE_MAIN_FILE = "database/database.txt";
+  public static final String QUESTION_DATABASE_BACKUP_DIR = "database_backups";
+  
+  public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd-HH-mm-ss");
 
   // Ensure that output file hierarchy exists.
   public final static void setupProjectDirectories() {
     core.IO.createDirOrDie(OUTPUT_DIR);
     core.IO.createDirOrDie(QUESTION_DATA_DIR);
     core.IO.createDirOrDie(QUESTION_IMAGE_DIR);
+    core.IO.createDirOrDie(QUESTION_DATABASE_BACKUP_DIR);
+  }
+  
+  public final static String getDatabaseBackupDirName(Date date) {
+    String dateStr = DATE_FORMAT.format(date);
+    String dirName = QUESTION_DATABASE_BACKUP_DIR + "/" + dateStr;
+    return dirName;
+  }
+  public final static String getDatabaseBackupDirName() {
+    return getDatabaseBackupDirName(new Date());
   }
 
   public final static String getQuestionImageFilename(int id) {
@@ -33,6 +50,7 @@ public class Constants {
 
   public static void main(String[] args) {
     setupProjectDirectories();
+    System.out.println(getDatabaseBackupDirName());
   }
 
 }

@@ -1,6 +1,8 @@
 package models;
 
 import core.FatalError;
+import engine.ListFilter;
+import engine.ListSorter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -56,6 +58,54 @@ public final class Database {
     return null;
   }
 
+  /**
+   * Gets Question array from Database.
+   * @return ArrayList with all Question instances, sorted by ID.
+   */
+  public ArrayList<Question> getQuestions() {
+    return getQuestions(ListFilter.NULL_FILTER, ListSorter.ID_SORTER);
+  }
+  
+  /**
+   * Gets Question array from Database filtered by ListFilter.
+   * @param filter ListFilter to use to filter Question array.
+   * @return ArrayList with all Question instances that match ListFilter, sorted by ID.
+   */
+  public ArrayList<Question> getQuestions(ListFilter filter) {
+    return getQuestions(filter, ListSorter.ID_SORTER);
+  }
+  
+  /**
+   * Gets Question array from Database sorted by ListSorter.
+   * @param sorter ListSorter to use to sort Question array.
+   * @return ArrayList with all Question instances, sorted by ListSorter.
+   */
+  public ArrayList<Question> getQuestions(ListSorter sorter) {
+    return getQuestions(ListFilter.NULL_FILTER, sorter);
+  }
+  
+  
+  
+  /**
+   * Gets Question array from Database filtered by ListFilter and sorted by ListSorter.
+   * @param filter ListFilter to use to filter Question array.
+   * @param sorter ListSorter to use to sort Question array.
+   * @return ArrayList with all Question instances that match ListFilter, sorted by ListSorter.
+   */
+  public ArrayList<Question> getQuestions(ListFilter filter, ListSorter sorter) {
+    ArrayList<Question> list = new ArrayList<>();
+    Iterator<Question> iter = this.getDatabaseIterator();
+    while (iter.hasNext()) {
+      Question q = iter.next();
+      if (filter.accept(q)) {
+        list.add(q);
+      }
+    }
+    sorter.sort(list);
+    return list;
+  }
+  
+  @Deprecated
   public List<Question> getQuestionList() {
     List<Question> questionsList = new ArrayList<>();
     Iterator<Question> iter = this.getDatabaseIterator();
@@ -65,6 +115,7 @@ public final class Database {
     return questionsList;
   }
 
+  @Deprecated
   public List<Question> getQuestionList(QuestionFilter filter) {
     List<Question> questionsList = new ArrayList<>();
     Iterator<Question> iter = this.getDatabaseIterator();
@@ -77,10 +128,11 @@ public final class Database {
     return questionsList;
   }
 
-  public Iterator<Question> getDatabaseIterator() {
+  private Iterator<Question> getDatabaseIterator() {
     return this.questions.values().iterator();
   }
 
+  @Deprecated
   public Question findQuestionCopy(Source source, Integer questionNumber) {
     for (Question q: this.questions.values()) {
       if (q.source == source && q.questionNumber == questionNumber) {
@@ -90,6 +142,7 @@ public final class Database {
     return null;
   }
 
+  @Deprecated
   public List<Question> getQuestionListCopy() {
     List<Question> questionsCopy = new ArrayList<>();
     Iterator<Question> iter = this.getDatabaseCopyIterator();
@@ -99,6 +152,7 @@ public final class Database {
     return questionsCopy;
   }
 
+  @Deprecated
   public Iterator<Question> getDatabaseCopyIterator() {
     final Iterator<Question> baseIterator = this.questions.values().iterator();
     return new Iterator<Question>() {
@@ -113,6 +167,7 @@ public final class Database {
     };
   }
 
+  @Deprecated
   public void addQuestionsToSession(List<Question> questions) {
     for (Question q: questions) {
       this.addQuestionToSession(q);

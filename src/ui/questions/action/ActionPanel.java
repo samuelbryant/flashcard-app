@@ -14,7 +14,7 @@ import models.Answer;
 import ui.components.FAActionButton;
 import ui.components.FAButton;
 import ui.questions.QuestionListController;
-import ui.questions.sorters.QuestionListSorter;
+import engine.QuestionListSorter;
 import ui.questions.SubPanel;
 
 public class ActionPanel <T extends QuestionListController> extends SubPanel<T, ActionController<T>> {

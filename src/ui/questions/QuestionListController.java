@@ -1,6 +1,6 @@
 package ui.questions;
 
-import ui.questions.sorters.QuestionListSorter;
+import engine.QuestionListSorter;
 import java.util.ArrayList;
 import models.Answer;
 import models.Database;
