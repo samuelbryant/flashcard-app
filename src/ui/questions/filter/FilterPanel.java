@@ -3,11 +3,16 @@ package ui.questions.filter;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import models.Source;
 import models.Subject;
 import models.Tag;
 import ui.Constants;
@@ -25,6 +30,9 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
   protected JCheckBox noSubjectCheckbox;
   protected final Map<Subject, FACheckbox> subjectCheckboxes;
   protected final Map<Tag, FACheckbox> tagCheckboxes;
+  protected JComboBox sourceCombobox;
+  
+  protected static final String NO_SOURCE_FILTER = "None";
   
   public FilterPanel(FilterController<T> filterController) {
     super(filterController);
@@ -36,6 +44,7 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
   public void buildComponents() {
     Subject subjects[] = Subject.values();
     Tag tags[] = Tag.values();
+    Source sources[] = Source.values();
     
     // Build labels.
     topLabel = new JLabel("Apply List Filters");
@@ -55,10 +64,33 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
     for (Tag tag: tags) {
       tagCheckboxes.put(tag, new FACheckbox(tag.name()));
     }
+    
+    ArrayList<String> sourceStrings = new ArrayList<>();
+    sourceStrings.add(FilterPanel.NO_SOURCE_FILTER);
+    for (Source source: sources) {
+      sourceStrings.add(source.toString());
+    }
+    this.sourceCombobox = new javax.swing.JComboBox(sourceStrings.toArray());
+    this.sourceCombobox.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        questionListController.requestFocus();
+      }
+    });
+    this.sourceCombobox.setAlignmentX(LEFT_ALIGNMENT);
 
     // Build filter button.
     this.applyFiltersButton = new FAButton("Apply Filters");
-    this.applyFiltersButton.addActionListener(this.updateControllerListener);
+    this.applyFiltersButton.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("Button clicked");
+        syncToController();
+        componentController.applyFilters();
+      }
+      
+    });
   }
 
   @Override
@@ -77,6 +109,7 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
     for (Tag tag: tags) {
       this.add(tagCheckboxes.get(tag));
     }
+    this.add(this.sourceCombobox);
     this.add(applyFiltersButton);
     
     this.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -86,6 +119,8 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
   public void sizeComponents(Dimension totalDimension) {
     this.setSize(totalDimension);
     this.setPreferredSize(totalDimension);
+    this.sourceCombobox.setMaximumSize(new Dimension(100, 50));
+    this.sourceCombobox.setPreferredSize(new Dimension(100, 50));
   }
   
   @Override
@@ -97,7 +132,13 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
     for (Tag tag: Tag.values()) {
       this.componentController.tagFilters.put(tag, this.tagCheckboxes.get(tag).isSelected());
     }
-    this.componentController.applyFilters();
+    String sourceFilter = (String) this.sourceCombobox.getSelectedItem();
+    if (sourceFilter.compareTo(FilterPanel.NO_SOURCE_FILTER) == 0) {
+      this.componentController.sourceFilter = null;
+    } else {
+      this.componentController.sourceFilter = Source.valueOf(sourceFilter);
+      System.out.println("Set source to " + this.componentController.sourceFilter);
+    }
   }
   
   @Override
@@ -107,6 +148,11 @@ public class FilterPanel <T extends QuestionListController> extends SubPanel<T, 
     }
     for (Tag tag: Tag.values()) {
       this.tagCheckboxes.get(tag).setSelected(this.componentController.tagFilters.get(tag));
+    }
+    if (this.componentController.sourceFilter == null) {
+      this.sourceCombobox.setSelectedItem(FilterPanel.NO_SOURCE_FILTER);
+    } else {
+      this.sourceCombobox.setSelectedItem(this.componentController.sourceFilter.toString());
     }
   }
 

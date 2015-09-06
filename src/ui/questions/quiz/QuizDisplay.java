@@ -8,8 +8,13 @@ import ui.DisplayWindow;
 import ui.components.FACheckbox;
 import ui.questions.QuestionListController;
 import ui.questions.QuestionListDisplay;
+import static ui.questions.TaggingModeDisplay.BORDER_SIZE;
+import static ui.questions.TaggingModeDisplay.FILTER_PANEL_WIDTH;
+import static ui.questions.TaggingModeDisplay.TAGGER_PANEL_WIDTH;
 import ui.questions.action.ActionController;
 import ui.questions.action.ActionPanel;
+import ui.questions.filter.FilterController;
+import ui.questions.filter.FilterPanel;
 import ui.questions.infobar.InfobarController;
 import ui.questions.infobar.InfobarPanel;
 import ui.questions.infobar.QuizInfobarPanel;
@@ -19,12 +24,13 @@ import ui.questions.tagger.TaggerPanel;
 
 public class QuizDisplay extends QuestionListDisplay {
 
-  public static final int TOTAL_WIDTH = 900;
+  public static final int TOTAL_WIDTH = 1400;
   public static final int TOTAL_HEIGHT = 800;
   public static final int TAGGER_PANEL_WIDTH = 150;
   public static final int BORDER_SIZE = 10;
   
   protected TaggerPanel taggerPanel;
+  protected FilterPanel filterPanel;
   protected FACheckbox recordTimeCheckbox;
 
   public QuizDisplay(final QuestionListController ctrl) {
@@ -41,6 +47,19 @@ public class QuizDisplay extends QuestionListDisplay {
     this.infoPanel = new QuizInfobarPanel(infoController);
     this.infoPanel.buildComponents();
     
+    final FilterController<QuestionListController> filterController = new FilterController<>(ctrl);
+    this.filterPanel = new FilterPanel(filterController) {
+      @Override
+      protected void syncFromController() {
+        super.syncFromController();
+        if (filterController.questionListController.isInProgress()) {
+          this.setVisible(filterController.questionListController.isAnswered());
+        }
+      }
+  
+    };
+    this.filterPanel.buildComponents();
+    
     ActionController actionController = new ActionController(this.ctrl);
     this.actionPanel = new ActionPanel(actionController, QuestionListSorter.ALL_SORTERS) {
       @Override
@@ -53,7 +72,6 @@ public class QuizDisplay extends QuestionListDisplay {
     
     final TaggerController<QuestionListController> taggerController = new TaggerController<>(ctrl);
     this.taggerPanel = new TaggerPanel(taggerController) {
-      
       @Override
       protected void syncFromController() {
         super.syncFromController();
@@ -74,18 +92,22 @@ public class QuizDisplay extends QuestionListDisplay {
     Dimension taggerPanelSize = new Dimension(
         TAGGER_PANEL_WIDTH, 
         height - 2 * BORDER_SIZE);
+    Dimension filterPanelSize = new Dimension(
+        FILTER_PANEL_WIDTH,
+        height - 2 * BORDER_SIZE);
     Dimension questionPanelSize = new Dimension(
-        width - (TAGGER_PANEL_WIDTH + BORDER_SIZE),
+        width - (TAGGER_PANEL_WIDTH + FILTER_PANEL_WIDTH + 2 * BORDER_SIZE),
         height - (INFO_PANEL_HEIGHT + ACTION_PANEL_HEIGHT + 4 * BORDER_SIZE));
     Dimension actionPanelSize = new Dimension(
-        width - (TAGGER_PANEL_WIDTH + BORDER_SIZE),
+        width - (TAGGER_PANEL_WIDTH + FILTER_PANEL_WIDTH + 2 * BORDER_SIZE),
         ACTION_PANEL_HEIGHT);
     Dimension infoPanelSize = new Dimension(
-        width - (TAGGER_PANEL_WIDTH + BORDER_SIZE), 
+        width - (TAGGER_PANEL_WIDTH + FILTER_PANEL_WIDTH + 2 * BORDER_SIZE),
         INFO_PANEL_HEIGHT);
     
     this.infoPanel.sizeComponents(infoPanelSize);
     this.taggerPanel.sizeComponents(taggerPanelSize);
+    this.filterPanel.sizeComponents(filterPanelSize);
     this.actionPanel.sizeComponents(actionPanelSize);
     this.questionPanel.sizeComponents(questionPanelSize);
   }
@@ -96,11 +118,13 @@ public class QuizDisplay extends QuestionListDisplay {
     
     this.taggerPanel.layoutComponents();
     this.infoPanel.layoutComponents();
+    this.filterPanel.layoutComponents();
     this.actionPanel.layoutComponents();
     this.questionPanel.layoutComponents();
     
     this.add(this.taggerPanel);
     this.add(this.infoPanel);
+    this.add(this.filterPanel);
     this.add(this.actionPanel);
     this.add(this.questionPanel);
     
@@ -124,6 +148,11 @@ public class QuizDisplay extends QuestionListDisplay {
     
     size = this.questionPanel.getPreferredSize();
     this.questionPanel.setBounds(lEdge, tEdge, size.width, size.height);
+    lEdge += size.width + BORDER_SIZE;
+    tEdge = insets.top + BORDER_SIZE;
+    
+    size = this.filterPanel.getPreferredSize();
+    this.filterPanel.setBounds(lEdge, tEdge, size.width, size.height);
   }
   
   public static void main(String[] args) {

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import engine.QuestionFilter;
+import java.util.Objects;
 import java.util.TreeMap;
 
 public final class Database {
@@ -39,7 +40,7 @@ public final class Database {
 
   public boolean containsQuestion(Source source, Integer questionNumber) {
     for (Question q: this.questions.values()) {
-      if (q.source == source && q.questionNumber == questionNumber) {
+      if (q.source == source && Objects.equals(q.questionNumber, questionNumber)) {
         return true;
       }
     }
@@ -48,7 +49,7 @@ public final class Database {
 
   public Question findQuestion(Source source, Integer questionNumber) {
     for (Question q: this.questions.values()) {
-      if (q.source == source && q.questionNumber == questionNumber) {
+      if (q.source == source && Objects.equals(q.questionNumber, questionNumber)) {
         return q;
       }
     }

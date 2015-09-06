@@ -3,10 +3,8 @@ package ui.questions.filter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import models.Database;
 import models.Question;
 import models.Source;
 import models.Subject;
@@ -23,9 +21,9 @@ public class FilterController <T extends QuestionListController> extends SubCont
   Boolean noSubjectFilter;
   Map<Subject, Boolean> subjectFilters;
   Map<Tag, Boolean> tagFilters;
-  Map<Source, Boolean> sourceFilters;
   SortType sortType;
   Boolean sortAscending;
+  Source sourceFilter;
   
   public FilterController(T questionListController) {
     super(questionListController);
@@ -42,6 +40,8 @@ public class FilterController <T extends QuestionListController> extends SubCont
     for (Tag tag: Tag.values()) {
       this.tagFilters.put(tag, false);
     }
+    
+    this.sourceFilter = null;
 
     this.sortType = SortType.ID;
     
@@ -49,7 +49,7 @@ public class FilterController <T extends QuestionListController> extends SubCont
   }
   
   public void applyFilters() {
-    ArrayList<Question> list = this.questionListController.getQuestionList();
+    ArrayList<Question> list = this.questionListController.getOriginalQuestionList();
     this.questionListController.setQuestionList(this.filterQuestionList(list));
   }
   
@@ -92,6 +92,9 @@ public class FilterController <T extends QuestionListController> extends SubCont
         if (!FilterController._arrayInBoolmap(this.tagFilters, q.getTags())) {
           continue;
         }
+      }
+      if (this.sourceFilter != null && this.sourceFilter != q.getSource()) {
+        continue;
       }
       list.add(q);
     }

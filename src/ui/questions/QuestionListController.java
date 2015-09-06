@@ -27,6 +27,7 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   private QuestionDisplay currentQuestion;
   private State state;
   private QuestionListSorter questionListSorter = null;
+  private final ArrayList<Question> originalQuestionList;
   private ArrayList<Question> questionList = null;
   private Integer totalQuestions = null;
   private Integer currentIndex = null;
@@ -36,6 +37,10 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
     super();
     this.database = db;
     this.questionListSorter = QuestionListSorter.DEFAULT_SORTER;
+    originalQuestionList = new ArrayList<>();
+    for (Question q: this.database.getQuestionList()) {
+      originalQuestionList.add(q);
+    }
     this.setQuestionList(this.database.getQuestionList());
   }
   
@@ -57,6 +62,10 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
     this.currentIndex = null;
     this.setChanged();  // TODO: Is this necessary
     this.update();
+  }
+  
+  public ArrayList<Question> getOriginalQuestionList() {
+    return this.originalQuestionList;
   }
   
   public ArrayList<Question> getQuestionList() {

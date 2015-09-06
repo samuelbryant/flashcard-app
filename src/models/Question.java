@@ -146,4 +146,8 @@ public class Question implements Serializable {
   public Object getQuestionNumber() {
     return this.questionNumber;
   }
+
+  public void addTag(Tag tag) {
+    this.tags.add(tag);
+  }
 }
