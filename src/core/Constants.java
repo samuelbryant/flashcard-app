@@ -40,11 +40,20 @@ public class Constants {
     core.IO.createDirOrDie(QUESTION_DATABASE_BACKUP_DIR);
   }
   
+  public final static String getDatabaseBackupDataDirName(String backupDirname) {
+    return backupDirname + "/" + "question_data";
+  }
+  
+  public final static String getDatabaseBackupMainFileName(String backupDirname) {
+    return backupDirname + "/" + "database.txt";
+  }
+  
   public final static String getDatabaseBackupDirName(Date date) {
     String dateStr = DATE_FORMAT.format(date);
     String dirName = QUESTION_DATABASE_BACKUP_DIR + "/" + dateStr;
     return dirName;
   }
+  
   public final static String getDatabaseBackupDirName() {
     return getDatabaseBackupDirName(new Date());
   }

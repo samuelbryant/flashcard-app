@@ -27,10 +27,36 @@ public class DatabaseIO {
   }
 
   public static void saveDatabase() {
+    
     if (currentDatabase == null) {
       throw new IllegalStateException("No database has been loaded");
     }
+    try {
+      _backupDatabase();
+    } catch(Exception ex) {
+      System.err.printf("ERROR: Database Backup Failed!\n");
+    }
     _writeDatabase(currentDatabase);
+    
+  }
+  
+  private static void _backupDatabase() {
+    String backupDirname = Constants.getDatabaseBackupDirName();
+
+    IO.createDirOrDie(backupDirname);
+    String src1 = Constants.QUESTION_DATABASE_MAIN_FILE;
+    String dst1 = Constants.getDatabaseBackupMainFileName(backupDirname);
+    String src2 = Constants.QUESTION_DATA_DIR;
+    String dst2 = Constants.getDatabaseBackupDataDirName(backupDirname);
+    
+    IO.copyOrDie(src1, dst1);
+    IO.copyOrDie(src2, dst2);
+  }
+  
+  private static void _backupToFolder(String srcDirname, String srcFilename, String dstDirname) {
+    String src = srcDirname + "/" + srcFilename;
+    String dst = dstDirname + "/" + srcFilename;
+    IO.copyOrDie(src, dst);
   }
   
   @Deprecated
@@ -105,5 +131,4 @@ public class DatabaseIO {
     }
     return db;
   }
-
 }
