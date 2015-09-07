@@ -187,4 +187,16 @@ public class Question implements Serializable {
     return list;
   }
   
+  public int[] getTimesRightWrong() {
+    int[] grades = new int[]{0,0};
+    for (Response r: this.responses) {
+      if (r.getSelectedAnswer() == this.answer) {
+        grades[0]++;
+      } else {
+        grades[1]++;
+      }
+    }
+    return grades;
+  }
+  
 }

@@ -58,4 +58,16 @@ public class Response implements Comparable<Response> {
   public int compareTo(Response o) {
     return -1 * this.date.compareTo(o.date);
   }
+
+  public Answer getSelectedAnswer() {
+    return this.response;
+  }
+  
+  public Double getTimeInSeconds() {
+    if (this.responseTime == null) {
+      return null;
+    } else {
+      return (((double) this.responseTime) / 1000000000);
+    }
+  }
 }

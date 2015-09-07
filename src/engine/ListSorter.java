@@ -150,6 +150,7 @@ public abstract class ListSorter {
     ALL_SORTERS.put("Random", RANDOM_SORTER);
     ALL_SORTERS.put("None", NULL_SORTER);
     ALL_SORTERS.put("Wrong %", WRONG_PERCENTAGE_SORTER);
+    ALL_SORTERS.put("Quiz 1", new engine.ListQuiz1());
   }
   public static final String DEFAULT_1_STRING = "By ids";
   public static final String DEFAULT_2_STRING = "None";
