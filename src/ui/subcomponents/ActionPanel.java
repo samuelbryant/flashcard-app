@@ -1,4 +1,4 @@
-package ui.questions.action;
+package ui.subcomponents;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -16,10 +16,10 @@ import ui.components.FAButton;
 import ui.questions.QuestionListController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ui.components.SubController;
+import ui.core.SubController;
 import ui.questions.QuestionList;
 import ui.questions.QuestionState;
-import ui.components.SubPanel;
+import ui.core.SubPanel;
 
 public class ActionPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
 

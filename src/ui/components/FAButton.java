@@ -2,7 +2,7 @@ package ui.components;
 
 import java.awt.Color;
 import javax.swing.JButton;
-import ui.Constants;
+import core.Constants;
 
 public class FAButton extends JButton {
   

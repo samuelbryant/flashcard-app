@@ -1,11 +1,11 @@
-package ui.questions.action;
+package ui.subcomponents;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import ui.questions.QuestionListController;
-import ui.components.SubController;
-import ui.components.SubPanel;
+import ui.core.SubController;
+import ui.core.SubPanel;
 
 public class InfobarPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
 

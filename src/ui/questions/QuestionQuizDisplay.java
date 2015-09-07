@@ -2,7 +2,7 @@ package ui.questions;
 
 import models.Database;
 import models.DatabaseIO;
-import ui.components.DisplayWindow;
+import ui.core.DisplayWindow;
 import static ui.questions.QuestionListDisplay.TOTAL_HEIGHT;
 import static ui.questions.QuestionListDisplay.TOTAL_WIDTH;
 

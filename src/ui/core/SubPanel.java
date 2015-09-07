@@ -1,9 +1,11 @@
-package ui.components;
+package ui.core;
 
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 import ui.components.FABuildable;
+import ui.components.FABuildable;
+import ui.components.FAPanel;
 import ui.components.FAPanel;
 import ui.questions.QuestionList;
 import ui.questions.QuestionListController;

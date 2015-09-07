@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.components;
+package ui.core;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import ui.components.FAKeyMap;
 import ui.components.FAKeyMap;
 
 /**

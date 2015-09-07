@@ -1,8 +1,10 @@
-package ui.components;
+package ui.core;
 
 import javax.swing.JMenuBar;
 import java.awt.Dimension;
 import ui.components.FABuildable;
+import ui.components.FABuildable;
+import ui.components.FAPanel;
 import ui.components.FAPanel;
 
 public abstract class Display <T extends Controller> extends FAPanel implements FABuildable {

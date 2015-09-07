@@ -5,6 +5,8 @@
  */
 package core;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +17,13 @@ import java.util.Date;
  */
 public class Constants {
 
+  public static final Font BASIC_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
+  public static final Font SUBSECTION_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 14);
+  public static final Font SECTION_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 16);
+  public static final Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
+  public static final Color BACKGROUND_COLOR2 = Color.GRAY;
+  public static final Color BUTTON_COLOR = Color.DARK_GRAY;
+  
   public static final String OUTPUT_DIR = "database";
   public static final String QUESTION_DATA_DIR = "database/question_data";
   public static final String QUESTION_IMAGE_DIR = "database/question_images";

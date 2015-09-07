@@ -5,7 +5,7 @@ import engine.ListSorter;
 import models.Answer;
 import models.DatabaseIO;
 import models.Response;
-import ui.components.Controller;
+import ui.core.Controller;
 
 public class QuestionListController extends Controller<QuestionListDisplay> {
      

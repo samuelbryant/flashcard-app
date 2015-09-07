@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.components;
+package ui.core;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import ui.components.FABuildable;
+import ui.components.FABuildable;
+import ui.components.FAPanel;
 import ui.components.FAPanel;
 
 public abstract class ImageDisplay extends FAPanel implements FABuildable {

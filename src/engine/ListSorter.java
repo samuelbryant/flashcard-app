@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import models.Answer;
+import models.DatabaseIO;
 import models.Question;
 import models.Response;
 import models.Source;
@@ -67,10 +68,12 @@ public abstract class ListSorter {
     public int compare(Question o1, Question o2) {
       Date d1 = o1.getLastResponseTime();
       Date d2 = o2.getLastResponseTime();
-      if (d1 == null) {
-        return +1;
-      } else if (d2 == null) {
+      if (d1 == null && d2 == null) {
+        return 0;
+      } else if (d1 == null) {
         return -1;
+      } else if (d2 == null) {
+        return +1;
       } else {
         return d1.compareTo(d2);
       }
@@ -140,30 +143,6 @@ public abstract class ListSorter {
     }
   }
   
-  public static void main(String[] args) {
-    Date before = new Date(2012, 1, 1);
-    Date after = new Date(2015, 12, 25);
-    
-    Question q1 = new Question(Source.CUSTOM, 1, Answer.A, "somewhere");
-    Question q2 = new Question(Source.CUSTOM, 2, Answer.A, "somewhere");
-    q1.addResponse(new Response(null, null, before));
-    q2.addResponse(new Response(null, null, after));
-    
-    ArrayList<Question> list = new ArrayList<>();
-    list.add(q1);
-    list.add(q2);
-    
-    for (Question q: list) {
-      System.out.println(q);
-    }
-    
-    LAST_ANSWERED.sort(list);
-    
-    for (Question q: list) {
-      System.out.println(q);
-    }
-  }
-  
   public static final Map<String, ListSorter> ALL_SORTERS = new HashMap<>();
   static {
     ALL_SORTERS.put("By ids", ListSorter.ID_SORTER);
@@ -175,4 +154,14 @@ public abstract class ListSorter {
   public static final String DEFAULT_1_STRING = "By ids";
   public static final String DEFAULT_2_STRING = "None";
   
+  public static void main(String[] args) {
+    ListSorter s1 = ListSorter.LAST_ANSWERED;
+    ListSorter s2 = ListSorter.NULL_SORTER;
+    ListSorter s = ListSorter.getCompositeSorter(s1, s2);
+    
+    ArrayList<Question> list = DatabaseIO.getDatabase().getQuestions(ListFilter.NULL_FILTER, s);
+    for (Question q: list) {
+      System.out.println(q);
+    }
+  }
 }

@@ -1,4 +1,4 @@
-package ui.questions.action;
+package ui.subcomponents;
 
 import engine.ListFilter;
 import engine.ListSorter;
@@ -17,12 +17,12 @@ import javax.swing.JLabel;
 import models.Source;
 import models.Subject;
 import models.Tag;
-import ui.Constants;
-import ui.components.SubController;
+import core.Constants;
+import ui.core.SubController;
 import ui.components.FAButton;
 import ui.components.FACheckbox;
 import ui.questions.QuestionListController;
-import ui.components.SubPanel;
+import ui.core.SubPanel;
 
 public class FilterPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> implements ActionListener {
   

@@ -1,9 +1,9 @@
-package ui.questions.action;
+package ui.subcomponents;
 
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
-import ui.components.ImageDisplay;
+import ui.core.ImageDisplay;
 import ui.questions.QuestionList;
 import ui.questions.QuestionListController;
 import ui.questions.QuestionListImage;

@@ -1,4 +1,4 @@
-package ui.components;
+package ui.core;
 
 import ui.questions.QuestionList;
 import ui.questions.QuestionListController;

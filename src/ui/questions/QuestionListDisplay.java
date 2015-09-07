@@ -3,14 +3,14 @@ package ui.questions;
 import java.awt.Dimension;
 import models.Database;
 import models.DatabaseIO;
-import ui.components.DisplayWindow;
-import ui.components.Display;
-import ui.components.ImageDisplay;
-import ui.questions.action.ActionPanel;
-import ui.questions.action.InfobarPanel;
-import ui.questions.action.FilterPanel;
-import ui.questions.action.QuestionPanel;
-import ui.questions.action.TaggerPanel;
+import ui.core.DisplayWindow;
+import ui.core.Display;
+import ui.core.ImageDisplay;
+import ui.subcomponents.ActionPanel;
+import ui.subcomponents.InfobarPanel;
+import ui.subcomponents.FilterPanel;
+import ui.subcomponents.QuestionPanel;
+import ui.subcomponents.TaggerPanel;
 
 public class QuestionListDisplay extends Display<QuestionListController> {
   

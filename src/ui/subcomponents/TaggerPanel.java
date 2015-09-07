@@ -1,4 +1,4 @@
-package ui.questions.action;
+package ui.subcomponents;
 
 import static java.awt.Component.TOP_ALIGNMENT;
 import java.awt.Dimension;
@@ -12,12 +12,12 @@ import javax.swing.JLabel;
 import models.Question;
 import models.Subject;
 import models.Tag;
-import ui.Constants;
-import ui.components.SubController;
+import core.Constants;
+import ui.core.SubController;
 import ui.components.FAButton;
 import ui.components.FACheckbox;
 import ui.questions.QuestionListController;
-import ui.components.SubPanel;
+import ui.core.SubPanel;
 
 public class TaggerPanel extends SubPanel<QuestionListController, SubController<QuestionListController>>{
   

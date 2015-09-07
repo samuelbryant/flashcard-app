@@ -5,7 +5,7 @@ package ui.components;
 import java.awt.Dimension;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import ui.Constants;
+import core.Constants;
 
 public class FAPanel extends JPanel {
   
