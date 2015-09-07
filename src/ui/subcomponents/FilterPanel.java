@@ -31,7 +31,7 @@ public class FilterPanel extends SubPanel<QuestionListController, SubController<
   protected JLabel subjectsLabel;
   protected JLabel tagsLabel;
   protected JLabel sourceLabel;
-  protected JCheckBox noSubjectCheckbox;
+  protected FACheckbox noSubjectCheckbox;
   protected final Map<Subject, FACheckbox> subjectCheckboxes;
   protected final Map<Tag, FACheckbox> tagCheckboxes;
   protected JComboBox sourceCombobox;
@@ -85,7 +85,7 @@ public class FilterPanel extends SubPanel<QuestionListController, SubController<
     sorter2Label.setFont(Constants.SUBSECTION_FONT);
     
     // Build checkbox components.
-    this.noSubjectCheckbox = new JCheckBox("No subject");
+    this.noSubjectCheckbox = new FACheckbox("No subject");
     for (Subject subject: subjects) {
       subjectCheckboxes.put(subject, new FACheckbox(subject.name()));
     }
