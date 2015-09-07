@@ -28,6 +28,10 @@ public abstract class Display <T extends Controller> extends FAPanel implements 
   @Override
   public abstract void layoutComponents(Dimension totalSize);
   
+  public void componentResized() {
+    
+  }
+  
   protected abstract void setupMenuBar();
 
   public Controller getController() {

@@ -5,6 +5,7 @@ import engine.ListSorter;
 import models.Answer;
 import models.DatabaseIO;
 import models.Response;
+import models.Tag;
 import ui.core.Controller;
 
 public class QuestionListController extends Controller<QuestionListDisplay> {
@@ -32,10 +33,14 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   }
   
   public void answer(Answer answer) {
-    this.getQuestionState().answer(answer);
-    if (this.recordAnswers) {
-      Response r = this.getQuestionState().getResponseObject();
-      this._questionList.getCurrentQuestion().addResponse(r);
+    if (this.getQuestionState().isAnswered()) {
+      this.getQuestionState().changeAnswer(answer);
+    } else {
+      this.getQuestionState().answer(answer);
+      if (this.recordAnswers) {
+        Response r = this.getQuestionState().getResponseObject();
+        this._questionList.getCurrentQuestion().addResponse(r);
+      }
     }
   }
   

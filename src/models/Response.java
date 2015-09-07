@@ -16,7 +16,7 @@ public class Response implements Comparable<Response> {
   
   public static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yy h:mm a");
 
-  final Answer response;
+  Answer response;
   final Long responseTime;
   final String dateString;
   final Date date;  // Transient.
@@ -43,6 +43,10 @@ public class Response implements Comparable<Response> {
     } catch (ParseException ex) {
       throw new FatalError("Could not parse date string: " + dateString);
     }
+  }
+  
+  public void setAnswer(Answer answer) {
+    this.response = answer;
   }
 
   /**

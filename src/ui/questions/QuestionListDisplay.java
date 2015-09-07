@@ -54,6 +54,7 @@ public class QuestionListDisplay extends Display<QuestionListController> {
 
   @Override
   public void layoutComponents(Dimension totalSize) {
+    System.out.printf("Laying out: %d, %d\n", totalSize.width, totalSize.height);
     this.setLayout(null);
     
     this.add(this.taggerPanel);

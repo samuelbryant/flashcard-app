@@ -1,9 +1,11 @@
 package ui.core;
 
 import java.awt.Dimension;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import javax.swing.JFrame;
 
-public class DisplayWindow extends JFrame {
+public class DisplayWindow extends JFrame implements ComponentListener {
 
   private Controller ctrl = null;
   private Display display = null;
@@ -14,7 +16,7 @@ public class DisplayWindow extends JFrame {
     this.totalWidth = totalWidth;
     this.totalHeight = totalHeight;
   }
-
+  
   public void showDisplay(Display d) {    
     // Remove old display.
     if (this.display != null) {
@@ -39,6 +41,22 @@ public class DisplayWindow extends JFrame {
 
     // Display window.
     this.setVisible(true);
+    this.addComponentListener(this);
   }
+
+  @Override
+  public void componentResized(ComponentEvent e) {
+    Dimension size = this.getSize();
+    this.display.layoutComponents(new Dimension(size.width, size.height - 50));
+  }
+
+  @Override
+  public void componentMoved(ComponentEvent e) {}
+
+  @Override
+  public void componentShown(ComponentEvent e) {}
+
+  @Override
+  public void componentHidden(ComponentEvent e) {}
 
 }

@@ -75,6 +75,17 @@ public class QuestionState extends Observable implements Observer {
     this.notifyObservers();
   }
   
+  void changeAnswer(Answer answer) throws NotAnsweredYetException {
+    if (this.isAnswered()) {
+      this._response.setAnswer(answer);
+      this._selectedAnswer = answer;
+      this.setChanged();
+      this.notifyObservers();
+    } else {
+      throw new NotAnsweredYetException();
+    }
+  }
+  
   void answer(Answer answer) throws AlreadyAnsweredException, NotStartedYetException {
     if (this.isAnswered()) {
       throw new AlreadyAnsweredException();

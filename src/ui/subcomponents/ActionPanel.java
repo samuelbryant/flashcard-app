@@ -28,7 +28,8 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
     KeyEvent.VK_2,
     KeyEvent.VK_3,
     KeyEvent.VK_4,
-    KeyEvent.VK_5
+    KeyEvent.VK_5,
+    KeyEvent.VK_6
   };
   
   protected FAActionButton backButton, nextButton, saveButton;
@@ -150,7 +151,7 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
     for (Answer answer: Answer.values()) {
       FAButton button = this.answerButtons.get(answer);
       
-      button.setEnabled(isStarted && !isAnswered);
+      button.setEnabled(isStarted);
       
       if (isAnswered && answer == questionState.getCorrectAnswer()) {
         button.setBackground(Color.GREEN);

@@ -9,7 +9,7 @@ import ui.core.SubPanel;
 
 public class InfobarPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
 
-  public static final int LABEL_WIDTH = 300;
+  public static final int LABEL_WIDTH = 200;
   
   protected JLabel questionListLabel;
   protected JLabel questionLabel;
