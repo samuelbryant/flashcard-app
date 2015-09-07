@@ -1,4 +1,4 @@
-package ui;
+package ui.components;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -29,8 +29,7 @@ public class DisplayWindow extends JFrame {
     this.setJMenuBar(d.getDisplayMenuBar());
     
     this.display.buildComponents();
-    this.display.sizeComponents(new Dimension(totalWidth, totalHeight));
-    this.display.layoutComponents();
+    this.display.layoutComponents(new Dimension(totalWidth, totalHeight));
     Dimension thisSize = new Dimension(totalWidth, totalHeight + 50);
     this.setSize(thisSize);
 

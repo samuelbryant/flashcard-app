@@ -1,110 +1,115 @@
 package ui.questions;
 
-import java.awt.Color;
-import java.awt.event.ActionListener;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import javax.swing.BoxLayout;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
 import models.Database;
 import models.DatabaseIO;
-import ui.DisplayWindow;
-import ui.Display;
-import ui.ImageDisplay;
-import ui.questions.action.ActionController;
+import ui.components.DisplayWindow;
+import ui.components.Display;
+import ui.components.ImageDisplay;
 import ui.questions.action.ActionPanel;
-import ui.questions.infobar.InfobarController;
-import ui.questions.infobar.InfobarPanel;
-import engine.QuestionListSorter;
+import ui.questions.action.InfobarPanel;
+import ui.questions.action.FilterPanel;
+import ui.questions.action.QuestionPanel;
+import ui.questions.action.TaggerPanel;
 
 public class QuestionListDisplay extends Display<QuestionListController> {
   
-  public static final int TOTAL_WIDTH = 700;
-  public static final int TOTAL_HEIGHT = 700;
+  public static final int BORDER_SIZE = 10;
+  public static final int SIDE_COLUMN_WIDTH = 200;
   public static final int ACTION_PANEL_HEIGHT = 50;
-  public static final int INFO_PANEL_HEIGHT = 30;
+  public static final int INFO_PANEL_HEIGHT = 50;
+  
+  public static final int TOTAL_WIDTH = 1100;
+  public static final int TOTAL_HEIGHT = 800;
 
   protected ImageDisplay questionPanel;
   protected ActionPanel actionPanel;
+  protected FilterPanel filterPanel;
   protected InfobarPanel infoPanel;
+  protected TaggerPanel taggerPanel;
 
   public QuestionListDisplay(final QuestionListController ctrl) {
     super(ctrl);
   }
-
-  @Override
-  protected void setupMenuBar() {
-    JMenu file = new JMenu("File");
-    JMenuItem menuItem = new JMenuItem("Save");
-    menuItem.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent ev) {
-        QuestionListDisplay.this.ctrl.saveToDatabase();
-      }
-      });
-    file.add(menuItem);
-    System.out.printf("Set up menu bar\n");
-  }
-
+  
   @Override
   public void buildComponents() {
-    ActionController actionController = new ActionController(this.ctrl);
-    this.actionPanel = new ActionPanel(actionController, QuestionListSorter.ALL_SORTERS);
+    this.actionPanel = new ActionPanel(this.ctrl);
     this.actionPanel.buildComponents();
     
-    InfobarController infoController = new InfobarController(this.ctrl);
-    this.infoPanel = new InfobarPanel(infoController);
+    this.taggerPanel = new TaggerPanel(this.ctrl);
+    this.taggerPanel.buildComponents();
+    
+    this.filterPanel = new FilterPanel(this.ctrl);
+    this.filterPanel.buildComponents();
+    
+    this.infoPanel = new InfobarPanel(this.ctrl);
     this.infoPanel.buildComponents();
     
-    // Build image display in middle.
-    this.questionPanel = new ImageDisplay(true) {
-      @Override
-      public BufferedImage generateDisplayImage() {
-        if (QuestionListDisplay.this.ctrl.getState() == QuestionListController.State.NOT_STARTED) {
-          BufferedImage img = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-          Graphics2D gr = img.createGraphics();
-          gr.setColor(Color.BLACK);
-          gr.drawString("Questions List Not Started", 40, 40);
-          return img;
-        } else {
-          return ctrl.getCurrentQuestion().getImage();
-        }
-      }
-    };
+    this.questionPanel = new QuestionPanel(this.ctrl, true);
     this.questionPanel.buildComponents();
+    
+    this.ctrl.initialUpdate();
   }
 
   @Override
-  public void layoutComponents() {
-    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+  public void layoutComponents(Dimension totalSize) {
+    this.setLayout(null);
     
-    // Build info bar panel on top.
-    this.infoPanel.layoutComponents();;
-    this.add(this.infoPanel);
-    
-    this.actionPanel.layoutComponents();
+    this.add(this.taggerPanel);
     this.add(this.actionPanel);
-    
-    // Build image display in middle.
-    this.questionPanel.layoutComponents();
+    this.add(this.infoPanel);
     this.add(this.questionPanel);
-  }
-
-  @Override
-  public void sizeComponents(Dimension totalSize) {
-    Dimension infoPanelSize = new Dimension(
-        totalSize.width, INFO_PANEL_HEIGHT);
-    Dimension actionPanelSize = new Dimension(
-        totalSize.width, ACTION_PANEL_HEIGHT);
-    Dimension questionPanelSize = new Dimension(
-        totalSize.width, totalSize.height - (ACTION_PANEL_HEIGHT + INFO_PANEL_HEIGHT));
-
-    this.infoPanel.sizeComponents(infoPanelSize);
-    this.actionPanel.sizeComponents(actionPanelSize);
-    this.questionPanel.sizeComponents(questionPanelSize);
+    this.add(this.filterPanel);
+    
+    int width = totalSize.width - 2 * BORDER_SIZE;
+    int height = totalSize.height - 2 * BORDER_SIZE;
+    
+    int col1Width = SIDE_COLUMN_WIDTH;
+    int col3Width = SIDE_COLUMN_WIDTH;
+    int col2Width = width - (col1Width + col3Width + 2 * BORDER_SIZE);
+    
+    int row1Height = INFO_PANEL_HEIGHT;
+    int row2Height = ACTION_PANEL_HEIGHT;
+    int row3Height = height - (row1Height + row2Height + 2 * BORDER_SIZE);
+    
+    Dimension taggerDim = new Dimension(col1Width, height);
+    Dimension infoDim = new Dimension(col2Width, row1Height);
+    Dimension actionDim = new Dimension(col2Width, row2Height);
+    Dimension questionDim = new Dimension(col2Width, row3Height);
+    Dimension filterDim = new Dimension(col3Width, height);
+    
+    int lEdge = BORDER_SIZE;
+    int tEdge = BORDER_SIZE;
+    
+    this.taggerPanel.setBounds(lEdge, tEdge, taggerDim.width, taggerDim.height);
+    
+    lEdge += taggerDim.width;
+    lEdge += BORDER_SIZE;
+    
+    this.infoPanel.setBounds(lEdge, tEdge, infoDim.width, infoDim.height);
+    
+    tEdge += infoDim.height;
+    tEdge += BORDER_SIZE;
+    
+    this.actionPanel.setBounds(lEdge, tEdge, actionDim.width, actionDim.height);
+    
+    tEdge += actionDim.height;
+    tEdge += BORDER_SIZE;
+    
+    this.questionPanel.setBounds(lEdge, tEdge, actionDim.width, actionDim.height);
+    
+    lEdge += actionDim.width;
+    lEdge += BORDER_SIZE;
+    tEdge = BORDER_SIZE;
+    
+    this.filterPanel.setBounds(lEdge, tEdge, filterDim.width, filterDim.height);
+    
+    this.infoPanel.layoutComponents(infoDim);
+    this.taggerPanel.layoutComponents(taggerDim);
+    this.actionPanel.layoutComponents(actionDim);
+    this.questionPanel.layoutComponents(questionDim);
+    this.filterPanel.layoutComponents(filterDim);
     
     this.sizeComponent(this, totalSize);
   }
@@ -114,11 +119,15 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     Database db = DatabaseIO.loadDatabase();
 
     // Load/initialize controller/display.
-    QuestionListController ctrl = new QuestionListController(db);
+    QuestionListController ctrl = new QuestionListController();
     QuestionListDisplay display = new QuestionListDisplay(ctrl);
 
     // Bring it all home.
     DisplayWindow window = new DisplayWindow(TOTAL_WIDTH, TOTAL_HEIGHT);
     window.showDisplay(display);
   }
+
+  @Override
+  protected void setupMenuBar() {}
+  
 }

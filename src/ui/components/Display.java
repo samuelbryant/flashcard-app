@@ -1,4 +1,4 @@
-package ui;
+package ui.components;
 
 import javax.swing.JMenuBar;
 import java.awt.Dimension;
@@ -24,10 +24,7 @@ public abstract class Display <T extends Controller> extends FAPanel implements 
   public abstract void buildComponents();
   
   @Override
-  public abstract void layoutComponents();
-  
-  @Override
-  public abstract void sizeComponents(Dimension totalSize);
+  public abstract void layoutComponents(Dimension totalSize);
   
   protected abstract void setupMenuBar();
 

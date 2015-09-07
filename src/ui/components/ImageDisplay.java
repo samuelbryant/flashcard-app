@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui;
+package ui.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -59,10 +59,7 @@ public abstract class ImageDisplay extends FAPanel implements FABuildable {
   public void buildComponents() {}
 
   @Override
-  public void layoutComponents() {}
-
-  @Override
-  public void sizeComponents(Dimension totalSize) {
+  public void layoutComponents(Dimension totalSize) {
     this.sizeComponent(this, totalSize);
   }
 

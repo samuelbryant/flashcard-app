@@ -179,4 +179,12 @@ public class Question implements Serializable {
     }
   }
   
+  public ArrayList<Boolean> getGradedResponses() {
+    ArrayList<Boolean> list = new ArrayList<>();
+    for (Response r: this.responses) {
+      list.add(r.response == this.answer);
+    }
+    return list;
+  }
+  
 }

@@ -6,8 +6,6 @@ public interface FABuildable {
   
   public void buildComponents();
   
-  public void layoutComponents();
-  
-  public void sizeComponents(Dimension totalSize);
+  public void layoutComponents(Dimension totalSize);
   
 }

@@ -14,10 +14,14 @@ import models.Answer;
 import ui.components.FAActionButton;
 import ui.components.FAButton;
 import ui.questions.QuestionListController;
-import engine.QuestionListSorter;
-import ui.questions.SubPanel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import ui.components.SubController;
+import ui.questions.QuestionList;
+import ui.questions.QuestionState;
+import ui.components.SubPanel;
 
-public class ActionPanel <T extends QuestionListController> extends SubPanel<T, ActionController<T>> {
+public class ActionPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
 
   private static final int[] ANSWER_KEYS = new int[]{
     KeyEvent.VK_1,
@@ -30,18 +34,10 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
   protected FAActionButton backButton, nextButton, saveButton;
   protected final Map<Answer, FAButton> answerButtons;
   protected JComboBox filtersBox;
-  protected final Map<String, QuestionListSorter> listFilters;
   
-  public ActionPanel(ActionController<T> componentController) {
-    super(componentController);
+  public ActionPanel(QuestionListController controller) {
+    super(new SubController(controller));
     this.answerButtons = new TreeMap<>();
-    this.listFilters = null;
-  }
-
-  public ActionPanel(ActionController<T> componentController, Map<String, QuestionListSorter> listFilters) {
-    super(componentController);
-    this.answerButtons = new TreeMap<>();
-    this.listFilters = listFilters;
   }
 
   @Override
@@ -54,8 +50,12 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
       ActionListener buttonPress = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          if (questionListController.isInProgress()) {
-            ActionPanel.this.componentController.answerQuestion(answer);
+          try {
+            questionListController.answer(answer);
+          } catch (QuestionState.AlreadyAnsweredException ex) {
+            Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (QuestionList.NotStartedYetException ex) {
+            Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
         }
       };
@@ -67,26 +67,26 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
       this.questionListController.addKeyAction(buttonMnemonic, buttonPress);
     }
     
-    // Create list filter box.
-    if (this.listFilters != null) {
-      this.filtersBox = new JComboBox(this.listFilters.keySet().toArray());
-      this.filtersBox.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          String filterString = (String) filtersBox.getSelectedItem();
-          questionListController.setQuestionListSorter(listFilters.get(filterString));
-          questionListController.requestFocus();
-        }
-      });
-    }
+//    // Create list filter box.
+//    if (this.listFilters != null) {
+//      this.filtersBox = new JComboBox(this.listFilters.keySet().toArray());
+//      this.filtersBox.addActionListener(new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//          String filterString = (String) filtersBox.getSelectedItem();
+//          questionListController.setQuestionListSorter(listFilters.get(filterString));
+//          questionListController.requestFocus();
+//        }
+//      });
+//    }
     
     backButton = new FAActionButton("Back") {  
       @Override
       public void actionPerformed(ActionEvent ev) {
         try {
-          ActionPanel.this.questionListController.previousQuestion();
-        } catch (QuestionListController.OutOfQuestionsException ex) {
-          System.out.printf("LOG: No more questions\n");
+          questionList.lastQuestion();
+        } catch (QuestionList.OutOfQuestionsException ex) {
+          Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
     };
@@ -95,9 +95,11 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
       @Override
       public void actionPerformed(ActionEvent ev) {
         try {
-          ActionPanel.this.questionListController.nextQuestion();
-        } catch (QuestionListController.OutOfQuestionsException ex) {
-          System.out.printf("LOG: No more questions\n");
+          questionList.nextQuestion();
+        } catch (QuestionList.OutOfQuestionsException ex) {
+          Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QuestionList.NotStartedYetException ex) {
+          Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
     };
@@ -105,14 +107,14 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
     saveButton = new FAActionButton("Save") {
       @Override
       public void actionPerformed(ActionEvent ev) {
-        ActionPanel.this.questionListController.saveToDatabase();
+        questionListController.save();
         System.out.printf("Saved to database!\n");
       }
     };
   }
 
   @Override
-  public void layoutComponents() {
+  public void layoutComponents(Dimension totalSize) {
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     for (Answer answer: Answer.values()) {
       this.add(this.answerButtons.get(answer));
@@ -124,37 +126,38 @@ public class ActionPanel <T extends QuestionListController> extends SubPanel<T, 
     this.add(saveButton);
     this.questionListController.addKeyAction(KeyEvent.VK_S, saveButton);
     
-    this.add(this.filtersBox);
+    // this.add(this.filtersBox);
     
     this.setAlignmentX(Component.CENTER_ALIGNMENT);
     this.setAlignmentY(Component.TOP_ALIGNMENT);
+    
+    this.sizeComponent(this, totalSize);
+  }
+  
+  @Override
+  protected void observeListChange() {
+    
   }
 
   @Override
-  public void sizeComponents(Dimension totalDimension) {
-    this.setSize(totalDimension);
-    this.setPreferredSize(totalDimension);
-  }
-
-  @Override
-  protected void syncToController() {}
-
-  @Override
-  protected void syncFromController() {
-    if (this.questionListController.isInProgress()) {
-      Answer selected = this.questionListController.getSelectedAnswer();
-      Answer correct = this.questionListController.getCorrectAnswer();
-
-      for (Answer answer: Answer.values()) {
-        if (!this.questionListController.isAnswered()) {
-          this.answerButtons.get(answer).setDefaultBackground();
-        } else if (answer == selected && answer != correct) {
-          this.answerButtons.get(answer).setBackground(Color.RED);
-        } else if (answer == correct) {
-          this.answerButtons.get(answer).setBackground(Color.GREEN);
-        } else {
-          this.answerButtons.get(answer).setDefaultBackground();
-        }
+  protected void observeQuestionChange() {
+    this.backButton.setEnabled(questionList.hasLastQuestion());
+    this.nextButton.setEnabled(questionList.hasNextQuestion());
+    
+    boolean isStarted = this.questionList.isStarted();
+    boolean isAnswered = this.questionList.isStarted() && this.questionState.isAnswered();
+    
+    for (Answer answer: Answer.values()) {
+      FAButton button = this.answerButtons.get(answer);
+      
+      button.setEnabled(isStarted && !isAnswered);
+      
+      if (isAnswered && answer == questionState.getCorrectAnswer()) {
+        button.setBackground(Color.GREEN);
+      } else if (isAnswered && answer == questionState.getSelectedAnswer()) {
+        button.setBackground(Color.RED);
+      } else {
+        button.setDefaultBackground();
       }
     }
   }

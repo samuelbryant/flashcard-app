@@ -5,9 +5,7 @@ import engine.ListFilter;
 import engine.ListSorter;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import engine.QuestionFilter;
 import java.util.Objects;
 import java.util.TreeMap;
 
@@ -105,73 +103,9 @@ public final class Database {
     return list;
   }
   
-  @Deprecated
-  public List<Question> getQuestionList() {
-    List<Question> questionsList = new ArrayList<>();
-    Iterator<Question> iter = this.getDatabaseIterator();
-    while (iter.hasNext()) {
-      questionsList.add(iter.next());
-    }
-    return questionsList;
-  }
-
-  @Deprecated
-  public List<Question> getQuestionList(QuestionFilter filter) {
-    List<Question> questionsList = new ArrayList<>();
-    Iterator<Question> iter = this.getDatabaseIterator();
-    while (iter.hasNext()) {
-      Question q = iter.next();
-      if (filter.accept(q)) {
-        questionsList.add(q);
-      }
-    }
-    return questionsList;
-  }
 
   private Iterator<Question> getDatabaseIterator() {
     return this.questions.values().iterator();
-  }
-
-  @Deprecated
-  public Question findQuestionCopy(Source source, Integer questionNumber) {
-    for (Question q: this.questions.values()) {
-      if (q.source == source && q.questionNumber == questionNumber) {
-        return core.Utilities.makeDeepCopy(q);
-      }
-    }
-    return null;
-  }
-
-  @Deprecated
-  public List<Question> getQuestionListCopy() {
-    List<Question> questionsCopy = new ArrayList<>();
-    Iterator<Question> iter = this.getDatabaseCopyIterator();
-    while (iter.hasNext()) {
-      questionsCopy.add(iter.next());
-    }
-    return questionsCopy;
-  }
-
-  @Deprecated
-  public Iterator<Question> getDatabaseCopyIterator() {
-    final Iterator<Question> baseIterator = this.questions.values().iterator();
-    return new Iterator<Question>() {
-      @Override
-      public boolean hasNext() {return baseIterator.hasNext();}
-      @Override
-      public Question next() {
-        return core.Utilities.makeDeepCopy(baseIterator.next());
-      }
-      @Override
-      public void remove() {throw new UnsupportedOperationException("Not supported yet.");}
-    };
-  }
-
-  @Deprecated
-  public void addQuestionsToSession(List<Question> questions) {
-    for (Question q: questions) {
-      this.addQuestionToSession(q);
-    }
   }
 
   public void addQuestionToSession(Question q) {

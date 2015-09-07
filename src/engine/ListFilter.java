@@ -14,7 +14,7 @@ import models.Tag;
  * Class used to filter lists of Questions to create new lists.
  */
 public abstract class ListFilter {
-  
+
   public enum Relationship {
     AND, OR;
   }
@@ -26,30 +26,10 @@ public abstract class ListFilter {
    */
   public abstract boolean accept(Question q);
   
-//  /**
-//   * Creates new filtered ArrayList by filtering given list.
-//   * @param questions List of questions to filter.
-//   * @return New ArrayList created by applying filter to old list.
-//   */
-//  public ArrayList<Question> filterList(List<Question> questions) {
-//    return filterList(questions.iterator());
-//  }
-//  
-//  /**
-//   * Creates new filtered ArrayList by filtering given question iterator.
-//   * @param iter Question iterator used to generate filtered list.
-//   * @return New ArrayList created by applying filter question iterator.
-//   */
-//  public ArrayList<Question> filterList(Iterator<Question> iter) {
-//    ArrayList<Question> newList = new ArrayList<>();
-//    while (iter.hasNext()) {
-//      Question q = iter.next();
-//      if (this.accept(iter.next())) {
-//        newList.add(q);
-//      }
-//    }
-//    return newList;
-//  }
+  public static ListFilter getCompositeFilter(ArrayList<ListFilter> filters) {
+    return getCompositeFilter(filters, Relationship.AND);
+  }
+  
   
   /**
    * Creates filter that is the intersection of two filters.
@@ -59,15 +39,6 @@ public abstract class ListFilter {
    */
   public static ListFilter getCompositeFilter(final ListFilter filter1, final ListFilter filter2) {
     return getCompositeFilter(filter1, filter2, Relationship.AND);
-  }
-  
-  /**
-   * Creates filter that is the intersection of several filters.
-   * @param filters Set of filters to consider.
-   * @return A ListFilter that requires all filter arguments to pass.
-   */
-  public static ListFilter getCompositeFilter(final ListFilter[] filters) {
-    return getCompositeFilter(filters, Relationship.AND);
   }
   
   /**
@@ -98,7 +69,7 @@ public abstract class ListFilter {
    * @param rel Relationship to use when creating composite filter (AND or OR).
    * @return A ListFilter that is a composite of the given filters.
    */
-  public static ListFilter getCompositeFilter(final ListFilter[] filters, final Relationship rel) {
+  public static ListFilter getCompositeFilter(final List<ListFilter> filters, final Relationship rel) {
     return new ListFilter() {
       @Override
       public boolean accept(Question q) {
@@ -135,7 +106,7 @@ public abstract class ListFilter {
   /**
    * ListFilter class which filters Question lists by the Source value of the Question instances.
    */
-  public class SourceFilter extends ListFilter {
+  public static class SourceFilter extends ListFilter {
 
     private final Map<Source, Boolean> sources;
     private final boolean includeNoSources;
@@ -179,7 +150,7 @@ public abstract class ListFilter {
   /**
    * ListFilter class which filters Question lists by the Tag values of the Question instances.
    */
-  public class TagFilter extends ListFilter {
+  public static class TagFilter extends ListFilter {
 
     private final Map<Tag, Boolean> tags;
     private final boolean includeNoTags;
@@ -223,7 +194,7 @@ public abstract class ListFilter {
   /**
    * ListFilter class which filters Question lists by the Subject values of the Question instances.
    */
-  public class SubjectFilter extends ListFilter {
+  public static class SubjectFilter extends ListFilter {
 
     private final Map<Subject, Boolean> subjects;
     private final boolean includeNoSubjects;
