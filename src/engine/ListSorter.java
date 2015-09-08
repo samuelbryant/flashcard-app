@@ -23,6 +23,12 @@ public abstract class ListSorter {
    */
   public abstract void sort(ArrayList<Question> list);
 
+  /**
+   *
+   * @param s1
+   * @param s2
+   * @return
+   */
   public static ListSorter getCompositeSorter(final ListSorter s1, final ListSorter s2) {
     return new ListSorter() {
       @Override
@@ -38,8 +44,15 @@ public abstract class ListSorter {
    */
   public static class CompareSorter extends ListSorter {
 
+    /**
+     *
+     */
     protected final Comparator<Question> compare;
 
+    /**
+     *
+     * @param compare
+     */
     public CompareSorter(Comparator<Question> compare) {
       this.compare = compare;
     }
@@ -143,6 +156,9 @@ public abstract class ListSorter {
     }
   }
 
+  /**
+   *
+   */
   public static final Map<String, ListSorter> ALL_SORTERS = new HashMap<>();
   static {
     ALL_SORTERS.put("By ids", ListSorter.ID_SORTER);
@@ -152,9 +168,21 @@ public abstract class ListSorter {
     ALL_SORTERS.put("Wrong %", WRONG_PERCENTAGE_SORTER);
     ALL_SORTERS.put("Quiz 1", new engine.ListQuiz1());
   }
+
+  /**
+   *
+   */
   public static final String DEFAULT_1_STRING = "By ids";
+
+  /**
+   *
+   */
   public static final String DEFAULT_2_STRING = "None";
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     ListSorter s1 = ListSorter.LAST_ANSWERED;
     ListSorter s2 = ListSorter.NULL_SORTER;

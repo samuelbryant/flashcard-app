@@ -15,8 +15,20 @@ import models.Tag;
  */
 public abstract class ListFilter {
 
+  /**
+   *
+   */
   public enum Relationship {
-    AND, OR;
+
+    /**
+     *
+     */
+    AND,
+
+    /**
+     *
+     */
+    OR;
   }
 
   /**
@@ -26,6 +38,11 @@ public abstract class ListFilter {
    */
   public abstract boolean accept(Question q);
 
+  /**
+   *
+   * @param filters
+   * @return
+   */
   public static ListFilter getCompositeFilter(ArrayList<ListFilter> filters) {
     return getCompositeFilter(filters, Relationship.AND);
   }

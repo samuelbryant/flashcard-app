@@ -8,11 +8,27 @@ import ui.questions.QuestionList;
 import ui.questions.QuestionListController;
 import ui.questions.QuestionListImage;
 
+/**
+ *
+ * @author sambryant
+ */
 public class QuestionPanel extends ImageDisplay implements Observer {
 
+  /**
+   *
+   */
   protected QuestionListController ctrl;
+
+  /**
+   *
+   */
   protected QuestionList questionList;
 
+  /**
+   *
+   * @param ctrl
+   * @param resize
+   */
   public QuestionPanel(QuestionListController ctrl, boolean resize) {
     super(resize);
     this.ctrl = ctrl;
@@ -20,6 +36,10 @@ public class QuestionPanel extends ImageDisplay implements Observer {
     this.questionList.addObserver(this);
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public BufferedImage generateDisplayImage() {
     return QuestionListImage.getQuestionListImage(questionList, this.getWidth(), this.getHeight());

@@ -14,15 +14,30 @@ import ui.components.FABuildable;
 import ui.components.FAPanel;
 import ui.components.FAPanel;
 
+/**
+ *
+ * @author sambryant
+ */
 public abstract class ImageDisplay extends FAPanel implements FABuildable {
 
+  /**
+   *
+   */
   public final boolean resizeImage;
 
+  /**
+   *
+   * @param resizeImage
+   */
   public ImageDisplay(boolean resizeImage) {
     super();
     this.resizeImage = resizeImage;
   }
 
+  /**
+   *
+   * @return
+   */
   public abstract BufferedImage generateDisplayImage();
 
   @Override
@@ -57,9 +72,16 @@ public abstract class ImageDisplay extends FAPanel implements FABuildable {
     }
   }
 
+  /**
+   *
+   */
   @Override
   public void buildComponents() {}
 
+  /**
+   *
+   * @param totalSize
+   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     this.sizeComponent(this, totalSize);

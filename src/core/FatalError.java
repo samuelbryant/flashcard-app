@@ -11,9 +11,19 @@ package core;
  */
 public class FatalError extends RuntimeException {
 
+  /**
+   *
+   * @param msg
+   */
   public FatalError(String msg) {
     super("FATAL: " + msg);
   }
+
+  /**
+   *
+   * @param msg
+   * @param ex
+   */
   public FatalError(String msg, Exception ex) {
     super("FATAL: " + msg, ex);
   }

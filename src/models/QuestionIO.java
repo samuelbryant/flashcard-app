@@ -8,8 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.*;
 
+/**
+ *
+ * @author sambryant
+ */
 public class QuestionIO {
 
+  /**
+   *
+   * @param id
+   * @return
+   */
   public static Question loadQuestion(int id) {
     Question q = _readQuestionDataFile(id);
     q.persistent = true;
@@ -18,12 +27,20 @@ public class QuestionIO {
     return q;
   }
 
+  /**
+   *
+   * @param q
+   */
   public static void writeQuestion(Question q) {
     _writeQuestionImageFile(q);
     _writeQuestionDataFile(q);
     q.persistent = true;
   }
 
+  /**
+   *
+   * @param q
+   */
   public static void loadQuestionImage(Question q) {
     q.questionImage = IO.loadImageOrDie(q.databaseImageFilename);
   }
@@ -148,6 +165,10 @@ public class QuestionIO {
     return obj.has(key) ? obj.getJSONArray(key) : new JSONArray();
   }
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     Question q = new Question();
     q.subjects.add(Subject.MECHANICS);

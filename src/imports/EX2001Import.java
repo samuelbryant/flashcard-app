@@ -12,10 +12,19 @@ import models.Question;
 import models.Source;
 import models.Tag;
 
+/**
+ *
+ * @author sambryant
+ */
 public class EX2001Import {
 
   static String SRC_DIR = "imports/2001";
 
+  /**
+   *
+   * @param args
+   * @throws FileNotFoundException
+   */
   public static void main(String[] args) throws FileNotFoundException {
     Constants.setupProjectDirectories();
 

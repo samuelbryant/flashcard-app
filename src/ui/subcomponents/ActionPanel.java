@@ -21,6 +21,10 @@ import ui.questions.QuestionList;
 import ui.questions.QuestionState;
 import ui.core.SubPanel;
 
+/**
+ *
+ * @author sambryant
+ */
 public class ActionPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
 
   private static final int[] ANSWER_KEYS = new int[]{
@@ -33,14 +37,29 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
   };
 
   protected FAActionButton backButton, nextButton, saveButton;
+
+  /**
+   *
+   */
   protected final Map<Answer, FAButton> answerButtons;
+
+  /**
+   *
+   */
   protected JComboBox filtersBox;
 
+  /**
+   *
+   * @param controller
+   */
   public ActionPanel(QuestionListController controller) {
     super(new SubController(controller));
     this.answerButtons = new TreeMap<>();
   }
 
+  /**
+   *
+   */
   @Override
   public void buildComponents() {
     Answer[] answers = Answer.values();
@@ -114,6 +133,10 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
     };
   }
 
+  /**
+   *
+   * @param totalSize
+   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -135,11 +158,17 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
     this.sizeComponent(this, totalSize);
   }
 
+  /**
+   *
+   */
   @Override
   protected void observeListChange() {
 
   }
 
+  /**
+   *
+   */
   @Override
   protected void observeQuestionChange() {
     this.backButton.setEnabled(questionList.hasLastQuestion());

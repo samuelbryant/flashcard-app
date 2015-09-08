@@ -6,12 +6,23 @@ import ui.core.DisplayWindow;
 import static ui.questions.QuestionListDisplay.TOTAL_HEIGHT;
 import static ui.questions.QuestionListDisplay.TOTAL_WIDTH;
 
+/**
+ *
+ * @author sambryant
+ */
 public class QuestionQuizDisplay extends QuestionListDisplay {
 
+  /**
+   *
+   * @param ctrl
+   */
   public QuestionQuizDisplay(QuestionListController ctrl) {
     super(ctrl);
   }
 
+  /**
+   *
+   */
   @Override
   public void buildComponents() {
     super.buildComponents();
@@ -20,6 +31,10 @@ public class QuestionQuizDisplay extends QuestionListDisplay {
     this.ctrl.setRecordAnswers(true);
   }
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     // Load/initialize models.
     Database db = DatabaseIO.loadDatabase();

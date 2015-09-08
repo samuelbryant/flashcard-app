@@ -20,13 +20,26 @@ import java.nio.file.Files;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 
+/**
+ *
+ * @author sambryant
+ */
 public class IO {
 
+  /**
+   *
+   * @param name
+   * @return
+   */
   public static boolean fileExists(String name) {
     File f = new File(name);
     return f.exists();
   }
 
+  /**
+   *
+   * @param dirname
+   */
   public static void createDirOrDie(String dirname) {
     File dir = new File(dirname);
     if (dir.exists() && dir.isDirectory()) {
@@ -39,6 +52,10 @@ public class IO {
     existsOrDie(dir);
   }
 
+  /**
+   *
+   * @param filename
+   */
   public static void createOrDie(String filename) {
     File file = new File(filename);
     if (file.exists()) {
@@ -52,24 +69,46 @@ public class IO {
     }
   }
 
+  /**
+   *
+   * @param filename
+   */
   public static void existsOrDie(String filename) {
     existsOrDie(new File(filename));
   }
 
+  /**
+   *
+   * @param file
+   */
   public static void existsOrDie(File file) {
     if (!file.exists()) {
       throw new FatalError("existsOrDie failed for file: " + file);
     }
   }
+
+  /**
+   *
+   * @param filename
+   */
   public static void notExistsOrDie(String filename) {
       notExistsOrDie(new File(filename));
   }
+
+  /**
+   *
+   * @param file
+   */
   public static void notExistsOrDie(File file) {
     if (file.exists()) {
       throw new FatalError("notExistsOrDie failed for file: " + file);
     }
   }
 
+  /**
+   *
+   * @param filename
+   */
   public static void deleteOrDie(String filename) {
     File file = new File(filename);
     if (file.exists()) {
@@ -78,6 +117,11 @@ public class IO {
     notExistsOrDie(file);
   }
 
+  /**
+   *
+   * @param srcFilename
+   * @param dstFilename
+   */
   public static void copyOrDie(String srcFilename, String dstFilename) {
     File src = new File(srcFilename);
     File dst = new File(dstFilename);
@@ -100,6 +144,10 @@ public class IO {
     existsOrDie(dst);
   }
 
+  /**
+   *
+   * @param filename
+   */
   public static void backupAndRecreateOrDie(String filename) {
     File file = new File(filename);
     if (!file.exists()) {
@@ -121,6 +169,10 @@ public class IO {
     createOrDie(filename);
   }
 
+  /**
+   *
+   * @param c
+   */
   public static void closeOrLive(Closeable c) {
     try {
       c.close();
@@ -129,6 +181,11 @@ public class IO {
     }
   }
 
+  /**
+   *
+   * @param filename
+   * @return
+   */
   public static BufferedReader getBufferedReaderOrLive(String filename) {
     try {
       return new BufferedReader(new FileReader(filename));
@@ -137,6 +194,11 @@ public class IO {
     }
   }
 
+  /**
+   *
+   * @param filename
+   * @return
+   */
   public static ObjectInputStream getObjectInputStreamOrLive(String filename) {
     try {
       return new ObjectInputStream(new FileInputStream(filename));
@@ -145,6 +207,11 @@ public class IO {
     }
   }
 
+  /**
+   *
+   * @param filename
+   * @return
+   */
   public static PrintWriter getPrintWriterOrDie(String filename) {
     try {
       createOrDie(filename);
@@ -157,6 +224,11 @@ public class IO {
     }
   }
 
+  /**
+   *
+   * @param filename
+   * @return
+   */
   public static ObjectOutputStream getObjectOutputStreamOrDie(String filename) {
     try {
       createOrDie(filename);
@@ -169,6 +241,11 @@ public class IO {
     }
   }
 
+  /**
+   *
+   * @param filename
+   * @return
+   */
   public static BufferedImage loadImageOrDie(String filename) {
     try {
       BufferedImage img = ImageIO.read(new File(filename));
@@ -179,6 +256,11 @@ public class IO {
     }
   }
 
+  /**
+   *
+   * @param filename
+   * @return
+   */
   public static Scanner getScannerOrDie(String filename) {
     try {
       return new Scanner(new File(filename));
@@ -187,6 +269,11 @@ public class IO {
     }
   }
 
+  /**
+   *
+   * @param filename
+   * @return
+   */
   public static String readEntireFileOrDie(String filename) {
     Scanner scan = getScannerOrDie(filename);
     scan.useDelimiter("\\Z");  

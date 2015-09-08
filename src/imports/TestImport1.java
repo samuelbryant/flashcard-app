@@ -38,6 +38,10 @@ public class TestImport1 {
     "1986 24.png", "1986 26.png", "1986 28.png", "1986 29.png"
   };
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
 
     Constants.setupProjectDirectories();

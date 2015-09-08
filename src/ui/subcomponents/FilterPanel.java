@@ -24,26 +24,91 @@ import ui.components.FACheckbox;
 import ui.questions.QuestionListController;
 import ui.core.SubPanel;
 
+/**
+ *
+ * @author sambryant
+ */
 public class FilterPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> implements ActionListener {
 
+  /**
+   *
+   */
   protected FAButton applyFiltersButton;
+
+  /**
+   *
+   */
   protected JLabel topLabel;
+
+  /**
+   *
+   */
   protected JLabel subjectsLabel;
+
+  /**
+   *
+   */
   protected JLabel tagsLabel;
+
+  /**
+   *
+   */
   protected JLabel sourceLabel;
+
+  /**
+   *
+   */
   protected FACheckbox noSubjectCheckbox;
+
+  /**
+   *
+   */
   protected final Map<Subject, FACheckbox> subjectCheckboxes;
+
+  /**
+   *
+   */
   protected final Map<Tag, FACheckbox> tagCheckboxes;
+
+  /**
+   *
+   */
   protected JComboBox sourceCombobox;
+
+  /**
+   *
+   */
   protected boolean hideBeforeAnswering;
 
+  /**
+   *
+   */
   protected JLabel sorter1Label;
+
+  /**
+   *
+   */
   protected JComboBox sorter1Combobox;
+
+  /**
+   *
+   */
   protected JLabel sorter2Label;
+
+  /**
+   *
+   */
   protected JComboBox sorter2Combobox;
 
+  /**
+   *
+   */
   protected static final String NO_SOURCE_FILTER = "None";
 
+  /**
+   *
+   * @param controller
+   */
   public FilterPanel(QuestionListController controller) {
     super(new SubController(controller));
     subjectCheckboxes = new TreeMap<>();
@@ -51,14 +116,25 @@ public class FilterPanel extends SubPanel<QuestionListController, SubController<
     this.hideBeforeAnswering = false;
   }
 
+  /**
+   *
+   * @param value
+   */
   public void setHideBeforeAnswering(boolean value) {
     this.hideBeforeAnswering = value;
   }
 
+  /**
+   *
+   * @return
+   */
   public boolean getHideBeforeAnswering() {
     return this.hideBeforeAnswering;
   }
 
+  /**
+   *
+   */
   @Override
   public void buildComponents() {
     Subject subjects[] = Subject.values();
@@ -132,6 +208,10 @@ public class FilterPanel extends SubPanel<QuestionListController, SubController<
     this.applyFiltersButton.addActionListener(this);
   }
 
+  /**
+   *
+   * @param totalSize
+   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     Subject subjects[] = Subject.values();
@@ -213,11 +293,17 @@ public class FilterPanel extends SubPanel<QuestionListController, SubController<
     this.questionList.setFilterSorter(filter, sorter);
   }
 
+  /**
+   *
+   */
   @Override
   protected void observeListChange() {
 
   }
 
+  /**
+   *
+   */
   @Override
   protected void observeQuestionChange() {
     if (this.hideBeforeAnswering) {

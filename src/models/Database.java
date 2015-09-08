@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
+/**
+ *
+ * @author sambryant
+ */
 public final class Database {
 
   static final int _ID_START = 1001;
@@ -34,10 +38,20 @@ public final class Database {
     return db;
   }
 
+  /**
+   *
+   * @return
+   */
   public int getNumberOfQuestions() {
     return this.questions.values().size();
   }
 
+  /**
+   *
+   * @param source
+   * @param questionNumber
+   * @return
+   */
   public boolean containsQuestion(Source source, Integer questionNumber) {
     for (Question q: this.questions.values()) {
       if (q.source == source && Objects.equals(q.questionNumber, questionNumber)) {
@@ -47,6 +61,12 @@ public final class Database {
     return false;
   }
 
+  /**
+   *
+   * @param source
+   * @param questionNumber
+   * @return
+   */
   public Question findQuestion(Source source, Integer questionNumber) {
     for (Question q: this.questions.values()) {
       if (q.source == source && Objects.equals(q.questionNumber, questionNumber)) {
@@ -108,6 +128,10 @@ public final class Database {
     return this.questions.values().iterator();
   }
 
+  /**
+   *
+   * @param q
+   */
   public void addQuestionToSession(Question q) {
     // For old questions (has id), we ensure question is already in database, then set it to map.
     if (q.id != null) {
@@ -143,6 +167,10 @@ public final class Database {
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public boolean isValid() {
     System.out.printf("LOG: database isValid NIY\n");
     for (Question q: this.questions.values()) {
@@ -153,12 +181,19 @@ public final class Database {
     return true;
   }
 
+  /**
+   *
+   */
   public void validate() {
     if (!this.isValid()) {
       throw new FatalError("Database failed validation: " + this);
     }
   }
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     Database d = DatabaseIO.loadDatabase();
     System.out.println("DATABASE");

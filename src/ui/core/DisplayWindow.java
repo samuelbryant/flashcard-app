@@ -5,18 +5,31 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import javax.swing.JFrame;
 
+/**
+ *
+ * @author sambryant
+ */
 public class DisplayWindow extends JFrame implements ComponentListener {
 
   private Controller ctrl = null;
   private Display display = null;
   private final int totalWidth, totalHeight;
 
+  /**
+   *
+   * @param totalWidth
+   * @param totalHeight
+   */
   public DisplayWindow(int totalWidth, int totalHeight) {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.totalWidth = totalWidth;
     this.totalHeight = totalHeight;
   }
 
+  /**
+   *
+   * @param d
+   */
   public void showDisplay(Display d) {    
     // Remove old display.
     if (this.display != null) {

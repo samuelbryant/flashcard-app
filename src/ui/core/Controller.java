@@ -13,11 +13,23 @@ import java.util.Observer;
 import ui.components.FAKeyMap;
 import ui.components.FAKeyMap;
 
+/**
+ *
+ * @author sambryant
+ * @param <T>
+ */
 public abstract class Controller <T extends Display> extends Observable implements KeyListener, FAKeyMap, FocusListener {
 
   private final Map<Integer, ActionListener> _keyMap;
+
+  /**
+   *
+   */
   protected T display = null;
 
+  /**
+   *
+   */
   public Controller() {
     super();
     this._keyMap = new HashMap<>();
@@ -27,12 +39,20 @@ public abstract class Controller <T extends Display> extends Observable implemen
     this.display = d;
   }
 
+  /**
+   *
+   */
   public void update() {
     this.notifyObservers();
     if (this.display != null)
       this.display.repaint();
   }
 
+  /**
+   *
+   * @param keyCode
+   * @param al
+   */
   @Override
   public final void addKeyAction(int keyCode, ActionListener al) {
     this._keyMap.put(keyCode, al);
@@ -65,6 +85,9 @@ public abstract class Controller <T extends Display> extends Observable implemen
 //    c.requestFocus();
   };
 
+  /**
+   *
+   */
   public final void requestFocus() {
     this.display.requestFocus();
   }  

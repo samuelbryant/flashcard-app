@@ -12,8 +12,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *
+ * @author sambryant
+ */
 public class Response implements Comparable<Response> {
 
+  /**
+   *
+   */
   public static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yy h:mm a");
 
   Answer response;
@@ -21,6 +28,12 @@ public class Response implements Comparable<Response> {
   final String dateString;
   final Date date;  // Transient.
 
+  /**
+   *
+   * @param response
+   * @param responseTime
+   * @param date
+   */
   public Response(Answer response, Long responseTime, Date date) {
     this.response = response;
     this.responseTime = responseTime;
@@ -45,6 +58,10 @@ public class Response implements Comparable<Response> {
     }
   }
 
+  /**
+   *
+   * @param answer
+   */
   public void setAnswer(Answer answer) {
     this.response = answer;
   }
@@ -59,10 +76,18 @@ public class Response implements Comparable<Response> {
     return -1 * this.date.compareTo(o.date);
   }
 
+  /**
+   *
+   * @return
+   */
   public Answer getSelectedAnswer() {
     return this.response;
   }
 
+  /**
+   *
+   * @return
+   */
   public Double getTimeInSeconds() {
     if (this.responseTime == null) {
       return null;

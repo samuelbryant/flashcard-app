@@ -5,10 +5,24 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import ui.questions.QuestionList.NotStartedYetException;
 
+/**
+ *
+ * @author sambryant
+ */
 public class QuestionListImage {
 
+  /**
+   *
+   */
   public static final Integer LINE_SPACING = 20;
 
+  /**
+   *
+   * @param list
+   * @param width
+   * @param height
+   * @return
+   */
   public static BufferedImage getQuestionListImage(QuestionList list, int width, int height) {
     try {
       return list.getCurrentQuestion().getImage();

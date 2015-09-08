@@ -8,20 +8,47 @@ import models.Question;
 import models.Response;
 import ui.questions.QuestionList.NotStartedYetException;
 
+/**
+ *
+ * @author sambryant
+ */
 public class QuestionState extends Observable implements Observer {
 
+  /**
+   *
+   */
   public static class QuestionStateException extends RuntimeException {
+
+    /**
+     *
+     * @param str
+     */
     public QuestionStateException(String str) {
       super(str);
     }
   }
+
+  /**
+   *
+   */
   public static class NotAnsweredYetException extends QuestionStateException {
+
+    /**
+     *
+     */
     public NotAnsweredYetException() {
       super("Not answered yet");
     }
   }
 
+  /**
+   *
+   */
   public static class AlreadyAnsweredException extends QuestionStateException {
+
+    /**
+     *
+     */
     public AlreadyAnsweredException() {
       super("Already answered");
     }
@@ -99,6 +126,12 @@ public class QuestionState extends Observable implements Observer {
     this.notifyObservers();
   }
 
+  /**
+   *
+   * @return
+   * @throws NotAnsweredYetException
+   * @throws NotStartedYetException
+   */
   public boolean isAnsweredCorrectly() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
       return this._selectedAnswer == this._correctAnswer;
@@ -107,6 +140,12 @@ public class QuestionState extends Observable implements Observer {
     }
   }
 
+  /**
+   *
+   * @return
+   * @throws NotAnsweredYetException
+   * @throws NotStartedYetException
+   */
   public Response getResponseObject() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
       return this._response;
@@ -115,6 +154,12 @@ public class QuestionState extends Observable implements Observer {
     }
   }
 
+  /**
+   *
+   * @return
+   * @throws NotStartedYetException
+   * @throws NotAnsweredYetException
+   */
   public Answer getSelectedAnswer() throws NotStartedYetException, NotAnsweredYetException {
     if (this.isAnswered()) {
       return this._selectedAnswer;
@@ -123,6 +168,11 @@ public class QuestionState extends Observable implements Observer {
     }
   }
 
+  /**
+   *
+   * @return
+   * @throws NotStartedYetException
+   */
   public Answer getCorrectAnswer() throws NotStartedYetException {
     if (this._questionList.isStarted()) {
       return this._correctAnswer;
@@ -131,6 +181,11 @@ public class QuestionState extends Observable implements Observer {
     }
   }
 
+  /**
+   *
+   * @return
+   * @throws NotStartedYetException
+   */
   public boolean isAnswered() throws NotStartedYetException {
     if (this._questionList.isStarted()) {
       return this._isAnswered;
@@ -139,6 +194,12 @@ public class QuestionState extends Observable implements Observer {
     }
   }
 
+  /**
+   *
+   * @return
+   * @throws NotAnsweredYetException
+   * @throws NotStartedYetException
+   */
   public int getLastResponseTime() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
       return (int) (Math.floorDiv(this._endTime - this._startTime, 1000000000));

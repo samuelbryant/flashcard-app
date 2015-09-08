@@ -8,8 +8,15 @@ import models.Question;
 import models.Source;
 import models.Tag;
 
+/**
+ *
+ * @author sambryant
+ */
 public class HardestImport {
 
+  /**
+   *
+   */
   public static final String SRC_DIR = "imports/HARD_LISTS";
 
   static Source[] SOURCES = new Source[] {
@@ -22,6 +29,10 @@ public class HardestImport {
       // TODO: 1996
   };
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     Database db = DatabaseIO.loadDatabase();
 

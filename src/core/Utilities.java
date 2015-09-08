@@ -18,6 +18,12 @@ import java.io.Serializable;
  */
 public class Utilities {
 
+  /**
+   *
+   * @param <T>
+   * @param object
+   * @return
+   */
   public static <T extends Serializable> T makeDeepCopy(T object) {
     try {
       ByteArrayOutputStream bos = new ByteArrayOutputStream();

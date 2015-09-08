@@ -7,18 +7,43 @@ import ui.questions.QuestionListController;
 import ui.core.SubController;
 import ui.core.SubPanel;
 
+/**
+ *
+ * @author sambryant
+ */
 public class InfobarPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
 
+  /**
+   *
+   */
   public static final int LABEL_WIDTH = 200;
 
+  /**
+   *
+   */
   protected JLabel questionListLabel;
+
+  /**
+   *
+   */
   protected JLabel questionLabel;
+
+  /**
+   *
+   */
   protected JLabel timerLabel;
 
+  /**
+   *
+   * @param ctrl
+   */
   public InfobarPanel(QuestionListController ctrl) {
     super(new SubController(ctrl));
   }
 
+  /**
+   *
+   */
   @Override
   public void buildComponents() {
     this.questionLabel = new JLabel("Question: ");
@@ -26,6 +51,10 @@ public class InfobarPanel extends SubPanel<QuestionListController, SubController
     this.timerLabel = new JLabel("Time: -");
   }
 
+  /**
+   *
+   * @param totalSize
+   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     this.setLayout(new FlowLayout());
@@ -40,11 +69,17 @@ public class InfobarPanel extends SubPanel<QuestionListController, SubController
     this.sizeComponent(this.timerLabel, labelSize);
   }
 
+  /**
+   *
+   */
   @Override
   protected void observeListChange() {
 
   }
 
+  /**
+   *
+   */
   @Override
   protected void observeQuestionChange() {
     if (this.questionList.isStarted()) {

@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Scanner;
 import models.Answer;
 
+/**
+ *
+ * @author sambryant
+ */
 public class ImportUtilities {
 
   static Map<Integer, Answer> readAnswerFile(String filename) {

@@ -5,10 +5,21 @@ import core.IO;
 import java.io.PrintWriter;
 import org.json.JSONObject;
 
+/**
+ *
+ * @author sambryant
+ */
 public class DatabaseIO {
 
+  /**
+   *
+   */
   protected static Database currentDatabase = null;
 
+  /**
+   *
+   * @return
+   */
   public static Database loadDatabase() {
     if (currentDatabase != null) {
       throw new IllegalStateException("Database has already been loaded");
@@ -19,6 +30,10 @@ public class DatabaseIO {
     return db;
   }
 
+  /**
+   *
+   * @return
+   */
   public static Database getDatabase() {
     if (currentDatabase == null) {
       loadDatabase();
@@ -26,6 +41,9 @@ public class DatabaseIO {
     return currentDatabase;
   }
 
+  /**
+   *
+   */
   public static void saveDatabase() {
 
     if (currentDatabase == null) {
@@ -59,6 +77,11 @@ public class DatabaseIO {
     IO.copyOrDie(src, dst);
   }
 
+  /**
+   *
+   * @param db
+   * @deprecated
+   */
   @Deprecated
   public static void writeDatabase(Database db) {
     db.validate();

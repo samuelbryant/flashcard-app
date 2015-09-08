@@ -13,32 +13,76 @@ import models.Question;
  */
 public class QuestionList extends Observable {
 
+  /**
+   *
+   */
   public static class QuestionListException extends Exception {
+
+    /**
+     *
+     * @param str
+     */
     public QuestionListException(String str) {
       super(str);
     }
   }
 
+  /**
+   *
+   */
   public static class OutOfQuestionsException extends QuestionListException {
+
+    /**
+     *
+     * @param str
+     */
     public OutOfQuestionsException(String str) {
       super(str);
     }
   }
 
+  /**
+   *
+   */
   public static class NotStartedYetException extends RuntimeException {
+
+    /**
+     *
+     * @param str
+     */
     public NotStartedYetException(String str) {
       super(str);
     }
   }
 
+  /**
+   *
+   */
   public static class NoQuestionsException extends QuestionListException {
+
+    /**
+     *
+     * @param str
+     */
     public NoQuestionsException(String str) {
       super(str);
     }
   }
 
+  /**
+   *
+   */
   public static enum State {
-    NOT_STARTED, STARTED;
+
+    /**
+     *
+     */
+    NOT_STARTED,
+
+    /**
+     *
+     */
+    STARTED;
   }
 
 
@@ -50,6 +94,11 @@ public class QuestionList extends Observable {
   private Integer _totalNumber;
   private State _state;
 
+  /**
+   *
+   * @param filter
+   * @param sorter
+   */
   public QuestionList(ListFilter filter, ListSorter sorter) {
     this._listFilter = filter;
     this._listSorter = sorter;
@@ -68,24 +117,46 @@ public class QuestionList extends Observable {
     this.notifyObservers();
   }
 
+  /**
+   *
+   * @param filter
+   * @param sorter
+   */
   public void setFilterSorter(ListFilter filter, ListSorter sorter) {
     this._listFilter = filter;
     this._listSorter = sorter;
     this._resetList();
   }
 
+  /**
+   *
+   * @return
+   */
   public Boolean isStarted() {
     return this._state == State.STARTED;
   }
 
+  /**
+   *
+   * @return
+   */
   public QuestionState getQuestionState() {
     return this._questionState;
   }
 
+  /**
+   *
+   * @return
+   */
   public Integer getNumberOfQuestions() {
     return this._totalNumber;
   }
 
+  /**
+   *
+   * @return
+   * @throws NotStartedYetException
+   */
   public Integer getCurrentIndex() throws NotStartedYetException {
     if (this._state != State.STARTED) {
       throw new NotStartedYetException("Question list not started yet");
@@ -94,6 +165,11 @@ public class QuestionList extends Observable {
     }
   }
 
+  /**
+   *
+   * @return
+   * @throws NotStartedYetException
+   */
   public Question getCurrentQuestion() throws NotStartedYetException {
     if (this._state != State.STARTED) {
       throw new NotStartedYetException("Question list not started yet");
@@ -102,6 +178,10 @@ public class QuestionList extends Observable {
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public Boolean hasNextQuestion() {
     if (this._state != State.STARTED) {
       return this._totalNumber > 0;
@@ -110,6 +190,10 @@ public class QuestionList extends Observable {
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public Boolean hasLastQuestion() {
     if (this._state != State.STARTED) {
       return false;
@@ -118,6 +202,10 @@ public class QuestionList extends Observable {
     }
   }
 
+  /**
+   *
+   * @throws OutOfQuestionsException
+   */
   public void nextQuestion() throws OutOfQuestionsException {
     if (this._state == State.NOT_STARTED) {
       this._currentIndex = -1;
@@ -134,6 +222,11 @@ public class QuestionList extends Observable {
     }
   }
 
+  /**
+   *
+   * @throws OutOfQuestionsException
+   * @throws NotStartedYetException
+   */
   public void lastQuestion() throws OutOfQuestionsException, NotStartedYetException {
     if (this._state == State.NOT_STARTED) {
       throw new NotStartedYetException("Cannot go back when quiz not started");

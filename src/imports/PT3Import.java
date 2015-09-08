@@ -8,10 +8,18 @@ import models.DatabaseIO;
 import models.Question;
 import models.Source;
 
+/**
+ *
+ * @author sambryant
+ */
 public class PT3Import {
 
   static String SRC_DIR = "imports/pt3";
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     Constants.setupProjectDirectories();
 

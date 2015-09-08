@@ -19,16 +19,51 @@ import ui.components.FACheckbox;
 import ui.questions.QuestionListController;
 import ui.core.SubPanel;
 
+/**
+ *
+ * @author sambryant
+ */
 public class TaggerPanel extends SubPanel<QuestionListController, SubController<QuestionListController>>{
 
+  /**
+   *
+   */
   protected FAButton onlyShowUnchecked;
+
+  /**
+   *
+   */
   protected JLabel topLabel;
+
+  /**
+   *
+   */
   protected JLabel subjectsLabel;
+
+  /**
+   *
+   */
   protected JLabel tagsLabel;
+
+  /**
+   *
+   */
   protected final Map<Subject, FACheckbox> subjectCheckboxes;
+
+  /**
+   *
+   */
   protected final Map<Tag, FACheckbox> tagCheckboxes;
+
+  /**
+   *
+   */
   protected boolean hideBeforeAnswering;
 
+  /**
+   *
+   * @param ctrl
+   */
   public TaggerPanel(QuestionListController ctrl) {
     super(new SubController(ctrl));
     subjectCheckboxes = new TreeMap<>();
@@ -36,14 +71,25 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
     this.hideBeforeAnswering = false;
   }
 
+  /**
+   *
+   * @param value
+   */
   public void setHideBeforeAnswering(boolean value) {
     this.hideBeforeAnswering = value;
   }
 
+  /**
+   *
+   * @return
+   */
   public boolean getHideBeforeAnswering() {
     return this.hideBeforeAnswering;
   }
 
+  /**
+   *
+   */
   @Override
   public void buildComponents() {
     Subject[] subjects = Subject.values();
@@ -81,6 +127,10 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
     }
   }
 
+  /**
+   *
+   * @param totalSize
+   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     Subject[] subjects = Subject.values();
@@ -103,6 +153,9 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
     this.sizeComponent(this, totalSize);
   }
 
+  /**
+   *
+   */
   @Override
   protected void observeListChange() {
     for (Subject subject: Subject.values()) {
@@ -127,6 +180,9 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
     }
   }
 
+  /**
+   *
+   */
   @Override
   protected void observeQuestionChange() {
     if (this.hideBeforeAnswering) {

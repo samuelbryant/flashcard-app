@@ -8,6 +8,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
+/**
+ *
+ * @author sambryant
+ */
 public class Question implements Serializable {
 
   // Permanent fields central to class.
@@ -59,6 +63,10 @@ public class Question implements Serializable {
     return String.format("ID: %05d  (%s  -  #%d)", id, source, questionNumber);
   }
 
+  /**
+   *
+   * @return
+   */
   public BufferedImage getImage() {
     if (this.questionImage != null) {
       return this.questionImage;
@@ -69,6 +77,10 @@ public class Question implements Serializable {
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public boolean isValid() {
     // Ensure proper fields are non-null.
     if (this.id == null) return false;
@@ -77,20 +89,37 @@ public class Question implements Serializable {
     return true;
   }
 
+  /**
+   *
+   */
   public void validate() {
     if (!this.isValid()) {
       throw new FatalError("Question failed validation: " + this);
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public Answer getAnswer() {
     return this.answer;
   }
 
+  /**
+   *
+   * @param subject
+   * @return
+   */
   public boolean hasSubject(Subject subject) {
     return this.subjects.contains(subject);
   }
 
+  /**
+   *
+   * @return
+   * @deprecated
+   */
   @Deprecated
   public Subject[] getSubjectsArray() {
     Subject[] subjects = new Subject[this.subjects.size()];
@@ -100,6 +129,11 @@ public class Question implements Serializable {
     return subjects;
   }
 
+  /**
+   *
+   * @param subject
+   * @param value
+   */
   public void setSubject(Subject subject, boolean value) {
     if (this.subjects.contains(subject)) {
       if (!value) {
@@ -110,36 +144,70 @@ public class Question implements Serializable {
     }
   }
 
+  /**
+   *
+   * @param r
+   */
   public void addResponse(Response r) {
     this.responses.add(r);
     // Keep responses sorted by last answered date.
     Collections.sort(this.responses);
   }
 
+  /**
+   *
+   * @return
+   */
   public Source getSource() {
     return this.source;
   }
 
+  /**
+   *
+   * @return
+   */
   public ArrayList<Response> getResponses() {
     return this.responses;
   }
 
+  /**
+   *
+   * @return
+   */
   public ArrayList<Subject> getSubjects() {
     return this.subjects;
   }
 
+  /**
+   *
+   * @return
+   */
   public ArrayList<Tag> getTags() {
     return this.tags;
   }
 
+  /**
+   *
+   * @return
+   */
   public int getId() {
     return this.id;
   }
 
+  /**
+   *
+   * @param tag
+   * @return
+   */
   public boolean hasTag(Tag tag) {
     return this.tags.contains(tag);
   }
 
+  /**
+   *
+   * @param tag
+   * @param value
+   */
   public void setTag(Tag tag, boolean value) {
     if (this.tags.contains(tag)) {
       if (!value) {
@@ -150,18 +218,34 @@ public class Question implements Serializable {
     }
   }
 
+  /**
+   *
+   * @param tags
+   */
   public void setQuestionTags(ArrayList<Tag> tags) {
     this.tags = tags;
   }
 
+  /**
+   *
+   * @param subjects
+   */
   public void setQuestionSubjects(ArrayList<Subject> subjects) {
     this.subjects = subjects;
   }
 
+  /**
+   *
+   * @return
+   */
   public Object getQuestionNumber() {
     return this.questionNumber;
   }
 
+  /**
+   *
+   * @param tag
+   */
   public void addTag(Tag tag) {
     this.tags.add(tag);
   }
@@ -179,6 +263,10 @@ public class Question implements Serializable {
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public ArrayList<Boolean> getGradedResponses() {
     ArrayList<Boolean> list = new ArrayList<>();
     for (Response r: this.responses) {
@@ -187,6 +275,10 @@ public class Question implements Serializable {
     return list;
   }
 
+  /**
+   *
+   * @return
+   */
   public int[] getTimesRightWrong() {
     int[] grades = new int[]{0,0};
     for (Response r: this.responses) {

@@ -13,6 +13,11 @@ public abstract class ListQuizSorter extends ListSorter {
 
   ListQuizSorter() {}
 
+  /**
+   *
+   * @param q
+   * @return
+   */
   protected abstract int getQuestionWeight(Question q);
 
   /**

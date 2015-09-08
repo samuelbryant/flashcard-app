@@ -9,10 +9,18 @@ import models.DatabaseIO;
 import models.Question;
 import models.Source;
 
+/**
+ *
+ * @author sambryant
+ */
 public class GRE1986 {
 
   static String SRC_DIR = "imports/GRE_1986";
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     Constants.setupProjectDirectories();
 

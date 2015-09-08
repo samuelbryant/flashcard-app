@@ -12,26 +12,78 @@ import ui.subcomponents.FilterPanel;
 import ui.subcomponents.QuestionPanel;
 import ui.subcomponents.TaggerPanel;
 
+/**
+ *
+ * @author sambryant
+ */
 public class QuestionListDisplay extends Display<QuestionListController> {
 
+  /**
+   *
+   */
   public static final int BORDER_SIZE = 10;
+
+  /**
+   *
+   */
   public static final int SIDE_COLUMN_WIDTH = 200;
+
+  /**
+   *
+   */
   public static final int ACTION_PANEL_HEIGHT = 50;
+
+  /**
+   *
+   */
   public static final int INFO_PANEL_HEIGHT = 50;
 
+  /**
+   *
+   */
   public static final int TOTAL_WIDTH = 1100;
+
+  /**
+   *
+   */
   public static final int TOTAL_HEIGHT = 800;
 
+  /**
+   *
+   */
   protected ImageDisplay questionPanel;
+
+  /**
+   *
+   */
   protected ActionPanel actionPanel;
+
+  /**
+   *
+   */
   protected FilterPanel filterPanel;
+
+  /**
+   *
+   */
   protected InfobarPanel infoPanel;
+
+  /**
+   *
+   */
   protected TaggerPanel taggerPanel;
 
+  /**
+   *
+   * @param ctrl
+   */
   public QuestionListDisplay(final QuestionListController ctrl) {
     super(ctrl);
   }
 
+  /**
+   *
+   */
   @Override
   public void buildComponents() {
     this.actionPanel = new ActionPanel(this.ctrl);
@@ -52,6 +104,10 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     this.ctrl.initialUpdate();
   }
 
+  /**
+   *
+   * @param totalSize
+   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     System.out.printf("Laying out: %d, %d\n", totalSize.width, totalSize.height);
@@ -115,6 +171,10 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     this.sizeComponent(this, totalSize);
   }
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     // Load/initialize models.
     Database db = DatabaseIO.loadDatabase();
@@ -128,6 +188,9 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     window.showDisplay(display);
   }
 
+  /**
+   *
+   */
   @Override
   protected void setupMenuBar() {}
 

@@ -11,13 +11,38 @@ import ui.questions.QuestionList;
 import ui.questions.QuestionListController;
 import ui.questions.QuestionState;
 
+/**
+ *
+ * @author sambryant
+ * @param <T>
+ * @param <K>
+ */
 public abstract class SubPanel <T extends QuestionListController, K extends SubController<T>> extends FAPanel implements Observer, FABuildable {
 
+  /**
+   *
+   */
   protected final K componentController;
+
+  /**
+   *
+   */
   protected final T questionListController;
+
+  /**
+   *
+   */
   protected final QuestionList questionList;
+
+  /**
+   *
+   */
   protected final QuestionState questionState;
 
+  /**
+   *
+   * @param componentController
+   */
   public SubPanel(K componentController) {
     super();
     this.componentController = componentController;
@@ -28,14 +53,27 @@ public abstract class SubPanel <T extends QuestionListController, K extends SubC
     this.questionList.addObserver(this);
   }
 
+  /**
+   *
+   */
   @Override
   public abstract void buildComponents();
 
+  /**
+   *
+   * @param totalDimension
+   */
   @Override
   public abstract void layoutComponents(Dimension totalDimension);
 
+  /**
+   *
+   */
   protected abstract void observeListChange();
 
+  /**
+   *
+   */
   protected abstract void observeQuestionChange();
 
   @Override
