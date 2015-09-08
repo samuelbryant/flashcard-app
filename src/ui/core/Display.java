@@ -3,8 +3,6 @@ package ui.core;
 import javax.swing.JMenuBar;
 import java.awt.Dimension;
 import ui.core.components.FABuildable;
-import ui.core.components.FABuildable;
-import ui.core.components.FAPanel;
 import ui.core.components.FAPanel;
 
 /**

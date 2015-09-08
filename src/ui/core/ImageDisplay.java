@@ -10,8 +10,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import ui.core.components.FABuildable;
-import ui.core.components.FABuildable;
-import ui.core.components.FAPanel;
 import ui.core.components.FAPanel;
 
 /**
@@ -54,10 +52,8 @@ public abstract class ImageDisplay extends FAPanel implements FABuildable {
 
     if (this.resizeImage) {
       if (width < w && height < h) {
-        System.out.printf("Image within bounds (%d, %d)\n", width, height);
         gr.drawImage(img, 0, 0, null);
       } else {
-        System.out.printf("Image not within bounds (%d, %d) (%d, %d)\n", width, height, w, h);
         double heightRatio = ((double) height) / h;
         double widthRatio = ((double) width) / w;
         double maxRatio = Math.max(widthRatio, heightRatio);

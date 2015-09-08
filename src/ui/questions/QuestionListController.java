@@ -5,7 +5,6 @@ import engine.ListSorter;
 import models.Answer;
 import models.DatabaseIO;
 import models.Response;
-import models.Tag;
 import ui.core.Controller;
 
 /**

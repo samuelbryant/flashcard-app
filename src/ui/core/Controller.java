@@ -1,6 +1,5 @@
 package ui.core;
 
-import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -9,8 +8,6 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Observer;
-import ui.core.components.FAKeyMap;
 import ui.core.components.FAKeyMap;
 
 /**

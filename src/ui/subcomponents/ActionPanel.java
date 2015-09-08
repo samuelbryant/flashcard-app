@@ -87,26 +87,13 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
       this.questionListController.addKeyAction(buttonMnemonic, buttonPress);
     }
 
-//    // Create list filter box.
-//    if (this.listFilters != null) {
-//      this.filtersBox = new JComboBox(this.listFilters.keySet().toArray());
-//      this.filtersBox.addActionListener(new ActionListener() {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//          String filterString = (String) filtersBox.getSelectedItem();
-//          questionListController.setQuestionListSorter(listFilters.get(filterString));
-//          questionListController.requestFocus();
-//        }
-//      });
-//    }
-
     backButton = new FAActionButton("Back") {  
       @Override
       public void actionPerformed(ActionEvent ev) {
         try {
           questionList.lastQuestion();
         } catch (QuestionList.OutOfQuestionsException ex) {
-          Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
+          System.err.println("No more questions");
         }
       }
     };
@@ -117,9 +104,7 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
         try {
           questionList.nextQuestion();
         } catch (QuestionList.OutOfQuestionsException ex) {
-          Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (QuestionList.NotStartedYetException ex) {
-          Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
+          System.err.println("No more questions");
         }
       }
     };

@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 import ui.core.components.FABuildable;
-import ui.core.components.FABuildable;
-import ui.core.components.FAPanel;
 import ui.core.components.FAPanel;
 import ui.questions.QuestionList;
 import ui.questions.QuestionListController;

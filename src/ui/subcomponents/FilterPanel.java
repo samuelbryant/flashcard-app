@@ -2,7 +2,6 @@ package ui.subcomponents;
 
 import engine.ListFilter;
 import engine.ListSorter;
-import java.awt.Component;
 import static java.awt.Component.LEFT_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import models.Source;
