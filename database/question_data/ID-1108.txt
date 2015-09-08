@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "A",
+  "subjects": [
+    "MECHANICS",
+    "ROTATIONAL"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1108.png",
+  "id": 1108,
+  "source": "SAMPLE_3",
+  "questionNumber": 8,
+  "tags": ["HARD"]
+}

@@ -1,0 +1,18 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": [
+    "MECHANICS",
+    "ROTATIONAL"
+  ],
+  "responses": [{
+    "response": "X",
+    "responseTime": 80337727877,
+    "dateString": "09/06/15 9:36 PM"
+  }],
+  "databaseImageFilename": "database/question_images/ID-1582.png",
+  "id": 1582,
+  "source": "GRE_1991",
+  "questionNumber": 82,
+  "tags": ["HARD"]
+}

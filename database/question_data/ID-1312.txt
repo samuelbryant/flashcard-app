@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": ["OPTICS"],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1312.png",
+  "id": 1312,
+  "source": "GRE_2001",
+  "questionNumber": 12,
+  "tags": []
+}

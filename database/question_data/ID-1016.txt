@@ -1,0 +1,18 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": [
+    "EM",
+    "CIRCUITS"
+  ],
+  "responses": [{
+    "response": "D",
+    "responseTime": 47174124146,
+    "dateString": "09/06/15 11:31 PM"
+  }],
+  "databaseImageFilename": "database/question_images/ID-1016.png",
+  "id": 1016,
+  "source": "SAMPLE_1",
+  "questionNumber": 16,
+  "tags": []
+}

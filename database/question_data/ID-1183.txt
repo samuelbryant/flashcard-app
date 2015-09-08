@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "C",
+  "subjects": ["EM"],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1183.png",
+  "id": 1183,
+  "source": "SAMPLE_3",
+  "questionNumber": 83,
+  "tags": []
+}

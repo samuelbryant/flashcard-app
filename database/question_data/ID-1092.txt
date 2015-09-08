@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "B",
+  "subjects": [
+    "SPECIAL",
+    "LAB_METHODS"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1092.png",
+  "id": 1092,
+  "source": "SAMPLE_1",
+  "questionNumber": 92,
+  "tags": []
+}

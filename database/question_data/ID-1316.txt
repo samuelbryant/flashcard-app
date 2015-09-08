@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": ["LAB_METHODS"],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1316.png",
+  "id": 1316,
+  "source": "GRE_2001",
+  "questionNumber": 16,
+  "tags": ["HARD"]
+}

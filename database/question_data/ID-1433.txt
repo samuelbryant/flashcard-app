@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": [
+    "SPECIAL",
+    "LAB_METHODS"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1433.png",
+  "id": 1433,
+  "source": "GRE_1986",
+  "questionNumber": 33,
+  "tags": ["HARD"]
+}

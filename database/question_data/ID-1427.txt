@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": [
+    "QM",
+    "ATOMIC"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1427.png",
+  "id": 1427,
+  "source": "GRE_1986",
+  "questionNumber": 27,
+  "tags": []
+}

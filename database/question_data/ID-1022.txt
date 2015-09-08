@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "A",
+  "subjects": [
+    "EM",
+    "CIRCUITS"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1022.png",
+  "id": 1022,
+  "source": "SAMPLE_1",
+  "questionNumber": 22,
+  "tags": ["HARD"]
+}

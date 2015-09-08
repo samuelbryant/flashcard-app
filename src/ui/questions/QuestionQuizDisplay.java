@@ -16,7 +16,7 @@ public class QuestionQuizDisplay extends QuestionListDisplay {
   public void buildComponents() {
     super.buildComponents();
     this.filterPanel.setHideBeforeAnswering(false);
-    this.taggerPanel.setHideBeforeAnswering(true);
+    // this.taggerPanel.setHideBeforeAnswering(true);
     this.ctrl.setRecordAnswers(true);
   }
   

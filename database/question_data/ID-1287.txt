@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": [
+    "THERMO",
+    "QM"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1287.png",
+  "id": 1287,
+  "source": "SAMPLE_2",
+  "questionNumber": 87,
+  "tags": ["HARD"]
+}

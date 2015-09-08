@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": ["MECHANICS"],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1021.png",
+  "id": 1021,
+  "source": "SAMPLE_1",
+  "questionNumber": 21,
+  "tags": []
+}

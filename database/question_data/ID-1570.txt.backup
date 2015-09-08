@@ -1,0 +1,18 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": ["RELATIVITY"],
+  "responses": [{
+    "response": "D",
+    "responseTime": 49434626972,
+    "dateString": "09/06/15 9:34 PM"
+  }],
+  "databaseImageFilename": "database/question_images/ID-1570.png",
+  "id": 1570,
+  "source": "GRE_1991",
+  "questionNumber": 70,
+  "tags": [
+    "HARD",
+    "TIME"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "C",
+  "subjects": [
+    "THERMO",
+    "SPECIAL"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1221.png",
+  "id": 1221,
+  "source": "SAMPLE_2",
+  "questionNumber": 21,
+  "tags": []
+}

@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": [
+    "WAVES",
+    "OTHER"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/question_images/ID-1103.png",
+  "id": 1103,
+  "source": "SAMPLE_3",
+  "questionNumber": 3,
+  "tags": ["HARD"]
+}
