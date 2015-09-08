@@ -20,13 +20,13 @@ public class QuestionState extends Observable implements Observer {
       super("Not answered yet");
     }
   }
-  
+
   public static class AlreadyAnsweredException extends QuestionStateException {
     public AlreadyAnsweredException() {
       super("Already answered");
     }
   }
-  
+
   private final QuestionList _questionList;
   private Question _question;
   private Answer _correctAnswer;
@@ -40,7 +40,7 @@ public class QuestionState extends Observable implements Observer {
     this._questionList = questionList;
     this._setQuestion(null);
   }
-  
+
   /**
    * Handler for updates from the question list.
    */
@@ -74,7 +74,7 @@ public class QuestionState extends Observable implements Observer {
     this.setChanged();
     this.notifyObservers();
   }
-  
+
   void changeAnswer(Answer answer) throws NotAnsweredYetException {
     if (this.isAnswered()) {
       this._response.setAnswer(answer);
@@ -85,7 +85,7 @@ public class QuestionState extends Observable implements Observer {
       throw new NotAnsweredYetException();
     }
   }
-  
+
   void answer(Answer answer) throws AlreadyAnsweredException, NotStartedYetException {
     if (this.isAnswered()) {
       throw new AlreadyAnsweredException();
@@ -98,7 +98,7 @@ public class QuestionState extends Observable implements Observer {
     this.setChanged();
     this.notifyObservers();
   }
-  
+
   public boolean isAnsweredCorrectly() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
       return this._selectedAnswer == this._correctAnswer;
@@ -106,7 +106,7 @@ public class QuestionState extends Observable implements Observer {
       throw new NotAnsweredYetException();
     }
   }
-  
+
   public Response getResponseObject() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
       return this._response;
@@ -114,7 +114,7 @@ public class QuestionState extends Observable implements Observer {
       throw new NotAnsweredYetException();
     }
   }
-  
+
   public Answer getSelectedAnswer() throws NotStartedYetException, NotAnsweredYetException {
     if (this.isAnswered()) {
       return this._selectedAnswer;
@@ -122,7 +122,7 @@ public class QuestionState extends Observable implements Observer {
       throw new NotAnsweredYetException();
     }
   }
-  
+
   public Answer getCorrectAnswer() throws NotStartedYetException {
     if (this._questionList.isStarted()) {
       return this._correctAnswer;
@@ -130,7 +130,7 @@ public class QuestionState extends Observable implements Observer {
       throw new QuestionList.NotStartedYetException("Not started yet");
     }
   }
-  
+
   public boolean isAnswered() throws NotStartedYetException {
     if (this._questionList.isStarted()) {
       return this._isAnswered;
@@ -138,7 +138,7 @@ public class QuestionState extends Observable implements Observer {
       throw new QuestionList.NotStartedYetException("Not started yet");
     }
   }
-  
+
   public int getLastResponseTime() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
       return (int) (Math.floorDiv(this._endTime - this._startTime, 1000000000));
@@ -146,5 +146,5 @@ public class QuestionState extends Observable implements Observer {
       throw new NotAnsweredYetException();
     }
   }
-  
+
 }

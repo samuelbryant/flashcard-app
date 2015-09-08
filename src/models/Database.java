@@ -63,7 +63,7 @@ public final class Database {
   public ArrayList<Question> getQuestions() {
     return getQuestions(ListFilter.NULL_FILTER, ListSorter.ID_SORTER);
   }
-  
+
   /**
    * Gets Question array from Database filtered by ListFilter.
    * @param filter ListFilter to use to filter Question array.
@@ -72,7 +72,7 @@ public final class Database {
   public ArrayList<Question> getQuestions(ListFilter filter) {
     return getQuestions(filter, ListSorter.ID_SORTER);
   }
-  
+
   /**
    * Gets Question array from Database sorted by ListSorter.
    * @param sorter ListSorter to use to sort Question array.
@@ -81,9 +81,9 @@ public final class Database {
   public ArrayList<Question> getQuestions(ListSorter sorter) {
     return getQuestions(ListFilter.NULL_FILTER, sorter);
   }
-  
-  
-  
+
+
+
   /**
    * Gets Question array from Database filtered by ListFilter and sorted by ListSorter.
    * @param filter ListFilter to use to filter Question array.
@@ -102,7 +102,7 @@ public final class Database {
     sorter.sort(list);
     return list;
   }
-  
+
 
   private Iterator<Question> getDatabaseIterator() {
     return this.questions.values().iterator();

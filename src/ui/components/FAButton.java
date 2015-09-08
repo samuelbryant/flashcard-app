@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import core.Constants;
 
 public class FAButton extends JButton {
-  
+
   protected Color defaultColor;
 
   public FAButton(String label) {
@@ -16,7 +16,7 @@ public class FAButton extends JButton {
     this.setBorderPainted(false);
     this.setFocusable(false);
   }
-  
+
   public FAButton(String label, Color color) {
     super(label);
     this.setBackground(color);
@@ -25,11 +25,11 @@ public class FAButton extends JButton {
     this.setBorderPainted(false);
     this.setFocusable(false);
   }
-  
+
   public Color getDefaultColor() {
     return this.defaultColor;
   }
-  
+
   public void setDefaultBackground() {
     this.setBackground(defaultColor);
   }

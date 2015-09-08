@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui.core;
 
 import java.awt.Component;
@@ -18,11 +13,6 @@ import java.util.Observer;
 import ui.components.FAKeyMap;
 import ui.components.FAKeyMap;
 
-/**
- *
- * @author sambryant
- * @param <T>
- */
 public abstract class Controller <T extends Display> extends Observable implements KeyListener, FAKeyMap, FocusListener {
 
   private final Map<Integer, ActionListener> _keyMap;
@@ -61,7 +51,7 @@ public abstract class Controller <T extends Display> extends Observable implemen
       System.out.printf("Unknown key code: %d\n", e.getKeyCode());
     }
   }
-  
+
   @Override
   public final void keyReleased(KeyEvent e) {}
 
@@ -74,9 +64,9 @@ public abstract class Controller <T extends Display> extends Observable implemen
 //    Component c = e.getComponent();
 //    c.requestFocus();
   };
-  
+
   public final void requestFocus() {
     this.display.requestFocus();
   }  
-  
+
 }

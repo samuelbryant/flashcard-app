@@ -23,13 +23,13 @@ public class Constants {
   public static final Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
   public static final Color BACKGROUND_COLOR2 = Color.GRAY;
   public static final Color BUTTON_COLOR = Color.DARK_GRAY;
-  
+
   public static final String OUTPUT_DIR = "database";
   public static final String QUESTION_DATA_DIR = "database/question_data";
   public static final String QUESTION_IMAGE_DIR = "database/question_images";
   public static final String QUESTION_DATABASE_MAIN_FILE = "database/database.txt";
   public static final String QUESTION_DATABASE_BACKUP_DIR = "database_backups";
-  
+
   public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd-HH-mm-ss");
 
   // Ensure that output file hierarchy exists.
@@ -39,21 +39,21 @@ public class Constants {
     core.IO.createDirOrDie(QUESTION_IMAGE_DIR);
     core.IO.createDirOrDie(QUESTION_DATABASE_BACKUP_DIR);
   }
-  
+
   public final static String getDatabaseBackupDataDirName(String backupDirname) {
     return backupDirname + "/" + "question_data";
   }
-  
+
   public final static String getDatabaseBackupMainFileName(String backupDirname) {
     return backupDirname + "/" + "database.txt";
   }
-  
+
   public final static String getDatabaseBackupDirName(Date date) {
     String dateStr = DATE_FORMAT.format(date);
     String dirName = QUESTION_DATABASE_BACKUP_DIR + "/" + dateStr;
     return dirName;
   }
-  
+
   public final static String getDatabaseBackupDirName() {
     return getDatabaseBackupDirName(new Date());
   }

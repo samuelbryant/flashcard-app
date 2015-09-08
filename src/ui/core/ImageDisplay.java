@@ -15,9 +15,9 @@ import ui.components.FAPanel;
 import ui.components.FAPanel;
 
 public abstract class ImageDisplay extends FAPanel implements FABuildable {
-  
+
   public final boolean resizeImage;
-  
+
   public ImageDisplay(boolean resizeImage) {
     super();
     this.resizeImage = resizeImage;
@@ -36,7 +36,7 @@ public abstract class ImageDisplay extends FAPanel implements FABuildable {
     BufferedImage img = generateDisplayImage();
     int width = img.getWidth();
     int height = img.getHeight();
-    
+
     if (this.resizeImage) {
       if (width < w && height < h) {
         System.out.printf("Image within bounds (%d, %d)\n", width, height);

@@ -9,10 +9,10 @@ import ui.questions.QuestionListController;
 import ui.questions.QuestionListImage;
 
 public class QuestionPanel extends ImageDisplay implements Observer {
-  
+
   protected QuestionListController ctrl;
   protected QuestionList questionList;
-  
+
   public QuestionPanel(QuestionListController ctrl, boolean resize) {
     super(resize);
     this.ctrl = ctrl;

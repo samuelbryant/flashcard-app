@@ -10,12 +10,12 @@ package core;
  * @author author
  */
 public class FatalError extends RuntimeException {
-  
+
   public FatalError(String msg) {
     super("FATAL: " + msg);
   }
   public FatalError(String msg, Exception ex) {
     super("FATAL: " + msg, ex);
   }
-  
+
 }

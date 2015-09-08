@@ -10,11 +10,11 @@ import ui.core.SubPanel;
 public class InfobarPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
 
   public static final int LABEL_WIDTH = 200;
-  
+
   protected JLabel questionListLabel;
   protected JLabel questionLabel;
   protected JLabel timerLabel;
-  
+
   public InfobarPanel(QuestionListController ctrl) {
     super(new SubController(ctrl));
   }
@@ -32,7 +32,7 @@ public class InfobarPanel extends SubPanel<QuestionListController, SubController
     this.add(this.questionListLabel);
     this.add(this.questionLabel);
     this.add(this.timerLabel);
-    
+
     this.sizeComponent(this, totalSize);
     Dimension labelSize = new Dimension(200, 20);
     this.sizeComponent(this.questionLabel, labelSize);
@@ -42,7 +42,7 @@ public class InfobarPanel extends SubPanel<QuestionListController, SubController
 
   @Override
   protected void observeListChange() {
-    
+
   }
 
   @Override
@@ -51,15 +51,15 @@ public class InfobarPanel extends SubPanel<QuestionListController, SubController
       int currentIndex = this.questionList.getCurrentIndex();
       int totalNumber = this.questionList.getNumberOfQuestions();
       this.questionListLabel.setText(String.format("List: %d/%d", currentIndex, totalNumber));
-      
+
       String source = this.questionList.getCurrentQuestion().getSource().toString();
       String number = this.questionList.getCurrentQuestion().getQuestionNumber().toString();
       this.questionLabel.setText(String.format("Question: %s - %s", source, number));
-      
+
       if (this.questionState.isAnswered()) {
         this.timerLabel.setText("Time: " + this.questionState.getLastResponseTime());
       }
     }
   }
-  
+
 }

@@ -10,13 +10,13 @@ public class DisplayWindow extends JFrame implements ComponentListener {
   private Controller ctrl = null;
   private Display display = null;
   private final int totalWidth, totalHeight;
-  
+
   public DisplayWindow(int totalWidth, int totalHeight) {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.totalWidth = totalWidth;
     this.totalHeight = totalHeight;
   }
-  
+
   public void showDisplay(Display d) {    
     // Remove old display.
     if (this.display != null) {
@@ -29,7 +29,7 @@ public class DisplayWindow extends JFrame implements ComponentListener {
 
     // Setup this component based on display.
     this.setJMenuBar(d.getDisplayMenuBar());
-    
+
     this.display.buildComponents();
     this.display.layoutComponents(new Dimension(totalWidth, totalHeight));
     Dimension thisSize = new Dimension(totalWidth, totalHeight + 50);

@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import org.json.JSONObject;
 
 public class DatabaseIO {
-  
+
   protected static Database currentDatabase = null;
 
   public static Database loadDatabase() {
@@ -18,7 +18,7 @@ public class DatabaseIO {
     currentDatabase = db;
     return db;
   }
-  
+
   public static Database getDatabase() {
     if (currentDatabase == null) {
       loadDatabase();
@@ -27,7 +27,7 @@ public class DatabaseIO {
   }
 
   public static void saveDatabase() {
-    
+
     if (currentDatabase == null) {
       throw new IllegalStateException("No database has been loaded");
     }
@@ -37,9 +37,9 @@ public class DatabaseIO {
       System.err.printf("ERROR: Database Backup Failed!\n");
     }
     _writeDatabase(currentDatabase);
-    
+
   }
-  
+
   private static void _backupDatabase() {
     String backupDirname = Constants.getDatabaseBackupDirName();
 
@@ -48,17 +48,17 @@ public class DatabaseIO {
     String dst1 = Constants.getDatabaseBackupMainFileName(backupDirname);
     String src2 = Constants.QUESTION_DATA_DIR;
     String dst2 = Constants.getDatabaseBackupDataDirName(backupDirname);
-    
+
     IO.copyOrDie(src1, dst1);
     IO.copyOrDie(src2, dst2);
   }
-  
+
   private static void _backupToFolder(String srcDirname, String srcFilename, String dstDirname) {
     String src = srcDirname + "/" + srcFilename;
     String dst = dstDirname + "/" + srcFilename;
     IO.copyOrDie(src, dst);
   }
-  
+
   @Deprecated
   public static void writeDatabase(Database db) {
     db.validate();
@@ -67,7 +67,7 @@ public class DatabaseIO {
     _writeQuestionFiles(db);
     db.isPersistent = true;
   }
-  
+
   private static void _writeDatabase(Database db) {
     db.validate();
     db.revisionNumber++;

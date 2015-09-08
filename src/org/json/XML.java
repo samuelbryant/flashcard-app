@@ -1,77 +1,40 @@
 package org.json;
 
-/*
-Copyright (c) 2002 JSON.org
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-The Software shall be used for Good, not Evil.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
 
 import java.util.Iterator;
 
-/**
- * This provides static methods to convert an XML text into a JSONObject,
- * and to covert a JSONObject into an XML text.
- * @author JSON.org
- * @version 2014-05-03
- */
+
 public class XML {
 
-    /** The Character '&amp;'. */
+
     public static final Character AMP   = '&';
 
-    /** The Character '''. */
+
     public static final Character APOS  = '\'';
 
-    /** The Character '!'. */
+
     public static final Character BANG  = '!';
 
-    /** The Character '='. */
+
     public static final Character EQ    = '=';
 
-    /** The Character '>'. */
+
     public static final Character GT    = '>';
 
-    /** The Character '&lt;'. */
+
     public static final Character LT    = '<';
 
-    /** The Character '?'. */
+
     public static final Character QUEST = '?';
 
-    /** The Character '"'. */
+
     public static final Character QUOT  = '"';
 
-    /** The Character '/'. */
+
     public static final Character SLASH = '/';
 
-    /**
-     * Replace special characters with XML escapes:
-     * <pre>
-     * &amp; <small>(ampersand)</small> is replaced by &amp;amp;
-     * &lt; <small>(less than)</small> is replaced by &amp;lt;
-     * &gt; <small>(greater than)</small> is replaced by &amp;gt;
-     * &quot; <small>(double quote)</small> is replaced by &amp;quot;
-     * </pre>
-     * @param string The string to be escaped.
-     * @return The escaped string.
-     */
+
     public static String escape(String string) {
         StringBuilder sb = new StringBuilder(string.length());
         for (int i = 0, length = string.length(); i < length; i++) {
@@ -99,12 +62,7 @@ public class XML {
         return sb.toString();
     }
 
-    /**
-     * Throw an exception if the string contains whitespace.
-     * Whitespace is not allowed in tagNames and attributes.
-     * @param string A string.
-     * @throws JSONException
-     */
+
     public static void noSpace(String string) throws JSONException {
         int i, length = string.length();
         if (length == 0) {
@@ -118,14 +76,7 @@ public class XML {
         }
     }
 
-    /**
-     * Scan the content following the named tag, attaching it to the context.
-     * @param x       The XMLTokener containing the source string.
-     * @param context The JSONObject that will include the new material.
-     * @param name    The tag name.
-     * @return true if the close tag is processed.
-     * @throws JSONException
-     */
+
     private static boolean parse(XMLTokener x, JSONObject context,
                                  String name) throws JSONException {
         char       c;
@@ -290,15 +241,7 @@ public class XML {
     }
 
 
-    /**
-     * Try to convert a string into a number, boolean, or null. If the string
-     * can't be converted, return the string. This is much less ambitious than
-     * JSONObject.stringToValue, especially because it does not attempt to
-     * convert plus forms, octal forms, hex forms, or E forms lacking decimal
-     * points.
-     * @param string A String.
-     * @return A simple JSON value.
-     */
+
     public static Object stringToValue(String string) {
         if ("true".equalsIgnoreCase(string)) {
             return Boolean.TRUE;
@@ -334,20 +277,7 @@ public class XML {
     }
 
 
-    /**
-     * Convert a well-formed (but not necessarily valid) XML string into a
-     * JSONObject. Some information may be lost in this transformation
-     * because JSON is a data format and XML is a document format. XML uses
-     * elements, attributes, and content text, while JSON uses unordered
-     * collections of name/value pairs and arrays of values. JSON does not
-     * does not like to distinguish between elements and attributes.
-     * Sequences of similar elements are represented as JSONArrays. Content
-     * text may be placed in a "content" member. Comments, prologs, DTDs, and
-     * <code>&lt;[ [ ]]></code> are ignored.
-     * @param string The source string.
-     * @return A JSONObject containing the structured data from the XML string.
-     * @throws JSONException
-     */
+
     public static JSONObject toJSONObject(String string) throws JSONException {
         JSONObject jo = new JSONObject();
         XMLTokener x = new XMLTokener(string);
@@ -358,24 +288,13 @@ public class XML {
     }
 
 
-    /**
-     * Convert a JSONObject into a well-formed, element-normal XML string.
-     * @param object A JSONObject.
-     * @return  A string.
-     * @throws  JSONException
-     */
+
     public static String toString(Object object) throws JSONException {
         return toString(object, null);
     }
 
 
-    /**
-     * Convert a JSONObject into a well-formed, element-normal XML string.
-     * @param object A JSONObject.
-     * @param tagName The optional name of the enclosing tag.
-     * @return A string.
-     * @throws JSONException
-     */
+
     public static String toString(Object object, String tagName)
             throws JSONException {
         StringBuilder       sb = new StringBuilder();

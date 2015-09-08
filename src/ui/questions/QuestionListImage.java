@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui.questions;
 
 import java.awt.Color;
@@ -10,14 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import ui.questions.QuestionList.NotStartedYetException;
 
-/**
- *
- * @author sambryant
- */
 public class QuestionListImage {
-  
+
   public static final Integer LINE_SPACING = 20;
-  
+
   public static BufferedImage getQuestionListImage(QuestionList list, int width, int height) {
     try {
       return list.getCurrentQuestion().getImage();
@@ -36,5 +27,5 @@ public class QuestionListImage {
       return img;
     }
   }
-  
+
 }

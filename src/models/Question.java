@@ -44,7 +44,7 @@ public class Question implements Serializable {
     this.persistent = false;
     this.databaseImageFilename = null;
   }
-  
+
   /**
    * Performs necessary post-loading/creating processing work.
    * This includes:
@@ -109,29 +109,29 @@ public class Question implements Serializable {
       this.subjects.add(subject);
     }
   }
-  
+
   public void addResponse(Response r) {
     this.responses.add(r);
     // Keep responses sorted by last answered date.
     Collections.sort(this.responses);
   }
-  
+
   public Source getSource() {
     return this.source;
   }
-  
+
   public ArrayList<Response> getResponses() {
     return this.responses;
   }
-  
+
   public ArrayList<Subject> getSubjects() {
     return this.subjects;
   }
-  
+
   public ArrayList<Tag> getTags() {
     return this.tags;
   }
-  
+
   public int getId() {
     return this.id;
   }
@@ -165,7 +165,7 @@ public class Question implements Serializable {
   public void addTag(Tag tag) {
     this.tags.add(tag);
   }
-  
+
   /**
    * Gets most recent Date that this question was answered.
    * @return Date of last response or null if no responses.
@@ -178,7 +178,7 @@ public class Question implements Serializable {
       return this.responses.get(0).date;
     }
   }
-  
+
   public ArrayList<Boolean> getGradedResponses() {
     ArrayList<Boolean> list = new ArrayList<>();
     for (Response r: this.responses) {
@@ -186,7 +186,7 @@ public class Question implements Serializable {
     }
     return list;
   }
-  
+
   public int[] getTimesRightWrong() {
     int[] grades = new int[]{0,0};
     for (Response r: this.responses) {
@@ -198,5 +198,5 @@ public class Question implements Serializable {
     }
     return grades;
   }
-  
+
 }

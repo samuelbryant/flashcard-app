@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Response implements Comparable<Response> {
-  
+
   public static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yy h:mm a");
 
   Answer response;
@@ -27,7 +27,7 @@ public class Response implements Comparable<Response> {
     this.dateString = DATE_FORMAT.format(date);
     this.date = (Date) date.clone();
   }
-  
+
   /**
    * Constructor for parsing Response from file.
    * @param response
@@ -44,7 +44,7 @@ public class Response implements Comparable<Response> {
       throw new FatalError("Could not parse date string: " + dateString);
     }
   }
-  
+
   public void setAnswer(Answer answer) {
     this.response = answer;
   }
@@ -62,7 +62,7 @@ public class Response implements Comparable<Response> {
   public Answer getSelectedAnswer() {
     return this.response;
   }
-  
+
   public Double getTimeInSeconds() {
     if (this.responseTime == null) {
       return null;

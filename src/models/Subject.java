@@ -8,7 +8,7 @@ public enum Subject {
 
   // Sub-subject tags
   FLUIDS, ROTATIONAL, CIRCUITS, OPTICS, ATOMIC, MATH;
-  
+
   public static HashMap<Subject, Boolean> getMap() {
     HashMap<Subject, Boolean> map = new HashMap<>();
     for (Subject src: Subject.values()) {

@@ -11,7 +11,7 @@ public class QuestionQuizDisplay extends QuestionListDisplay {
   public QuestionQuizDisplay(QuestionListController ctrl) {
     super(ctrl);
   }
-  
+
   @Override
   public void buildComponents() {
     super.buildComponents();
@@ -19,7 +19,7 @@ public class QuestionQuizDisplay extends QuestionListDisplay {
     // this.taggerPanel.setHideBeforeAnswering(true);
     this.ctrl.setRecordAnswers(true);
   }
-  
+
   public static void main(String[] args) {
     // Load/initialize models.
     Database db = DatabaseIO.loadDatabase();

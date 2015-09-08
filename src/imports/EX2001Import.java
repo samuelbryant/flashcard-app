@@ -13,16 +13,16 @@ import models.Source;
 import models.Tag;
 
 public class EX2001Import {
-  
+
   static String SRC_DIR = "imports/2001";
-  
+
   public static void main(String[] args) throws FileNotFoundException {
     Constants.setupProjectDirectories();
 
     Database d = DatabaseIO.loadDatabase();
-    
+
     Source source = Source.GRE_2001;
-    
+
     Scanner scan = new Scanner(new File(SRC_DIR + "/answers.txt"));
     while (scan.hasNextLine()) {
       String parts[] = scan.nextLine().split(" +");
@@ -33,8 +33,8 @@ public class EX2001Import {
       try {
         myAnswer = Answer.valueOf(parts[2]);
       } catch (Exception e) {}
-      
-      
+
+
       String qFile = SRC_DIR + "/2001 " + qNumber + ".png";
       Question q = new Question(source, qNumber, correctAnswer, qFile);
       if (myAnswer != correctAnswer) {
@@ -42,8 +42,8 @@ public class EX2001Import {
       }
       d.addQuestionToSession(q);
     }
-    
+
     DatabaseIO.writeDatabase(d);
   }
-  
+
 }

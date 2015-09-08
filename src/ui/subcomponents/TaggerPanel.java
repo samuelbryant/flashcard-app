@@ -20,7 +20,7 @@ import ui.questions.QuestionListController;
 import ui.core.SubPanel;
 
 public class TaggerPanel extends SubPanel<QuestionListController, SubController<QuestionListController>>{
-  
+
   protected FAButton onlyShowUnchecked;
   protected JLabel topLabel;
   protected JLabel subjectsLabel;
@@ -28,36 +28,36 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
   protected final Map<Subject, FACheckbox> subjectCheckboxes;
   protected final Map<Tag, FACheckbox> tagCheckboxes;
   protected boolean hideBeforeAnswering;
-  
+
   public TaggerPanel(QuestionListController ctrl) {
     super(new SubController(ctrl));
     subjectCheckboxes = new TreeMap<>();
     tagCheckboxes = new TreeMap<>();
     this.hideBeforeAnswering = false;
   }
-  
+
   public void setHideBeforeAnswering(boolean value) {
     this.hideBeforeAnswering = value;
   }
-  
+
   public boolean getHideBeforeAnswering() {
     return this.hideBeforeAnswering;
   }
-  
+
   @Override
   public void buildComponents() {
     Subject[] subjects = Subject.values();
     Tag[] tags = Tag.values();
-    
+
     topLabel = new JLabel("Add Labels");
     topLabel.setFont(Constants.SECTION_FONT);
-    
+
     subjectsLabel = new JLabel("Subjects");
     subjectsLabel.setFont(Constants.SUBSECTION_FONT);
-    
+
     tagsLabel = new JLabel("Tags");
     tagsLabel.setFont(Constants.SUBSECTION_FONT);
-    
+
     for (final Subject subject: subjects) {
       final FACheckbox cb = new FACheckbox(subject.name());
       cb.addActionListener(new ActionListener() {
@@ -68,7 +68,7 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
       });
       subjectCheckboxes.put(subject, cb);
     }
-    
+
     for (final Tag tag: tags) {
       final FACheckbox cb = new FACheckbox(tag.name());
       cb.addActionListener(new ActionListener() {
@@ -80,14 +80,14 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
       tagCheckboxes.put(tag, cb);
     }
   }
-  
+
   @Override
   public void layoutComponents(Dimension totalSize) {
     Subject[] subjects = Subject.values();
     Tag[] tags = Tag.values();
-   
+
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    
+
     this.add(topLabel);
     this.add(subjectsLabel);
     for (Subject subject: subjects) {
@@ -97,9 +97,9 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
     for (Tag tag: tags) {
       this.add(tagCheckboxes.get(tag));
     }
-   
+
     this.setAlignmentY(TOP_ALIGNMENT);
-    
+
     this.sizeComponent(this, totalSize);
   }
 
@@ -113,7 +113,7 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
       this.tagCheckboxes.get(tag).setEnabled(this.questionList.isStarted());
       this.tagCheckboxes.get(tag).setSelected(false);
     }
-    
+
     if (this.questionList.isStarted()) {
       Question q = this.questionList.getCurrentQuestion();
       ArrayList<Subject> subjects = q.getSubjects();

@@ -31,11 +31,11 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
     KeyEvent.VK_5,
     KeyEvent.VK_6
   };
-  
+
   protected FAActionButton backButton, nextButton, saveButton;
   protected final Map<Answer, FAButton> answerButtons;
   protected JComboBox filtersBox;
-  
+
   public ActionPanel(QuestionListController controller) {
     super(new SubController(controller));
     this.answerButtons = new TreeMap<>();
@@ -44,7 +44,7 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
   @Override
   public void buildComponents() {
     Answer[] answers = Answer.values();
-    
+
     for (final Answer answer: answers) {
       // Create answer button.
       FAButton button = new FAButton(answer.name());
@@ -62,12 +62,12 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
       };
       button.addActionListener(buttonPress);
       this.answerButtons.put(answer, button);
-      
+
       // Create key shortcut.
       int buttonMnemonic = ANSWER_KEYS[answer.ordinal()];
       this.questionListController.addKeyAction(buttonMnemonic, buttonPress);
     }
-    
+
 //    // Create list filter box.
 //    if (this.listFilters != null) {
 //      this.filtersBox = new JComboBox(this.listFilters.keySet().toArray());
@@ -80,7 +80,7 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
 //        }
 //      });
 //    }
-    
+
     backButton = new FAActionButton("Back") {  
       @Override
       public void actionPerformed(ActionEvent ev) {
@@ -91,7 +91,7 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
         }
       }
     };
-  
+
     nextButton = new FAActionButton("Next") {  
       @Override
       public void actionPerformed(ActionEvent ev) {
@@ -104,7 +104,7 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
         }
       }
     };
-    
+
     saveButton = new FAActionButton("Save") {
       @Override
       public void actionPerformed(ActionEvent ev) {
@@ -126,33 +126,33 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
     this.questionListController.addKeyAction(KeyEvent.VK_RIGHT, nextButton);
     this.add(saveButton);
     this.questionListController.addKeyAction(KeyEvent.VK_S, saveButton);
-    
+
     // this.add(this.filtersBox);
-    
+
     this.setAlignmentX(Component.CENTER_ALIGNMENT);
     this.setAlignmentY(Component.TOP_ALIGNMENT);
-    
+
     this.sizeComponent(this, totalSize);
   }
-  
+
   @Override
   protected void observeListChange() {
-    
+
   }
 
   @Override
   protected void observeQuestionChange() {
     this.backButton.setEnabled(questionList.hasLastQuestion());
     this.nextButton.setEnabled(questionList.hasNextQuestion());
-    
+
     boolean isStarted = this.questionList.isStarted();
     boolean isAnswered = this.questionList.isStarted() && this.questionState.isAnswered();
-    
+
     for (Answer answer: Answer.values()) {
       FAButton button = this.answerButtons.get(answer);
-      
+
       button.setEnabled(isStarted);
-      
+
       if (isAnswered && answer == questionState.getCorrectAnswer()) {
         button.setBackground(Color.GREEN);
       } else if (isAnswered && answer == questionState.getSelectedAnswer()) {
@@ -162,5 +162,5 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
       }
     }
   }
-  
+
 }

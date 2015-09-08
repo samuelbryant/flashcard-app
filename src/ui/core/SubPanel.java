@@ -17,7 +17,7 @@ public abstract class SubPanel <T extends QuestionListController, K extends SubC
   protected final T questionListController;
   protected final QuestionList questionList;
   protected final QuestionState questionState;
- 
+
   public SubPanel(K componentController) {
     super();
     this.componentController = componentController;
@@ -27,17 +27,17 @@ public abstract class SubPanel <T extends QuestionListController, K extends SubC
     this.questionState.addObserver(this);
     this.questionList.addObserver(this);
   }
-  
+
   @Override
   public abstract void buildComponents();
-  
+
   @Override
   public abstract void layoutComponents(Dimension totalDimension);
-  
+
   protected abstract void observeListChange();
-  
+
   protected abstract void observeQuestionChange();
-  
+
   @Override
   public void update(Observable o, Object args) {
     if (o == this.questionList) {
@@ -46,5 +46,5 @@ public abstract class SubPanel <T extends QuestionListController, K extends SubC
       this.observeQuestionChange();
     } else throw new RuntimeException("Unknown object update: " + o);
   }
-  
+
 }

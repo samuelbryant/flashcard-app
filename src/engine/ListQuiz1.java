@@ -10,21 +10,21 @@ public class ListQuiz1 extends ListQuizSorter {
   /**
    * Weighting scheme
    * Base value: 5
-   * has never answered => +8
-   * has answered, only correctly => -4
-   * has answered, sometimes correctly => +2
-   * has answered, only wrong => +4
+   * has never answered = +8
+   * has answered, only correctly = -4
+   * has answered, sometimes correctly = +2
+   * has answered, only wrong = +4
    * Tag weights (Only gets maximum value)
-   * tagged hard => +4
-   * tagged time => +5
-   * other tags => +3
+   * tagged hard = +4
+   * tagged time = +5
+   * other tags = +3
    */
   @Override
   protected int getQuestionWeight(Question q) {
     int weight = this.getTagWeight(q) + this.getAnswerWeight(q);
     return weight;
   }
-  
+
   public int getTagWeight(Question q) {
     ArrayList<Tag> tags = q.getTags();
     if (tags.isEmpty()) {
@@ -37,7 +37,7 @@ public class ListQuiz1 extends ListQuizSorter {
       return +3;
     }
   }
-  
+
   public int getAnswerWeight(Question q) {
     ArrayList<Response> responses = q.getResponses();
     if (responses.isEmpty()) {
@@ -54,6 +54,6 @@ public class ListQuiz1 extends ListQuizSorter {
       return +2;
     }
   }
-  
-  
+
+
 }

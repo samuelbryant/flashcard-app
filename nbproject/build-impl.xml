@@ -1209,7 +1209,7 @@ is divided into following sections:
             <classpath>
                 <path path="${javac.classpath}"/>
             </classpath>
-            <fileset dir="${src.dir}" excludes="${bug5101868workaround},${excludes},${javadoc.excludes}" includes="${includes}">
+            <fileset dir="${src.dir}" excludes="${bug5101868workaround},${excludes}" includes="${includes}">
                 <filename name="**/*.java"/>
             </fileset>
             <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">

@@ -8,5 +8,5 @@ package core;
  * @author author
  */
 public interface Exportable {
-  
+
 }

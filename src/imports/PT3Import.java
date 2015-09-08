@@ -9,23 +9,23 @@ import models.Question;
 import models.Source;
 
 public class PT3Import {
-  
+
   static String SRC_DIR = "imports/pt3";
-  
+
   public static void main(String[] args) {
     Constants.setupProjectDirectories();
 
     Database d = DatabaseIO.loadDatabase();
-    
+
     Map<Integer, Answer> answers = ImportUtilities.readAnswerFile(SRC_DIR + "/answers.txt");
     Source source = Source.SAMPLE_3;
-    
+
     for (int i = 1; i <= 100; i++) {
       Question q = new Question(source, i, answers.get(i), SRC_DIR + "/PT3 " + i + ".png");
       d.addQuestionToSession(q);
     }
-    
+
     DatabaseIO.writeDatabase(d);
   }
-  
+
 }

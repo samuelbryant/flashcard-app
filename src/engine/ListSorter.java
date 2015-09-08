@@ -22,7 +22,7 @@ public abstract class ListSorter {
    * @param list An array list of objects to be sorted.
    */
   public abstract void sort(ArrayList<Question> list);
-  
+
   public static ListSorter getCompositeSorter(final ListSorter s1, final ListSorter s2) {
     return new ListSorter() {
       @Override
@@ -32,24 +32,24 @@ public abstract class ListSorter {
       }
     };
   }
-  
+
   /**
    * ListSorter class based on Comparator object.
    */
   public static class CompareSorter extends ListSorter {
 
     protected final Comparator<Question> compare;
-    
+
     public CompareSorter(Comparator<Question> compare) {
       this.compare = compare;
     }
-    
+
     @Override
     public void sort(ArrayList<Question> list) {
       Collections.sort(list, compare);
     }
   }
-  
+
   /**
    * ListSorter instance which sorts question IDs from smallest to largest.
    */
@@ -59,7 +59,7 @@ public abstract class ListSorter {
       return o1.getId() - o2.getId();
     }
   });
-  
+
   /**
    * ListSorter instance which sorts questions from least recently answered to most recently answered.
    */
@@ -79,7 +79,7 @@ public abstract class ListSorter {
       }
     }
   });
-  
+
   /**
    * ListSorter instance which sorts questions based on fraction of times wrong.
    */
@@ -90,15 +90,15 @@ public abstract class ListSorter {
       ArrayList<Boolean> responses2 = o2.getGradedResponses();
       int right1 = 0;
       int right2 = 0;
-      
+
       for (Boolean b : responses1) {
         if (b) right1++;
       }
-      
+
       for (Boolean b : responses2) {
         if (b) right2++;
       }
-      
+
       if (responses2.isEmpty()) {
         if (right1 == responses1.size()) {
           return -1;
@@ -106,7 +106,7 @@ public abstract class ListSorter {
           return +1;
         }
       }
-      
+
       if (responses1.isEmpty()) {
         if (right2 == responses2.size()) {
           return +1;
@@ -114,11 +114,11 @@ public abstract class ListSorter {
           return -1;
         }
       }
-      
+
       return (int) ((((double) right2) / responses2.size()) - (((double) right1) / responses1.size()));
     }
   });
-  
+
   /**
    * ListSorter instance which sorts questions randomly.
    */
@@ -128,7 +128,7 @@ public abstract class ListSorter {
       Collections.shuffle(list);
     }
   };
-  
+
   /**
    * ListSorter instance which does not sort or change the order of questions.
    */
@@ -136,13 +136,13 @@ public abstract class ListSorter {
     @Override
     public void sort(ArrayList<Question> list) {}
   };
-  
+
   static void printList(ArrayList<Integer> list) {
     for (Integer i: list) {
       System.out.println(i);
     }
   }
-  
+
   public static final Map<String, ListSorter> ALL_SORTERS = new HashMap<>();
   static {
     ALL_SORTERS.put("By ids", ListSorter.ID_SORTER);
@@ -154,12 +154,12 @@ public abstract class ListSorter {
   }
   public static final String DEFAULT_1_STRING = "By ids";
   public static final String DEFAULT_2_STRING = "None";
-  
+
   public static void main(String[] args) {
     ListSorter s1 = ListSorter.LAST_ANSWERED;
     ListSorter s2 = ListSorter.NULL_SORTER;
     ListSorter s = ListSorter.getCompositeSorter(s1, s2);
-    
+
     ArrayList<Question> list = DatabaseIO.getDatabase().getQuestions(ListFilter.NULL_FILTER, s);
     for (Question q: list) {
       System.out.println(q);

@@ -21,17 +21,17 @@ public abstract class Display <T extends Controller> extends FAPanel implements 
     this.addFocusListener(this.ctrl);
     this.ctrl.setDisplay(this);
   }
-  
+
   @Override
   public abstract void buildComponents();
-  
+
   @Override
   public abstract void layoutComponents(Dimension totalSize);
-  
+
   public void componentResized() {
-    
+
   }
-  
+
   protected abstract void setupMenuBar();
 
   public Controller getController() {

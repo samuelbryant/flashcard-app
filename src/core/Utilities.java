@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @author author
  */
 public class Utilities {
-  
+
   public static <T extends Serializable> T makeDeepCopy(T object) {
     try {
       ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -36,5 +36,5 @@ public class Utilities {
       throw new RuntimeException("FATAL EXCEPTION IN OBJECT DEEP COPY", ex);
     }
   }
-  
+
 }

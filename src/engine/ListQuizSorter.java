@@ -10,11 +10,11 @@ import models.Question;
  * This "high-jacks" normal ListSorter behavior by changing the length of the input array.
  */
 public abstract class ListQuizSorter extends ListSorter {
-  
+
   ListQuizSorter() {}
-  
+
   protected abstract int getQuestionWeight(Question q);
-  
+
   /**
    * Changes input array to contain a list of Questions randomly selected by weight.
    * Warning: This does not "sort" at all. In fact, it changes the length of the input array.
@@ -23,7 +23,7 @@ public abstract class ListQuizSorter extends ListSorter {
   @Override
   public void sort(ArrayList<Question> list) {
     LinkedList<Question> questionPool = new LinkedList<>();
-    
+
     // Add each Question to pool the number of times equal to its weight.
     for (Question q: list) {
       int weight = getQuestionWeight(q);
@@ -31,21 +31,21 @@ public abstract class ListQuizSorter extends ListSorter {
         questionPool.add(q);
       }
     }
-    
+
     int poolSize = questionPool.size();
     int totalNumber = poolSize;
-    
+
     // Clear old list and set capacity.
     list.clear();
     list.ensureCapacity(totalNumber);  
-    
+
     for (int i = 0; i < totalNumber; i++) {
       int choiceIndex = (int) (Math.random() * poolSize);
       Question choice = questionPool.remove(choiceIndex);
       poolSize--;
-      
+
       list.add(choice);
     }
   }
-  
+
 }

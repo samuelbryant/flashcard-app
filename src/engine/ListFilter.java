@@ -18,19 +18,19 @@ public abstract class ListFilter {
   public enum Relationship {
     AND, OR;
   }
-  
+
   /**
    * Determines if given question should be filtered out of list.
    * @param q Question to filter.
    * @return Boolean indicating if question should be included.
    */
   public abstract boolean accept(Question q);
-  
+
   public static ListFilter getCompositeFilter(ArrayList<ListFilter> filters) {
     return getCompositeFilter(filters, Relationship.AND);
   }
-  
-  
+
+
   /**
    * Creates filter that is the intersection of two filters.
    * @param filter1 First filter to consider.
@@ -40,7 +40,7 @@ public abstract class ListFilter {
   public static ListFilter getCompositeFilter(final ListFilter filter1, final ListFilter filter2) {
     return getCompositeFilter(filter1, filter2, Relationship.AND);
   }
-  
+
   /**
    * Creates filter that is a composite of multiple filters.
    * The resulting filter can either be the union or the intersection of the input filters.
@@ -61,7 +61,7 @@ public abstract class ListFilter {
       }
     };
   }
-  
+
   /**
    * Creates filter that is a composite of multiple filters.
    * The resulting filter can either be the union or the intersection of the input filters.
@@ -91,7 +91,7 @@ public abstract class ListFilter {
       }
     };
   }
-  
+
   /**
    * ListFilter instance which returns all values.
    */
@@ -102,7 +102,7 @@ public abstract class ListFilter {
       return true;
     }
   };
-  
+
   /**
    * ListFilter class which filters Question lists by the Source value of the Question instances.
    */
@@ -110,7 +110,7 @@ public abstract class ListFilter {
 
     private final Map<Source, Boolean> sources;
     private final boolean includeNoSources;
-    
+
     /**
      * Constructor for Question list SourceFilter.
      * @param src Source value required by this filter.
@@ -120,7 +120,7 @@ public abstract class ListFilter {
       this.sources.put(src, true);
       this.includeNoSources = false;
     }
-    
+
     /**
      * Constructor for Question list SourceFilter.
      * @param sources Set of Source values allowed by this filter.
@@ -135,7 +135,7 @@ public abstract class ListFilter {
       }
       this.includeNoSources = includeNoSources;
     }
-    
+
     @Override
     public boolean accept(Question q) {
       Source source = q.getSource();
@@ -146,7 +146,7 @@ public abstract class ListFilter {
       }
     }
   }
-  
+
   /**
    * ListFilter class which filters Question lists by the Tag values of the Question instances.
    */
@@ -154,7 +154,7 @@ public abstract class ListFilter {
 
     private final Map<Tag, Boolean> tags;
     private final boolean includeNoTags;
-    
+
     /**
      * Constructor for Question list TagFilter.
      * @param tag Tag value required by this filter.
@@ -164,7 +164,7 @@ public abstract class ListFilter {
       this.tags.put(tag, true);
       this.includeNoTags = false;
     }
-    
+
     /**
      * Constructor for Question list TagFilter.
      * @param tags Set of Tag values allowed by this filter.
@@ -179,7 +179,7 @@ public abstract class ListFilter {
       }
       this.includeNoTags = includeNoTags;
     }
-    
+
     @Override
     public boolean accept(Question q) {
       ArrayList<Tag> questionTags = q.getTags();
@@ -190,7 +190,7 @@ public abstract class ListFilter {
       }
     }
   }
-  
+
   /**
    * ListFilter class which filters Question lists by the Subject values of the Question instances.
    */
@@ -198,7 +198,7 @@ public abstract class ListFilter {
 
     private final Map<Subject, Boolean> subjects;
     private final boolean includeNoSubjects;
-    
+
     /**
      * Constructor for Question list SubjectFilter.
      * @param subject Subject value required by this filter.
@@ -208,7 +208,7 @@ public abstract class ListFilter {
       this.subjects.put(subject, true);
       this.includeNoSubjects = false;
     }
-    
+
     /**
      * Constructor for Question list SubjectFilter.
      * @param subjects Set of Subject values allowed by this filter.
@@ -223,7 +223,7 @@ public abstract class ListFilter {
       }
       this.includeNoSubjects = includeNoSubjects;
     }
-    
+
     @Override
     public boolean accept(Question q) {
       ArrayList<Subject> questionSubjects = q.getSubjects();
@@ -251,5 +251,5 @@ public abstract class ListFilter {
     }
     return false;
   }
-  
+
 }

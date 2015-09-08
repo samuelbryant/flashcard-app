@@ -186,7 +186,7 @@ public class IO {
       throw new FatalError("getScannerOrDie failed for " + filename, ex);
     }
   }
-  
+
   public static String readEntireFileOrDie(String filename) {
     Scanner scan = getScannerOrDie(filename);
     scan.useDelimiter("\\Z");  

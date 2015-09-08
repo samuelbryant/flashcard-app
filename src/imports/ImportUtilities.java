@@ -7,10 +7,10 @@ import java.util.Scanner;
 import models.Answer;
 
 public class ImportUtilities {
-  
+
   static Map<Integer, Answer> readAnswerFile(String filename) {
     Map<Integer, Answer> map = new HashMap<>();
-    
+
     Scanner scan = IO.getScannerOrDie(filename);
     String line;
     while (scan.hasNextLine()) {
@@ -23,5 +23,5 @@ public class ImportUtilities {
     }
     return map;
   }
-  
+
 }
