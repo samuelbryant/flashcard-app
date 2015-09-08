@@ -14,8 +14,8 @@ import models.Subject;
 import models.Tag;
 import core.Constants;
 import ui.core.SubController;
-import ui.components.FAButton;
-import ui.components.FACheckbox;
+import ui.core.components.FAButton;
+import ui.core.components.FACheckbox;
 import ui.questions.QuestionListController;
 import ui.core.SubPanel;
 

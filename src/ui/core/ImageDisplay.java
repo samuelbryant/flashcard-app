@@ -9,10 +9,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import ui.components.FABuildable;
-import ui.components.FABuildable;
-import ui.components.FAPanel;
-import ui.components.FAPanel;
+import ui.core.components.FABuildable;
+import ui.core.components.FABuildable;
+import ui.core.components.FAPanel;
+import ui.core.components.FAPanel;
 
 /**
  *

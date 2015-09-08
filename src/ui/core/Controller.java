@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import ui.components.FAKeyMap;
-import ui.components.FAKeyMap;
+import ui.core.components.FAKeyMap;
+import ui.core.components.FAKeyMap;
 
 /**
  *

@@ -5,6 +5,10 @@ import models.Question;
 import models.Response;
 import models.Tag;
 
+/**
+ *
+ * @author sambryant
+ */
 public class ListQuiz1 extends ListQuizSorter {
 
   /**
@@ -18,6 +22,8 @@ public class ListQuiz1 extends ListQuizSorter {
    * tagged hard = +4
    * tagged time = +5
    * other tags = +3
+   * @param q
+   * @return 
    */
   @Override
   protected int getQuestionWeight(Question q) {
@@ -25,6 +31,11 @@ public class ListQuiz1 extends ListQuizSorter {
     return weight;
   }
 
+  /**
+   *
+   * @param q
+   * @return
+   */
   public int getTagWeight(Question q) {
     ArrayList<Tag> tags = q.getTags();
     if (tags.isEmpty()) {
@@ -38,6 +49,11 @@ public class ListQuiz1 extends ListQuizSorter {
     }
   }
 
+  /**
+   *
+   * @param q
+   * @return
+   */
   public int getAnswerWeight(Question q) {
     ArrayList<Response> responses = q.getResponses();
     if (responses.isEmpty()) {

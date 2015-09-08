@@ -1,6 +1,6 @@
 /* Panel with correct background colors and one that is not focusable.
  */
-package ui.components;
+package ui.core.components;
 
 import java.awt.Dimension;
 import javax.swing.JComponent;

@@ -1,4 +1,4 @@
-package ui.components;
+package ui.core.components;
 
 import javax.swing.JCheckBox;
 

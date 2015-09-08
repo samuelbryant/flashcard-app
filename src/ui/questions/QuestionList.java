@@ -86,7 +86,7 @@ public class QuestionList extends Observable {
   }
 
 
-  private QuestionState _questionState;
+  private final QuestionState _questionState;
   private ArrayList<Question> _questionList;
   private ListFilter _listFilter;
   private ListSorter _listSorter;

@@ -1,8 +1,6 @@
 package ui.questions;
 
 import java.awt.Dimension;
-import models.Database;
-import models.DatabaseIO;
 import ui.core.DisplayWindow;
 import ui.core.Display;
 import ui.core.ImageDisplay;
@@ -176,9 +174,6 @@ public class QuestionListDisplay extends Display<QuestionListController> {
    * @param args
    */
   public static void main(String[] args) {
-    // Load/initialize models.
-    Database db = DatabaseIO.loadDatabase();
-
     // Load/initialize controller/display.
     QuestionListController ctrl = new QuestionListController();
     QuestionListDisplay display = new QuestionListDisplay(ctrl);
