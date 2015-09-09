@@ -290,5 +290,16 @@ public class Question implements Serializable {
     }
     return grades;
   }
+  
+  public String getNote() {
+    return this.notes.isEmpty() ? "" : this.notes.get(0);
+  }
+  
+  public void setNote(String note) {
+    if (this.notes.isEmpty())
+      this.notes.add(note);
+    else
+      this.notes.set(0, note);
+  }
 
 }

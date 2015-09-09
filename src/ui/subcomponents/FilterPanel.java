@@ -98,6 +98,7 @@ public class FilterPanel extends SubPanel<QuestionListController, SubController<
    */
   protected JComboBox sorter2Combobox;
 
+
   /**
    *
    */

@@ -36,7 +36,11 @@ public enum Tag {
   /**
    *
    */
-  NEED_FORMULA;
+  NEED_FORMULA,
+  
+  DUMB_MISTAKE,
+  
+  STARRED;
 
   /**
    *

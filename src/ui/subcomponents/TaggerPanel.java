@@ -13,6 +13,7 @@ import models.Question;
 import models.Subject;
 import models.Tag;
 import core.Constants;
+import javax.swing.JTextArea;
 import ui.core.SubController;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
@@ -59,6 +60,9 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
    *
    */
   protected boolean hideBeforeAnswering;
+  
+  protected JTextArea notesArea;
+  protected FAButton notesAreaButton;
 
   /**
    *
@@ -125,6 +129,17 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
       });
       tagCheckboxes.put(tag, cb);
     }
+    
+    this.notesArea = new JTextArea();
+    this.notesAreaButton = new FAButton("Done");
+    this.notesAreaButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        if (questionList.isStarted()) {
+          questionList.getCurrentQuestion().setNote(notesArea.getText());
+        }
+        TaggerPanel.this.questionListController.requestFocus();
+      }
+    });
   }
 
   /**
@@ -147,6 +162,10 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
     for (Tag tag: tags) {
       this.add(tagCheckboxes.get(tag));
     }
+    
+    this.notesArea.setAlignmentX(LEFT_ALIGNMENT);
+    this.add(notesArea);
+    this.add(notesAreaButton);
 
     this.setAlignmentY(TOP_ALIGNMENT);
 
@@ -177,6 +196,9 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
       for (Tag tag: tags) {
         this.tagCheckboxes.get(tag).setSelected(true);
       }
+      
+      
+      this.notesArea.setText(this.questionList.getCurrentQuestion().getNote());
     }
   }
 
