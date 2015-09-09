@@ -13,6 +13,7 @@ import models.Question;
 import models.Subject;
 import models.Tag;
 import core.Constants;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import ui.core.SubController;
 import ui.core.components.FAButton;
@@ -63,6 +64,7 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
   
   protected JTextArea notesArea;
   protected FAButton notesAreaButton;
+  protected JScrollPane notesPane;
 
   /**
    *
@@ -140,6 +142,9 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
         TaggerPanel.this.questionListController.requestFocus();
       }
     });
+    
+    this.notesArea.setAlignmentX(LEFT_ALIGNMENT);
+    this.notesPane = new JScrollPane(this.notesArea);
   }
 
   /**
@@ -163,8 +168,8 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
       this.add(tagCheckboxes.get(tag));
     }
     
-    this.notesArea.setAlignmentX(LEFT_ALIGNMENT);
-    this.add(notesArea);
+    this.notesPane.setAlignmentX(LEFT_ALIGNMENT);
+    this.add(notesPane);
     this.add(notesAreaButton);
 
     this.setAlignmentY(TOP_ALIGNMENT);
@@ -210,6 +215,7 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
     if (this.hideBeforeAnswering) {
       this.setVisible(this.questionList.isStarted() && this.questionState.isAnswered());
     }
+    this.notesArea.setVisible(this.questionList.isStarted() && this.questionState.isAnswered());
   }
 
 }
