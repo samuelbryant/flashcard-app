@@ -1,11 +1,20 @@
 {
   "notes": [],
   "answer": "B",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["WAVES"],
+  "responses": [{
+    "response": "D",
+    "responseTime": 105553052395,
+    "dateString": "09/08/15 7:31 PM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1681.png",
   "id": 1681,
   "source": "GRE_1996",
   "questionNumber": 81,
-  "tags": []
+  "tags": [
+    "WRONG",
+    "HARD",
+    "UNSURE",
+    "IMPORTANT"
+  ]
 }

@@ -1,11 +1,15 @@
 {
   "notes": [],
   "answer": "C",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["MECHANICS"],
+  "responses": [{
+    "response": "C",
+    "responseTime": 9612797555,
+    "dateString": "09/08/15 8:25 PM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1504.png",
   "id": 1504,
   "source": "GRE_1991",
   "questionNumber": 4,
-  "tags": ["HARD"]
+  "tags": []
 }
