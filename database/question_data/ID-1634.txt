@@ -1,8 +1,12 @@
 {
   "notes": [],
   "answer": "D",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["SPECIAL"],
+  "responses": [{
+    "response": "D",
+    "responseTime": 26749850996,
+    "dateString": "09/09/15 11:40 AM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1634.png",
   "id": 1634,
   "source": "GRE_1996",

@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "B",
   "subjects": [],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 23202968157,
+    "dateString": "09/08/15 11:43 PM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1531.png",
   "id": 1531,
   "source": "GRE_1991",

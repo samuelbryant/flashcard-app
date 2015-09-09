@@ -1,11 +1,19 @@
 {
-  "notes": [],
+  "notes": ["Best method: all in terms of d\n  d = 2*L*sin(o)\n  F_C = k*q^2 / d^2\n  F_G = M*g*sin(o)\n         = M*g*d / 2*L\nSet equal\n  kq^2/d^2 = Mgd/2L\n  d^3 = 2Lkq^2 / Mg\nGiving you A"],
   "answer": "A",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["EM"],
+  "responses": [{
+    "response": "A",
+    "responseTime": 181770681622,
+    "dateString": "09/09/15 12:45 PM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1583.png",
   "id": 1583,
   "source": "GRE_1991",
   "questionNumber": 83,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "TIME",
+    "WRONG"
+  ]
 }

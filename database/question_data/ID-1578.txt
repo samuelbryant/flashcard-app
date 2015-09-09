@@ -1,11 +1,21 @@
 {
-  "notes": [],
+  "notes": ["Use conservation of momentum"],
   "answer": "C",
-  "subjects": [],
-  "responses": [],
+  "subjects": [
+    "ROTATIONAL",
+    "MECHANICS"
+  ],
+  "responses": [{
+    "response": "C",
+    "responseTime": 310078079341,
+    "dateString": "09/09/15 11:39 AM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1578.png",
   "id": 1578,
   "source": "GRE_1991",
   "questionNumber": 78,
-  "tags": []
+  "tags": [
+    "HARD",
+    "TIME"
+  ]
 }

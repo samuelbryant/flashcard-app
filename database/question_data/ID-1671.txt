@@ -1,11 +1,20 @@
 {
-  "notes": [],
+  "notes": ["My common mistake:\nCompute angle as:\n  tan(o) = v_y/v_x\n\nThe correct solution:\nCompute angle as:\n  tan(o) = Delta Y / Delta X\n            = Delta Y / L\nWhere Delta Y is given by:\n  (1/2) a*t^2\nas usual"],
   "answer": "A",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["EM"],
+  "responses": [{
+    "response": "X",
+    "responseTime": 426184196897,
+    "dateString": "09/09/15 11:30 AM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1671.png",
   "id": 1671,
   "source": "GRE_1996",
   "questionNumber": 71,
-  "tags": []
+  "tags": [
+    "WRONG",
+    "HARD",
+    "TIME",
+    "STARRED"
+  ]
 }

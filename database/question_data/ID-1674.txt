@@ -1,11 +1,19 @@
 {
-  "notes": [],
+  "notes": ["Simple math\n\n*Compute for mono. ideal\nif it works there, must also be\ntrue here\n\nS ~ ln(TV^(3/2)/N)\n2*ln(300) - ln(500) - ln(100)\n\n= ln(3^2) - ln(5) - ln(1)\n= ln(9/5)\n\nBoo-yah"],
   "answer": "B",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["THERMO"],
+  "responses": [{
+    "response": "B",
+    "responseTime": 117749717907,
+    "dateString": "09/08/15 11:17 PM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1674.png",
   "id": 1674,
   "source": "GRE_1996",
   "questionNumber": 74,
-  "tags": []
+  "tags": [
+    "TIME",
+    "HARD",
+    "STARRED"
+  ]
 }
