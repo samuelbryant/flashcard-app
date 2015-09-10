@@ -16,6 +16,9 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   // Question list variables.
   private final QuestionList _questionList;
   private boolean recordAnswers;
+  private Integer _numberAnswered;
+  private Integer _numberCorrect;
+  private Integer _totalQuestionTime;
 
   /**
    *
@@ -23,6 +26,9 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   public QuestionListController() {
     this._questionList = new QuestionList(ListFilter.NULL_FILTER, ListSorter.ID_SORTER);
     this.recordAnswers = false;
+    this._numberAnswered = 0;
+    this._numberCorrect = 0;
+    this._totalQuestionTime = 0;
   }
 
   /**
@@ -31,6 +37,18 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
    */
   public boolean getRecordAnswers() {
     return this.recordAnswers;
+  }
+  
+  public int getNumberAnswered() {
+    return this._numberAnswered;
+  }
+  
+  public int getNumberCorrect() {
+    return this._numberCorrect;
+  }
+  
+  public int getTotalQuestionTime() {
+    return this._totalQuestionTime;
   }
 
   /**
@@ -59,10 +77,20 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
       this.getQuestionState().changeAnswer(answer);
     } else {
       this.getQuestionState().answer(answer);
+      
+      // Record answer to database.
       if (this.recordAnswers) {
         Response r = this.getQuestionState().getResponseObject();
         this._questionList.getCurrentQuestion().addResponse(r);
       }
+      
+      // Record question list stats.
+      this._numberAnswered++;
+      if (answer == this._questionList.getCurrentQuestion().getAnswer()) {
+        this._numberCorrect++;
+      }
+      this._totalQuestionTime += this.getQuestionState().getLastResponseTime();
+      
     }
   }
 

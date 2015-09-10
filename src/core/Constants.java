@@ -17,6 +17,8 @@ import java.util.Date;
  */
 public class Constants {
 
+  
+  public static final int TARGET_TIME = 90;
   /**
    *
    */
