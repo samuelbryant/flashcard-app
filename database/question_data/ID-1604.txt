@@ -1,11 +1,22 @@
 {
   "notes": [],
   "answer": "A",
-  "subjects": [],
-  "responses": [],
+  "subjects": [
+    "EM",
+    "ROTATIONAL"
+  ],
+  "responses": [{
+    "response": "A",
+    "responseTime": 151565825453,
+    "dateString": "09/10/15 11:31 AM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1604.png",
   "id": 1604,
   "source": "GRE_1996",
   "questionNumber": 4,
-  "tags": []
+  "tags": [
+    "TIME",
+    "HARD",
+    "UNSURE"
+  ]
 }
