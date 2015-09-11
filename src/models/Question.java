@@ -1,36 +1,26 @@
 package models;
 
-import core.FatalError;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.Objects;
 
-/**
- *
- * @author sambryant
- */
-public class Question implements Serializable {
+public class Question extends AbstractQuestion {
 
-  // Permanent fields central to class.
-  Integer id = null;  // Non-nullable
-  Source source = null;  // Non-nullable
-  Integer questionNumber = null;  // Non-nullable
-  String databaseImageFilename = null;  // Non-nullable for persistent entries.
-  Answer answer = null;
-  ArrayList<Subject> subjects = new ArrayList<>();
-  ArrayList<Tag> tags = new ArrayList<>();
-  ArrayList<String> notes = new ArrayList<>();
-  ArrayList<Response> responses = new ArrayList<>();
-
+  protected Source source = null;  // Non-nullable
+  protected Integer questionNumber = null;  // Non-nullable
+  protected String databaseImageFilename = null;  // Non-nullable for persistent entries.
+  protected Answer answer = null;
+  
   // Transient fields which do not get serialized.
-  String originalImageFilename = null;
-  BufferedImage questionImage = null;
-  Boolean persistent = false;
-
-  Question() {}
+  protected String originalImageFilename = null;
+  protected BufferedImage questionImage = null;
+  
+  /**
+   * Constructor used when reading a question from database
+   */
+  Question(int id) {
+    super(id);
+  }
 
   /**
    * Constructor designed for importing questions.
@@ -40,62 +30,51 @@ public class Question implements Serializable {
    * @param imageFilename The {String} representation of the file with the question's image. 
    */
   public Question(Source source, Integer questionNumber, Answer answer, String imageFilename) {
+    super();
     this.source = source;
     this.questionNumber = questionNumber;
     this.answer = answer;
     this.originalImageFilename = imageFilename;
-
-    this.persistent = false;
     this.databaseImageFilename = null;
-  }
-
-  /**
-   * Performs necessary post-loading/creating processing work.
-   * This includes:
-   *  - Sorting responses by date
-   */
-  void initialize() {
-    Collections.sort(this.responses);
   }
 
   @Override
   public String toString() {
-    return String.format("ID: %05d  (%s  -  #%d)", id, source, questionNumber);
+    return super.toString() + String.format(" (%s - #%d)", source, questionNumber);
   }
 
   /**
-   *
-   * @return
+   * Returns image for this Question.
+   * @return BufferedImage of this GRE Question.
    */
   public BufferedImage getImage() {
     if (this.questionImage != null) {
       return this.questionImage;
     } else {
       System.out.printf("LOG: image not loaded yet for %s\n", this);
-      QuestionIO.loadQuestionImage(this);
+      QuestionIO.getGREIO().loadQuestionImages(this);
       return this.questionImage;
     }
   }
 
   /**
-   *
+   * Checks if this Question is valid (ready to be written to database).
    * @return
    */
+  @Override
   public boolean isValid() {
     // Ensure proper fields are non-null.
-    if (this.id == null) return false;
-    if (this.source == null) return false;
-    if (this.questionNumber == null) return false;
-    return true;
-  }
-
-  /**
-   *
-   */
-  public void validate() {
-    if (!this.isValid()) {
-      throw new FatalError("Question failed validation: " + this);
+    if (this.id == null) 
+      return false;
+    if (this.source == null) 
+      return false;
+    if (this.questionNumber == null) 
+      return false;
+    if (!((databaseImageFilename != null && this.persistent) ||
+          (originalImageFilename != null && !this.persistent))) {
+      return false;
     }
+    return true;
   }
 
   /**
@@ -104,54 +83,6 @@ public class Question implements Serializable {
    */
   public Answer getAnswer() {
     return this.answer;
-  }
-
-  /**
-   *
-   * @param subject
-   * @return
-   */
-  public boolean hasSubject(Subject subject) {
-    return this.subjects.contains(subject);
-  }
-
-  /**
-   *
-   * @return
-   * @deprecated
-   */
-  @Deprecated
-  public Subject[] getSubjectsArray() {
-    Subject[] subjects = new Subject[this.subjects.size()];
-    for (int i=0; i<this.subjects.size(); i++) {
-      subjects[i] = this.subjects.get(i);
-    }
-    return subjects;
-  }
-
-  /**
-   *
-   * @param subject
-   * @param value
-   */
-  public void setSubject(Subject subject, boolean value) {
-    if (this.subjects.contains(subject)) {
-      if (!value) {
-        this.subjects.remove(subject);
-      }
-    } else if (value) {
-      this.subjects.add(subject);
-    }
-  }
-
-  /**
-   *
-   * @param r
-   */
-  public void addResponse(Response r) {
-    this.responses.add(r);
-    // Keep responses sorted by last answered date.
-    Collections.sort(this.responses);
   }
 
   /**
@@ -166,101 +97,8 @@ public class Question implements Serializable {
    *
    * @return
    */
-  public ArrayList<Response> getResponses() {
-    return this.responses;
-  }
-
-  /**
-   *
-   * @return
-   */
-  public ArrayList<Subject> getSubjects() {
-    return this.subjects;
-  }
-
-  /**
-   *
-   * @return
-   */
-  public ArrayList<Tag> getTags() {
-    return this.tags;
-  }
-
-  /**
-   *
-   * @return
-   */
-  public int getId() {
-    return this.id;
-  }
-
-  /**
-   *
-   * @param tag
-   * @return
-   */
-  public boolean hasTag(Tag tag) {
-    return this.tags.contains(tag);
-  }
-
-  /**
-   *
-   * @param tag
-   * @param value
-   */
-  public void setTag(Tag tag, boolean value) {
-    if (this.tags.contains(tag)) {
-      if (!value) {
-        this.tags.remove(tag);
-      }
-    } else if (value) {
-      this.tags.add(tag);
-    }
-  }
-
-  /**
-   *
-   * @param tags
-   */
-  public void setQuestionTags(ArrayList<Tag> tags) {
-    this.tags = tags;
-  }
-
-  /**
-   *
-   * @param subjects
-   */
-  public void setQuestionSubjects(ArrayList<Subject> subjects) {
-    this.subjects = subjects;
-  }
-
-  /**
-   *
-   * @return
-   */
   public Object getQuestionNumber() {
     return this.questionNumber;
-  }
-
-  /**
-   *
-   * @param tag
-   */
-  public void addTag(Tag tag) {
-    this.tags.add(tag);
-  }
-
-  /**
-   * Gets most recent Date that this question was answered.
-   * @return Date of last response or null if no responses.
-   */
-  public Date getLastResponseTime() {
-    Collections.sort(this.responses);  // should be necessary.
-    if (this.responses.isEmpty()) {
-      return null;
-    } else {
-      return this.responses.get(0).date;
-    }
   }
 
   /**
@@ -290,16 +128,28 @@ public class Question implements Serializable {
     }
     return grades;
   }
-  
-  public String getNote() {
-    return this.notes.isEmpty() ? "" : this.notes.get(0);
+
+  @Override
+  public Type getType() {
+    return Type.GRE;
   }
-  
-  public void setNote(String note) {
-    if (this.notes.isEmpty())
-      this.notes.add(note);
-    else
-      this.notes.set(0, note);
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Question) {
+      Question q = (Question) obj;
+      return q.source == this.source && Objects.equals(q.questionNumber, this.questionNumber);
+    } else {
+      return false;
+    }
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 17 * hash + Objects.hashCode(this.source);
+    hash = 17 * hash + Objects.hashCode(this.questionNumber);
+    return hash;
   }
 
 }

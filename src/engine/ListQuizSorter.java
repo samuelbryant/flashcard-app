@@ -9,7 +9,7 @@ import models.Question;
  * Warning:
  * This "high-jacks" normal ListSorter behavior by changing the length of the input array.
  */
-public abstract class ListQuizSorter extends ListSorter {
+public abstract class ListQuizSorter extends ListSorter<Question> {
 
   ListQuizSorter() {}
 

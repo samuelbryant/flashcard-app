@@ -4,6 +4,7 @@ import engine.ListFilter;
 import engine.ListSorter;
 import models.Answer;
 import models.DatabaseIO;
+import models.Question;
 import models.Response;
 import ui.core.Controller;
 
@@ -24,7 +25,7 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
    *
    */
   public QuestionListController() {
-    this._questionList = new QuestionList(ListFilter.NULL_FILTER, ListSorter.ID_SORTER);
+    this._questionList = new QuestionList(new ListFilter.NullFilter<Question>(), new ListSorter.IdSorter<Question>());
     this.recordAnswers = false;
     this._numberAnswered = 0;
     this._numberCorrect = 0;
@@ -64,8 +65,8 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
   /**
    *
    */
-    public void save() {
-    DatabaseIO.saveDatabase();
+  public void save() {
+    DatabaseIO.getQuestionDatabaseIO().save();
   }
 
   /**

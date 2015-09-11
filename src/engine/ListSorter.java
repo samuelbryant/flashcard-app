@@ -6,33 +6,33 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import models.Answer;
-import models.DatabaseIO;
+import models.AbstractQuestion;
+import models.Flashcard;
 import models.Question;
-import models.Response;
-import models.Source;
 
 /**
  * Class used to sort lists of Questions in-place.
  */
-public abstract class ListSorter {
+public abstract class ListSorter <T extends AbstractQuestion> {
 
   /**
    * Sorts given array list in-place.
    * @param list An array list of objects to be sorted.
    */
-  public abstract void sort(ArrayList<Question> list);
+  public abstract void sort(ArrayList<T> list);
 
   /**
    *
+   * @param <K>
    * @param s1
    * @param s2
    * @return
    */
-  public static ListSorter getCompositeSorter(final ListSorter s1, final ListSorter s2) {
-    return new ListSorter() {
+  public static <K extends AbstractQuestion> ListSorter<K> getCompositeSorter(
+      final ListSorter<K> s1, final ListSorter<K> s2) {
+    return new ListSorter<K>() {
       @Override
-      public void sort(ArrayList<Question> list) {
+      public void sort(ArrayList<K> list) {
         s2.sort(list);
         s1.sort(list);
       }
@@ -42,61 +42,64 @@ public abstract class ListSorter {
   /**
    * ListSorter class based on Comparator object.
    */
-  public static class CompareSorter extends ListSorter {
+  public static class CompareSorter<K extends AbstractQuestion> extends ListSorter<K> {
 
-    /**
-     *
-     */
-    protected final Comparator<Question> compare;
+    protected final Comparator<K> compare;
 
-    /**
-     *
-     * @param compare
-     */
-    public CompareSorter(Comparator<Question> compare) {
+    public CompareSorter(Comparator<K> compare) {
       this.compare = compare;
     }
 
     @Override
-    public void sort(ArrayList<Question> list) {
+    public void sort(ArrayList<K> list) {
       Collections.sort(list, compare);
     }
   }
 
   /**
    * ListSorter instance which sorts question IDs from smallest to largest.
+   * @param <K> Type of Question for this IdSorter.
    */
-  public static final ListSorter ID_SORTER = new CompareSorter(new Comparator<Question>() {
-    @Override
-    public int compare(Question o1, Question o2) {
-      return o1.getId() - o2.getId();
+  public static final class IdSorter<K extends AbstractQuestion> extends CompareSorter<K> {
+    public IdSorter() {
+      super(new Comparator<K>() {
+        @Override
+        public int compare(K o1, K o2) {
+          return o1.getId() - o2.getId();
+        }
+      });
     }
-  });
+  }
 
   /**
    * ListSorter instance which sorts questions from least recently answered to most recently answered.
+   * @param <K>
    */
-  public static final ListSorter LAST_ANSWERED = new CompareSorter(new Comparator<Question>() {
-    @Override
-    public int compare(Question o1, Question o2) {
-      Date d1 = o1.getLastResponseTime();
-      Date d2 = o2.getLastResponseTime();
-      if (d1 == null && d2 == null) {
-        return 0;
-      } else if (d1 == null) {
-        return -1;
-      } else if (d2 == null) {
-        return +1;
-      } else {
-        return d1.compareTo(d2);
-      }
+  public static final class LastAnsweredSorter<K extends AbstractQuestion> extends CompareSorter<K> {
+    public LastAnsweredSorter() {
+      super(new Comparator<K>(){
+        @Override
+        public int compare(K o1, K o2) {
+          Date d1 = o1.getLastResponseTime();
+          Date d2 = o2.getLastResponseTime();
+          if (d1 == null && d2 == null) {
+            return 0;
+          } else if (d1 == null) {
+            return -1;
+          } else if (d2 == null) {
+            return +1;
+          } else {
+            return d1.compareTo(d2);
+          }
+        }
+      });
     }
-  });
+  }
 
   /**
    * ListSorter instance which sorts questions based on fraction of times wrong.
    */
-  public static final ListSorter WRONG_PERCENTAGE_SORTER = new CompareSorter(new Comparator<Question>() {
+  public static final ListSorter<Question> WRONG_PERCENTAGE_SORTER = new CompareSorter(new Comparator<Question>() {
     @Override
     public int compare(Question o1, Question o2) {
       ArrayList<Boolean> responses1 = o1.getGradedResponses();
@@ -135,9 +138,9 @@ public abstract class ListSorter {
   /**
    * ListSorter instance which sorts questions randomly.
    */
-  public static final ListSorter RANDOM_SORTER = new ListSorter() {
+  public static final class RandomSorter<K extends AbstractQuestion> extends ListSorter<K> {
     @Override
-    public void sort(ArrayList<Question> list) {
+    public void sort(ArrayList<K> list) {
       Collections.shuffle(list);
     }
   };
@@ -145,9 +148,9 @@ public abstract class ListSorter {
   /**
    * ListSorter instance which does not sort or change the order of questions.
    */
-  public static final ListSorter NULL_SORTER = new ListSorter() {
+  public static final class NullSorter<K extends AbstractQuestion> extends ListSorter<K> {
     @Override
-    public void sort(ArrayList<Question> list) {}
+    public void sort(ArrayList<K> list) {}
   };
 
   static void printList(ArrayList<Integer> list) {
@@ -156,18 +159,27 @@ public abstract class ListSorter {
     }
   }
 
-  /**
-   *
-   */
-  public static final Map<String, ListSorter> ALL_SORTERS = new HashMap<>();
-  static {
-    ALL_SORTERS.put("By ids", ListSorter.ID_SORTER);
-    ALL_SORTERS.put("Last answered", ListSorter.LAST_ANSWERED);
-    ALL_SORTERS.put("Random", RANDOM_SORTER);
-    ALL_SORTERS.put("None", NULL_SORTER);
-    ALL_SORTERS.put("Wrong %", WRONG_PERCENTAGE_SORTER);
-    ALL_SORTERS.put("Quiz 1", new engine.ListQuiz1());
+  
+  public static final Map<String, ListSorter<Question>> getAllGRESorters() {
+    Map<String, ListSorter<Question>> sorters = new HashMap<>();
+    sorters.put("By ids", new IdSorter<Question>());
+    sorters.put("Last answered", new LastAnsweredSorter<Question>());
+    sorters.put("Random", new RandomSorter<Question>());
+    sorters.put("None", new NullSorter<Question>());
+    sorters.put("Wrong %", WRONG_PERCENTAGE_SORTER);
+    sorters.put("Quiz 1", new engine.ListQuiz1());
+    return sorters;
   }
+  
+  public static final Map<String, ListSorter<Flashcard>> getAllFLCSorters() {
+    Map<String, ListSorter<Flashcard>> sorters = new HashMap<>();
+    sorters.put("By ids", new IdSorter<Flashcard>());
+    sorters.put("Last answered", new LastAnsweredSorter<Flashcard>());
+    sorters.put("Random", new RandomSorter<Flashcard>());
+    sorters.put("None", new NullSorter<Flashcard>());
+    return sorters;
+  }
+  
 
   /**
    *
@@ -179,18 +191,4 @@ public abstract class ListSorter {
    */
   public static final String DEFAULT_2_STRING = "None";
 
-  /**
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    ListSorter s1 = ListSorter.LAST_ANSWERED;
-    ListSorter s2 = ListSorter.NULL_SORTER;
-    ListSorter s = ListSorter.getCompositeSorter(s1, s2);
-
-    ArrayList<Question> list = DatabaseIO.getDatabase().getQuestions(ListFilter.NULL_FILTER, s);
-    for (Question q: list) {
-      System.out.println(q);
-    }
-  }
 }

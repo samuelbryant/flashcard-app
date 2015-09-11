@@ -6,30 +6,28 @@ import engine.ListSorter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Objects;
 import java.util.TreeMap;
 
 /**
- *
- * @author sambryant
+ * @param <T> Type of question this database represents.
  */
-public final class Database {
+public final class Database <T extends AbstractQuestion> {
 
   static final int _ID_START = 1001;
 
   // Package private fields.
-  Integer revisionNumber = 0;
-  Integer questionNumber = 0;
-  Integer nextQuestionId = 0;
-  Map<Integer, Question> questions = new TreeMap<>();
+  protected Integer revisionNumber = 0;
+  protected Integer questionNumber = 0;
+  protected Integer nextQuestionId = 0;
+  protected Map<Integer, T> questions = new TreeMap<>();
 
   // Private fields.
   boolean isPersistent = false;
 
   Database() {}
 
-  static Database getFreshDatabase() {
-    Database db = new Database();
+  static <K extends AbstractQuestion> Database<K> getFreshDatabase() {
+    Database<K> db = new Database();
     db.revisionNumber = 0;
     db.questionNumber = 0;
     db.nextQuestionId = _ID_START;
@@ -45,43 +43,17 @@ public final class Database {
   public int getNumberOfQuestions() {
     return this.questions.values().size();
   }
-
-  /**
-   *
-   * @param source
-   * @param questionNumber
-   * @return
-   */
-  public boolean containsQuestion(Source source, Integer questionNumber) {
-    for (Question q: this.questions.values()) {
-      if (q.source == source && Objects.equals(q.questionNumber, questionNumber)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   *
-   * @param source
-   * @param questionNumber
-   * @return
-   */
-  public Question findQuestion(Source source, Integer questionNumber) {
-    for (Question q: this.questions.values()) {
-      if (q.source == source && Objects.equals(q.questionNumber, questionNumber)) {
-        return q;
-      }
-    }
-    return null;
+  
+  public boolean containsQuestion(T q) {
+    return this.questions.containsValue(q);
   }
 
   /**
    * Gets Question array from Database.
    * @return ArrayList with all Question instances, sorted by ID.
    */
-  public ArrayList<Question> getQuestions() {
-    return getQuestions(ListFilter.NULL_FILTER, ListSorter.ID_SORTER);
+  public ArrayList<T> getQuestions() {
+    return getQuestions(new ListFilter.NullFilter<T>(), new ListSorter.IdSorter<T>());
   }
 
   /**
@@ -89,8 +61,8 @@ public final class Database {
    * @param filter ListFilter to use to filter Question array.
    * @return ArrayList with all Question instances that match ListFilter, sorted by ID.
    */
-  public ArrayList<Question> getQuestions(ListFilter filter) {
-    return getQuestions(filter, ListSorter.ID_SORTER);
+  public ArrayList<T> getQuestions(ListFilter<T> filter) {
+    return getQuestions(filter, new ListSorter.IdSorter<T>());
   }
 
   /**
@@ -98,8 +70,8 @@ public final class Database {
    * @param sorter ListSorter to use to sort Question array.
    * @return ArrayList with all Question instances, sorted by ListSorter.
    */
-  public ArrayList<Question> getQuestions(ListSorter sorter) {
-    return getQuestions(ListFilter.NULL_FILTER, sorter);
+  public ArrayList<T> getQuestions(ListSorter<T> sorter) {
+    return getQuestions(new ListFilter.NullFilter<T>(), sorter);
   }
 
 
@@ -110,11 +82,11 @@ public final class Database {
    * @param sorter ListSorter to use to sort Question array.
    * @return ArrayList with all Question instances that match ListFilter, sorted by ListSorter.
    */
-  public ArrayList<Question> getQuestions(ListFilter filter, ListSorter sorter) {
-    ArrayList<Question> list = new ArrayList<>();
-    Iterator<Question> iter = this.getDatabaseIterator();
+  public ArrayList<T> getQuestions(ListFilter<T> filter, ListSorter<T> sorter) {
+    ArrayList<T> list = new ArrayList<>();
+    Iterator<T> iter = this.getDatabaseIterator();
     while (iter.hasNext()) {
-      Question q = iter.next();
+      T q = iter.next();
       if (filter.accept(q)) {
         list.add(q);
       }
@@ -124,7 +96,7 @@ public final class Database {
   }
 
 
-  private Iterator<Question> getDatabaseIterator() {
+  private Iterator<T> getDatabaseIterator() {
     return this.questions.values().iterator();
   }
 
@@ -132,7 +104,7 @@ public final class Database {
    *
    * @param q
    */
-  public void addQuestionToSession(Question q) {
+  public void addQuestionToSession(T q) {
     // For old questions (has id), we ensure question is already in database, then set it to map.
     if (q.id != null) {
       if (this.questions.get(q.id) == null) {
@@ -154,7 +126,7 @@ public final class Database {
       }
 
       // Ensure database doesn't already have matching question (to avoid duplicates).
-      if (this.containsQuestion(q.source, q.questionNumber)) {
+      if (this.containsQuestion(q)) {
         // Unset new id so question is unchanged.
         q.id = null;
         System.out.printf("WRN: addQuestionToSession: Ignoring duplicate question: %s\n", q);
@@ -173,7 +145,7 @@ public final class Database {
    */
   public boolean isValid() {
     System.out.printf("LOG: database isValid NIY\n");
-    for (Question q: this.questions.values()) {
+    for (T q: this.questions.values()) {
       if (!q.isValid()) {
         return false;
       }
@@ -190,19 +162,19 @@ public final class Database {
     }
   }
 
-  /**
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    Database d = DatabaseIO.loadDatabase();
-    System.out.println("DATABASE");
-    System.out.printf("Total #  : %d\n", d.questionNumber);
-    System.out.printf("Integrity: %s\n", d.isValid());
-    System.out.printf("**** Questions ****\n");
-    for (Question q: d.questions.values()) {
-      System.out.println(q);
-    }
-  }
+//  /**
+//   *
+//   * @param args
+//   */
+//  public static void main(String[] args) {
+//    Database d = DatabaseIO.loadDatabase();
+//    System.out.println("DATABASE");
+//    System.out.printf("Total #  : %d\n", d.questionNumber);
+//    System.out.printf("Integrity: %s\n", d.isValid());
+//    System.out.printf("**** Questions ****\n");
+//    for (T q: d.questions.values()) {
+//      System.out.println(q);
+//    }
+//  }
 
 }

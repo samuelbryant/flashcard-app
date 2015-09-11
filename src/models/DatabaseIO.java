@@ -5,119 +5,110 @@ import core.IO;
 import java.io.PrintWriter;
 import org.json.JSONObject;
 
-/**
- *
- * @author sambryant
- */
-public class DatabaseIO {
-
-  /**
-   *
-   */
-  protected static Database currentDatabase = null;
-
-  /**
-   *
-   * @return
-   */
-  public static Database loadDatabase() {
-    if (currentDatabase != null) {
-      throw new IllegalStateException("Database has already been loaded");
+public abstract class DatabaseIO <K extends AbstractQuestion> {
+  
+  public static final DatabaseIO<Flashcard> getFlashcardDatabaseIO() {
+    return DatabaseIO.FLCDBIO.SINGLETON;
+  }
+  
+  public static final DatabaseIO<Question> getQuestionDatabaseIO() {
+    return DatabaseIO.GREDBIO.SINGLETON;
+  }
+  
+  protected Database<K> database;
+  
+  private DatabaseIO() {
+    this.database = null; 
+  }
+  
+  public Database<K> get() {
+    return this.getDatabase();
+  }
+  
+  public void save() {
+    this.saveDatabase();
+  }
+  
+  protected abstract QuestionIO<K> getQuestionIO();
+  
+  protected abstract Type getType();
+  
+  private Database<K> getDatabase() {
+    Database<K> db = this.database;
+    if (db == null) {
+      this.loadDatabase();
     }
-    Database db = _readDatabaseFromFiles();
-    db.validate();
-    currentDatabase = db;
+    return this.database;
+  }
+  
+  private void loadDatabase() {
+    if (database != null) {
+      throw new IllegalStateException(this.getType() + " database has already been loaded");
+    } else {
+      String databaseFilename = Constants.getDatabaseFile(this.getType());
+      Database<K> db;
+      if (IO.fileExists(databaseFilename)) {
+        String jsonStr = IO.readEntireFileOrDie(databaseFilename);
+        db = this.parseDatabaseJSON(jsonStr);
+        db.isPersistent = true;
+      } else {  
+        db = Database.<K>getFreshDatabase();
+        db.isPersistent = false;
+      } 
+      db.validate();
+      this.database = db;
+    }
+  }
+  
+  private Database<K> parseDatabaseJSON(String jsonStr) {
+    JSONObject obj = new JSONObject(jsonStr);
+    Database<K> db = new Database<>();
+    db.questionNumber = obj.getInt("questionNumber");
+    db.revisionNumber = obj.getInt("revisionNumber");
+    db.nextQuestionId = obj.getInt("nextQuestionId");
+    for (Object idObj: obj.getJSONArray("questions")) {
+      Integer id = (Integer) idObj;
+      K question = this.getQuestionIO().get(id);
+      db.questions.put(id, question);
+    }
     return db;
   }
-
-  /**
-   *
-   * @return
-   */
-  public static Database getDatabase() {
-    if (currentDatabase == null) {
-      loadDatabase();
+  
+  private void saveDatabase() {
+    if (database == null) {
+      throw new IllegalStateException(this.getType() + " database has not yet been loaded");
+    } else {
+      try {
+        Constants.backupDatabaseOrDie();
+      } catch(Exception ex) {
+        System.err.printf("ERROR: %s Database Backup Failed!\n", this.getType().toString());
+      } 
+      database.validate();
+      database.revisionNumber++;
+      this.writeDatabaseFile();
+      this.writeQuestionFiles();
+      database.isPersistent = true;
     }
-    return currentDatabase;
-  }
-
-  /**
-   *
-   */
-  public static void saveDatabase() {
-
-    if (currentDatabase == null) {
-      throw new IllegalStateException("No database has been loaded");
-    }
-    try {
-      _backupDatabase();
-    } catch(Exception ex) {
-      System.err.printf("ERROR: Database Backup Failed!\n");
-    }
-    _writeDatabase(currentDatabase);
-
-  }
-
-  private static void _backupDatabase() {
-    String backupDirname = Constants.getDatabaseBackupDirName();
-
-    IO.createDirOrDie(backupDirname);
-    String src1 = Constants.QUESTION_DATABASE_MAIN_FILE;
-    String dst1 = Constants.getDatabaseBackupMainFileName(backupDirname);
-    String src2 = Constants.QUESTION_DATA_DIR;
-    String dst2 = Constants.getDatabaseBackupDataDirName(backupDirname);
-
-    IO.copyOrDie(src1, dst1);
-    IO.copyOrDie(src2, dst2);
-  }
-
-  private static void _backupToFolder(String srcDirname, String srcFilename, String dstDirname) {
-    String src = srcDirname + "/" + srcFilename;
-    String dst = dstDirname + "/" + srcFilename;
-    IO.copyOrDie(src, dst);
-  }
-
-  /**
-   *
-   * @param db
-   * @deprecated
-   */
-  @Deprecated
-  public static void writeDatabase(Database db) {
-    db.validate();
-    db.revisionNumber++;
-    _writeDatabaseFile(db);
-    _writeQuestionFiles(db);
-    db.isPersistent = true;
-  }
-
-  private static void _writeDatabase(Database db) {
-    db.validate();
-    db.revisionNumber++;
-    _writeDatabaseFile(db);
-    _writeQuestionFiles(db);
-    db.isPersistent = true;
   }
 
   //***** DATABASE WRITING METHODS *****/
-
-  private static void _writeQuestionFiles(Database db) {
-    for (Question q: db.questions.values()) {
-      QuestionIO.writeQuestion(q);
+  private void writeQuestionFiles() {
+    for (K q: database.questions.values()) {
+      this.getQuestionIO().save(q);
     }
   }
 
-  private static void _writeDatabaseFile(Database db) {
-    String dataFilename = Constants.QUESTION_DATABASE_MAIN_FILE;
+  private void writeDatabaseFile() {
+    String dataFilename = Constants.getDatabaseFile(this.getType());
     IO.backupAndRecreateOrDie(dataFilename);
+    
     PrintWriter pw = IO.getPrintWriterOrDie(dataFilename);
-
-    String jsonDatabase = _databaseToJSON(db);
+    String jsonDatabase = this.databaseToJSON(database);
     pw.write(jsonDatabase);
     IO.closeOrLive(pw);
   }
 
-  private static String _databaseToJSON(Database db) {
+  private String databaseToJSON(Database db) {
     JSONObject obj = new JSONObject();
     obj.put("questionNumber", db.questionNumber);
     obj.put("revisionNumber", db.revisionNumber);
@@ -125,33 +116,30 @@ public class DatabaseIO {
     obj.put("questions", db.questions.keySet());
     return obj.toString(2);
   }
-
-  //***** DATABASE READING METHODS *****/
-
-  private static Database _readDatabaseFromFiles() {
-    String databaseFilename = Constants.QUESTION_DATABASE_MAIN_FILE;
-    if (IO.fileExists(databaseFilename)) {
-      String jsonStr = IO.readEntireFileOrDie(databaseFilename);
-      Database db = _parseDatabaseJSON(jsonStr);
-      db.isPersistent = true;
-      return db;
-    } else {
-      Database db = Database.getFreshDatabase();
-      db.isPersistent = false;
-      return db;
+  
+  public static class FLCDBIO extends DatabaseIO<Flashcard> {
+    private static final FLCDBIO SINGLETON = new FLCDBIO();
+    
+    @Override
+    protected QuestionIO<Flashcard> getQuestionIO() {
+      return QuestionIO.getFlashcardIO();
+    }
+    @Override
+    protected Type getType() {
+      return Type.FLASHCARD;
     }
   }
-  private static Database _parseDatabaseJSON(String jsonStr) {
-    JSONObject obj = new JSONObject(jsonStr);
-    Database db = new Database();
-    db.questionNumber = obj.getInt("questionNumber");
-    db.revisionNumber = obj.getInt("revisionNumber");
-    db.nextQuestionId = obj.getInt("nextQuestionId");
-    for (Object idObj: obj.getJSONArray("questions")) {
-      Integer id = (Integer) idObj;
-      Question q = QuestionIO.loadQuestion(id);
-      db.questions.put(id, q);
+  public static class GREDBIO extends DatabaseIO<Question> {
+    private static final GREDBIO SINGLETON = new GREDBIO();
+    
+    @Override
+    protected QuestionIO<Question> getQuestionIO() {
+      return QuestionIO.getGREIO();
     }
-    return db;
+    
+    @Override
+    protected Type getType() {
+      return Type.GRE;
+    }
   }
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import models.AbstractQuestion;
 import models.Question;
 import models.Source;
 import models.Subject;
@@ -13,7 +14,7 @@ import models.Tag;
 /**
  * Class used to filter lists of Questions to create new lists.
  */
-public abstract class ListFilter {
+public abstract class ListFilter <T extends AbstractQuestion> {
 
   /**
    *
@@ -36,14 +37,14 @@ public abstract class ListFilter {
    * @param q Question to filter.
    * @return Boolean indicating if question should be included.
    */
-  public abstract boolean accept(Question q);
+  public abstract boolean accept(T q);
 
   /**
    *
    * @param filters
    * @return
    */
-  public static ListFilter getCompositeFilter(ArrayList<ListFilter> filters) {
+  public static <K extends AbstractQuestion> ListFilter<K> getCompositeFilter(ArrayList<ListFilter<K>> filters) {
     return getCompositeFilter(filters, Relationship.AND);
   }
 
@@ -54,7 +55,7 @@ public abstract class ListFilter {
    * @param filter2 Second filter to consider.
    * @return A ListFilter that requires both filter arguments to pass.
    */
-  public static ListFilter getCompositeFilter(final ListFilter filter1, final ListFilter filter2) {
+  public static <K extends AbstractQuestion> ListFilter getCompositeFilter(final ListFilter<K> filter1, final ListFilter<K> filter2) {
     return getCompositeFilter(filter1, filter2, Relationship.AND);
   }
 
@@ -66,10 +67,11 @@ public abstract class ListFilter {
    * @param rel Relationship to use when creating composite filter (AND or OR).
    * @return A ListFilter that is a composite of the given filters.
    */
-  public static ListFilter getCompositeFilter(final ListFilter filter1, final ListFilter filter2, final Relationship rel) {
-    return new ListFilter() {
+  public static <K extends AbstractQuestion> ListFilter getCompositeFilter(
+      final ListFilter<K> filter1, final ListFilter<K> filter2, final Relationship rel) {
+    return new ListFilter<K>() {
       @Override
-      public boolean accept(Question q) {
+      public boolean accept(K q) {
         if (rel == Relationship.AND) {
           return filter1.accept(q) && filter2.accept(q);
         } else {
@@ -86,10 +88,11 @@ public abstract class ListFilter {
    * @param rel Relationship to use when creating composite filter (AND or OR).
    * @return A ListFilter that is a composite of the given filters.
    */
-  public static ListFilter getCompositeFilter(final List<ListFilter> filters, final Relationship rel) {
-    return new ListFilter() {
+  public static <K extends AbstractQuestion> ListFilter getCompositeFilter(
+      final List<ListFilter<K>> filters, final Relationship rel) {
+    return new ListFilter<K>() {
       @Override
-      public boolean accept(Question q) {
+      public boolean accept(K q) {
         if (rel == Relationship.AND) {
           for (ListFilter f: filters) {
             if (!f.accept(q)) {
@@ -111,11 +114,11 @@ public abstract class ListFilter {
 
   /**
    * ListFilter instance which returns all values.
+   * @param <K>
    */
-  public static ListFilter NULL_FILTER = new ListFilter() {
-
+  public static class NullFilter <K extends AbstractQuestion> extends ListFilter<K> {
     @Override
-    public boolean accept(Question q) {
+    public boolean accept(K q) {
       return true;
     }
   };
@@ -123,7 +126,7 @@ public abstract class ListFilter {
   /**
    * ListFilter class which filters Question lists by the Source value of the Question instances.
    */
-  public static class SourceFilter extends ListFilter {
+  public static class SourceFilter extends ListFilter<Question> {
 
     private final Map<Source, Boolean> sources;
     private final boolean includeNoSources;
@@ -167,7 +170,7 @@ public abstract class ListFilter {
   /**
    * ListFilter class which filters Question lists by the Tag values of the Question instances.
    */
-  public static class TagFilter extends ListFilter {
+  public static class TagFilter<K extends AbstractQuestion> extends ListFilter<K> {
 
     private final Map<Tag, Boolean> tags;
     private final boolean includeNoTags;
@@ -198,7 +201,7 @@ public abstract class ListFilter {
     }
 
     @Override
-    public boolean accept(Question q) {
+    public boolean accept(K q) {
       ArrayList<Tag> questionTags = q.getTags();
       if (questionTags.isEmpty()) {
         return includeNoTags;
@@ -211,7 +214,7 @@ public abstract class ListFilter {
   /**
    * ListFilter class which filters Question lists by the Subject values of the Question instances.
    */
-  public static class SubjectFilter extends ListFilter {
+  public static class SubjectFilter<K extends AbstractQuestion> extends ListFilter<K> {
 
     private final Map<Subject, Boolean> subjects;
     private final boolean includeNoSubjects;
@@ -242,7 +245,7 @@ public abstract class ListFilter {
     }
 
     @Override
-    public boolean accept(Question q) {
+    public boolean accept(K q) {
       ArrayList<Subject> questionSubjects = q.getSubjects();
       if (questionSubjects.isEmpty()) {
         return includeNoSubjects;

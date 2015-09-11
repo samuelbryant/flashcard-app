@@ -16,6 +16,7 @@ import models.Source;
 import models.Subject;
 import models.Tag;
 import core.Constants;
+import models.Question;
 import ui.core.SubController;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
@@ -183,8 +184,8 @@ public class FilterPanel extends SubPanel<QuestionListController, SubController<
     this.sourceCombobox.setAlignmentX(LEFT_ALIGNMENT);
 
     // Sorting combo boxes.
-    this.sorter1Combobox = new JComboBox(ListSorter.ALL_SORTERS.keySet().toArray());
-    this.sorter2Combobox = new JComboBox(ListSorter.ALL_SORTERS.keySet().toArray());
+    this.sorter1Combobox = new JComboBox(ListSorter.getAllGRESorters().keySet().toArray());
+    this.sorter2Combobox = new JComboBox(ListSorter.getAllGRESorters().keySet().toArray());
     this.sorter1Combobox.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -244,14 +245,14 @@ public class FilterPanel extends SubPanel<QuestionListController, SubController<
   }
 
   private ListSorter _generateSorter() {
-    ListSorter s1 = ListSorter.ALL_SORTERS.get((String) this.sorter1Combobox.getSelectedItem());
-    ListSorter s2 = ListSorter.ALL_SORTERS.get((String) this.sorter2Combobox.getSelectedItem());
+    ListSorter s1 = ListSorter.getAllGRESorters().get((String) this.sorter1Combobox.getSelectedItem());
+    ListSorter s2 = ListSorter.getAllGRESorters().get((String) this.sorter2Combobox.getSelectedItem());
 
     return ListSorter.getCompositeSorter(s1, s2);
   }
 
   private ListFilter _generateFilter() {
-    ArrayList<ListFilter> filters = new ArrayList<>();
+    ArrayList<ListFilter<Question>> filters = new ArrayList<>();
 
     // Build subject filter.
     ArrayList<Subject> subjectFilters = new ArrayList<>();

@@ -4,6 +4,7 @@ import engine.ListFilter;
 import engine.ListSorter;
 import java.util.ArrayList;
 import java.util.Observable;
+import models.Database;
 import models.DatabaseIO;
 import models.Question;
 
@@ -88,8 +89,8 @@ public class QuestionList extends Observable {
 
   private final QuestionState _questionState;
   private ArrayList<Question> _questionList;
-  private ListFilter _listFilter;
-  private ListSorter _listSorter;
+  private ListFilter<Question> _listFilter;
+  private ListSorter<Question> _listSorter;
   private Integer _currentIndex;
   private Integer _totalNumber;
   private State _state;
@@ -99,7 +100,7 @@ public class QuestionList extends Observable {
    * @param filter
    * @param sorter
    */
-  public QuestionList(ListFilter filter, ListSorter sorter) {
+  public QuestionList(ListFilter<Question> filter, ListSorter<Question> sorter) {
     this._listFilter = filter;
     this._listSorter = sorter;
     this._state = State.NOT_STARTED;
@@ -109,7 +110,11 @@ public class QuestionList extends Observable {
   }
 
   private void _resetList() {
-    this._questionList = DatabaseIO.getDatabase().getQuestions(_listFilter, _listSorter);
+    DatabaseIO<Question> io = DatabaseIO.getQuestionDatabaseIO();
+    Database<Question> db = io.get();
+    db.getQuestions();
+    
+    this._questionList = DatabaseIO.getQuestionDatabaseIO().get().getQuestions(_listFilter, _listSorter);
     this._currentIndex = null;
     this._totalNumber = this._questionList.size();
     this._state = State.NOT_STARTED;
@@ -122,7 +127,7 @@ public class QuestionList extends Observable {
    * @param filter
    * @param sorter
    */
-  public void setFilterSorter(ListFilter filter, ListSorter sorter) {
+  public void setFilterSorter(ListFilter<Question> filter, ListSorter<Question> sorter) {
     this._listFilter = filter;
     this._listSorter = sorter;
     this._resetList();
