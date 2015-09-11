@@ -147,6 +147,7 @@ public final class Database <T extends AbstractQuestion> {
     System.out.printf("LOG: database isValid NIY\n");
     for (T q: this.questions.values()) {
       if (!q.isValid()) {
+        System.err.printf("Question is invalid: %s\n", q);
         return false;
       }
     }

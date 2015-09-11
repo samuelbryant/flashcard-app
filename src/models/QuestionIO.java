@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import org.json.*;
 
 public abstract class QuestionIO<T extends AbstractQuestion> {
@@ -234,22 +235,16 @@ public abstract class QuestionIO<T extends AbstractQuestion> {
 
     @Override
     protected void writeQuestionImageFiles(Flashcard q) {
-
-      // For objects not in database yet, we need to copy their images to proper location.
-      if (q.databaseAnswerFilename == null || !IO.fileExists(q.databaseAnswerFilename)) {
-        String originalImageFilename = q.originalAnswerFilename;
-        String databaseImageFilename = Constants.getFLCAnswerImageFile(q.id);
-        IO.existsOrDie(originalImageFilename);
-        IO.copyOrDie(originalImageFilename, databaseImageFilename);
-        q.databaseAnswerFilename = databaseImageFilename;
+      if (q.databaseAnswerFilename == null && q.answerImage != null) {
+        String filename = Constants.getFLCAnswerImageFile(q.id);
+        IO.writeImageOrDie(q.answerImage, filename);
+        q.databaseAnswerFilename = filename;
       }
       
-      if (q.databaseQuestionFilename == null || !IO.fileExists(q.databaseQuestionFilename)) {
-        String originalImageFilename = q.originalQuestionFilename;
-        String databaseImageFilename = Constants.getFLCQuestionImageFile(q.id);
-        IO.existsOrDie(originalImageFilename);
-        IO.copyOrDie(originalImageFilename, databaseImageFilename);
-        q.databaseAnswerFilename = databaseImageFilename;
+      if (q.databaseQuestionFilename == null && q.questionImage != null) {
+        String filename = Constants.getFLCQuestionImageFile(q.id);
+        IO.writeImageOrDie(q.questionImage, filename);
+        q.databaseQuestionFilename = filename;
       }
     }
 

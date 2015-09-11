@@ -255,6 +255,14 @@ public class IO {
       throw new FatalError("loadImageOrDie failed for: " + filename, ex);
     }
   }
+  
+  public static void writeImageOrDie(BufferedImage img, String filename) {
+    try {
+      ImageIO.write(img, "png", new File(filename));
+    } catch(IOException ex) {
+      throw new FatalError("writeImageOrDie failed for: " + filename, ex);
+    }
+  }
 
   /**
    *

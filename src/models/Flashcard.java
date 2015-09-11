@@ -17,6 +17,12 @@ public class Flashcard extends AbstractQuestion {
   protected BufferedImage answerImage;
   protected BufferedImage questionImage;
 
+  
+  public Flashcard(BufferedImage qImg, BufferedImage aImg) {
+    this.questionImage = qImg;
+    this.answerImage = aImg;
+  }
+  
   Flashcard(int id) {
     super(id);
   }
@@ -31,7 +37,7 @@ public class Flashcard extends AbstractQuestion {
     if (this.id == null)
       return false;
     if (!((databaseQuestionFilename != null && databaseAnswerFilename != null && this.persistent) ||
-          (originalQuestionFilename != null && originalAnswerFilename != null && !this.persistent))) {
+          (questionImage != null && answerImage != null && !this.persistent))) {
       return false;
     }
     return true;
