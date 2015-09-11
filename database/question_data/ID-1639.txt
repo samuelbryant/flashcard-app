@@ -1,11 +1,19 @@
 {
-  "notes": [],
+  "notes": ["low ionization potential =\n easy to ionize"],
   "answer": "E",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["ATOMIC"],
+  "responses": [{
+    "response": "D",
+    "responseTime": 25794426035,
+    "dateString": "09/10/15 12:06 PM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1639.png",
   "id": 1639,
   "source": "GRE_1996",
   "questionNumber": 39,
-  "tags": []
+  "tags": [
+    "HARD",
+    "WRONG",
+    "UNSURE"
+  ]
 }

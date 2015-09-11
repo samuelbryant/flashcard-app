@@ -1,11 +1,15 @@
 {
   "notes": [],
   "answer": "B",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["EM"],
+  "responses": [{
+    "response": "B",
+    "responseTime": 61433309523,
+    "dateString": "09/10/15 12:09 PM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1686.png",
   "id": 1686,
   "source": "GRE_1996",
   "questionNumber": 86,
-  "tags": []
+  "tags": ["HARD"]
 }

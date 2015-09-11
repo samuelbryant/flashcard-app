@@ -1,11 +1,25 @@
 {
-  "notes": [],
+  "notes": [""],
   "answer": "B",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["SPECIAL"],
+  "responses": [
+    {
+      "response": "B",
+      "responseTime": 33652065678,
+      "dateString": "09/10/15 7:13 PM"
+    },
+    {
+      "response": "B",
+      "responseTime": 86815394594,
+      "dateString": "09/10/15 12:20 PM"
+    }
+  ],
   "databaseImageFilename": "database/question_images/ID-1698.png",
   "id": 1698,
   "source": "GRE_1996",
   "questionNumber": 99,
-  "tags": []
+  "tags": [
+    "HARD",
+    "UNSURE"
+  ]
 }

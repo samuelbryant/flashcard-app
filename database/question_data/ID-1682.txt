@@ -1,11 +1,18 @@
 {
   "notes": [],
   "answer": "E",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["WAVES"],
+  "responses": [{
+    "response": "C",
+    "responseTime": 88769969688,
+    "dateString": "09/11/15 8:03 AM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1682.png",
   "id": 1682,
   "source": "GRE_1996",
   "questionNumber": 82,
-  "tags": []
+  "tags": [
+    "HARD",
+    "WRONG"
+  ]
 }

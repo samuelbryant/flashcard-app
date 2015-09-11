@@ -1,11 +1,15 @@
 {
   "notes": [],
   "answer": "B",
-  "subjects": [],
-  "responses": [],
+  "subjects": ["EM"],
+  "responses": [{
+    "response": "B",
+    "responseTime": 72451461337,
+    "dateString": "09/10/15 12:10 PM"
+  }],
   "databaseImageFilename": "database/question_images/ID-1512.png",
   "id": 1512,
   "source": "GRE_1991",
   "questionNumber": 12,
-  "tags": []
+  "tags": ["UNSURE"]
 }
