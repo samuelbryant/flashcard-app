@@ -1,105 +1,114 @@
 package ui.questions;
 
 import java.awt.Dimension;
-import ui.core.DisplayWindow;
 import ui.core.Display;
+import ui.core.DisplayWindow;
 import ui.core.ImageDisplay;
 import ui.subcomponents.ActionPanel;
 import ui.subcomponents.InfobarPanel;
 import ui.subcomponents.FilterPanel;
-import ui.subcomponents.QuestionPanel;
 import ui.subcomponents.TaggerPanel;
 
-/**
- *
- * @author sambryant
- */
-public class QuestionListDisplay extends Display<QuestionListController> {
+public abstract class QuestionListDisplay<CTRL_TYPE extends QuestionListController>
+extends Display<CTRL_TYPE> {
 
-  /**
-   *
-   */
+  public static final int DEFAULT_WINDOW_WIDTH = 1200;
+  public static final int DEFAULT_WINDOW_HEIGHT = 800;
+  public static final boolean DEFAULT_RECORD_RESPONSES = true;
+  public static final boolean DEFAULT_HIDE_FILTER_BEFORE_RESPONSE = false;
+  public static final boolean DEFAULT_HIDE_TAGGER_BEFORE_RESPONSE = false;
+
+  protected int windowWidth, windowHeight;
+  protected boolean recordResponses = true;
+  protected boolean hideFilterBeforeResponse = false;
+  protected boolean hideTaggerBeforeResponse = false;
+  
   public static final int BORDER_SIZE = 10;
-
-  /**
-   *
-   */
   public static final int SIDE_COLUMN_WIDTH = 200;
-
-  /**
-   *
-   */
   public static final int ACTION_PANEL_HEIGHT = 50;
-
-  /**
-   *
-   */
   public static final int INFO_PANEL_HEIGHT = 50;
+  // public static final int TOTAL_WIDTH = 1100;
+  // public static final int TOTAL_HEIGHT = 800;
 
-  /**
-   *
-   */
-  public static final int TOTAL_WIDTH = 1100;
-
-  /**
-   *
-   */
-  public static final int TOTAL_HEIGHT = 800;
-
-  /**
-   *
-   */
   protected ImageDisplay questionPanel;
-
-  /**
-   *
-   */
   protected ActionPanel actionPanel;
-
-  /**
-   *
-   */
   protected FilterPanel filterPanel;
-
-  /**
-   *
-   */
   protected InfobarPanel infoPanel;
-
-  /**
-   *
-   */
   protected TaggerPanel taggerPanel;
 
-  /**
-   *
-   * @param ctrl
-   */
-  public QuestionListDisplay(final QuestionListController ctrl) {
+  public QuestionListDisplay(CTRL_TYPE ctrl) {
     super(ctrl);
+    this.setSettings();
+  }
+  
+  public QuestionListDisplay(CTRL_TYPE ctrl, int windowWidth, int windowHeight) {
+    super(ctrl);
+    this.setSettings(windowWidth, windowHeight);
+  }
+  
+  public QuestionListDisplay(
+    CTRL_TYPE ctrl, int windowWidth, int windowHeight, boolean recordResponses,
+    boolean hideFilterBeforeResponses, boolean hideTaggerBeforeResponses) {
+    super(ctrl);
+    this.setSettings(
+        windowWidth, windowHeight, recordResponses,
+        hideFilterBeforeResponse, hideTaggerBeforeResponse);
+  }
+  
+  public QuestionListDisplay(
+    CTRL_TYPE ctrl, boolean recordResponses, boolean hideFilterBeforeResponses, boolean hideTaggerBeforeResponses) {
+    super(ctrl);
+    this.setSettings(
+        recordResponses, hideFilterBeforeResponse, hideTaggerBeforeResponse);
+  }
+  
+  public final void setSettings() {
+    this.setSettings(
+        DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_RECORD_RESPONSES,
+        DEFAULT_HIDE_FILTER_BEFORE_RESPONSE,
+        DEFAULT_HIDE_TAGGER_BEFORE_RESPONSE);
+  }
+  
+  public final void setSettings(int windowWidth, int windowHeight) {
+    this.setSettings(
+        windowWidth, windowHeight, DEFAULT_RECORD_RESPONSES,
+        DEFAULT_HIDE_FILTER_BEFORE_RESPONSE,
+        DEFAULT_HIDE_TAGGER_BEFORE_RESPONSE);
+  }
+  
+  public final void setSettings(
+      boolean recordResponses, boolean hideFilterBeforeResponse, boolean hideTaggerBeforeResponse) {
+    this.setSettings(
+        DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, 
+        recordResponses, hideFilterBeforeResponse, hideTaggerBeforeResponse);
+  }
+  
+  public final void setSettings(
+      int windowWidth, int windowHeight, boolean recordResponses,
+      boolean hideFilterBeforeResponse, boolean hideTaggerBeforeResponse) {
+    this.windowWidth = windowWidth;
+    this.windowHeight = windowHeight;
+    this.recordResponses = recordResponses;
+    this.hideFilterBeforeResponse = hideFilterBeforeResponse;
+    this.hideTaggerBeforeResponse = hideTaggerBeforeResponse;
   }
 
-  /**
-   *
-   */
   @Override
   public void buildComponents() {
-    this.actionPanel = new ActionPanel(this.ctrl);
     this.actionPanel.buildComponents();
-
-    this.taggerPanel = new TaggerPanel(this.ctrl);
     this.taggerPanel.buildComponents();
-
-    this.filterPanel = new FilterPanel(this.ctrl);
     this.filterPanel.buildComponents();
-
-    this.infoPanel = new InfobarPanel(this.ctrl);
     this.infoPanel.buildComponents();
-
-    this.questionPanel = new QuestionPanel(this.ctrl, true);
     this.questionPanel.buildComponents();
-
+    this.filterPanel.setHideBeforeAnswering(this.hideFilterBeforeResponse);
+    this.taggerPanel.setHideBeforeAnswering(this.hideTaggerBeforeResponse);
+    this.ctrl.setRecordAnswers(recordResponses);
     this.ctrl.initialUpdate();
+  }
+  
+  public void go() {
+    DisplayWindow window = new DisplayWindow(this.windowWidth, this.windowHeight);
+    window.showDisplay(this);
   }
 
   /**
@@ -168,23 +177,6 @@ public class QuestionListDisplay extends Display<QuestionListController> {
     this.sizeComponent(this, totalSize);
   }
 
-  /**
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    // Load/initialize controller/display.
-    QuestionListController ctrl = new QuestionListController();
-    QuestionListDisplay display = new QuestionListDisplay(ctrl);
-
-    // Bring it all home.
-    DisplayWindow window = new DisplayWindow(TOTAL_WIDTH, TOTAL_HEIGHT);
-    window.showDisplay(display);
-  }
-
-  /**
-   *
-   */
   @Override
   protected void setupMenuBar() {}
 

@@ -1,6 +1,5 @@
 package ui.subcomponents;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -9,24 +8,24 @@ import java.awt.event.KeyEvent;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
 import models.Answer;
 import ui.core.components.FAActionButton;
 import ui.core.components.FAButton;
 import ui.questions.QuestionListController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.AbstractQuestion;
 import ui.core.SubController;
 import ui.questions.QuestionList;
 import ui.questions.QuestionState;
 import ui.core.SubPanel;
 
-/**
- *
- * @author sambryant
- */
-public class ActionPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
-
+public abstract class ActionPanel<
+    Q_TYPE extends AbstractQuestion,
+    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
+    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
+    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
+    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE, SubController<CTRL_TYPE>>{
   private static final int[] ANSWER_KEYS = new int[]{
     KeyEvent.VK_1,
     KeyEvent.VK_2,
@@ -37,22 +36,9 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
   };
 
   protected FAActionButton backButton, nextButton, saveButton;
-
-  /**
-   *
-   */
   protected final Map<Answer, FAButton> answerButtons;
-
-  /**
-   *
-   */
-  protected JComboBox filtersBox;
-
-  /**
-   *
-   * @param controller
-   */
-  public ActionPanel(QuestionListController controller) {
+  
+  public ActionPanel(CTRL_TYPE controller) {
     super(new SubController(controller));
     this.answerButtons = new TreeMap<>();
   }
@@ -72,9 +58,7 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
         public void actionPerformed(ActionEvent e) {
           try {
             questionListController.answer(answer);
-          } catch (QuestionState.AlreadyAnsweredException ex) {
-            Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
-          } catch (QuestionList.NotStartedYetException ex) {
+          } catch (QuestionState.AlreadyAnsweredException | QuestionList.NotStartedYetException ex) {
             Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
         }
@@ -158,23 +142,23 @@ public class ActionPanel extends SubPanel<QuestionListController, SubController<
   protected void observeQuestionChange() {
     this.backButton.setEnabled(questionList.hasLastQuestion());
     this.nextButton.setEnabled(questionList.hasNextQuestion());
-
-    boolean isStarted = this.questionList.isStarted();
-    boolean isAnswered = this.questionList.isStarted() && this.questionState.isAnswered();
-
-    for (Answer answer: Answer.values()) {
-      FAButton button = this.answerButtons.get(answer);
-
-      button.setEnabled(isStarted);
-
-      if (isAnswered && answer == questionState.getCorrectAnswer()) {
-        button.setBackground(Color.GREEN);
-      } else if (isAnswered && answer == questionState.getSelectedAnswer()) {
-        button.setBackground(Color.RED);
-      } else {
-        button.setDefaultBackground();
-      }
-    }
   }
+//    boolean isStarted = this.questionList.isStarted();
+//    boolean isAnswered = this.questionList.isStarted() && this.questionState.isAnswered();
+//
+//    for (Answer answer: Answer.values()) {
+//      FAButton button = this.answerButtons.get(answer);
+//
+//      button.setEnabled(isStarted);
+//
+//      if (isAnswered && answer == questionState.getCorrectAnswer()) {
+//        button.setBackground(Color.GREEN);
+//      } else if (isAnswered && answer == questionState.getSelectedAnswer()) {
+//        button.setBackground(Color.RED);
+//      } else {
+//        button.setDefaultBackground();
+//      }
+//    }
+//  }
 
 }

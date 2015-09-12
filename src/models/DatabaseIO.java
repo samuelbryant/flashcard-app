@@ -7,6 +7,14 @@ import org.json.JSONObject;
 
 public abstract class DatabaseIO <K extends AbstractQuestion> {
   
+  public static DatabaseIO getDatabaseIO(QType t) {
+    if (t == QType.FLASHCARD) {
+      return getFlashcardDatabaseIO();
+    } else {
+      return getQuestionDatabaseIO();
+    }
+  }
+  
   public static final DatabaseIO<Flashcard> getFlashcardDatabaseIO() {
     return DatabaseIO.FLCDBIO.SINGLETON;
   }
@@ -31,7 +39,7 @@ public abstract class DatabaseIO <K extends AbstractQuestion> {
   
   protected abstract QuestionIO<K> getQuestionIO();
   
-  protected abstract Type getType();
+  protected abstract QType getType();
   
   private Database<K> getDatabase() {
     Database<K> db = this.database;
@@ -125,8 +133,8 @@ public abstract class DatabaseIO <K extends AbstractQuestion> {
       return QuestionIO.getFlashcardIO();
     }
     @Override
-    protected Type getType() {
-      return Type.FLASHCARD;
+    protected QType getType() {
+      return QType.FLASHCARD;
     }
   }
   public static class GREDBIO extends DatabaseIO<Question> {
@@ -138,8 +146,8 @@ public abstract class DatabaseIO <K extends AbstractQuestion> {
     }
     
     @Override
-    protected Type getType() {
-      return Type.GRE;
+    protected QType getType() {
+      return QType.GRE;
     }
   }
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 
 public abstract class AbstractQuestion implements Serializable {
   // Permanent fields central to class.
-  protected final Type type;
+  protected final QType type;
   protected Integer id = null;  // Non-nullable
   protected ArrayList<Subject> subjects = new ArrayList<>();
   protected ArrayList<Tag> tags = new ArrayList<>();
@@ -39,7 +39,7 @@ public abstract class AbstractQuestion implements Serializable {
     this.type = this.getType();
   }
   
-  public abstract Type getType();
+  public abstract QType getType();
   
   public abstract boolean isValid();
   

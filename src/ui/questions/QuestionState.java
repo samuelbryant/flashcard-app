@@ -3,7 +3,9 @@ package ui.questions;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
+import models.AbstractQuestion;
 import models.Answer;
+import models.Flashcard;
 import models.Question;
 import models.Response;
 import ui.questions.QuestionList.NotStartedYetException;
@@ -11,87 +13,66 @@ import ui.questions.QuestionList.NotStartedYetException;
 /**
  *
  * @author sambryant
+ * @param <Q_TYPE>
+ * @param <SELF>
+ * @param <LIST_TYPE>
  */
-public class QuestionState extends Observable implements Observer {
+public abstract class QuestionState<
+    SELF extends QuestionState<SELF, Q_TYPE, LIST_TYPE>,
+    Q_TYPE extends AbstractQuestion,
+    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, SELF>>
+    extends Observable implements Observer {
 
-  /**
-   *
-   */
   public static class QuestionStateException extends RuntimeException {
-
-    /**
-     *
-     * @param str
-     */
     public QuestionStateException(String str) {
       super(str);
     }
   }
 
-  /**
-   *
-   */
   public static class NotAnsweredYetException extends QuestionStateException {
-
-    /**
-     *
-     */
     public NotAnsweredYetException() {
       super("Not answered yet");
     }
   }
 
-  /**
-   *
-   */
   public static class AlreadyAnsweredException extends QuestionStateException {
-
-    /**
-     *
-     */
     public AlreadyAnsweredException() {
       super("Already answered");
     }
   }
 
-  private final QuestionList _questionList;
-  private Question _question;
-  private Answer _correctAnswer;
-  private Answer _selectedAnswer;
-  private Boolean _isAnswered;
-  private Long _startTime;
-  private Long _endTime;
-  private Response _response;
+  protected LIST_TYPE _questionList;
+  protected Q_TYPE _question;
+  protected Answer _selectedAnswer;
+  protected Boolean _isAnswered;
+  protected Long _startTime;
+  protected Long _endTime;
+  protected Response _response;
 
-  QuestionState(QuestionList questionList) {
-    this._questionList = questionList;
-    this._setQuestion(null);
-  }
-
+  protected QuestionState() {}
+  
   /**
    * Handler for updates from the question list.
    */
   @Override
   public void update(Observable o, Object arg) {
     try {
-      this._setQuestion(this._questionList.getCurrentQuestion());
+      this.setQuestion(this._questionList.getCurrentQuestion());
     } catch(NotStartedYetException ex) {
-      this._setQuestion(null);
+      this.setQuestion(null);
     }
   }
 
-  private void _setQuestion(Question q) {
+  protected void setQuestion(Q_TYPE q) {
     if (q == null) {
       this._question = null;
       this._isAnswered = null;
       this._selectedAnswer = null;
-      this._correctAnswer = null;
       this._startTime = null;
       this._endTime = null;
       this._response = null;
     } else {
       this._question = q;
-      this._correctAnswer = q.getAnswer();
       this._selectedAnswer = null;
       this._isAnswered = false;
       this._startTime = System.nanoTime();
@@ -132,20 +113,6 @@ public class QuestionState extends Observable implements Observer {
    * @throws NotAnsweredYetException
    * @throws NotStartedYetException
    */
-  public boolean isAnsweredCorrectly() throws NotAnsweredYetException, NotStartedYetException {
-    if (this.isAnswered()) {
-      return this._selectedAnswer == this._correctAnswer;
-    } else {
-      throw new NotAnsweredYetException();
-    }
-  }
-
-  /**
-   *
-   * @return
-   * @throws NotAnsweredYetException
-   * @throws NotStartedYetException
-   */
   public Response getResponseObject() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
       return this._response;
@@ -168,18 +135,6 @@ public class QuestionState extends Observable implements Observer {
     }
   }
 
-  /**
-   *
-   * @return
-   * @throws NotStartedYetException
-   */
-  public Answer getCorrectAnswer() throws NotStartedYetException {
-    if (this._questionList.isStarted()) {
-      return this._correctAnswer;
-    } else {
-      throw new QuestionList.NotStartedYetException("Not started yet");
-    }
-  }
 
   /**
    *

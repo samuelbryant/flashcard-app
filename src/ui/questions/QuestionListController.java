@@ -1,78 +1,64 @@
 package ui.questions;
 
-import engine.ListFilter;
-import engine.ListSorter;
+import models.AbstractQuestion;
 import models.Answer;
 import models.DatabaseIO;
-import models.Question;
 import models.Response;
+import models.QType;
 import ui.core.Controller;
+import ui.questions.gre.GreCtrl;
 
-/**
- *
- * @author sambryant
- */
-public class QuestionListController extends Controller<QuestionListDisplay> {
+public abstract class QuestionListController<
+    Q_TYPE extends AbstractQuestion,
+    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
+    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>>
+  extends Controller<QuestionListDisplay> {
 
   // Question list variables.
-  private final QuestionList _questionList;
-  private boolean recordAnswers;
-  private Integer _numberAnswered;
-  private Integer _numberCorrect;
-  private Integer _totalQuestionTime;
+  protected STATE_TYPE questionState;
+  protected LIST_TYPE questionList;
+  protected boolean recordAnswers;
+  protected Integer numberAnswered;
+  protected Integer totalQuestionTime;
 
-  /**
-   *
-   */
-  public QuestionListController() {
-    this._questionList = new QuestionList(new ListFilter.NullFilter<Question>(), new ListSorter.IdSorter<Question>());
+  protected QuestionListController(LIST_TYPE list, STATE_TYPE state) {
+    this.questionList = list;
+    this.questionState = state;
     this.recordAnswers = false;
-    this._numberAnswered = 0;
-    this._numberCorrect = 0;
-    this._totalQuestionTime = 0;
+    this.numberAnswered = 0;
+    this.totalQuestionTime = 0;
+    this.bind();
+  }
+  
+  private void bind() {
+    questionList._questionState = questionState;
+    questionState._questionList = questionList;
+    questionList.addObserver(questionState);
+    questionList._resetList();
   }
 
-  /**
-   *
-   * @return
-   */
   public boolean getRecordAnswers() {
     return this.recordAnswers;
   }
   
   public int getNumberAnswered() {
-    return this._numberAnswered;
-  }
-  
-  public int getNumberCorrect() {
-    return this._numberCorrect;
+    return this.numberAnswered;
   }
   
   public int getTotalQuestionTime() {
-    return this._totalQuestionTime;
+    return this.totalQuestionTime;
   }
 
-  /**
-   *
-   * @param value
-   */
   public void setRecordAnswers(boolean value) {
     this.recordAnswers = value;
   }
 
   // Question List Controller Proper Methods.
 
-  /**
-   *
-   */
   public void save() {
     DatabaseIO.getQuestionDatabaseIO().save();
   }
 
-  /**
-   *
-   * @param answer
-   */
   public void answer(Answer answer) {
     if (this.getQuestionState().isAnswered()) {
       this.getQuestionState().changeAnswer(answer);
@@ -82,40 +68,37 @@ public class QuestionListController extends Controller<QuestionListDisplay> {
       // Record answer to database.
       if (this.recordAnswers) {
         Response r = this.getQuestionState().getResponseObject();
-        this._questionList.getCurrentQuestion().addResponse(r);
+        this.questionList.getCurrentQuestion().addResponse(r);
       }
       
       // Record question list stats.
-      this._numberAnswered++;
-      if (answer == this._questionList.getCurrentQuestion().getAnswer()) {
-        this._numberCorrect++;
-      }
-      this._totalQuestionTime += this.getQuestionState().getLastResponseTime();
-      
+      this.numberAnswered++;
+      this.totalQuestionTime += this.getQuestionState().getLastResponseTime();      
     }
   }
-
-  /**
-   *
-   * @return
-   */
-  public QuestionList getQuestionList() {
-    return this._questionList;
+  
+  public Q_TYPE getQuestion() {
+    return this.questionList.getCurrentQuestion();
   }
 
-  /**
-   *
-   * @return
-   */
-  public QuestionState getQuestionState() {
-    return this._questionList.getQuestionState();
+  public LIST_TYPE getQuestionList() {
+    return this.questionList;
   }
 
-  /**
-   *
-   */
+  public STATE_TYPE getQuestionState() {
+    return this.questionList.getQuestionState();
+  }
+
   public void initialUpdate() {
-    this._questionList.initialUpdate();
+    this.questionList.initialUpdate();
+  }
+  
+  public static QuestionListController createCtrl(QType t) {
+    if (t == QType.GRE) {
+      return new GreCtrl();
+    } else {
+      throw new UnsupportedOperationException("Not implemented yet");
+    }
   }
 
 }

@@ -9,93 +9,54 @@ import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import models.Question;
 import models.Subject;
 import models.Tag;
 import core.Constants;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import models.AbstractQuestion;
 import ui.core.SubController;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
 import ui.questions.QuestionListController;
 import ui.core.SubPanel;
+import ui.questions.QuestionList;
+import ui.questions.QuestionState;
 
-/**
- *
- * @author sambryant
- */
-public class TaggerPanel extends SubPanel<QuestionListController, SubController<QuestionListController>>{
+public class TaggerPanel<
+    Q_TYPE extends AbstractQuestion,
+    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
+    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
+    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
+    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE, SubController<CTRL_TYPE>>{
 
-  /**
-   *
-   */
   protected FAButton onlyShowUnchecked;
-
-  /**
-   *
-   */
   protected JLabel topLabel;
-
-  /**
-   *
-   */
   protected JLabel subjectsLabel;
-
-  /**
-   *
-   */
   protected JLabel tagsLabel;
-
-  /**
-   *
-   */
   protected final Map<Subject, FACheckbox> subjectCheckboxes;
-
-  /**
-   *
-   */
   protected final Map<Tag, FACheckbox> tagCheckboxes;
-
-  /**
-   *
-   */
   protected boolean hideBeforeAnswering;
   
   protected JTextArea notesArea;
   protected FAButton notesAreaButton;
   protected JScrollPane notesPane;
 
-  /**
-   *
-   * @param ctrl
-   */
-  public TaggerPanel(QuestionListController ctrl) {
+  public TaggerPanel(CTRL_TYPE ctrl) {
     super(new SubController(ctrl));
     subjectCheckboxes = new TreeMap<>();
     tagCheckboxes = new TreeMap<>();
     this.hideBeforeAnswering = false;
   }
 
-  /**
-   *
-   * @param value
-   */
   public void setHideBeforeAnswering(boolean value) {
     this.hideBeforeAnswering = value;
   }
 
-  /**
-   *
-   * @return
-   */
   public boolean getHideBeforeAnswering() {
     return this.hideBeforeAnswering;
   }
 
-  /**
-   *
-   */
   @Override
   public void buildComponents() {
     Subject[] subjects = Subject.values();
@@ -192,7 +153,7 @@ public class TaggerPanel extends SubPanel<QuestionListController, SubController<
     }
 
     if (this.questionList.isStarted()) {
-      Question q = this.questionList.getCurrentQuestion();
+      Q_TYPE q = this.questionList.getCurrentQuestion();
       ArrayList<Subject> subjects = q.getSubjects();
       ArrayList<Tag> tags = q.getTags();
       for (Subject subject: subjects) {

@@ -3,6 +3,6 @@
  */
 package models;
 
-public enum Type {
+public enum QType {
   GRE, FLASHCARD;
 }

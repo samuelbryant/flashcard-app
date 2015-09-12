@@ -130,8 +130,8 @@ public class Question extends AbstractQuestion {
   }
 
   @Override
-  public Type getType() {
-    return Type.GRE;
+  public QType getType() {
+    return QType.GRE;
   }
 
   @Override

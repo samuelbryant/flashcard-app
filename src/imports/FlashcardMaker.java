@@ -154,6 +154,8 @@ public class FlashcardMaker extends JPanel implements MouseListener {
       BufferedImage aImg = img.getSubimage(mid, top, right-mid, bot-top);
       
       db.addQuestionToSession(new Flashcard(qImg, aImg));
+      
+      top = bot;
 //      
 //      
 //      String name = "imports/flashcards/images";

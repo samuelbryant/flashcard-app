@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import models.Type;
+import models.QType;
 
 /**
  *
@@ -35,10 +35,10 @@ public class Constants {
   private static final String DATA_DIR_NAME = "data";
   private static final String IMAGE_DIR_NAME = "images";
   private static final String DB_FILE_NAME = "database.txt";
-  private static final Map<Type, String> DIR_NAMES = new HashMap<>();
+  private static final Map<QType, String> DIR_NAMES = new HashMap<>();
   static {
-    DIR_NAMES.put(Type.GRE, "gre");
-    DIR_NAMES.put(Type.FLASHCARD, "flc");
+    DIR_NAMES.put(QType.GRE, "gre");
+    DIR_NAMES.put(QType.FLASHCARD, "flc");
   }
   
   /**
@@ -47,58 +47,58 @@ public class Constants {
   public final static void setupProjectDirectories() {
     core.IO.createDirOrDie(OUTPUT_DIR);
     core.IO.createDirOrDie(OUTPUT_BACKUP_DIR);
-    for (Type t: Type.values()) {
+    for (QType t: QType.values()) {
       core.IO.createDirOrDie(Constants.getDatabaseDir(t));
       core.IO.createDirOrDie(Constants.getDatabaseDataDir(t));
       core.IO.createDirOrDie(Constants.getDatabaseImageDir(t));
     }
   }
   
-  public static String getQuestionDataFile(Type t, int id) {
+  public static String getQuestionDataFile(QType t, int id) {
     return String.format("%s/ID-%d.txt", getDatabaseDataDir(t), id);
   }
   
   public static String getGREQuestionImageFile(int id) {
-    return String.format("%s/ID-%d.png", getDatabaseImageDir(Type.GRE), id);
+    return String.format("%s/ID-%d.png", getDatabaseImageDir(QType.GRE), id);
   }
   
   public static String getFLCQuestionImageFile(int id) {
-    return String.format("%s/ID-%d-Q.png", getDatabaseImageDir(Type.FLASHCARD), id);
+    return String.format("%s/ID-%d-Q.png", getDatabaseImageDir(QType.FLASHCARD), id);
   }
   
   public static String getFLCAnswerImageFile(int id) {
-    return String.format("%s/ID-%d-A.png", getDatabaseImageDir(Type.FLASHCARD), id);
+    return String.format("%s/ID-%d-A.png", getDatabaseImageDir(QType.FLASHCARD), id);
   }
   
-  public static String getDatabaseDir(Type t) {
+  public static String getDatabaseDir(QType t) {
     return getDatabaseDir(t, Constants.OUTPUT_DIR);
   }
   
-  public static String getDatabaseFile(Type t) {
+  public static String getDatabaseFile(QType t) {
     return getDatabaseFile(t, Constants.OUTPUT_DIR);
   }
   
-  public static String getDatabaseDataDir(Type t) {
+  public static String getDatabaseDataDir(QType t) {
     return getDatabaseDataDir(t, Constants.OUTPUT_DIR);
   }
   
-  public static String getDatabaseImageDir(Type t) {
+  public static String getDatabaseImageDir(QType t) {
     return getDatabaseImageDir(t, Constants.OUTPUT_DIR);
   }
 
-  private static String getDatabaseDir(Type t, String topLevelDir) {
+  private static String getDatabaseDir(QType t, String topLevelDir) {
     return String.format("%s/%s", topLevelDir, Constants.DIR_NAMES.get(t));
   }
   
-  private static String getDatabaseFile(Type t, String topLevelDir) {
+  private static String getDatabaseFile(QType t, String topLevelDir) {
     return String.format("%s/%s/%s", topLevelDir, Constants.DIR_NAMES.get(t), Constants.DB_FILE_NAME);
   }
   
-  private static String getDatabaseDataDir(Type t, String topLevelDir) {
+  private static String getDatabaseDataDir(QType t, String topLevelDir) {
      return String.format("%s/%s/%s", topLevelDir, Constants.DIR_NAMES.get(t), Constants.DATA_DIR_NAME);
   }
   
-  private static String getDatabaseImageDir(Type t, String topLevelDir) {
+  private static String getDatabaseImageDir(QType t, String topLevelDir) {
      return String.format("%s/%s/%s", topLevelDir, Constants.DIR_NAMES.get(t), Constants.IMAGE_DIR_NAME);
   }
   
@@ -108,7 +108,7 @@ public class Constants {
     
     IO.createDirOrDie(backupDirname);
     
-    for (Type t: Type.values()) {
+    for (QType t: QType.values()) {
       String mainFile = getDatabaseFile(t);
       String dataDir = getDatabaseDataDir(t);
       

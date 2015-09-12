@@ -4,117 +4,70 @@ import engine.ListFilter;
 import engine.ListSorter;
 import java.util.ArrayList;
 import java.util.Observable;
+import models.AbstractQuestion;
 import models.Database;
 import models.DatabaseIO;
-import models.Question;
+import models.QType;
 
 /**
  * Class which captures state of a list of questions.
  * This includes keeping track of current question index, total number of questions, etc.
+ * @param <Q_TYPE>
+ * @param <SELF>
+ * @param <STATE_TYPE>
  */
-public class QuestionList extends Observable {
-
-  /**
-   *
-   */
+public abstract class QuestionList<
+    SELF extends QuestionList<SELF, Q_TYPE, STATE_TYPE>,
+    Q_TYPE extends AbstractQuestion,
+    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, SELF>>
+ extends Observable {
+  
   public static class QuestionListException extends Exception {
-
-    /**
-     *
-     * @param str
-     */
-    public QuestionListException(String str) {
+  public QuestionListException(String str) {
       super(str);
     }
   }
-
-  /**
-   *
-   */
   public static class OutOfQuestionsException extends QuestionListException {
-
-    /**
-     *
-     * @param str
-     */
     public OutOfQuestionsException(String str) {
       super(str);
     }
   }
-
-  /**
-   *
-   */
   public static class NotStartedYetException extends RuntimeException {
-
-    /**
-     *
-     * @param str
-     */
     public NotStartedYetException(String str) {
       super(str);
     }
   }
-
-  /**
-   *
-   */
   public static class NoQuestionsException extends QuestionListException {
-
-    /**
-     *
-     * @param str
-     */
     public NoQuestionsException(String str) {
       super(str);
     }
   }
-
-  /**
-   *
-   */
   public static enum State {
-
-    /**
-     *
-     */
     NOT_STARTED,
-
-    /**
-     *
-     */
     STARTED;
   }
 
+  protected STATE_TYPE _questionState;
+  protected ArrayList<Q_TYPE> _questionList;
+  protected ListFilter<Q_TYPE> _listFilter;
+  protected ListSorter<Q_TYPE> _listSorter;
+  protected Integer _currentIndex;
+  protected Integer _totalNumber;
+  protected State _state;
 
-  private final QuestionState _questionState;
-  private ArrayList<Question> _questionList;
-  private ListFilter<Question> _listFilter;
-  private ListSorter<Question> _listSorter;
-  private Integer _currentIndex;
-  private Integer _totalNumber;
-  private State _state;
-
-  /**
-   *
-   * @param filter
-   * @param sorter
-   */
-  public QuestionList(ListFilter<Question> filter, ListSorter<Question> sorter) {
+  protected QuestionList(ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter) {
     this._listFilter = filter;
     this._listSorter = sorter;
     this._state = State.NOT_STARTED;
-    this._questionState = new QuestionState(this);
-    this.addObserver(this._questionState);
-    _resetList();
   }
-
-  private void _resetList() {
-    DatabaseIO<Question> io = DatabaseIO.getQuestionDatabaseIO();
-    Database<Question> db = io.get();
-    db.getQuestions();
-    
-    this._questionList = DatabaseIO.getQuestionDatabaseIO().get().getQuestions(_listFilter, _listSorter);
+  
+  protected abstract QType getType();
+  
+  void _resetList() {
+    DatabaseIO<Q_TYPE> io = (DatabaseIO<Q_TYPE>) DatabaseIO.getDatabaseIO(this.getType());
+    Database<Q_TYPE> db = io.get();
+ 
+    this._questionList = db.getQuestions(_listFilter, _listSorter);
     this._currentIndex = null;
     this._totalNumber = this._questionList.size();
     this._state = State.NOT_STARTED;
@@ -127,41 +80,24 @@ public class QuestionList extends Observable {
    * @param filter
    * @param sorter
    */
-  public void setFilterSorter(ListFilter<Question> filter, ListSorter<Question> sorter) {
+  public void setFilterSorter(ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter) {
     this._listFilter = filter;
     this._listSorter = sorter;
     this._resetList();
   }
 
-  /**
-   *
-   * @return
-   */
   public Boolean isStarted() {
     return this._state == State.STARTED;
   }
 
-  /**
-   *
-   * @return
-   */
-  public QuestionState getQuestionState() {
+  public STATE_TYPE getQuestionState() {
     return this._questionState;
   }
 
-  /**
-   *
-   * @return
-   */
   public Integer getNumberOfQuestions() {
     return this._totalNumber;
   }
 
-  /**
-   *
-   * @return
-   * @throws NotStartedYetException
-   */
   public Integer getCurrentIndex() throws NotStartedYetException {
     if (this._state != State.STARTED) {
       throw new NotStartedYetException("Question list not started yet");
@@ -170,12 +106,7 @@ public class QuestionList extends Observable {
     }
   }
 
-  /**
-   *
-   * @return
-   * @throws NotStartedYetException
-   */
-  public Question getCurrentQuestion() throws NotStartedYetException {
+  public Q_TYPE getCurrentQuestion() throws NotStartedYetException {
     if (this._state != State.STARTED) {
       throw new NotStartedYetException("Question list not started yet");
     } else {
@@ -183,10 +114,6 @@ public class QuestionList extends Observable {
     }
   }
 
-  /**
-   *
-   * @return
-   */
   public Boolean hasNextQuestion() {
     if (this._state != State.STARTED) {
       return this._totalNumber > 0;
@@ -195,10 +122,6 @@ public class QuestionList extends Observable {
     }
   }
 
-  /**
-   *
-   * @return
-   */
   public Boolean hasLastQuestion() {
     if (this._state != State.STARTED) {
       return false;
@@ -207,10 +130,6 @@ public class QuestionList extends Observable {
     }
   }
 
-  /**
-   *
-   * @throws OutOfQuestionsException
-   */
   public void nextQuestion() throws OutOfQuestionsException {
     if (this._state == State.NOT_STARTED) {
       this._currentIndex = -1;
@@ -227,11 +146,6 @@ public class QuestionList extends Observable {
     }
   }
 
-  /**
-   *
-   * @throws OutOfQuestionsException
-   * @throws NotStartedYetException
-   */
   public void lastQuestion() throws OutOfQuestionsException, NotStartedYetException {
     if (this._state == State.NOT_STARTED) {
       throw new NotStartedYetException("Cannot go back when quiz not started");

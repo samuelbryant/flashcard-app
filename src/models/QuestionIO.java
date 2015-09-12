@@ -25,7 +25,7 @@ public abstract class QuestionIO<T extends AbstractQuestion> {
   
   protected abstract T getNewQuestion(int id);
   
-  protected abstract Type getType();
+  protected abstract QType getType();
   
   public void save(T q) {
     this.writeQuestion(q);
@@ -171,8 +171,8 @@ public abstract class QuestionIO<T extends AbstractQuestion> {
     }
 
     @Override
-    protected Type getType() {
-      return Type.GRE;
+    protected QType getType() {
+      return QType.GRE;
     }
 
     @Override
@@ -223,8 +223,8 @@ public abstract class QuestionIO<T extends AbstractQuestion> {
     }
 
     @Override
-    protected Type getType() {
-      return Type.FLASHCARD;
+    protected QType getType() {
+      return QType.FLASHCARD;
     }
 
     @Override

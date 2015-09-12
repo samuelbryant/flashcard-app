@@ -3,53 +3,33 @@ package ui.subcomponents;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import models.AbstractQuestion;
 import ui.questions.QuestionListController;
 import ui.core.SubController;
 import ui.core.SubPanel;
+import ui.questions.QuestionList;
+import ui.questions.QuestionState;
 
-/**
- *
- * @author sambryant
- */
-public class InfobarPanel extends SubPanel<QuestionListController, SubController<QuestionListController>> {
+public class InfobarPanel<
+    Q_TYPE extends AbstractQuestion,
+    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
+    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
+    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
+    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE, SubController<CTRL_TYPE>> {
 
   
-  
-  /**
-   *
-   */
   public static final int BIG_LABEL_WIDTH = 120;
   public static final int LABEL_WIDTH = 120;
-  
-  /**
-   *
-   */
   protected JLabel questionListLabel;
-
-  /**
-   *
-   */
   protected JLabel questionLabel;
-
-  /**
-   *
-   */
   protected JLabel timerLabel;
-
   protected JLabel totalTimeLabel;
   protected JLabel totalStatsLabel;
   
-  /**
-   *
-   * @param ctrl
-   */
-  public InfobarPanel(QuestionListController ctrl) {
+  public InfobarPanel(CTRL_TYPE ctrl) {
     super(new SubController(ctrl));
   }
 
-  /**
-   *
-   */
   @Override
   public void buildComponents() {
     this.questionLabel = new JLabel("Q: ");
@@ -59,10 +39,6 @@ public class InfobarPanel extends SubPanel<QuestionListController, SubController
     this.totalStatsLabel = new JLabel("Stats: -/-");
   }
 
-  /**
-   *
-   * @param totalSize
-   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     this.sizeComponent(this, totalSize);
@@ -83,27 +59,17 @@ public class InfobarPanel extends SubPanel<QuestionListController, SubController
     this.sizeComponent(this.totalTimeLabel, labelSize);
   }
 
-  /**
-   *
-   */
   @Override
   protected void observeListChange() {
 
   }
 
-  /**
-   *
-   */
   @Override
   protected void observeQuestionChange() {
     if (this.questionList.isStarted()) {
       int currentIndex = this.questionList.getCurrentIndex();
       int totalNumber = this.questionList.getNumberOfQuestions();
       this.questionListLabel.setText(String.format("List: %d/%d", currentIndex, totalNumber));
-
-      String source = this.questionList.getCurrentQuestion().getSource().toString();
-      String number = this.questionList.getCurrentQuestion().getQuestionNumber().toString();
-      this.questionLabel.setText(String.format("Q: %s - %s", source, number));
 
       if (this.questionState.isAnswered()) {
         int time = this.questionState.getLastResponseTime();
@@ -112,17 +78,13 @@ public class InfobarPanel extends SubPanel<QuestionListController, SubController
         this.timerLabel.setText(text);
       }
       
-      int numCorrect = this.questionListController.getNumberCorrect();
       int numAnswered = this.questionListController.getNumberAnswered();
       int totalTime = this.questionListController.getTotalQuestionTime();
       if (numAnswered != 0) {
-        this.totalStatsLabel.setText(String.format("Stats: %d/%d", numCorrect, numAnswered));
         this.totalTimeLabel.setText(String.format("Avg Time: %d", (int) ((double) totalTime)/numAnswered));
       } else {
-        this.totalStatsLabel.setText("Stats: -/-");
         this.totalTimeLabel.setText("Avg Time: -");
       } 
-      
     }
   }
 

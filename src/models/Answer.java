@@ -11,7 +11,7 @@ public enum Answer {
    * Returns the flashcard version of the answer (the confidence level)
    * @return An int from 0-5 representing how confident an answer is.
    */
-  public int getFlashcardAnswer() {
+  public Integer getFlashcardAnswer() {
     return 5 - this.ordinal();
   }
 }

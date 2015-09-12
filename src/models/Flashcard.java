@@ -28,8 +28,8 @@ public class Flashcard extends AbstractQuestion {
   }
   
   @Override
-  public Type getType() {
-    return Type.FLASHCARD;
+  public QType getType() {
+    return QType.FLASHCARD;
   }
 
   @Override
