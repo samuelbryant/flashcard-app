@@ -60,11 +60,8 @@ public abstract class QuestionListController<
   }
 
   public void answer(Answer answer) {
-    if (this.getQuestionState().isAnswered()) {
-      this.getQuestionState().changeAnswer(answer);
-    } else {
-      this.getQuestionState().answer(answer);
-      
+    this.questionList.answer(answer);
+    if (!this.getQuestionState().isAnswered()) {
       // Record answer to database.
       if (this.recordAnswers) {
         Response r = this.getQuestionState().getResponseObject();

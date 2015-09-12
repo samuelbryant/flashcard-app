@@ -3,11 +3,15 @@ package ui.questions;
 import engine.ListFilter;
 import engine.ListSorter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import models.AbstractQuestion;
+import models.Answer;
 import models.Database;
 import models.DatabaseIO;
 import models.QType;
+import models.Response;
 
 /**
  * Class which captures state of a list of questions.
@@ -54,6 +58,7 @@ public abstract class QuestionList<
   protected Integer _currentIndex;
   protected Integer _totalNumber;
   protected State _state;
+  protected Map<Q_TYPE, Response> responseValues = new HashMap<>();
 
   protected QuestionList(ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter) {
     this._listFilter = filter;
@@ -86,6 +91,15 @@ public abstract class QuestionList<
     this._resetList();
   }
 
+  public void answer(Answer answer) {
+    if (this.getQuestionState().isAnswered()) {
+      this.getQuestionState().changeAnswer(answer);
+    } else {
+      this.getQuestionState().answer(answer);
+      this.responseValues.put(this.getCurrentQuestion(), this.getQuestionState().getResponseObject());
+    }
+  }
+  
   public Boolean isStarted() {
     return this._state == State.STARTED;
   }
@@ -129,6 +143,11 @@ public abstract class QuestionList<
       return this._currentIndex > 0;
     }
   }
+  
+  private void questionChanged() {
+    this.setChanged();
+    this.notifyObservers();
+  }
 
   public void nextQuestion() throws OutOfQuestionsException {
     if (this._state == State.NOT_STARTED) {
@@ -138,8 +157,7 @@ public abstract class QuestionList<
     }
     if (this.hasNextQuestion()) {
       this._currentIndex++;
-      this.setChanged();
-      this.notifyObservers();
+      this.questionChanged();
     } else {
       this.notifyObservers();
       throw new OutOfQuestionsException("No more questions (total: " + this._totalNumber + ")");
@@ -152,8 +170,7 @@ public abstract class QuestionList<
     }
     if (this.hasLastQuestion()) {
       this._currentIndex--;
-      this.setChanged();
-      this.notifyObservers();
+      this.questionChanged();
     } else {
       throw new OutOfQuestionsException("No more questions (total: " + this._totalNumber + ")");
     }

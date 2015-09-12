@@ -95,4 +95,5 @@ public class Response implements Comparable<Response> {
       return (((double) this.responseTime) / 1000000000);
     }
   }
+
 }

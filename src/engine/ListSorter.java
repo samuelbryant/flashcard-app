@@ -131,7 +131,7 @@ public abstract class ListSorter <T extends AbstractQuestion> {
         }
       }
 
-      return (int) ((((double) right2) / responses2.size()) - (((double) right1) / responses1.size()));
+      return (int) ((((double) right1) / responses1.size()) - (((double) right2) / responses2.size()));
     }
   });
 

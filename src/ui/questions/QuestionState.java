@@ -1,6 +1,8 @@
 package ui.questions;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import models.AbstractQuestion;
@@ -48,6 +50,7 @@ public abstract class QuestionState<
   protected Long _startTime;
   protected Long _endTime;
   protected Response _response;
+  protected Map<Integer, Response> responseHistory = new HashMap<>();
 
   protected QuestionState() {}
   
@@ -57,7 +60,8 @@ public abstract class QuestionState<
   @Override
   public void update(Observable o, Object arg) {
     try {
-      this.setQuestion(this._questionList.getCurrentQuestion());
+      Q_TYPE q = this._questionList.getCurrentQuestion();
+      this.setQuestion(q);
     } catch(NotStartedYetException ex) {
       this.setQuestion(null);
     }
@@ -78,6 +82,9 @@ public abstract class QuestionState<
       this._startTime = System.nanoTime();
       this._endTime = null;
       this._response = null;
+      if (this.responseHistory.containsKey(q.getId())) {
+        this.setResponse(this.responseHistory.get(q.getId()));
+      }
     }
     this.setChanged();
     this.notifyObservers();
@@ -94,6 +101,12 @@ public abstract class QuestionState<
     }
   }
 
+  void setResponse(Response r) {
+    this._selectedAnswer = r.getSelectedAnswer();
+    this._response = r;
+    this._isAnswered = true;
+  }
+  
   void answer(Answer answer) throws AlreadyAnsweredException, NotStartedYetException {
     if (this.isAnswered()) {
       throw new AlreadyAnsweredException();
@@ -103,6 +116,7 @@ public abstract class QuestionState<
     this._selectedAnswer = answer;
     this._isAnswered = true;
     this._response = new Response(this._selectedAnswer, this._endTime - this._startTime, new Date());
+    this.responseHistory.put(this._questionList.getCurrentQuestion().getId(), _response);
     this.setChanged();
     this.notifyObservers();
   }
@@ -157,7 +171,7 @@ public abstract class QuestionState<
    */
   public int getLastResponseTime() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
-      return (int) (Math.floorDiv(this._endTime - this._startTime, 1000000000));
+      return (int) this._response.getTimeInSeconds().intValue();
     } else {
       throw new NotAnsweredYetException();
     }
