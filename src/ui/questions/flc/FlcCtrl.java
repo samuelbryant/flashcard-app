@@ -6,9 +6,9 @@ package ui.questions.flc;
 import models.Answer;
 import models.Flashcard;
 import models.QType;
-import ui.questions.ListCtrlImpl;
+import ui.questions.AppCtrlImpl;
 
-public class FlcCtrl extends ListCtrlImpl<Flashcard> {
+public class FlcCtrl extends AppCtrlImpl<Flashcard> {
   
   // Settings variables.
 //  protected boolean recordAnswers = true;

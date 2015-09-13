@@ -11,7 +11,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import models.QType;
-import ui.questions.QuestionListDisplay;
+import ui.questions.AppDisplay;
 import ui.questions.flc.FlcCtrl;
 import ui.questions.flc.FlcListDisplay;
 import ui.questions.gre.GreCtrl;
@@ -36,11 +36,11 @@ public final class ApplicationLauncher extends JFrame implements ActionListener 
     
     this.typeSelector = new JComboBox(QType.values());
     this.recordResponsesBox = new JCheckBox("Record answers?");
-    this.recordResponsesBox.setSelected(QuestionListDisplay.DEFAULT_RECORD_RESPONSES);
+    this.recordResponsesBox.setSelected(AppDisplay.DEFAULT_RECORD_RESPONSES);
     this.hideFilterBox = new JCheckBox("Hide list filter before answered?");
-    this.hideFilterBox.setSelected(QuestionListDisplay.DEFAULT_HIDE_FILTER_BEFORE_RESPONSE);
+    this.hideFilterBox.setSelected(AppDisplay.DEFAULT_HIDE_FILTER_BEFORE_RESPONSE);
     this.hideTaggerBox = new JCheckBox("Hide question tagger before answered?");
-    this.hideTaggerBox.setSelected(QuestionListDisplay.DEFAULT_HIDE_TAGGER_BEFORE_RESPONSE);
+    this.hideTaggerBox.setSelected(AppDisplay.DEFAULT_HIDE_TAGGER_BEFORE_RESPONSE);
 
     this.start = new JButton("Launch Application");
     this.start.addActionListener(this);

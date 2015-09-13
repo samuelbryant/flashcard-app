@@ -6,7 +6,7 @@ import models.AbstractQuestion;
 import models.Answer;
 import models.QType;
 
-public interface ListCtrl <Q_TYPE extends AbstractQuestion> {  
+public interface AppCtrl <Q_TYPE extends AbstractQuestion> {  
   public QType getType();
   
   // Other

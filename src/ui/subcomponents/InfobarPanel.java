@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 import models.AbstractQuestion;
 import ui.core.SubPanel;
-import ui.questions.ListCtrlImpl;
+import ui.questions.AppCtrlImpl;
 
 public class InfobarPanel
-<Q_TYPE extends AbstractQuestion,CTRL_TYPE extends ListCtrlImpl<Q_TYPE>>
+<Q_TYPE extends AbstractQuestion,CTRL_TYPE extends AppCtrlImpl<Q_TYPE>>
 extends SubPanel<Q_TYPE, CTRL_TYPE> {
   
   protected LabeledInfoBox questionListLabel;

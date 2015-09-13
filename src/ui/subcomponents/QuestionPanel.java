@@ -7,10 +7,10 @@ import java.util.Observable;
 import java.util.Observer;
 import models.AbstractQuestion;
 import ui.core.ImageDisplay;
-import ui.questions.ListCtrlImpl;
+import ui.questions.AppCtrlImpl;
 
 public abstract class QuestionPanel
-<Q_TYPE extends AbstractQuestion, CTRL_TYPE extends ListCtrlImpl<Q_TYPE>> 
+<Q_TYPE extends AbstractQuestion, CTRL_TYPE extends AppCtrlImpl<Q_TYPE>> 
 extends ImageDisplay implements Observer {
   
   public static final int LINE_SPACING = 20;

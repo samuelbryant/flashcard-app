@@ -16,11 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.AbstractQuestion;
 import ui.core.SubPanel;
-import ui.questions.ListCtrl;
-import ui.questions.ListCtrlImpl;
+import ui.questions.AppCtrl;
+import ui.questions.AppCtrlImpl;
 
 public abstract class ActionPanel
-<Q_TYPE extends AbstractQuestion, CTRL_TYPE extends ListCtrlImpl<Q_TYPE>>
+<Q_TYPE extends AbstractQuestion, CTRL_TYPE extends AppCtrlImpl<Q_TYPE>>
 extends SubPanel<Q_TYPE, CTRL_TYPE> {
 
   private static final int[] ANSWER_KEYS = new int[]{
@@ -52,7 +52,7 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
         public void actionPerformed(ActionEvent e) {
           try {
             ctrl.answer(answer);
-          } catch (ListCtrl.ListCtrlException ex) {
+          } catch (AppCtrl.ListCtrlException ex) {
             Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
         }
@@ -70,7 +70,7 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
       public void actionPerformed(ActionEvent ev) {
         try {
           ctrl.prevQuestion();
-        } catch (ListCtrl.NotStartedYetException | ListCtrl.NoQuestionsException ex) {
+        } catch (AppCtrl.NotStartedYetException | AppCtrl.NoQuestionsException ex) {
           System.err.println("No more questions");
         }
       }
@@ -81,7 +81,7 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
       public void actionPerformed(ActionEvent ev) {
         try {
           ctrl.nextQuestion();
-        } catch (ListCtrl.NotStartedYetException | ListCtrl.NoQuestionsException ex) {
+        } catch (AppCtrl.NotStartedYetException | AppCtrl.NoQuestionsException ex) {
           System.err.println("No more questions");
         }
       }

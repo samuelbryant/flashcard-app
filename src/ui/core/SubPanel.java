@@ -6,9 +6,9 @@ import java.util.Observer;
 import models.AbstractQuestion;
 import ui.core.components.FABuildable;
 import ui.core.components.FAPanel;
-import ui.questions.ListCtrlImpl;
+import ui.questions.AppCtrlImpl;
 
-public abstract class SubPanel <Q_TYPE extends AbstractQuestion, CTRL_TYPE extends ListCtrlImpl<Q_TYPE>>
+public abstract class SubPanel <Q_TYPE extends AbstractQuestion, CTRL_TYPE extends AppCtrlImpl<Q_TYPE>>
 extends FAPanel implements Observer, FABuildable {
 
   protected final CTRL_TYPE ctrl;

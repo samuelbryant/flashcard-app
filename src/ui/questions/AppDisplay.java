@@ -10,8 +10,8 @@ import ui.subcomponents.InfobarPanel;
 import ui.subcomponents.FilterPanel;
 import ui.subcomponents.TaggerPanel;
 
-public abstract class QuestionListDisplay
-<CTRL_TYPE extends ListCtrlImpl>
+public abstract class AppDisplay
+<CTRL_TYPE extends AppCtrlImpl>
 extends Display<CTRL_TYPE> {
 
   public static final int DEFAULT_WINDOW_WIDTH = 1300;
@@ -38,17 +38,17 @@ extends Display<CTRL_TYPE> {
   protected InfobarPanel infoPanel;
   protected TaggerPanel taggerPanel;
 
-  public QuestionListDisplay(CTRL_TYPE ctrl) {
+  public AppDisplay(CTRL_TYPE ctrl) {
     super(ctrl);
     this.setSettings();
   }
   
-  public QuestionListDisplay(CTRL_TYPE ctrl, int windowWidth, int windowHeight) {
+  public AppDisplay(CTRL_TYPE ctrl, int windowWidth, int windowHeight) {
     super(ctrl);
     this.setSettings(windowWidth, windowHeight);
   }
   
-  public QuestionListDisplay(
+  public AppDisplay(
     CTRL_TYPE ctrl, int windowWidth, int windowHeight, boolean recordResponses,
     boolean hideFilterBeforeResponses, boolean hideTaggerBeforeResponses) {
     super(ctrl);
@@ -57,7 +57,7 @@ extends Display<CTRL_TYPE> {
         hideFilterBeforeResponse, hideTaggerBeforeResponse);
   }
   
-  public QuestionListDisplay(
+  public AppDisplay(
     CTRL_TYPE ctrl, boolean recordResponses, boolean hideFilterBeforeResponses, boolean hideTaggerBeforeResponses) {
     super(ctrl);
     this.setSettings(

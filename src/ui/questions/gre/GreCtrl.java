@@ -6,13 +6,13 @@ package ui.questions.gre;
 import models.Answer;
 import models.QType;
 import models.Question;
-import ui.questions.ListCtrlImpl;
+import ui.questions.AppCtrlImpl;
 
 /**
  *
  * @author author
  */
-public class GreCtrl extends ListCtrlImpl<Question> {
+public class GreCtrl extends AppCtrlImpl<Question> {
   
   // Settings variables.
 //  protected boolean recordAnswers = true;

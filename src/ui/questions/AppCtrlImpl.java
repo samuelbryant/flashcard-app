@@ -15,7 +15,7 @@ import models.QType;
 import models.Response;
 import ui.core.Controller;
 
-public abstract class ListCtrlImpl <Q_TYPE extends AbstractQuestion> extends Controller<QuestionListDisplay> implements ListCtrl<Q_TYPE> {
+public abstract class AppCtrlImpl <Q_TYPE extends AbstractQuestion> extends Controller<AppDisplay> implements AppCtrl<Q_TYPE> {
   
   // Settings variables.
   protected boolean recordAnswers = true;
@@ -42,11 +42,11 @@ public abstract class ListCtrlImpl <Q_TYPE extends AbstractQuestion> extends Con
   protected int numberTimesRecorded;
   protected double totalQuestionTime;
   
-  public ListCtrlImpl(ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter) {
+  public AppCtrlImpl(ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter) {
     this.initialize(filter, sorter);
   }
   
-  public ListCtrlImpl(
+  public AppCtrlImpl(
       ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter,
       boolean recordAnswers, boolean rememberAnswers, boolean canChangeAnswer) {
     this.recordAnswers = recordAnswers;

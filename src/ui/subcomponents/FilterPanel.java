@@ -22,10 +22,10 @@ import models.Question;
 import ui.core.SubPanel;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
-import ui.questions.ListCtrlImpl;
+import ui.questions.AppCtrlImpl;
 
 public class FilterPanel
-<Q_TYPE extends AbstractQuestion,CTRL_TYPE extends ListCtrlImpl<Q_TYPE>>
+<Q_TYPE extends AbstractQuestion,CTRL_TYPE extends AppCtrlImpl<Q_TYPE>>
 extends SubPanel<Q_TYPE, CTRL_TYPE>
 implements ActionListener {
 

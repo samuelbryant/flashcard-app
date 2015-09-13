@@ -3,11 +3,11 @@
  */
 package ui.questions.gre;
 
-import ui.questions.QuestionListDisplay;
+import ui.questions.AppDisplay;
 import ui.subcomponents.FilterPanel;
 import ui.subcomponents.TaggerPanel;
 
-public class GreListDisplay extends QuestionListDisplay<GreCtrl> {
+public class GreListDisplay extends AppDisplay<GreCtrl> {
 
   public GreListDisplay(GreCtrl ctrl, boolean recordResponses, boolean hideFilter, boolean hideTagger) {
     super(ctrl, recordResponses, hideFilter, hideTagger);

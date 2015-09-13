@@ -3,11 +3,11 @@
  */
 package ui.questions.flc;
 
-import ui.questions.QuestionListDisplay;
+import ui.questions.AppDisplay;
 import ui.subcomponents.FilterPanel;
 import ui.subcomponents.TaggerPanel;
 
-public class FlcListDisplay extends QuestionListDisplay<FlcCtrl> {
+public class FlcListDisplay extends AppDisplay<FlcCtrl> {
 
   public FlcListDisplay(FlcCtrl ctrl, boolean recordResponses, boolean hideFilter, boolean hideTagger) {
     super(ctrl, recordResponses, hideFilter, hideTagger);
