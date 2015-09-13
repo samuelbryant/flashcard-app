@@ -125,6 +125,8 @@ public class IO {
   public static void copyOrDie(String srcFilename, String dstFilename) {
     File src = new File(srcFilename);
     File dst = new File(dstFilename);
+    
+    System.out.printf("Copy or die: %s, %s\n", srcFilename, dstFilename);
     if (!src.exists()) {
       return;
     }
@@ -134,7 +136,11 @@ public class IO {
 
     // Copy file.
     try {
-      Files.copy(src.toPath(), dst.toPath());
+      if (src.isDirectory()) {
+        org.apache.commons.io.FileUtils.copyDirectory(src, dst);
+      } else {
+        Files.copy(src.toPath(), dst.toPath());
+      }
     } catch (IOException ex) {
       throw new FatalError(
           "copyOrDie failed for '" + srcFilename + "' -> '" + dstFilename + "'", ex);
