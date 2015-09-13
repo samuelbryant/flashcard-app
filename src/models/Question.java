@@ -37,6 +37,17 @@ public class Question extends AbstractQuestion {
     this.originalImageFilename = imageFilename;
     this.databaseImageFilename = null;
   }
+  
+  /**
+   * Constructor used for question comparison (equals compares source and number).
+   * @param source
+   * @param questionNumber 
+   */
+  public Question(Source source, Integer questionNumber) {
+    super();
+    this.source = source;
+    this.questionNumber = questionNumber;
+  }
 
   @Override
   public String toString() {

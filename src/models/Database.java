@@ -8,10 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * @param <T> Type of question this database represents.
- */
-public final class Database <T extends AbstractQuestion> {
+public final class Database <Q_TYPE extends AbstractQuestion> {
 
   static final int _ID_START = 1001;
 
@@ -19,7 +16,7 @@ public final class Database <T extends AbstractQuestion> {
   protected Integer revisionNumber = 0;
   protected Integer questionNumber = 0;
   protected Integer nextQuestionId = 0;
-  protected Map<Integer, T> questions = new TreeMap<>();
+  protected Map<Integer, Q_TYPE> questions = new TreeMap<>();
 
   // Private fields.
   boolean isPersistent = false;
@@ -44,16 +41,20 @@ public final class Database <T extends AbstractQuestion> {
     return this.questions.values().size();
   }
   
-  public boolean containsQuestion(T q) {
+  public boolean containsQuestion(Q_TYPE q) {
     return this.questions.containsValue(q);
+  }
+  
+  public Q_TYPE findQuestion(Q_TYPE q) {
+    return this.questions.get(q);
   }
 
   /**
    * Gets Question array from Database.
    * @return ArrayList with all Question instances, sorted by ID.
    */
-  public ArrayList<T> getQuestions() {
-    return getQuestions(new ListFilter.NullFilter<T>(), new ListSorter.IdSorter<T>());
+  public ArrayList<Q_TYPE> getQuestions() {
+    return getQuestions(new ListFilter.NullFilter<Q_TYPE>(), new ListSorter.IdSorter<Q_TYPE>());
   }
 
   /**
@@ -61,8 +62,8 @@ public final class Database <T extends AbstractQuestion> {
    * @param filter ListFilter to use to filter Question array.
    * @return ArrayList with all Question instances that match ListFilter, sorted by ID.
    */
-  public ArrayList<T> getQuestions(ListFilter<T> filter) {
-    return getQuestions(filter, new ListSorter.IdSorter<T>());
+  public ArrayList<Q_TYPE> getQuestions(ListFilter<Q_TYPE> filter) {
+    return getQuestions(filter, new ListSorter.IdSorter<Q_TYPE>());
   }
 
   /**
@@ -70,8 +71,8 @@ public final class Database <T extends AbstractQuestion> {
    * @param sorter ListSorter to use to sort Question array.
    * @return ArrayList with all Question instances, sorted by ListSorter.
    */
-  public ArrayList<T> getQuestions(ListSorter<T> sorter) {
-    return getQuestions(new ListFilter.NullFilter<T>(), sorter);
+  public ArrayList<Q_TYPE> getQuestions(ListSorter<Q_TYPE> sorter) {
+    return getQuestions(new ListFilter.NullFilter<Q_TYPE>(), sorter);
   }
 
 
@@ -82,11 +83,11 @@ public final class Database <T extends AbstractQuestion> {
    * @param sorter ListSorter to use to sort Question array.
    * @return ArrayList with all Question instances that match ListFilter, sorted by ListSorter.
    */
-  public ArrayList<T> getQuestions(ListFilter<T> filter, ListSorter<T> sorter) {
-    ArrayList<T> list = new ArrayList<>();
-    Iterator<T> iter = this.getDatabaseIterator();
+  public ArrayList<Q_TYPE> getQuestions(ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter) {
+    ArrayList<Q_TYPE> list = new ArrayList<>();
+    Iterator<Q_TYPE> iter = this.getDatabaseIterator();
     while (iter.hasNext()) {
-      T q = iter.next();
+      Q_TYPE q = iter.next();
       if (filter.accept(q)) {
         list.add(q);
       }
@@ -96,7 +97,7 @@ public final class Database <T extends AbstractQuestion> {
   }
 
 
-  private Iterator<T> getDatabaseIterator() {
+  private Iterator<Q_TYPE> getDatabaseIterator() {
     return this.questions.values().iterator();
   }
 
@@ -104,7 +105,7 @@ public final class Database <T extends AbstractQuestion> {
    *
    * @param q
    */
-  public void addQuestionToSession(T q) {
+  public void addQuestionToSession(Q_TYPE q) {
     // For old questions (has id), we ensure question is already in database, then set it to map.
     if (q.id != null) {
       if (this.questions.get(q.id) == null) {
@@ -145,7 +146,7 @@ public final class Database <T extends AbstractQuestion> {
    */
   public boolean isValid() {
     System.out.printf("LOG: database isValid NIY\n");
-    for (T q: this.questions.values()) {
+    for (Q_TYPE q: this.questions.values()) {
       if (!q.isValid()) {
         System.err.printf("Question is invalid: %s\n", q);
         return false;

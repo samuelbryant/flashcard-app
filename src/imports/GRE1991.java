@@ -24,7 +24,7 @@ public class GRE1991 {
   public static void main(String[] args) {
     Constants.setupProjectDirectories();
 
-    Database d = DatabaseIO.loadDatabase();
+    Database d = DatabaseIO.getQuestionDatabaseIO().get();
 
     Map<Integer, Answer> answers = ImportUtilities.readAnswerFile(SRC_DIR + "/answers.txt");
     Source source = Source.GRE_1991;
@@ -38,7 +38,7 @@ public class GRE1991 {
       d.addQuestionToSession(q);
     }
 
-    DatabaseIO.writeDatabase(d);
+    DatabaseIO.getQuestionDatabaseIO().save();
   }
 
 }

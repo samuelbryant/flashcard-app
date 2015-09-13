@@ -23,7 +23,7 @@ public class PT2Import {
   public static void main(String[] args) {
     Constants.setupProjectDirectories();
 
-    Database d = DatabaseIO.loadDatabase();
+    Database d = DatabaseIO.getQuestionDatabaseIO().get();
 
     Map<Integer, Answer> answers = ImportUtilities.readAnswerFile(SRC_DIR + "/answers.txt");
     Source source = Source.SAMPLE_2;
@@ -33,7 +33,7 @@ public class PT2Import {
       d.addQuestionToSession(q);
     }
 
-    DatabaseIO.writeDatabase(d);
+    DatabaseIO.getQuestionDatabaseIO().save();
   }
 
 }

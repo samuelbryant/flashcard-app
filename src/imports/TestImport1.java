@@ -46,7 +46,7 @@ public class TestImport1 {
 
     Constants.setupProjectDirectories();
 
-    Database d = DatabaseIO.loadDatabase();
+    Database d = DatabaseIO.getQuestionDatabaseIO().get();
 
     Source source = Source.GRE_1986;
 
@@ -60,7 +60,7 @@ public class TestImport1 {
       d.addQuestionToSession(q);
     }
 
-    DatabaseIO.writeDatabase(d);
+    DatabaseIO.getQuestionDatabaseIO().save();
   }
 
 }

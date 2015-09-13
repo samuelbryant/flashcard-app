@@ -23,8 +23,8 @@ public class GRE1986 {
    */
   public static void main(String[] args) {
     Constants.setupProjectDirectories();
-
-    Database d = DatabaseIO.loadDatabase();
+    
+    Database d = DatabaseIO.getQuestionDatabaseIO().get();
 
     Map<Integer, Answer> answers = ImportUtilities.readAnswerFile(SRC_DIR + "/answers.txt");
     Source source = Source.GRE_1986;
@@ -38,7 +38,7 @@ public class GRE1986 {
       d.addQuestionToSession(q);
     }
 
-    DatabaseIO.writeDatabase(d);
+    DatabaseIO.getQuestionDatabaseIO().save();
   }
 
 }

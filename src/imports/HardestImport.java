@@ -34,7 +34,7 @@ public class HardestImport {
    * @param args
    */
   public static void main(String[] args) {
-    Database db = DatabaseIO.loadDatabase();
+    Database<Question> db = DatabaseIO.getQuestionDatabaseIO().get();
 
     for (Source src: SOURCES) {
       String hardFile = SRC_DIR + "/" + src.name() + ".txt";
@@ -44,12 +44,12 @@ public class HardestImport {
       while (scan.hasNextInt()) {
         Integer number = scan.nextInt();
         System.out.printf("%s #%d\n", src.toString(), number);
-        Question q = db.findQuestion(src, number);
-        q.addTag(Tag.HARD);
+        Question q = db.findQuestion(new Question(src, number));
+        q.setTag(Tag.HARD, true);
       } 
     }
 
-    DatabaseIO.writeDatabase(db);
+    DatabaseIO.getQuestionDatabaseIO().save();
 
   }
 

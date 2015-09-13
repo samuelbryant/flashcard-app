@@ -28,7 +28,7 @@ public class EX2001Import {
   public static void main(String[] args) throws FileNotFoundException {
     Constants.setupProjectDirectories();
 
-    Database d = DatabaseIO.loadDatabase();
+    Database d = DatabaseIO.getQuestionDatabaseIO().get();
 
     Source source = Source.GRE_2001;
 
@@ -47,12 +47,12 @@ public class EX2001Import {
       String qFile = SRC_DIR + "/2001 " + qNumber + ".png";
       Question q = new Question(source, qNumber, correctAnswer, qFile);
       if (myAnswer != correctAnswer) {
-        q.addTag(Tag.WRONG);
+        q.setTag(Tag.WRONG, true);
       }
       d.addQuestionToSession(q);
     }
 
-    DatabaseIO.writeDatabase(d);
+    DatabaseIO.getQuestionDatabaseIO().save();
   }
 
 }
