@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -148,8 +149,35 @@ public class FlashcardMaker extends JPanel implements MouseListener {
     for (int i=1; i<this.horizontalSplits.size(); i++) {
       int bot = this.horizontalSplits.get(i);
       
-      BufferedImage qImg = img.getSubimage(0, top, mid, bot-top);
-      BufferedImage aImg = img.getSubimage(mid, top, right-mid, bot-top);
+      BufferedImage qImgPart = img.getSubimage(0, top, mid, bot-top);
+      BufferedImage aImgPart = img.getSubimage(mid, top, right-mid, bot-top);
+      
+      int qWidth = qImgPart.getWidth();
+      int qHeight = qImgPart.getHeight();
+      int aWidth = aImgPart.getWidth();
+      int aHeight = aImgPart.getHeight();
+      
+      int tWidth = Math.max(qWidth, aWidth);
+      int tHeight = qHeight + aHeight;
+      BufferedImage qImg = new BufferedImage(tWidth, tHeight, BufferedImage.TYPE_4BYTE_ABGR);
+      BufferedImage aImg = new BufferedImage(tWidth, tHeight, BufferedImage.TYPE_4BYTE_ABGR);
+      
+      Graphics2D qGr = qImg.createGraphics();
+      Graphics2D aGr = aImg.createGraphics();
+      qGr.setColor(Color.WHITE);
+      aGr.setColor(Color.WHITE);
+      qGr.fillRect(0, 0, tWidth, tHeight);
+      aGr.fillRect(0, 0, tWidth, tHeight);
+      
+      int wOff1 = (tWidth - qWidth)/2;
+      int wOff2 = (tWidth - aWidth)/2;
+      int hOff = (tHeight - aHeight);
+      
+      qGr.drawImage(qImgPart, wOff1, 0, this);
+      aGr.drawImage(qImgPart, wOff1, 0, this);
+      aGr.drawImage(aImgPart, wOff2, hOff, this);
+      
+      
       
       db.addQuestionToSession(new Flashcard(qImg, aImg));
       
