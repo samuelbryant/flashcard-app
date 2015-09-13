@@ -1,9 +1,0 @@
-{
-  "databaseQuestionFilename": "database/flc/images/ID-1018-Q.png",
-  "notes": [],
-  "subjects": [],
-  "responses": [],
-  "id": 1018,
-  "databaseAnswerFilename": "database/flc/images/ID-1018-A.png",
-  "tags": []
-}
