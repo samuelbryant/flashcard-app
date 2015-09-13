@@ -163,4 +163,9 @@ public class Question extends AbstractQuestion {
     return hash;
   }
 
+  @Override
+  public String toDisplayName() {
+    return this.source.toDisplayName() + " #" + this.questionNumber.toString();
+  }
+
 }

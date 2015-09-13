@@ -18,7 +18,6 @@ import models.Tag;
 import core.Constants;
 import models.AbstractQuestion;
 import models.Question;
-import ui.core.SubController;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
 import ui.questions.QuestionListController;
@@ -31,7 +30,7 @@ public class FilterPanel<
     STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
     LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
     CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
-    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE, SubController<CTRL_TYPE>>
+    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE>
   implements ActionListener {
 
   protected FAButton applyFiltersButton;
@@ -51,8 +50,8 @@ public class FilterPanel<
 
   protected static final String NO_SOURCE_FILTER = "None";
 
-  public FilterPanel(QuestionListController controller) {
-    super(new SubController(controller));
+  public FilterPanel(CTRL_TYPE controller) {
+    super(controller);
     subjectCheckboxes = new TreeMap<>();
     tagCheckboxes = new TreeMap<>();
     this.hideBeforeAnswering = false;

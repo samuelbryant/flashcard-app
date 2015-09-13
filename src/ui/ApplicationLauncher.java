@@ -11,7 +11,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import models.QType;
-import ui.questions.QuestionListController;
 import ui.questions.QuestionListDisplay;
 import ui.questions.flc.FlcCtrl;
 import ui.questions.flc.FlcListDisplay;

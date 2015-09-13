@@ -19,14 +19,14 @@ public abstract class QuestionListController<
   protected LIST_TYPE questionList;
   protected boolean recordAnswers;
   protected Integer numberAnswered;
-  protected Integer totalQuestionTime;
+  protected Double totalQuestionTime;
 
   protected QuestionListController(LIST_TYPE list, STATE_TYPE state) {
     this.questionList = list;
     this.questionState = state;
     this.recordAnswers = false;
     this.numberAnswered = 0;
-    this.totalQuestionTime = 0;
+    this.totalQuestionTime = 0.0;
     this.bind();
   }
   
@@ -45,7 +45,11 @@ public abstract class QuestionListController<
     return this.numberAnswered;
   }
   
-  public int getTotalQuestionTime() {
+  public double getAverageQuestionTime() {
+    return this.totalQuestionTime / this.numberAnswered;
+  }
+  
+  public double getTotalQuestionTime() {
     return this.totalQuestionTime;
   }
 
@@ -60,8 +64,11 @@ public abstract class QuestionListController<
   }
 
   public void answer(Answer answer) {
+    boolean alreadyAnswered = this.questionState._isAnswered;
+    
     this.questionList.answer(answer);
-    if (!this.getQuestionState().isAnswered()) {
+
+    if (!alreadyAnswered) {
       // Record answer to database.
       if (this.recordAnswers) {
         Response r = this.getQuestionState().getResponseObject();
@@ -70,7 +77,7 @@ public abstract class QuestionListController<
       
       // Record question list stats.
       this.numberAnswered++;
-      this.totalQuestionTime += this.getQuestionState().getLastResponseTime();      
+      this.totalQuestionTime += this.getQuestionState().getLastResponseTimeComplete();      
     }
   }
   

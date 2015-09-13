@@ -43,6 +43,8 @@ public abstract class AbstractQuestion implements Serializable {
   
   public abstract boolean isValid();
   
+  public abstract String toDisplayName();
+  
   @Override
   public String toString() {
     return String.format("%3s #%d", this.type.toString(), this.id);

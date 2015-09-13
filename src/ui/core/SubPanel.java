@@ -14,11 +14,8 @@ public abstract class SubPanel <
     Q_TYPE extends AbstractQuestion,
     STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
     LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
-    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>,
-    SUBCTRL_TYPE extends SubController<CTRL_TYPE>> 
+    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
 extends FAPanel implements Observer, FABuildable {
-
-  protected final SUBCTRL_TYPE componentController;
 
   protected final CTRL_TYPE questionListController;
 
@@ -26,10 +23,9 @@ extends FAPanel implements Observer, FABuildable {
 
   protected final STATE_TYPE questionState;
 
-  public SubPanel(SUBCTRL_TYPE componentController) {
+  public SubPanel(CTRL_TYPE controller) {
     super();
-    this.componentController = componentController;
-    this.questionListController = this.componentController.getQuestionListController();
+    this.questionListController = controller;
     this.questionState = this.questionListController.getQuestionState();
     this.questionList = this.questionListController.getQuestionList();
     this.questionState.addObserver(this);

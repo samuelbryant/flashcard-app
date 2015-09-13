@@ -75,5 +75,10 @@ public class Flashcard extends AbstractQuestion {
   public int hashCode() {
     return super.id;
   }
+
+  @Override
+  public String toDisplayName() {
+    return "FLC " + this.id.toString();
+  }
    
 }

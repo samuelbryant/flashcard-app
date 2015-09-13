@@ -3,15 +3,12 @@ package ui.questions;
 import engine.ListFilter;
 import engine.ListSorter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
 import models.AbstractQuestion;
 import models.Answer;
 import models.Database;
 import models.DatabaseIO;
 import models.QType;
-import models.Response;
 
 /**
  * Class which captures state of a list of questions.
@@ -58,7 +55,6 @@ public abstract class QuestionList<
   protected Integer _currentIndex;
   protected Integer _totalNumber;
   protected State _state;
-  protected Map<Q_TYPE, Response> responseValues = new HashMap<>();
 
   protected QuestionList(ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter) {
     this._listFilter = filter;
@@ -96,7 +92,6 @@ public abstract class QuestionList<
       this.getQuestionState().changeAnswer(answer);
     } else {
       this.getQuestionState().answer(answer);
-      this.responseValues.put(this.getCurrentQuestion(), this.getQuestionState().getResponseObject());
     }
   }
   

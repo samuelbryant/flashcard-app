@@ -12,8 +12,8 @@ import ui.subcomponents.TaggerPanel;
 public abstract class QuestionListDisplay<CTRL_TYPE extends QuestionListController>
 extends Display<CTRL_TYPE> {
 
-  public static final int DEFAULT_WINDOW_WIDTH = 1200;
-  public static final int DEFAULT_WINDOW_HEIGHT = 800;
+  public static final int DEFAULT_WINDOW_WIDTH = 1300;
+  public static final int DEFAULT_WINDOW_HEIGHT = 850;
   public static final boolean DEFAULT_RECORD_RESPONSES = true;
   public static final boolean DEFAULT_HIDE_FILTER_BEFORE_RESPONSE = false;
   public static final boolean DEFAULT_HIDE_TAGGER_BEFORE_RESPONSE = false;

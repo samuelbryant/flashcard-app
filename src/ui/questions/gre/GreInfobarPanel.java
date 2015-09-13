@@ -5,31 +5,36 @@ package ui.questions.gre;
 
 import models.Question;
 import ui.subcomponents.InfobarPanel;
+import ui.subcomponents.LabeledInfoBox;
 
 public class GreInfobarPanel
 extends InfobarPanel<Question, GreQuestionState, GreQuestionList, GreCtrl> {
 
+  protected LabeledInfoBox statsLabel;
+  
   public GreInfobarPanel(GreCtrl ctrl) {
     super(ctrl);
   }
   
   @Override
-  protected void observeQuestionChange() {
-    super.observeQuestionChange();
+  public void buildComponents() {
+    super.buildComponents();
     
-    if (this.questionList.isStarted()) {
-      String source = this.questionList.getCurrentQuestion().getSource().toString();
-      String number = this.questionList.getCurrentQuestion().getQuestionNumber().toString();
-      this.questionLabel.setText(String.format("Q: %s - %s", source, number));
-      
-      int numCorrect = this.questionListController.getNumberCorrect();
-      int numAnswered = this.questionListController.getNumberAnswered();
-      if (numAnswered != 0) {
-        this.totalStatsLabel.setText(String.format("Stats: %d/%d", numCorrect, numAnswered));
-      } else {
-        this.totalStatsLabel.setText("Stats: -/-");
-      } 
-    }
+    // Stats label.
+    this.statsLabel = this.getInfoBox("List Stats", "Not Started", new LabeledInfoBox.TextGenerator() {
+      @Override
+      public String generateLabelText() {
+        if (questionList.isStarted()) {
+          int numberCorrect = questionListController.getNumberCorrect();
+          int totalNumber = questionListController.getNumberAnswered();
+          return String.format("%d / %d", numberCorrect, totalNumber);
+        } else {
+          return "Not Started";
+        }
+      }
+    });
+    
+    this.addInfoBox(this.statsLabel);
   }
   
 }

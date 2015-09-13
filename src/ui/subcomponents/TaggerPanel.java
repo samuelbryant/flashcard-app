@@ -15,7 +15,6 @@ import core.Constants;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import models.AbstractQuestion;
-import ui.core.SubController;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
 import ui.questions.QuestionListController;
@@ -28,7 +27,7 @@ public class TaggerPanel<
     STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
     LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
     CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
-    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE, SubController<CTRL_TYPE>>{
+    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE>{
 
   protected FAButton onlyShowUnchecked;
   protected JLabel topLabel;
@@ -43,7 +42,7 @@ public class TaggerPanel<
   protected JScrollPane notesPane;
 
   public TaggerPanel(CTRL_TYPE ctrl) {
-    super(new SubController(ctrl));
+    super(ctrl);
     subjectCheckboxes = new TreeMap<>();
     tagCheckboxes = new TreeMap<>();
     this.hideBeforeAnswering = false;

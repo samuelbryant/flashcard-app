@@ -30,8 +30,11 @@ public class GreCtrl extends QuestionListController<
 
   @Override
   public void answer(Answer answer) {
+    boolean alreadyAnswered = this.getQuestionState().isAnswered();
+    
     super.answer(answer);
-    if (this.getQuestionState().isAnswered()) {
+    
+    if (!alreadyAnswered) {
       if (this.getQuestionState().isAnsweredCorrectly()) {
         this.numberCorrect++;
       }

@@ -7,8 +7,6 @@ import java.util.Observable;
 import java.util.Observer;
 import models.AbstractQuestion;
 import models.Answer;
-import models.Flashcard;
-import models.Question;
 import models.Response;
 import ui.questions.QuestionList.NotStartedYetException;
 
@@ -59,10 +57,9 @@ public abstract class QuestionState<
    */
   @Override
   public void update(Observable o, Object arg) {
-    try {
-      Q_TYPE q = this._questionList.getCurrentQuestion();
-      this.setQuestion(q);
-    } catch(NotStartedYetException ex) {
+    if (this._questionList.isStarted()) {
+      this.setQuestion(this._questionList.getCurrentQuestion());
+    } else {
       this.setQuestion(null);
     }
   }
@@ -172,6 +169,20 @@ public abstract class QuestionState<
   public int getLastResponseTime() throws NotAnsweredYetException, NotStartedYetException {
     if (this.isAnswered()) {
       return (int) this._response.getTimeInSeconds().intValue();
+    } else {
+      throw new NotAnsweredYetException();
+    }
+  }
+  
+  /**
+   *
+   * @return
+   * @throws NotAnsweredYetException
+   * @throws NotStartedYetException
+   */
+  public double getLastResponseTimeComplete() throws NotAnsweredYetException, NotStartedYetException {
+    if (this.isAnswered()) {
+      return this._response.getTimeInSeconds();
     } else {
       throw new NotAnsweredYetException();
     }

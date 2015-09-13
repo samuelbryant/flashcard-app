@@ -13,9 +13,4 @@ extends InfobarPanel<Flashcard, FlcQuestionState, FlcQuestionList, FlcCtrl> {
     super(ctrl);
   }
   
-  @Override
-  protected void observeQuestionChange() {
-    super.observeQuestionChange();
-  }
-  
 }

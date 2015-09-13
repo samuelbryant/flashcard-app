@@ -15,7 +15,6 @@ import ui.questions.QuestionListController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.AbstractQuestion;
-import ui.core.SubController;
 import ui.questions.QuestionList;
 import ui.questions.QuestionState;
 import ui.core.SubPanel;
@@ -25,7 +24,8 @@ public abstract class ActionPanel<
     STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
     LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
     CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
-    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE, SubController<CTRL_TYPE>>{
+    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE> {
+
   private static final int[] ANSWER_KEYS = new int[]{
     KeyEvent.VK_1,
     KeyEvent.VK_2,
@@ -39,7 +39,7 @@ public abstract class ActionPanel<
   protected final Map<Answer, FAButton> answerButtons;
   
   public ActionPanel(CTRL_TYPE controller) {
-    super(new SubController(controller));
+    super(controller);
     this.answerButtons = new TreeMap<>();
   }
 
