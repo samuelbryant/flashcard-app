@@ -10,7 +10,8 @@ import ui.subcomponents.LabeledInfoBox;
 public class GreInfobarPanel
 extends InfobarPanel<Question, GreCtrl> {
 
-  protected LabeledInfoBox statsLabel;
+  protected LabeledInfoBox listStatsLabel;
+  protected LabeledInfoBox questionStatsLabel;
   
   public GreInfobarPanel(GreCtrl ctrl) {
     super(ctrl);
@@ -21,7 +22,7 @@ extends InfobarPanel<Question, GreCtrl> {
     super.buildComponents();
     
     // Stats label.
-    this.statsLabel = this.getInfoBox("List Stats", "Not Started", new LabeledInfoBox.TextGenerator() {
+    this.listStatsLabel = this.getInfoBox("List Stats", "Not Started", new LabeledInfoBox.TextGenerator() {
       @Override
       public String generateLabelText() {
         if (ctrl.isStarted()) {
@@ -34,7 +35,23 @@ extends InfobarPanel<Question, GreCtrl> {
       }
     });
     
-    this.addInfoBox(this.statsLabel);
+    // Stats label.
+    this.questionStatsLabel = this.getInfoBox("Ques Stats", "-", new LabeledInfoBox.TextGenerator() {
+      @Override
+      public String generateLabelText() {
+        if (ctrl.isStarted() && ctrl.isAnswered()) {
+          int numberRightWrong[] = ctrl.getCurrentQuestion().getTimesRightWrong();
+          int right = numberRightWrong[0];
+          int total = right + numberRightWrong[1];
+          return String.format("%d / %d", right, total);
+        } else {
+          return "-";
+        }
+      }
+    });
+    
+    this.addInfoBox(this.listStatsLabel);
+    this.addInfoBox(this.questionStatsLabel);
   }
   
 }
