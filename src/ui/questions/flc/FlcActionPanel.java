@@ -7,17 +7,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 import models.Answer;
 import models.Flashcard;
 import ui.core.components.FAButton;
 import ui.subcomponents.ActionPanel;
 
-/**
- *
- * @author author
- */
-public class FlcActionPanel
-extends ActionPanel<Flashcard, FlcQuestionState, FlcQuestionList, FlcCtrl> {
+
+public class FlcActionPanel extends ActionPanel<Flashcard, FlcCtrl> {
   
   protected FAButton showButton;
   
@@ -32,7 +29,7 @@ extends ActionPanel<Flashcard, FlcQuestionState, FlcQuestionList, FlcCtrl> {
     showButton.addActionListener(new ActionListener(){
       @Override
       public void actionPerformed(ActionEvent e) {
-        FlcActionPanel.this.questionListController.reveal();
+        FlcActionPanel.this.ctrl.reveal();
       }
     });
     
@@ -49,12 +46,12 @@ extends ActionPanel<Flashcard, FlcQuestionState, FlcQuestionList, FlcCtrl> {
   }
   
   @Override
-  protected void observeQuestionChange() {
-    super.observeQuestionChange();
+  public void update(Observable o, Object args) {
+    super.update(o, args);
 
-    boolean isStarted = this.questionList.isStarted();
-    boolean isAnswered = this.questionList.isStarted() && this.questionState.isAnswered();
-    boolean isRevealed = this.questionList.isStarted() && this.questionState.isRevealed();
+    boolean isStarted = this.ctrl.isStarted();
+    boolean isAnswered = this.ctrl.isStarted() && this.ctrl.isAnswered();
+    boolean isRevealed = this.ctrl.isStarted() && this.ctrl.isRevealed();
     
     this.showButton.setEnabled(isStarted && !isRevealed);
     
@@ -62,7 +59,7 @@ extends ActionPanel<Flashcard, FlcQuestionState, FlcQuestionList, FlcCtrl> {
       FAButton button = this.answerButtons.get(answer);
 
       button.setEnabled(isStarted && isRevealed);
-      if (isAnswered && answer == questionState.getSelectedAnswer()) {
+      if (isAnswered && answer == ctrl.getSelectedAnswer()) {
         button.setBackground(Color.GREEN);
       } else {
         button.setDefaultBackground();

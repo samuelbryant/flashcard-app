@@ -12,22 +12,18 @@ import javax.swing.JLabel;
 import models.Subject;
 import models.Tag;
 import core.Constants;
+import java.util.Observable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import models.AbstractQuestion;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
-import ui.questions.QuestionListController;
 import ui.core.SubPanel;
-import ui.questions.QuestionList;
-import ui.questions.QuestionState;
+import ui.questions.ListCtrlImpl;
 
-public class TaggerPanel<
-    Q_TYPE extends AbstractQuestion,
-    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
-    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
-    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
-    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE>{
+public class TaggerPanel 
+<Q_TYPE extends AbstractQuestion, CTRL_TYPE extends ListCtrlImpl<Q_TYPE>>
+extends SubPanel<Q_TYPE, CTRL_TYPE> {
 
   protected FAButton onlyShowUnchecked;
   protected JLabel topLabel;
@@ -75,7 +71,7 @@ public class TaggerPanel<
       cb.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          questionList.getCurrentQuestion().setSubject(subject, cb.isSelected());
+          ctrl.getCurrentQuestion().setSubject(subject, cb.isSelected());
         } 
       });
       subjectCheckboxes.put(subject, cb);
@@ -86,7 +82,7 @@ public class TaggerPanel<
       cb.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          questionList.getCurrentQuestion().setTag(tag, cb.isSelected());
+          ctrl.getCurrentQuestion().setTag(tag, cb.isSelected());
         } 
       });
       tagCheckboxes.put(tag, cb);
@@ -95,11 +91,12 @@ public class TaggerPanel<
     this.notesArea = new JTextArea();
     this.notesAreaButton = new FAButton("Done");
     this.notesAreaButton.addActionListener(new ActionListener() {
+      @Override
       public void actionPerformed(ActionEvent e) {
-        if (questionList.isStarted()) {
-          questionList.getCurrentQuestion().setNote(notesArea.getText());
+        if (ctrl.isStarted()) {
+          ctrl.getCurrentQuestion().setNote(notesArea.getText());
         }
-        TaggerPanel.this.questionListController.requestFocus();
+        TaggerPanel.this.ctrl.requestFocus();
       }
     });
     
@@ -107,10 +104,6 @@ public class TaggerPanel<
     this.notesPane = new JScrollPane(this.notesArea);
   }
 
-  /**
-   *
-   * @param totalSize
-   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     Subject[] subjects = Subject.values();
@@ -137,22 +130,32 @@ public class TaggerPanel<
     this.sizeComponent(this, totalSize);
   }
 
-  /**
-   *
-   */
   @Override
-  protected void observeListChange() {
+  public void update(Observable o, Object args) {
+    
+    // Hide tagging panel before answering if set, otherwise, hide when there is no question.
+    if (this.hideBeforeAnswering) {
+      this.setVisible(this.ctrl.isAnswered());
+    } else {
+      this.setVisible(this.ctrl.isStarted());
+    }
+    
+    // Always hide note panel before answering.
+    this.notesArea.setVisible(this.ctrl.isAnswered());
+    
+    // Disable tagging boxes when there is no question.
     for (Subject subject: Subject.values()) {
-      this.subjectCheckboxes.get(subject).setEnabled(this.questionList.isStarted());
+      this.subjectCheckboxes.get(subject).setEnabled(this.ctrl.isStarted());
       this.subjectCheckboxes.get(subject).setSelected(false);
     }
     for (Tag tag: Tag.values()) {
-      this.tagCheckboxes.get(tag).setEnabled(this.questionList.isStarted());
+      this.tagCheckboxes.get(tag).setEnabled(this.ctrl.isStarted());
       this.tagCheckboxes.get(tag).setSelected(false);
     }
 
-    if (this.questionList.isStarted()) {
-      Q_TYPE q = this.questionList.getCurrentQuestion();
+    // When there is a question, set values of boxes from question.
+    if (this.ctrl.isStarted()) {
+      Q_TYPE q = this.ctrl.getCurrentQuestion();
       ArrayList<Subject> subjects = q.getSubjects();
       ArrayList<Tag> tags = q.getTags();
       for (Subject subject: subjects) {
@@ -162,20 +165,8 @@ public class TaggerPanel<
         this.tagCheckboxes.get(tag).setSelected(true);
       }
       
-      
-      this.notesArea.setText(this.questionList.getCurrentQuestion().getNote());
+      this.notesArea.setText(this.ctrl.getCurrentQuestion().getNote());
     }
-  }
-
-  /**
-   *
-   */
-  @Override
-  protected void observeQuestionChange() {
-    if (this.hideBeforeAnswering) {
-      this.setVisible(this.questionList.isStarted() && this.questionState.isAnswered());
-    }
-    this.notesArea.setVisible(this.questionList.isStarted() && this.questionState.isAnswered());
   }
 
 }

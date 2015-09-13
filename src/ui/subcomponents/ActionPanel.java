@@ -6,25 +6,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Map;
+import java.util.Observable;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
 import models.Answer;
 import ui.core.components.FAActionButton;
 import ui.core.components.FAButton;
-import ui.questions.QuestionListController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.AbstractQuestion;
-import ui.questions.QuestionList;
-import ui.questions.QuestionState;
 import ui.core.SubPanel;
+import ui.questions.ListCtrl;
+import ui.questions.ListCtrlImpl;
 
-public abstract class ActionPanel<
-    Q_TYPE extends AbstractQuestion,
-    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
-    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
-    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
-    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE> {
+public abstract class ActionPanel
+<Q_TYPE extends AbstractQuestion, CTRL_TYPE extends ListCtrlImpl<Q_TYPE>>
+extends SubPanel<Q_TYPE, CTRL_TYPE> {
 
   private static final int[] ANSWER_KEYS = new int[]{
     KeyEvent.VK_1,
@@ -43,9 +40,6 @@ public abstract class ActionPanel<
     this.answerButtons = new TreeMap<>();
   }
 
-  /**
-   *
-   */
   @Override
   public void buildComponents() {
     Answer[] answers = Answer.values();
@@ -57,8 +51,8 @@ public abstract class ActionPanel<
         @Override
         public void actionPerformed(ActionEvent e) {
           try {
-            questionListController.answer(answer);
-          } catch (QuestionState.AlreadyAnsweredException | QuestionList.NotStartedYetException ex) {
+            ctrl.answer(answer);
+          } catch (ListCtrl.ListCtrlException ex) {
             Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
         }
@@ -68,15 +62,15 @@ public abstract class ActionPanel<
 
       // Create key shortcut.
       int buttonMnemonic = ANSWER_KEYS[answer.ordinal()];
-      this.questionListController.addKeyAction(buttonMnemonic, buttonPress);
+      this.ctrl.addKeyAction(buttonMnemonic, buttonPress);
     }
 
     backButton = new FAActionButton("Back") {  
       @Override
       public void actionPerformed(ActionEvent ev) {
         try {
-          questionList.lastQuestion();
-        } catch (QuestionList.OutOfQuestionsException ex) {
+          ctrl.prevQuestion();
+        } catch (ListCtrl.NotStartedYetException | ListCtrl.NoQuestionsException ex) {
           System.err.println("No more questions");
         }
       }
@@ -86,8 +80,8 @@ public abstract class ActionPanel<
       @Override
       public void actionPerformed(ActionEvent ev) {
         try {
-          questionList.nextQuestion();
-        } catch (QuestionList.OutOfQuestionsException ex) {
+          ctrl.nextQuestion();
+        } catch (ListCtrl.NotStartedYetException | ListCtrl.NoQuestionsException ex) {
           System.err.println("No more questions");
         }
       }
@@ -96,16 +90,11 @@ public abstract class ActionPanel<
     saveButton = new FAActionButton("Save") {
       @Override
       public void actionPerformed(ActionEvent ev) {
-        questionListController.save();
-        System.out.printf("Saved to database!\n");
+        ctrl.save();
       }
     };
   }
 
-  /**
-   *
-   * @param totalSize
-   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -113,13 +102,11 @@ public abstract class ActionPanel<
       this.add(this.answerButtons.get(answer));
     }
     // this.add(backButton);
-    this.questionListController.addKeyAction(KeyEvent.VK_LEFT, backButton);
+    this.ctrl.addKeyAction(KeyEvent.VK_LEFT, backButton);
     // this.add(nextButton);
-    this.questionListController.addKeyAction(KeyEvent.VK_RIGHT, nextButton);
+    this.ctrl.addKeyAction(KeyEvent.VK_RIGHT, nextButton);
     this.add(saveButton);
-    this.questionListController.addKeyAction(KeyEvent.VK_S, saveButton);
-
-    // this.add(this.filtersBox);
+    this.ctrl.addKeyAction(KeyEvent.VK_S, saveButton);
 
     this.setAlignmentX(Component.CENTER_ALIGNMENT);
     this.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -127,38 +114,13 @@ public abstract class ActionPanel<
     this.sizeComponent(this, totalSize);
   }
 
-  /**
-   *
-   */
   @Override
-  protected void observeListChange() {
-
+  public void update(Observable o, Object args) {
+    for (Answer answer: Answer.values()) {
+      FAButton button = this.answerButtons.get(answer);
+      button.setEnabled(ctrl.canAnswerQuestion());
+      button.setDefaultBackground();
+    }
   }
-
-  /**
-   *
-   */
-  @Override
-  protected void observeQuestionChange() {
-    this.backButton.setEnabled(questionList.hasLastQuestion());
-    this.nextButton.setEnabled(questionList.hasNextQuestion());
-  }
-//    boolean isStarted = this.questionList.isStarted();
-//    boolean isAnswered = this.questionList.isStarted() && this.questionState.isAnswered();
-//
-//    for (Answer answer: Answer.values()) {
-//      FAButton button = this.answerButtons.get(answer);
-//
-//      button.setEnabled(isStarted);
-//
-//      if (isAnswered && answer == questionState.getCorrectAnswer()) {
-//        button.setBackground(Color.GREEN);
-//      } else if (isAnswered && answer == questionState.getSelectedAnswer()) {
-//        button.setBackground(Color.RED);
-//      } else {
-//        button.setDefaultBackground();
-//      }
-//    }
-//  }
 
 }

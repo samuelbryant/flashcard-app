@@ -62,7 +62,6 @@ public abstract class Controller <T extends Display> extends Observable implemen
   public final void keyPressed(KeyEvent e) {
     ActionListener al = this._keyMap.get(e.getKeyCode());
     if (al != null) {
-      System.out.printf("Found actionlistener for key code: %d\n", e.getKeyCode());
       al.actionPerformed(null);
     } else {
       System.out.printf("Unknown key code: %d\n", e.getKeyCode());

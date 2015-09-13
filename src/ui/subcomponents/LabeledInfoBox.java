@@ -9,6 +9,7 @@ import ui.core.components.FAPanel;
 public class LabeledInfoBox extends FAPanel implements FABuildable {
 
   public static final int SPACING_SIZE = 20;
+  
   protected JLabel labelLabel;
   protected JLabel valueLabel;
   protected final String labelText;
@@ -34,7 +35,7 @@ public class LabeledInfoBox extends FAPanel implements FABuildable {
     this.valueLabel = new JLabel(maxString);
     this.setFont(core.Constants.BASIC_FONT);
     this.textGenerator = valueTextGenerator;
-    this.maxWidth = Math.max(
+    this.maxWidth = SPACING_SIZE + Math.max(
       this.valueLabel.getPreferredSize().width,
       this.labelLabel.getPreferredSize().width);
     this.maxHeight =

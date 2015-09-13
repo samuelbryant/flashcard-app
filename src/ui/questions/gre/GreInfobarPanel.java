@@ -8,7 +8,7 @@ import ui.subcomponents.InfobarPanel;
 import ui.subcomponents.LabeledInfoBox;
 
 public class GreInfobarPanel
-extends InfobarPanel<Question, GreQuestionState, GreQuestionList, GreCtrl> {
+extends InfobarPanel<Question, GreCtrl> {
 
   protected LabeledInfoBox statsLabel;
   
@@ -24,9 +24,9 @@ extends InfobarPanel<Question, GreQuestionState, GreQuestionList, GreCtrl> {
     this.statsLabel = this.getInfoBox("List Stats", "Not Started", new LabeledInfoBox.TextGenerator() {
       @Override
       public String generateLabelText() {
-        if (questionList.isStarted()) {
-          int numberCorrect = questionListController.getNumberCorrect();
-          int totalNumber = questionListController.getNumberAnswered();
+        if (ctrl.isStarted()) {
+          int numberCorrect = ctrl.getNumberCorrect();
+          int totalNumber = ctrl.getNumAnswered();
           return String.format("%d / %d", numberCorrect, totalNumber);
         } else {
           return "Not Started";

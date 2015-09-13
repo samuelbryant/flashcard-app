@@ -95,5 +95,13 @@ public class Response implements Comparable<Response> {
       return (((double) this.responseTime) / 1000000000);
     }
   }
+  
+  public Long getResponseTime() {
+    if (this.responseTime == null) {
+      return null;
+    } else {
+      return this.responseTime;
+    }
+  }
 
 }

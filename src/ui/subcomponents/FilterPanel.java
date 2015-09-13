@@ -16,22 +16,18 @@ import models.Source;
 import models.Subject;
 import models.Tag;
 import core.Constants;
+import java.util.Observable;
 import models.AbstractQuestion;
 import models.Question;
+import ui.core.SubPanel;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
-import ui.questions.QuestionListController;
-import ui.core.SubPanel;
-import ui.questions.QuestionList;
-import ui.questions.QuestionState;
+import ui.questions.ListCtrlImpl;
 
-public class FilterPanel<
-    Q_TYPE extends AbstractQuestion,
-    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
-    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
-    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
-    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE>
-  implements ActionListener {
+public class FilterPanel
+<Q_TYPE extends AbstractQuestion,CTRL_TYPE extends ListCtrlImpl<Q_TYPE>>
+extends SubPanel<Q_TYPE, CTRL_TYPE>
+implements ActionListener {
 
   protected FAButton applyFiltersButton;
   protected JLabel topLabel;
@@ -108,7 +104,7 @@ public class FilterPanel<
     this.sourceCombobox.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        questionListController.requestFocus();
+        ctrl.requestFocus();
       }
     });
     this.sourceCombobox.setAlignmentX(LEFT_ALIGNMENT);
@@ -119,13 +115,13 @@ public class FilterPanel<
     this.sorter1Combobox.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        questionListController.requestFocus();
+        ctrl.requestFocus();
       }
     });
     this.sorter2Combobox.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        questionListController.requestFocus();
+        ctrl.requestFocus();
       }
     });
     this.sorter1Combobox.setAlignmentX(LEFT_ALIGNMENT);
@@ -220,24 +216,13 @@ public class FilterPanel<
   public void actionPerformed(ActionEvent ev) {
     ListFilter filter = this._generateFilter();
     ListSorter sorter = this._generateSorter();
-    this.questionList.setFilterSorter(filter, sorter);
+    this.ctrl.setList(filter, sorter);
   }
 
-  /**
-   *
-   */
   @Override
-  protected void observeListChange() {
-
-  }
-
-  /**
-   *
-   */
-  @Override
-  protected void observeQuestionChange() {
+  public void update(Observable o, Object args) {
     if (this.hideBeforeAnswering) {
-      this.setVisible(!this.questionList.isStarted() || this.questionState.isAnswered());
+      this.setVisible(!ctrl.isStarted() || ctrl.isAnswered());
     }
   }
 

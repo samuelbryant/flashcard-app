@@ -7,8 +7,7 @@ import java.awt.image.BufferedImage;
 import models.Flashcard;
 import ui.subcomponents.QuestionPanel;
 
-public class FlcQuestionPanel
-extends QuestionPanel<Flashcard, FlcQuestionState, FlcQuestionList, FlcCtrl> {
+public class FlcQuestionPanel extends QuestionPanel<Flashcard, FlcCtrl> {
 
   public FlcQuestionPanel(FlcCtrl ctrl, boolean resize) {
     super(ctrl, resize);
@@ -16,11 +15,10 @@ extends QuestionPanel<Flashcard, FlcQuestionState, FlcQuestionList, FlcCtrl> {
 
   @Override
   public BufferedImage getCurrentImage() {
-    System.out.println("Getting current image");
-    if (this.questionList.getQuestionState().isRevealed()) {
-      return this.questionList.getCurrentQuestion().getAnswerImage();
+    if (this.ctrl.isRevealed()) {
+      return this.ctrl.getCurrentQuestion().getAnswerImage();
     } else {
-      return this.questionList.getCurrentQuestion().getQuestionImage();
+      return this.ctrl.getCurrentQuestion().getQuestionImage();
     }
   }
   

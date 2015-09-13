@@ -7,8 +7,7 @@ import java.awt.image.BufferedImage;
 import models.Question;
 import ui.subcomponents.QuestionPanel;
 
-public class GreQuestionPanel
-extends QuestionPanel<Question, GreQuestionState, GreQuestionList, GreCtrl> {
+public class GreQuestionPanel extends QuestionPanel<Question, GreCtrl> {
 
   public GreQuestionPanel(GreCtrl ctrl, boolean resize) {
     super(ctrl, resize);
@@ -16,7 +15,7 @@ extends QuestionPanel<Question, GreQuestionState, GreQuestionList, GreCtrl> {
 
   @Override
   public BufferedImage getCurrentImage() {
-    return this.questionList.getCurrentQuestion().getImage();
+    return this.ctrl.getCurrentQuestion().getImage();
   }
   
 }

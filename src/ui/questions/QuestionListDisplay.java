@@ -1,6 +1,7 @@
 package ui.questions;
 
 import java.awt.Dimension;
+import models.AbstractQuestion;
 import ui.core.Display;
 import ui.core.DisplayWindow;
 import ui.core.ImageDisplay;
@@ -9,7 +10,8 @@ import ui.subcomponents.InfobarPanel;
 import ui.subcomponents.FilterPanel;
 import ui.subcomponents.TaggerPanel;
 
-public abstract class QuestionListDisplay<CTRL_TYPE extends QuestionListController>
+public abstract class QuestionListDisplay
+<CTRL_TYPE extends ListCtrlImpl>
 extends Display<CTRL_TYPE> {
 
   public static final int DEFAULT_WINDOW_WIDTH = 1300;
@@ -103,7 +105,7 @@ extends Display<CTRL_TYPE> {
     this.filterPanel.setHideBeforeAnswering(this.hideFilterBeforeResponse);
     this.taggerPanel.setHideBeforeAnswering(this.hideTaggerBeforeResponse);
     this.ctrl.setRecordAnswers(recordResponses);
-    this.ctrl.initialUpdate();
+    this.ctrl.updateObservers();
   }
   
   public void go() {
@@ -111,10 +113,6 @@ extends Display<CTRL_TYPE> {
     window.showDisplay(this);
   }
 
-  /**
-   *
-   * @param totalSize
-   */
   @Override
   public void layoutComponents(Dimension totalSize) {
     this.setLayout(null);

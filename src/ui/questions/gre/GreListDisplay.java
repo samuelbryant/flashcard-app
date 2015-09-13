@@ -12,20 +12,26 @@ public class GreListDisplay extends QuestionListDisplay<GreCtrl> {
   public GreListDisplay(GreCtrl ctrl, boolean recordResponses, boolean hideFilter, boolean hideTagger) {
     super(ctrl, recordResponses, hideFilter, hideTagger);
     
-    this.actionPanel = new GreActionPanel(this.ctrl);
+    this.actionPanel = new GreActionPanel(ctrl);
     this.actionPanel.buildComponents();
 
-    this.taggerPanel = new TaggerPanel(this.ctrl);
+    this.taggerPanel = new TaggerPanel(ctrl);
     this.taggerPanel.buildComponents();
 
-    this.filterPanel = new FilterPanel(this.ctrl);
+    this.filterPanel = new FilterPanel(ctrl);
     this.filterPanel.buildComponents();
 
-    this.infoPanel = new GreInfobarPanel(this.ctrl);
+    this.infoPanel = new GreInfobarPanel(ctrl);
     this.infoPanel.buildComponents();
 
-    this.questionPanel = new GreQuestionPanel(this.ctrl, true);
+    this.questionPanel = new GreQuestionPanel(ctrl, true);
     this.questionPanel.buildComponents();
+  }
+  
+  public static void main(String[] args) {
+    GreCtrl ctrl = new GreCtrl();
+    GreListDisplay disp = new GreListDisplay(ctrl, true, false, false);
+    disp.go();
   }
   
 }

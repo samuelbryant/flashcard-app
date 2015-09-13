@@ -3,23 +3,22 @@ package ui.subcomponents;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.Observable;
 import models.AbstractQuestion;
-import ui.questions.QuestionListController;
 import ui.core.SubPanel;
-import ui.questions.QuestionList;
-import ui.questions.QuestionState;
+import ui.questions.ListCtrlImpl;
 
-public class InfobarPanel<
-    Q_TYPE extends AbstractQuestion,
-    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
-    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
-    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>>
-    extends SubPanel<Q_TYPE, STATE_TYPE, LIST_TYPE, CTRL_TYPE> {
+public class InfobarPanel
+<Q_TYPE extends AbstractQuestion,CTRL_TYPE extends ListCtrlImpl<Q_TYPE>>
+extends SubPanel<Q_TYPE, CTRL_TYPE> {
   
   protected LabeledInfoBox questionListLabel;
   protected LabeledInfoBox questionLabel;
   protected LabeledInfoBox timerLabel;
   protected LabeledInfoBox totalTimeLabel;
+  protected LabeledInfoBox timesSeenLabel;
+  protected LabeledInfoBox failureRateLabel;
+  
   protected ArrayList<LabeledInfoBox> labelBoxes = new ArrayList<>();
 
   public InfobarPanel(CTRL_TYPE ctrl) {
@@ -38,8 +37,9 @@ public class InfobarPanel<
         "Current Question", "Not Started", new LabeledInfoBox.TextGenerator() {
       @Override
       public String generateLabelText() {
-        if (questionList.isStarted()) {
-          Q_TYPE q = questionList.getCurrentQuestion();
+        if (ctrl.isStarted()) {
+          Q_TYPE q = ctrl.getCurrentQuestion();
+          System.out.printf("Current question: %s\n", q);
           return q.toDisplayName();
         } else {
           return "Not Started";
@@ -51,9 +51,9 @@ public class InfobarPanel<
     this.questionListLabel = this.getInfoBox("Question List", "Not Started", new LabeledInfoBox.TextGenerator() {
       @Override
       public String generateLabelText() {
-        if (questionList.isStarted()) {
-          int index = questionList.getCurrentIndex();
-          int total = questionList.getNumberOfQuestions();
+        if (ctrl.isStarted()) {
+          int index = ctrl.getCurrentIndex() + 1;
+          int total = ctrl.getQuestionNumber();
           return String.format("%d / %d", index, total);
         } else {
           return "Not Started";
@@ -65,8 +65,8 @@ public class InfobarPanel<
     this.timerLabel = this.getInfoBox("Response Time", "-", new LabeledInfoBox.TextGenerator() {
       @Override
       public String generateLabelText() {
-        if (questionList.isStarted() && questionState.isAnswered()) {
-          int time = questionState.getLastResponseTime();
+        if (ctrl.isStarted() && ctrl.isAnswered()) {
+          int time = ctrl.getLastResponseTime();
           int targetDiff = time - core.Constants.TARGET_TIME;
           return String.format("%d (%+d)", time, targetDiff);
         } else {
@@ -79,8 +79,8 @@ public class InfobarPanel<
     this.totalTimeLabel = this.getInfoBox("Average Time", "-", new LabeledInfoBox.TextGenerator() {
       @Override
       public String generateLabelText() {
-        if (questionList.isStarted() && questionListController.getNumberAnswered() != 0) {
-          double time = questionListController.getAverageQuestionTime();
+        if (ctrl.hasAverageQuestionTime()) {
+          double time = ctrl.getAverageQuestionTime();
           return String.format("%.1f", time);
         } else {
           return "-";
@@ -88,12 +88,26 @@ public class InfobarPanel<
       }
     });
     
+    // Number of times seen label.
+    this.timesSeenLabel = this.getInfoBox("Times Seen", "-", new LabeledInfoBox.TextGenerator() {
+      @Override
+      public String generateLabelText() {
+        if (ctrl.isStarted()) {
+          int times = ctrl.getCurrentQuestion().getResponses().size();
+          return String.format("%d", times);
+        } else {
+          return "-";
+        }
+      }
+    });
+
     this.labelBoxes.clear();
     
     this.addInfoBox(questionListLabel);
     this.addInfoBox(questionLabel);
     this.addInfoBox(timerLabel);
     this.addInfoBox(totalTimeLabel);
+    this.addInfoBox(timesSeenLabel);
   }
 
   protected void addInfoBox(LabeledInfoBox lib) {
@@ -115,38 +129,10 @@ public class InfobarPanel<
   }
 
   @Override
-  protected void observeListChange() {
-  }
-  
-  @Override
-  protected void observeQuestionChange() {
+  public void update(Observable o, Object args) {
     for (LabeledInfoBox lib: labelBoxes) {
       lib.update();
     }
   }
-//
-//  @Override
-//  protected void observeQuestionChange() {
-//    if (this.questionList.isStarted()) {
-//      int currentIndex = this.questionList.getCurrentIndex();
-//      int totalNumber = this.questionList.getNumberOfQuestions();
-//      this.questionListLabel.setText(String.format("List: %d/%d", currentIndex, totalNumber));
-//
-//      if (this.questionState.isAnswered()) {
-//        int time = this.questionState.getLastResponseTime();
-//        int targetDiff = time - core.Constants.TARGET_TIME;
-//        String text = String.format("Time: %d (%+d)", time, targetDiff);
-//        this.timerLabel.setText(text);
-//      }
-//      
-//      int numAnswered = this.questionListController.getNumberAnswered();
-//      int totalTime = this.questionListController.getTotalQuestionTime();
-//      if (numAnswered != 0) {
-//        this.totalTimeLabel.setText(String.format("Avg Time: %d", (int) ((double) totalTime)/numAnswered));
-//      } else {
-//        this.totalTimeLabel.setText("Avg Time: -");
-//      } 
-//    }
-//  }
 
 }

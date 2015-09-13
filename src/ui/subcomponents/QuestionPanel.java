@@ -7,34 +7,25 @@ import java.util.Observable;
 import java.util.Observer;
 import models.AbstractQuestion;
 import ui.core.ImageDisplay;
-import ui.questions.QuestionList;
-import ui.questions.QuestionListController;
-import ui.questions.QuestionState;
+import ui.questions.ListCtrlImpl;
 
-public abstract class QuestionPanel<
-    Q_TYPE extends AbstractQuestion,
-    STATE_TYPE extends QuestionState<STATE_TYPE, Q_TYPE, LIST_TYPE>,
-    LIST_TYPE extends QuestionList<LIST_TYPE, Q_TYPE, STATE_TYPE>,
-    CTRL_TYPE extends QuestionListController<Q_TYPE, STATE_TYPE, LIST_TYPE>> 
-    extends ImageDisplay implements Observer {
+public abstract class QuestionPanel
+<Q_TYPE extends AbstractQuestion, CTRL_TYPE extends ListCtrlImpl<Q_TYPE>> 
+extends ImageDisplay implements Observer {
   
   public static final int LINE_SPACING = 20;
   
   protected CTRL_TYPE ctrl;
-  protected LIST_TYPE questionList;
-  protected STATE_TYPE questionState;
 
   public QuestionPanel(CTRL_TYPE ctrl, boolean resize) {
     super(resize);
     this.ctrl = ctrl;
-    this.questionList = ctrl.getQuestionList();
-    this.questionState = ctrl.getQuestionState();
-    this.questionState.addObserver(this);
+    this.ctrl.addObserver(this);
   }
 
   @Override
   public BufferedImage generateDisplayImage() {
-    if (this.questionList.isStarted()) {
+    if (this.ctrl.isStarted()) {
       return this.getCurrentImage();
     } else {
       int width = this.getWidth();
@@ -49,7 +40,7 @@ public abstract class QuestionPanel<
 
       gr.drawString("Questions List Not Started", 40, yPos);
       yPos += LINE_SPACING;
-      gr.drawString("Number of questions: " + this.questionList.getNumberOfQuestions(), 40, yPos);
+      gr.drawString("Number of questions: " + this.ctrl.getQuestionNumber(), 40, yPos);
       return img;
     }
   }
