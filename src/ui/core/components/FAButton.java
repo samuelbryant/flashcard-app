@@ -23,6 +23,7 @@ public class FAButton extends JButton {
     super(label);
     this.setBackground(Constants.BUTTON_COLOR);
     this.defaultColor = Constants.BUTTON_COLOR;
+    this.setFont(Constants.BASIC_FONT);
     this.setOpaque(true);
     this.setBorderPainted(false);
     this.setFocusable(false);
@@ -37,6 +38,7 @@ public class FAButton extends JButton {
     super(label);
     this.setBackground(color);
     this.defaultColor = color;
+    this.setFont(Constants.BASIC_FONT);
     this.setOpaque(true);
     this.setBorderPainted(false);
     this.setFocusable(false);

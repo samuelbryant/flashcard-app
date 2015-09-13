@@ -2,6 +2,7 @@ package ui.subcomponents;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,8 @@ import ui.questions.AppCtrlImpl;
 public abstract class ActionPanel
 <Q_TYPE extends AbstractQuestion, CTRL_TYPE extends AppCtrlImpl<Q_TYPE>>
 extends SubPanel<Q_TYPE, CTRL_TYPE> {
+  
+  public static final int PADDING = 5;
 
   private static final int[] ANSWER_KEYS = new int[]{
     KeyEvent.VK_1,
@@ -97,7 +100,7 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
 
   @Override
   public void layoutComponents(Dimension totalSize) {
-    this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+    this.setLayout(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
     for (Answer answer: Answer.values()) {
       this.add(this.answerButtons.get(answer));
     }

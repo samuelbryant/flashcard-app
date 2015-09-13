@@ -19,15 +19,30 @@ import models.QType;
  * @author author
  */
 public class Constants {
-
+  
+  static Color SCHEME_GRAY = new Color(124, 120, 106);
+  static Color SCHEME_BLUE = new Color(141, 205, 193);
+  static Color SCHEME_GREEN = new Color(211, 227, 151);
+  static Color SCHEME_YELLOW = new Color(255, 245, 195);
+  static Color SCHEME_RED = new Color(235, 110, 68);
   
   public static final int TARGET_TIME = 90;
-  public static final Font BASIC_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
+  
+  public static final Color BUTTON_COLOR = SCHEME_RED;
+  public static final Color BACKGROUND_COLOR = SCHEME_GRAY;
+  
+  public static final Font BASIC_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 13);
   public static final Font SUBSECTION_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 14);
   public static final Font SECTION_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 16);
-  public static final Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
-  public static final Color BACKGROUND_COLOR2 = Color.GRAY;
-  public static final Color BUTTON_COLOR = Color.DARK_GRAY;
+  
+  public static final Color SECTION_LABEL_COLOR = SCHEME_BLUE;
+  public static final Color SUBSECTION_LABEL_COLOR = SCHEME_BLUE;
+  public static final Color NORMAL_LABEL_COLOR = Color.BLACK;
+  
+  public static final Color CORRECT_COLOR = SCHEME_BLUE;
+  public static final Color INCORRECT_COLOR = Color.RED;
+  public static final Color COMBO_BOX_COLOR = SCHEME_GREEN;
+
   public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd-HH-mm-ss");
 
   private static final String OUTPUT_DIR = "database";

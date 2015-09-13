@@ -20,6 +20,7 @@ public class FAPanel extends JPanel {
     super();
     this.setFocusable(false);
     this.setBackground(Constants.BACKGROUND_COLOR);
+    this.setFont(Constants.BASIC_FONT);
   }
 
   /**

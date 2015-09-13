@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import models.QType;
 import ui.questions.AppDisplay;
 import ui.questions.flc.FlcCtrl;
@@ -75,9 +78,20 @@ public final class ApplicationLauncher extends JFrame implements ActionListener 
     this.setVisible(false);
   }
   
-  public static void main(String[] args) {
-    ApplicationLauncher al = new ApplicationLauncher();
+  public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    JFrame.setDefaultLookAndFeelDecorated(true);
+    SwingUtilities.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception ex) {
+          System.out.println("Substance Graphite failed to initialize");
+        }
+        ApplicationLauncher al = new ApplicationLauncher();
     al.setVisible(true);
+      }
+    });
   }
   
 }

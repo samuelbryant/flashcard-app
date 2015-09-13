@@ -36,7 +36,7 @@ extends InfobarPanel<Question, GreCtrl> {
     });
     
     // Stats label.
-    this.questionStatsLabel = this.getInfoBox("Ques Stats", "-", new LabeledInfoBox.TextGenerator() {
+    this.questionStatsLabel = this.getInfoBox("Question Stats", "-", new LabeledInfoBox.TextGenerator() {
       @Override
       public String generateLabelText() {
         if (ctrl.isStarted() && ctrl.isAnswered()) {

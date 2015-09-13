@@ -1,5 +1,6 @@
 package ui.questions.gre;
 
+import core.Constants;
 import java.awt.Color;
 import java.util.Observable;
 import models.Answer;
@@ -25,9 +26,9 @@ public class GreActionPanel extends ActionPanel<Question, GreCtrl> {
     for (Answer answer: Answer.values()) {
       FAButton button = this.answerButtons.get(answer);
       if (isAnswered && answer == correctAnswer) {
-        button.setBackground(Color.GREEN);
+        button.setBackground(Constants.CORRECT_COLOR);
       } else if (isAnswered && answer == selectedAnswer) {
-        button.setBackground(Color.RED);
+        button.setBackground(Constants.INCORRECT_COLOR);
       }
     }
   }

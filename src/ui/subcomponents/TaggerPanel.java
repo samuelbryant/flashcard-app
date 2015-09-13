@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import models.Subject;
 import models.Tag;
 import core.Constants;
@@ -19,6 +18,7 @@ import models.AbstractQuestion;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
 import ui.core.SubPanel;
+import ui.core.components.FALabel;
 import ui.questions.AppCtrlImpl;
 
 public class TaggerPanel 
@@ -26,9 +26,9 @@ public class TaggerPanel
 extends SubPanel<Q_TYPE, CTRL_TYPE> {
 
   protected FAButton onlyShowUnchecked;
-  protected JLabel topLabel;
-  protected JLabel subjectsLabel;
-  protected JLabel tagsLabel;
+  protected FALabel topLabel;
+  protected FALabel subjectsLabel;
+  protected FALabel tagsLabel;
   protected final Map<Subject, FACheckbox> subjectCheckboxes;
   protected final Map<Tag, FACheckbox> tagCheckboxes;
   protected boolean hideBeforeAnswering;
@@ -57,14 +57,9 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
     Subject[] subjects = Subject.values();
     Tag[] tags = Tag.values();
 
-    topLabel = new JLabel("Add Labels");
-    topLabel.setFont(Constants.SECTION_FONT);
-
-    subjectsLabel = new JLabel("Subjects");
-    subjectsLabel.setFont(Constants.SUBSECTION_FONT);
-
-    tagsLabel = new JLabel("Tags");
-    tagsLabel.setFont(Constants.SUBSECTION_FONT);
+    topLabel = new FALabel("Add Labels", FALabel.SECTION_LABEL);
+    subjectsLabel = new FALabel("Subjects", FALabel.SUBSECTION_LABEL);
+    tagsLabel = new FALabel("Tags", FALabel.SUBSECTION_LABEL);
 
     for (final Subject subject: subjects) {
       final FACheckbox cb = new FACheckbox(subject.name());

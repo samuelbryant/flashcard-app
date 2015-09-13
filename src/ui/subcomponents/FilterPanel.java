@@ -11,17 +11,17 @@ import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import models.Source;
 import models.Subject;
 import models.Tag;
-import core.Constants;
 import java.util.Observable;
 import models.AbstractQuestion;
 import models.Question;
 import ui.core.SubPanel;
 import ui.core.components.FAButton;
 import ui.core.components.FACheckbox;
+import ui.core.components.FAComboBox;
+import ui.core.components.FALabel;
 import ui.questions.AppCtrlImpl;
 
 public class FilterPanel
@@ -30,19 +30,19 @@ extends SubPanel<Q_TYPE, CTRL_TYPE>
 implements ActionListener {
 
   protected FAButton applyFiltersButton;
-  protected JLabel topLabel;
-  protected JLabel subjectsLabel;
-  protected JLabel tagsLabel;
-  protected JLabel sourceLabel;
+  protected FALabel topLabel;
+  protected FALabel subjectsLabel;
+  protected FALabel tagsLabel;
+  protected FALabel sourceLabel;
   protected FACheckbox noSubjectCheckbox;
   protected final Map<Subject, FACheckbox> subjectCheckboxes;
   protected final Map<Tag, FACheckbox> tagCheckboxes;
-  protected JComboBox sourceCombobox;
+  protected FAComboBox sourceCombobox;
   protected boolean hideBeforeAnswering;
-  protected JLabel sorter1Label;
-  protected JComboBox sorter1Combobox;
-  protected JLabel sorter2Label;
-  protected JComboBox sorter2Combobox;
+  protected FALabel sorter1Label;
+  protected FAComboBox sorter1Combobox;
+  protected FALabel sorter2Label;
+  protected FAComboBox sorter2Combobox;
 
   protected static final String NO_SOURCE_FILTER = "None";
 
@@ -68,23 +68,12 @@ implements ActionListener {
     Source sources[] = Source.values();
 
     // Build labels.
-    topLabel = new JLabel("Apply List Filters");
-    topLabel.setFont(Constants.SECTION_FONT);
-
-    subjectsLabel = new JLabel("Subjects");
-    subjectsLabel.setFont(Constants.SUBSECTION_FONT);
-
-    tagsLabel = new JLabel("Tags");
-    tagsLabel.setFont(Constants.SUBSECTION_FONT);
-
-    sourceLabel = new JLabel("Source");
-    sourceLabel.setFont(Constants.SUBSECTION_FONT);
-
-    sorter1Label = new JLabel("Sort by 1");
-    sorter1Label.setFont(Constants.SUBSECTION_FONT);
-
-    sorter2Label = new JLabel("Sort by 2");
-    sorter2Label.setFont(Constants.SUBSECTION_FONT);
+    topLabel = new FALabel("Apply List Filters", FALabel.SECTION_LABEL);
+    subjectsLabel = new FALabel("Subjects", FALabel.SUBSECTION_LABEL);
+    tagsLabel = new FALabel("Tags", FALabel.SUBSECTION_LABEL);
+    sourceLabel = new FALabel("Source", FALabel.SUBSECTION_LABEL);
+    sorter1Label = new FALabel("Sort by 1", FALabel.SUBSECTION_LABEL);
+    sorter2Label = new FALabel("Sort by 2", FALabel.SUBSECTION_LABEL);
 
     // Build checkbox components.
     this.noSubjectCheckbox = new FACheckbox("No subject");
@@ -100,7 +89,7 @@ implements ActionListener {
     for (Source source: sources) {
       sourceStrings.add(source.toString());
     }
-    this.sourceCombobox = new javax.swing.JComboBox(sourceStrings.toArray());
+    this.sourceCombobox = new FAComboBox(sourceStrings.toArray());
     this.sourceCombobox.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -110,8 +99,8 @@ implements ActionListener {
     this.sourceCombobox.setAlignmentX(LEFT_ALIGNMENT);
 
     // Sorting combo boxes.
-    this.sorter1Combobox = new JComboBox(ListSorter.getAllGRESorters().keySet().toArray());
-    this.sorter2Combobox = new JComboBox(ListSorter.getAllGRESorters().keySet().toArray());
+    this.sorter1Combobox = new FAComboBox(ListSorter.getAllGRESorters().keySet().toArray());
+    this.sorter2Combobox = new FAComboBox(ListSorter.getAllGRESorters().keySet().toArray());
     this.sorter1Combobox.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -144,11 +133,6 @@ implements ActionListener {
     Tag tags[] = Tag.values();
 
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    this.add(this.sorter1Label);
-    this.add(this.sorter1Combobox);
-    this.add(this.sorter2Label);
-    this.add(this.sorter2Combobox);
-
 
     this.add(this.topLabel);
     this.add(this.subjectsLabel);
@@ -160,14 +144,16 @@ implements ActionListener {
     for (Tag tag: tags) {
       this.add(tagCheckboxes.get(tag));
     }
+    this.add(this.sorter1Label);
+    this.add(this.sorter1Combobox);
+    this.add(this.sorter2Label);
+    this.add(this.sorter2Combobox);
     this.add(this.sourceLabel);
     this.add(this.sourceCombobox);
+    
     this.add(applyFiltersButton);
 
-    // this.setAlignmentY(Component.TOP_ALIGNMENT);
-
     this.sizeComponent(this, totalSize);
-    this.sizeComponent(this.sourceCombobox, new Dimension(100, 50));
   }
 
   private ListSorter _generateSorter() {
