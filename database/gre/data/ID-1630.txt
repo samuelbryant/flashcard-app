@@ -1,0 +1,21 @@
+{
+  "notes": ["Best solution\n\n5*4 = 5*1 + (h2-h1)*1\nh1+h2 = 45\nSolve and get h1=15"],
+  "answer": "C",
+  "subjects": [
+    "MECHANICS",
+    "FLUIDS"
+  ],
+  "responses": [{
+    "response": "C",
+    "responseTime": 293274618479,
+    "dateString": "09/12/15 9:32 AM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1630.png",
+  "id": 1630,
+  "source": "GRE_1996",
+  "questionNumber": 30,
+  "tags": [
+    "HARD",
+    "TIME"
+  ]
+}

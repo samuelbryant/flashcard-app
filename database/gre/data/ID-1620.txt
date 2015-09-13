@@ -1,0 +1,19 @@
+{
+  "notes": ["Trick is COM frame: master this:\n\nIn COM frame, incoming and\nrecoil velcity must have same\nmagnitude\n\nFor 1v and 0.6v to have same\nmagnitude, our frame must be\nmoving at 0.2v. For this to be\nCOM, we need:\n mv/(m+M) = 0.2 v\n=> m:M is 1:4"],
+  "answer": "D",
+  "subjects": ["MECHANICS"],
+  "responses": [{
+    "response": "D",
+    "responseTime": 161436900240,
+    "dateString": "09/09/15 11:43 AM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1620.png",
+  "id": 1620,
+  "source": "GRE_1996",
+  "questionNumber": 20,
+  "tags": [
+    "TIME",
+    "HARD",
+    "STARRED"
+  ]
+}

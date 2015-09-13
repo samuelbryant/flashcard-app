@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "A",
+  "subjects": ["CIRCUITS"],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1285.png",
+  "id": 1285,
+  "source": "SAMPLE_2",
+  "questionNumber": 85,
+  "tags": []
+}

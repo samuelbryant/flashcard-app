@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": ["RELATIVITY"],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1282.png",
+  "id": 1282,
+  "source": "SAMPLE_2",
+  "questionNumber": 82,
+  "tags": []
+}

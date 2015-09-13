@@ -1,0 +1,18 @@
+{
+  "notes": [],
+  "answer": "C",
+  "subjects": [
+    "LAB_METHODS",
+    "ATOMIC"
+  ],
+  "responses": [{
+    "response": "C",
+    "responseTime": 22048635092,
+    "dateString": "09/12/15 11:43 AM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1483.png",
+  "id": 1483,
+  "source": "GRE_1986",
+  "questionNumber": 83,
+  "tags": ["HARD"]
+}

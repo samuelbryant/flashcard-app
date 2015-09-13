@@ -1,0 +1,19 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": ["WAVES"],
+  "responses": [{
+    "response": "B",
+    "responseTime": 308365417259,
+    "dateString": "09/11/15 10:13 PM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1683.png",
+  "id": 1683,
+  "source": "GRE_1996",
+  "questionNumber": 83,
+  "tags": [
+    "HARD",
+    "WRONG",
+    "STARRED"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": [
+    "MECHANICS",
+    "FLUIDS"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1274.png",
+  "id": 1274,
+  "source": "SAMPLE_2",
+  "questionNumber": 74,
+  "tags": ["HARD"]
+}

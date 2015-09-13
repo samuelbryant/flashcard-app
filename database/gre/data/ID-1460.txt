@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "C",
+  "subjects": ["MECHANICS"],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1460.png",
+  "id": 1460,
+  "source": "GRE_1986",
+  "questionNumber": 60,
+  "tags": ["HARD"]
+}

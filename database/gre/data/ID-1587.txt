@@ -1,0 +1,21 @@
+{
+  "notes": ["Use effective potential formula\nSet dV/dr = 0\nplug back into V,\nyou get 0"],
+  "answer": "C",
+  "subjects": [
+    "MECHANICS",
+    "ROTATIONAL"
+  ],
+  "responses": [{
+    "response": "C",
+    "responseTime": 91116061483,
+    "dateString": "09/11/15 8:09 AM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1587.png",
+  "id": 1587,
+  "source": "GRE_1991",
+  "questionNumber": 87,
+  "tags": [
+    "HARD",
+    "STARRED"
+  ]
+}

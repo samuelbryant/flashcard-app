@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": ["WAVES"],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1033.png",
+  "id": 1033,
+  "source": "SAMPLE_1",
+  "questionNumber": 33,
+  "tags": ["HARD"]
+}

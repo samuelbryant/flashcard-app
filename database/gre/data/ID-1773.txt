@@ -1,0 +1,21 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": [
+    "OPTICS",
+    "WAVES"
+  ],
+  "responses": [{
+    "response": "E",
+    "responseTime": 1584607696,
+    "dateString": "09/12/15 3:25 PM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1773.png",
+  "id": 1773,
+  "source": "GRE_2008",
+  "questionNumber": 74,
+  "tags": [
+    "HARD",
+    "UNSURE"
+  ]
+}

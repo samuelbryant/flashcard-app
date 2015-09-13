@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": ["MECHANICS"],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1355.png",
+  "id": 1355,
+  "source": "GRE_2001",
+  "questionNumber": 55,
+  "tags": ["TIME"]
+}

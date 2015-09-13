@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": ["QM"],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1243.png",
+  "id": 1243,
+  "source": "SAMPLE_2",
+  "questionNumber": 43,
+  "tags": []
+}

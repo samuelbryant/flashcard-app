@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": [
+    "SPECIAL",
+    "ATOMIC"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1368.png",
+  "id": 1368,
+  "source": "GRE_2001",
+  "questionNumber": 68,
+  "tags": ["HARD"]
+}

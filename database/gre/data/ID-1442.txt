@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "C",
+  "subjects": [
+    "LAB_METHODS",
+    "OTHER"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1442.png",
+  "id": 1442,
+  "source": "GRE_1986",
+  "questionNumber": 42,
+  "tags": []
+}

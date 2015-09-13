@@ -1,0 +1,18 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": [
+    "CIRCUITS",
+    "EM"
+  ],
+  "responses": [{
+    "response": "D",
+    "responseTime": 796315463,
+    "dateString": "09/12/15 3:24 PM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1767.png",
+  "id": 1767,
+  "source": "GRE_2008",
+  "questionNumber": 68,
+  "tags": ["HARD"]
+}

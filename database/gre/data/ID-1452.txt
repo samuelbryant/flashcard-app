@@ -1,0 +1,11 @@
+{
+  "notes": [],
+  "answer": "E",
+  "subjects": ["EM"],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1452.png",
+  "id": 1452,
+  "source": "GRE_1986",
+  "questionNumber": 52,
+  "tags": ["HARD"]
+}

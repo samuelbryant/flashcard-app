@@ -1,0 +1,15 @@
+{
+  "notes": ["Intrinsic magnetic moment is\nequal to gyromagnetic ratio\ntimes spin\n  mu = S * gamma\nGyromagnetic ratio given by\n  gamma = q / 2m\nq_N > q_e but not as much as\nm_N > m_e. Therefore,\nmu_N / mu_e < 1"],
+  "answer": "E",
+  "subjects": ["SPECIAL"],
+  "responses": [{
+    "response": "B",
+    "responseTime": 31892901259,
+    "dateString": "09/08/15 11:06 PM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1577.png",
+  "id": 1577,
+  "source": "GRE_1991",
+  "questionNumber": 77,
+  "tags": ["HARD"]
+}

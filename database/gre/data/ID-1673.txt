@@ -1,0 +1,18 @@
+{
+  "notes": [],
+  "answer": "C",
+  "subjects": ["THERMO"],
+  "responses": [{
+    "response": "C",
+    "responseTime": 114150555431,
+    "dateString": "09/10/15 7:20 PM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1673.png",
+  "id": 1673,
+  "source": "GRE_1996",
+  "questionNumber": 73,
+  "tags": [
+    "HARD",
+    "TIME"
+  ]
+}

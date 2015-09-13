@@ -1,0 +1,18 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": [
+    "ROTATIONAL",
+    "MECHANICS"
+  ],
+  "responses": [{
+    "response": "D",
+    "responseTime": 1242416383,
+    "dateString": "09/12/15 3:22 PM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1752.png",
+  "id": 1752,
+  "source": "GRE_2008",
+  "questionNumber": 53,
+  "tags": []
+}

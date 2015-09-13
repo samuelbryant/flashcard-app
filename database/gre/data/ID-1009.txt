@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "B",
+  "subjects": [
+    "MECHANICS",
+    "ROTATIONAL"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1009.png",
+  "id": 1009,
+  "source": "SAMPLE_1",
+  "questionNumber": 9,
+  "tags": ["HARD"]
+}

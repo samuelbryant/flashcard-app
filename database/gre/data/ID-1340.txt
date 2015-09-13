@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "D",
+  "subjects": ["CIRCUITS"],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1340.png",
+  "id": 1340,
+  "source": "GRE_2001",
+  "questionNumber": 40,
+  "tags": [
+    "WRONG",
+    "HARD"
+  ]
+}

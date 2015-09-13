@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "B",
+  "subjects": [
+    "LAB_METHODS",
+    "QM"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1217.png",
+  "id": 1217,
+  "source": "SAMPLE_2",
+  "questionNumber": 17,
+  "tags": []
+}

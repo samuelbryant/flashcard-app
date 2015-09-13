@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "C",
+  "subjects": [
+    "CIRCUITS",
+    "EM"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1424.png",
+  "id": 1424,
+  "source": "GRE_1986",
+  "questionNumber": 24,
+  "tags": ["HARD"]
+}

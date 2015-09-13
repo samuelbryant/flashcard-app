@@ -1,0 +1,23 @@
+{
+  "notes": [],
+  "answer": "C",
+  "subjects": [
+    "EM",
+    "CIRCUITS"
+  ],
+  "responses": [{
+    "response": "C",
+    "responseTime": 347513460224,
+    "dateString": "09/10/15 12:00 PM"
+  }],
+  "databaseImageFilename": "database/gre/images/ID-1662.png",
+  "id": 1662,
+  "source": "GRE_1996",
+  "questionNumber": 62,
+  "tags": [
+    "HARD",
+    "TIME",
+    "WRONG",
+    "STARRED"
+  ]
+}

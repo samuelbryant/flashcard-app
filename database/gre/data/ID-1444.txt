@@ -1,0 +1,14 @@
+{
+  "notes": [],
+  "answer": "A",
+  "subjects": [
+    "MECHANICS",
+    "ROTATIONAL"
+  ],
+  "responses": [],
+  "databaseImageFilename": "database/gre/images/ID-1444.png",
+  "id": 1444,
+  "source": "GRE_1986",
+  "questionNumber": 44,
+  "tags": []
+}
