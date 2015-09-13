@@ -5,6 +5,7 @@ package ui.questions.flc;
 
 import ui.questions.AppDisplay;
 import ui.subcomponents.FilterPanel;
+import ui.subcomponents.InfobarPanel;
 import ui.subcomponents.TaggerPanel;
 
 public class FlcListDisplay extends AppDisplay<FlcCtrl> {
@@ -21,7 +22,7 @@ public class FlcListDisplay extends AppDisplay<FlcCtrl> {
     this.filterPanel = new FilterPanel(this.ctrl);
     this.filterPanel.buildComponents();
 
-    this.infoPanel = new FlcInfobarPanel(this.ctrl);
+    this.infoPanel = new InfobarPanel(this.ctrl);
     this.infoPanel.buildComponents();
 
     this.questionPanel = new FlcQuestionPanel(this.ctrl, true);

@@ -82,11 +82,39 @@ public class FlcCtrl extends AppCtrlImpl<Flashcard> {
     this.updateObservers();
   }
   
+  public final void hide() throws AlreadyAnsweredException, NotStartedYetException {
+    this.hideUpdate();
+    this.updateObservers();
+  }
+  
+  public final void toggleVisibility() throws NotStartedYetException {
+    this.toggleVisibilityUpdate();
+    this.updateObservers();
+  }
+  
+  protected void toggleVisibilityUpdate() throws NotStartedYetException {
+    if (this.isStarted) {
+      this.isRevealed = !this.isRevealed;
+    } else {
+      throw new NotStartedYetException();
+    }
+  }
+  
   protected void revealUpdate() throws AlreadyAnsweredException, NotStartedYetException {
     if (this.isStarted && !this.isRevealed) {
       this.isRevealed = true;
     } else if (this.isStarted) {
       throw new AlreadyAnsweredException();
+    } else {
+      throw new NotStartedYetException();
+    }
+  }
+  
+  protected void hideUpdate() throws AlreadyAnsweredException, NotStartedYetException {
+    if (this.isStarted && this.isRevealed) {
+      this.isRevealed = false;
+    } else if (this.isStarted) {
+      throw new NotAnsweredYetException();
     } else {
       throw new NotStartedYetException();
     }

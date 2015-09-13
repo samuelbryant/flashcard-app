@@ -29,7 +29,7 @@ public class FlcActionPanel extends ActionPanel<Flashcard, FlcCtrl> {
     showButton.addActionListener(new ActionListener(){
       @Override
       public void actionPerformed(ActionEvent e) {
-        FlcActionPanel.this.ctrl.reveal();
+        FlcActionPanel.this.ctrl.toggleVisibility();
       }
     });
     
@@ -53,7 +53,7 @@ public class FlcActionPanel extends ActionPanel<Flashcard, FlcCtrl> {
     boolean isAnswered = this.ctrl.isStarted() && this.ctrl.isAnswered();
     boolean isRevealed = this.ctrl.isStarted() && this.ctrl.isRevealed();
     
-    this.showButton.setEnabled(isStarted && !isRevealed);
+    this.showButton.setText(isRevealed ? "Hide" : "Show");
     
     for (Answer answer: Answer.values()) {
       FAButton button = this.answerButtons.get(answer);
