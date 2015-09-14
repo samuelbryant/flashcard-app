@@ -1,7 +1,7 @@
 {
   "notes": [],
   "answer": "A",
-  "subjects": [],
+  "subjects": ["EM"],
   "responses": [{
     "response": "A",
     "responseTime": 1074262519,
@@ -11,5 +11,5 @@
   "id": 1716,
   "source": "GRE_2008",
   "questionNumber": 17,
-  "tags": []
+  "tags": ["NEED_FORMULA"]
 }
