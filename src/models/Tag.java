@@ -40,7 +40,9 @@ public enum Tag {
   
   DUMB_MISTAKE,
   
-  STARRED;
+  STARRED,
+  
+  COMPUTATION;
 
   /**
    *

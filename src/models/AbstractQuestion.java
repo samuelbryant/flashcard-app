@@ -91,6 +91,19 @@ public abstract class AbstractQuestion implements Serializable {
       return this.responses.get(0);
     }
   }
+  
+  /**
+   * Gets most recent Response Answer.
+   * @return Answer with most recent Date or null if no responses.
+   */
+  public Answer getLastResponseValue() {
+    Collections.sort(this.responses);  // should not be necessary.
+    if (this.responses.isEmpty()) {
+      return null;
+    } else {
+      return this.responses.get(0).getSelectedAnswer();
+    }
+  }
 
   /**
    * Gets most recent Date that this question was answered.
@@ -167,6 +180,10 @@ public abstract class AbstractQuestion implements Serializable {
     if (!this.isValid()) {
       throw new FatalError("Question failed validation: " + this);
     }
+  }
+  
+  public boolean hasAnswered() {
+    return !this.responses.isEmpty();
   }
   
   @Override

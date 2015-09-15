@@ -34,7 +34,7 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
   public void buildComponents() {
     // Question label.
     this.questionLabel = this.getInfoBox(
-        "Current Question", "Not Started", new LabeledInfoBox.TextGenerator() {
+        "Current Question", "Not Started       ", new LabeledInfoBox.TextGenerator() {
       @Override
       public String generateLabelText() {
         if (ctrl.isStarted()) {

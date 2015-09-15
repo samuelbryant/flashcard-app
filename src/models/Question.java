@@ -2,6 +2,7 @@ package models;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class Question extends AbstractQuestion {
@@ -139,6 +140,21 @@ public class Question extends AbstractQuestion {
     }
     return grades;
   }
+  
+  public boolean lastAnswerIsWrong() {
+    if (!this.hasAnswered()) throw new IllegalStateException("Not answered yet");
+    return this.getLastResponse().getSelectedAnswer() != this.answer;
+  }
+  
+  public boolean hasAnsweredWrong() {
+    if (!this.hasAnswered()) return false;
+    for (Response r: this.responses) {
+      if (r.getSelectedAnswer() != this.answer) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   @Override
   public QType getType() {
@@ -165,7 +181,26 @@ public class Question extends AbstractQuestion {
 
   @Override
   public String toDisplayName() {
-    return this.source.toDisplayName() + " #" + this.questionNumber.toString();
+    return this.source.toDisplayName() + " #" + this.questionNumber.toString() + " (" + this.id + ")";
   }
 
+  public static void main(String[] args) {
+    Question q = new Question(0);
+    
+    Date before = new Date();
+    Date after = new Date(2014, 10, 10);
+    System.out.println(before.before(after));
+    Response r1 = new Response(Answer.A, null, before);
+    Response r2 = new Response(Answer.B, null, after);
+    q.addResponse(r2);
+    q.addResponse(r1);
+    
+    System.out.println(q.getLastResponseValue());
+    
+    q.addResponse(r2);
+    q.addResponse(r1);
+    
+    System.out.println(q.getLastResponseValue());
+  }
+  
 }
