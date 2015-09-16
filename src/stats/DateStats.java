@@ -54,6 +54,10 @@ public class DateStats {
   }
   
   public void printStats() {
+    System.out.println("\n********************************************************************************");
+    System.out.println("Answer Date Statistics Breakdown");
+    System.out.println("********************************************************************************");
+    
     System.out.printf("%-10s %-10s %-10s %-10s %-10s\n", "Date", "Answered", "Right", "Wrong", "Percent");
     for (Map.Entry<Day, DayStats> entry: this.stats.entrySet()) {
       Day day = entry.getKey();

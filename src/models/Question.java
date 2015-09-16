@@ -63,7 +63,6 @@ public class Question extends AbstractQuestion {
     if (this.questionImage != null) {
       return this.questionImage;
     } else {
-      System.out.printf("LOG: image not loaded yet for %s\n", this);
       QuestionIO.getGREIO().loadQuestionImages(this);
       return this.questionImage;
     }

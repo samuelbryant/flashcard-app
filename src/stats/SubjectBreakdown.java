@@ -89,7 +89,10 @@ public class SubjectBreakdown {
   }
   
   public void print() {
-    System.out.println("Subject Statistics Breakdown\n");
+    System.out.println("\n********************************************************************************");
+    System.out.println("Subject Statistics Breakdown");
+    System.out.println("********************************************************************************");
+    
     System.out.println(SubjectStats.getHeaderString());
     for (Subject s: Subject.values()) {
       System.out.println(this.stats.get(s).toString());
