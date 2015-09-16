@@ -13,14 +13,6 @@ import models.Tag;
 
 public class SubjectBreakdown {
   
-  static int getPercent(int part, int whole) {
-    return (int) ((((double) part)/whole)*100);
-  }
-  
-  static String getPercentString(int part, int whole) {
-    return String.format("%2d%%", getPercent(part, whole));
-  }
-  
   static class SubjectStats {
     public final String subjectString;
     int totalNumber;
@@ -53,11 +45,11 @@ public class SubjectBreakdown {
       return String.format("%-15s | %-15s | %-15s | %-15s",
           this.subjectString,
           String.format("%-3d/%-3d (%s)", 
-              numberAnswered, totalNumber, getPercentString(numberAnswered, totalNumber)),
+              numberAnswered, totalNumber, Stats.getPercentString(numberAnswered, totalNumber)),
           String.format("%-3d (%s)",
-              numberWrongOrHard, getPercentString(numberWrongOrHard, totalNumber)),
+              numberWrongOrHard, Stats.getPercentString(numberWrongOrHard, totalNumber)),
           String.format("%-3d (%s)",
-              numberRightAndOkay, getPercentString(numberRightAndOkay, totalNumber)));
+              numberRightAndOkay, Stats.getPercentString(numberRightAndOkay, totalNumber)));
     }
     
     public void addQuestion(Question q) {
