@@ -21,7 +21,7 @@ public abstract class AppCtrlImpl <Q_TYPE extends AbstractQuestion> extends Cont
   protected boolean recordAnswers = true;
   protected boolean rememberAnswers = true;
   protected boolean canChangeAnswers = true;
-  protected boolean recordTime = true;
+  private boolean recordTime = true;
   
   // Question list state.
   protected boolean isStarted = false;
@@ -224,7 +224,11 @@ public abstract class AppCtrlImpl <Q_TYPE extends AbstractQuestion> extends Cont
     } else {
       this.currentResponse = r;
       this.isAnswered = true;
-      this.currentQuestionTime = this.currentResponse.getResponseTime();
+      if (this.currentResponse.getResponseTime() != null) {
+        this.currentQuestionTime = this.currentResponse.getResponseTime();
+      } else {
+        this.currentQuestionTime = -1;
+      }
       this.responseHistory.put(currentQuestion, currentResponse);
     }
   }
@@ -279,12 +283,12 @@ public abstract class AppCtrlImpl <Q_TYPE extends AbstractQuestion> extends Cont
   }
   
   @Override
-  public final void answer(Answer answer) throws NotStartedYetException, AlreadyAnsweredException {
-    this.answerUpdate(answer);
+  public final void answer(Answer answer, boolean recordTime) throws NotStartedYetException, AlreadyAnsweredException {
+    this.answerUpdate(answer, recordTime);
     this.updateObservers();
   }
-
-  protected void answerUpdate(Answer answer) throws NotStartedYetException, AlreadyAnsweredException {
+  
+  protected void answerUpdate(Answer answer, boolean recordTime) throws NotStartedYetException, AlreadyAnsweredException {
     if (!this.canAnswerQuestion()) {
       if (!this.isStarted) {
         throw new NotStartedYetException();
@@ -298,7 +302,7 @@ public abstract class AppCtrlImpl <Q_TYPE extends AbstractQuestion> extends Cont
       
       Long qTime = null;
       // Only record time if flag is set.
-      if (this.recordTime) {
+      if (recordTime) {
         qTime = endTime - this.questionStartTime;
         this.numberTimesRecorded++;
         this.totalQuestionTime += ((double) qTime) / (1000000000);
@@ -323,6 +327,11 @@ public abstract class AppCtrlImpl <Q_TYPE extends AbstractQuestion> extends Cont
     this.recordTime = value;
   }
   
+  @Override
+  public boolean getRecordTimes() {
+    return this.recordTime;
+  }
+  
   public void setRecordAnswers(boolean value) {
     this.recordAnswers = value;
   }
@@ -333,6 +342,14 @@ public abstract class AppCtrlImpl <Q_TYPE extends AbstractQuestion> extends Cont
   
   public void setRememberAnswers(boolean value) {
     this.rememberAnswers = value;
+  }
+  
+  @Override
+  public void refresh() {
+    for (Q_TYPE q: ((Database<Q_TYPE>) DatabaseIO.getDatabaseIO(this.getType()).get()).getQuestions()) {
+      q.refreshImages();
+    }
+    this.requestFocus();
   }
   
   @Override

@@ -103,5 +103,9 @@ public class Response implements Comparable<Response> {
       return this.responseTime;
     }
   }
+  
+  public Date getDate() {
+    return this.date;
+  }
 
 }

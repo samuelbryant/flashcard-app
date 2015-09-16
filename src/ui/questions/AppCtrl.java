@@ -16,12 +16,14 @@ public interface AppCtrl <Q_TYPE extends AbstractQuestion> {
   public void resetHistory();
   public void setList(ListFilter<Q_TYPE> filter, ListSorter<Q_TYPE> sorter);
   public void setRecordTimes(boolean value);
+  public boolean getRecordTimes();
   public void save();
   
   // Micro state changing functions.
   public void nextQuestion() throws NoQuestionsException;
   public void prevQuestion() throws NotStartedYetException, NoQuestionsException;
-  public void answer(Answer answer) throws NotStartedYetException, AlreadyAnsweredException;
+  // public void answer(Answer answer) throws NotStartedYetException, AlreadyAnsweredException;
+  public void answer(Answer answer, boolean recordTime) throws NotStartedYetException, AlreadyAnsweredException;
   
   // Getting list information.
   public int getQuestionNumber();
@@ -42,6 +44,9 @@ public interface AppCtrl <Q_TYPE extends AbstractQuestion> {
   public boolean hasNextQuestion();
   public boolean hasPrevQuestion();
   public boolean canAnswerQuestion();
+  
+  // Miscillaneous.
+  public void refresh();
 
   public static class ListCtrlException extends RuntimeException {}
   public static class NoQuestionsException extends ListCtrlException {}

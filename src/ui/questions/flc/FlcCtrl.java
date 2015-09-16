@@ -64,12 +64,12 @@ public class FlcCtrl extends AppCtrlImpl<Flashcard> {
   }
   
   @Override
-  protected void answerUpdate(Answer answer) throws NotStartedYetException, AlreadyAnsweredException {
+  protected void answerUpdate(Answer answer, boolean recordTime) throws NotStartedYetException, AlreadyAnsweredException {
     boolean alreadyAnswered = this.isAnswered;
     Integer oldSelectedAnswer = this.isAnswered ? this.getSelectedAnswer().getFlashcardAnswer() : null;
     Integer newSelectedAnswer = answer.getFlashcardAnswer();
     
-    super.answerUpdate(answer);
+    super.answerUpdate(answer, recordTime);
     
     if (alreadyAnswered) {
       this.totalConfidenceScore -= oldSelectedAnswer;

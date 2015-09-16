@@ -182,6 +182,8 @@ public abstract class AbstractQuestion implements Serializable {
     }
   }
   
+  public abstract void refreshImages();
+  
   public boolean hasAnswered() {
     return !this.responses.isEmpty();
   }

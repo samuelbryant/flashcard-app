@@ -11,21 +11,18 @@ public class GreListDisplay extends AppDisplay<GreCtrl> {
 
   public GreListDisplay(GreCtrl ctrl, boolean recordResponses, boolean hideFilter, boolean hideTagger) {
     super(ctrl, recordResponses, hideFilter, hideTagger);
-    
     this.actionPanel = new GreActionPanel(ctrl);
-    this.actionPanel.buildComponents();
-
     this.taggerPanel = new TaggerPanel(ctrl);
-    this.taggerPanel.buildComponents();
-
     this.filterPanel = new FilterPanel(ctrl);
-    this.filterPanel.buildComponents();
-
     this.infoPanel = new GreInfobarPanel(ctrl);
-    this.infoPanel.buildComponents();
-
     this.questionPanel = new GreQuestionPanel(ctrl, true);
-    this.questionPanel.buildComponents();
+  }
+  
+  @Override
+  public void buildComponents() {
+    super.buildComponents();
+    this.filterPanel.setHideBeforeAnswering(false);
+    this.taggerPanel.setHideBeforeAnswering(true);
   }
   
   public static void main(String[] args) {

@@ -183,6 +183,11 @@ public class Question extends AbstractQuestion {
   public String toDisplayName() {
     return this.source.toDisplayName() + " #" + this.questionNumber.toString() + " (" + this.id + ")";
   }
+  
+  @Override
+  public void refreshImages() {
+    this.questionImage = null;
+  }
 
   public static void main(String[] args) {
     Question q = new Question(0);

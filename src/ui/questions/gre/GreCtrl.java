@@ -64,11 +64,11 @@ public class GreCtrl extends AppCtrlImpl<Question> {
   }
 
   @Override
-  public void answerUpdate(Answer answer) throws NotStartedYetException, AlreadyAnsweredException {
+  public void answerUpdate(Answer answer, boolean recordTime) throws NotStartedYetException, AlreadyAnsweredException {
     boolean alreadyAnswered = this.isAnswered;
     Answer oldSelectedAnswer = this.isAnswered ? this.getSelectedAnswer() : null;
     
-    super.answerUpdate(answer);
+    super.answerUpdate(answer, recordTime);
     
     Answer correctAnswer = this.getCurrentQuestion().getAnswer();
     

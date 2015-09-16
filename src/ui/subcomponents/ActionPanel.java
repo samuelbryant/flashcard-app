@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.AbstractQuestion;
 import ui.core.SubPanel;
+import ui.core.components.FACheckbox;
 import ui.questions.AppCtrl;
 import ui.questions.AppCtrlImpl;
 
@@ -36,11 +37,14 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
   };
 
   protected FAActionButton backButton, nextButton, saveButton;
+  protected FAActionButton refreshButton;
   protected final Map<Answer, FAButton> answerButtons;
+  protected FACheckbox recordTimeCheckbox;
   
   public ActionPanel(CTRL_TYPE controller) {
     super(controller);
     this.answerButtons = new TreeMap<>();
+    this.recordTimeCheckbox = new FACheckbox("Record Q Time?");
   }
 
   @Override
@@ -54,7 +58,7 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
         @Override
         public void actionPerformed(ActionEvent e) {
           try {
-            ctrl.answer(answer);
+            ctrl.answer(answer, recordTimeCheckbox.isSelected());
           } catch (AppCtrl.ListCtrlException ex) {
             Logger.getLogger(ActionPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -96,6 +100,14 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
         ctrl.save();
       }
     };
+    
+    refreshButton = new FAActionButton("Refresh") {
+      @Override
+      public void actionPerformed(ActionEvent ev) {
+        System.out.println("Refreshing everything");
+        ctrl.refresh();
+      }
+    };
   }
 
   @Override
@@ -110,6 +122,8 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
     this.ctrl.addKeyAction(KeyEvent.VK_RIGHT, nextButton);
     this.add(saveButton);
     this.ctrl.addKeyAction(KeyEvent.VK_S, saveButton);
+    
+    this.add(recordTimeCheckbox);
 
     this.setAlignmentX(Component.CENTER_ALIGNMENT);
     this.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -124,6 +138,7 @@ extends SubPanel<Q_TYPE, CTRL_TYPE> {
       button.setEnabled(ctrl.canAnswerQuestion());
       button.setDefaultBackground();
     }
+    this.recordTimeCheckbox.setSelected(ctrl.getRecordTimes());
   }
 
 }

@@ -89,7 +89,7 @@ public final class ApplicationLauncher extends JFrame implements ActionListener 
           System.out.println("Substance Graphite failed to initialize");
         }
         ApplicationLauncher al = new ApplicationLauncher();
-    al.setVisible(true);
+        al.setVisible(true);
       }
     });
   }

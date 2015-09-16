@@ -18,11 +18,10 @@ extends Display<CTRL_TYPE> {
   public static final int DEFAULT_WINDOW_HEIGHT = 850;
   public static final boolean DEFAULT_RECORD_RESPONSES = true;
   public static final boolean DEFAULT_HIDE_FILTER_BEFORE_RESPONSE = false;
-  public static final boolean DEFAULT_HIDE_TAGGER_BEFORE_RESPONSE = false;
-
+  public static final boolean DEFAULT_HIDE_TAGGER_BEFORE_RESPONSE = true;
   protected int windowWidth, windowHeight;
   protected boolean recordResponses = true;
-  protected boolean hideFilterBeforeResponse = false;
+  protected boolean hideFilterBeforeResponse = true;
   protected boolean hideTaggerBeforeResponse = false;
   
   public static final int BORDER_SIZE = 10;
@@ -93,6 +92,7 @@ extends Display<CTRL_TYPE> {
     this.recordResponses = recordResponses;
     this.hideFilterBeforeResponse = hideFilterBeforeResponse;
     this.hideTaggerBeforeResponse = hideTaggerBeforeResponse;
+    System.out.printf("hide filter/tagger: %s/%s\n", hideFilterBeforeResponse, hideTaggerBeforeResponse);
   }
 
   @Override

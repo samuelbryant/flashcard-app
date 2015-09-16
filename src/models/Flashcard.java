@@ -60,6 +60,12 @@ public class Flashcard extends AbstractQuestion {
       return this.answerImage;
     }
   }
+  
+  @Override
+  public void refreshImages() {
+    this.answerImage = null;
+    this.questionImage = null;
+  }
 
   @Override
   public boolean equals(Object obj) {
