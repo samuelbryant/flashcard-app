@@ -1,11 +1,15 @@
 {
-  "notes": [],
+  "notes": ["Poisson Equation"],
   "answer": "A",
   "subjects": [
     "EM",
     "MATH"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 78055273215,
+    "dateString": "09/16/15 7:52 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1062.png",
   "id": 1062,
   "source": "SAMPLE_1",

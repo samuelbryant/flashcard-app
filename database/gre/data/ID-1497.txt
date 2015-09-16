@@ -1,11 +1,15 @@
 {
-  "notes": [],
+  "notes": ["Key: General Principle:\nAng Mom about a point P for\nand object O is equal to the\nang mom of O about its COM\n+ ang mom of O's COM about P\n\nWe don't care about O's moment\nof inertia about point P because\nwe are breaking down ang mom.\ninto rotational and orbital"],
   "answer": "A",
   "subjects": [
     "MECHANICS",
     "ROTATIONAL"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 74598134295,
+    "dateString": "09/15/15 3:23 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1497.png",
   "id": 1497,
   "source": "GRE_1986",

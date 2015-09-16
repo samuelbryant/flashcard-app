@@ -2,10 +2,14 @@
   "notes": [],
   "answer": "C",
   "subjects": ["THERMO"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 13312446727,
+    "dateString": "09/15/15 3:19 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1045.png",
   "id": 1045,
   "source": "SAMPLE_1",
   "questionNumber": 45,
-  "tags": ["HARD"]
+  "tags": []
 }

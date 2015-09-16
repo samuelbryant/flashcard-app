@@ -2,10 +2,14 @@
   "notes": [],
   "answer": "B",
   "subjects": ["SPECIAL"],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 4933431018,
+    "dateString": "09/15/15 4:41 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1240.png",
   "id": 1240,
   "source": "SAMPLE_2",
   "questionNumber": 40,
-  "tags": ["HARD"]
+  "tags": []
 }

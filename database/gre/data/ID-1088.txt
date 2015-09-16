@@ -1,11 +1,12 @@
 {
   "notes": [],
   "answer": "A",
-  "subjects": [
-    "OTHER",
-    "MATH"
-  ],
-  "responses": [],
+  "subjects": ["MATH"],
+  "responses": [{
+    "response": "A",
+    "responseTime": 17431202039,
+    "dateString": "09/15/15 9:56 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1088.png",
   "id": 1088,
   "source": "SAMPLE_1",

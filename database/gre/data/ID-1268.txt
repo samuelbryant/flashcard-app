@@ -1,11 +1,22 @@
 {
-  "notes": [],
+  "notes": [""],
   "answer": "C",
   "subjects": ["QM"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 101681761604,
+    "dateString": "09/15/15 12:53 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1268.png",
   "id": 1268,
   "source": "SAMPLE_2",
   "questionNumber": 68,
-  "tags": []
+  "tags": [
+    "HARD",
+    "NEED_FORMULA",
+    "COMPUTATION",
+    "WRONG",
+    "STARRED",
+    "DUMB_MISTAKE"
+  ]
 }

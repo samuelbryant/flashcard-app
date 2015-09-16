@@ -1,8 +1,15 @@
 {
-  "notes": [],
+  "notes": ["Group velocity can exceed c\nPhase velocity cannot\nPhase vel is information vel"],
   "answer": "E",
-  "subjects": ["SPECIAL"],
-  "responses": [],
+  "subjects": [
+    "SPECIAL",
+    "WAVES"
+  ],
+  "responses": [{
+    "response": "E",
+    "responseTime": 11867883624,
+    "dateString": "09/15/15 9:58 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1472.png",
   "id": 1472,
   "source": "GRE_1986",

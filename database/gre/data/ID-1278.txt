@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "E",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 62622606549,
+    "dateString": "09/15/15 5:24 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1278.png",
   "id": 1278,
   "source": "SAMPLE_2",
   "questionNumber": 78,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "NEED_FORMULA"
+  ]
 }

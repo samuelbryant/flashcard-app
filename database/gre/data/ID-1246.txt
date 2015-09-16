@@ -2,10 +2,15 @@
   "notes": [],
   "answer": "D",
   "subjects": [
-    "EM",
-    "WAVES"
+    "WAVES",
+    "OTHER",
+    "EM"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 45940385854,
+    "dateString": "09/15/15 5:25 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1246.png",
   "id": 1246,
   "source": "SAMPLE_2",

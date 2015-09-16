@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "E",
   "subjects": ["LAB_METHODS"],
-  "responses": [],
+  "responses": [{
+    "response": "X",
+    "responseTime": 5370254385,
+    "dateString": "09/16/15 8:36 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1187.png",
   "id": 1187,
   "source": "SAMPLE_3",
   "questionNumber": 87,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "STARRED"
+  ]
 }

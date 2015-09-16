@@ -5,7 +5,11 @@
     "RELATIVITY",
     "ATOMIC"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 146659543013,
+    "dateString": "09/16/15 9:29 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1367.png",
   "id": 1367,
   "source": "GRE_2001",

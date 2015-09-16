@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["FCC would be a^3/4\n\nAlways count full atom ratio!"],
   "answer": "C",
   "subjects": ["SPECIAL"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 17511266960,
+    "dateString": "09/15/15 12:49 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1352.png",
   "id": 1352,
   "source": "GRE_2001",

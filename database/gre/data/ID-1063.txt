@@ -1,14 +1,21 @@
 {
-  "notes": [],
+  "notes": [""],
   "answer": "A",
   "subjects": [
     "SPECIAL",
     "QM"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 69252748836,
+    "dateString": "09/15/15 3:31 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1063.png",
   "id": 1063,
   "source": "SAMPLE_1",
   "questionNumber": 63,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "COMPUTATION"
+  ]
 }

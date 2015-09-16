@@ -2,10 +2,18 @@
   "notes": [],
   "answer": "C",
   "subjects": ["RELATIVITY"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 190707937427,
+    "dateString": "09/16/15 9:24 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1025.png",
   "id": 1025,
   "source": "SAMPLE_1",
   "questionNumber": 25,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "TIME",
+    "COMPUTATION"
+  ]
 }

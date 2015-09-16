@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "A",
   "subjects": ["MECHANICS"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 54589615991,
+    "dateString": "09/15/15 5:35 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1407.png",
   "id": 1407,
   "source": "GRE_1986",

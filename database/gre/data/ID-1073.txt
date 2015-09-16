@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "E",
   "subjects": ["MECHANICS"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 114156726264,
+    "dateString": "09/16/15 8:53 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1073.png",
   "id": 1073,
   "source": "SAMPLE_1",
   "questionNumber": 73,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "TIME"
+  ]
 }

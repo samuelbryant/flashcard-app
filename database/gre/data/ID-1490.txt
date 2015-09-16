@@ -1,11 +1,18 @@
 {
-  "notes": [],
+  "notes": ["Trick is to recognize solution\nis of form:\n  A*sin(pi*x/a)\nthen ground state must be\nsomething like:\n  A*cos(pi*x/(2*a))\n\nEnergy proptional to d^2 Psi\n=> E_0 = E * (1/2)^2\n"],
   "answer": "C",
   "subjects": ["QM"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 60398982983,
+    "dateString": "09/15/15 5:30 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1490.png",
   "id": 1490,
   "source": "GRE_1986",
   "questionNumber": 90,
-  "tags": ["HARD"]
+  "tags": [
+    "WRONG",
+    "HARD"
+  ]
 }

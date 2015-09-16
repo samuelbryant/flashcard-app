@@ -1,11 +1,12 @@
 {
   "notes": [],
   "answer": "E",
-  "subjects": [
-    "CIRCUITS",
-    "LAB_METHODS"
-  ],
-  "responses": [],
+  "subjects": ["LAB_METHODS"],
+  "responses": [{
+    "response": "E",
+    "responseTime": 94182687319,
+    "dateString": "09/15/15 5:16 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1093.png",
   "id": 1093,
   "source": "SAMPLE_1",

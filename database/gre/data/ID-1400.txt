@@ -5,7 +5,11 @@
     "WAVES",
     "LAB_METHODS"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 164875547788,
+    "dateString": "09/15/15 12:47 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1400.png",
   "id": 1400,
   "source": "GRE_2001",
@@ -13,6 +17,7 @@
   "tags": [
     "HARD",
     "TIME",
-    "UNSURE"
+    "UNSURE",
+    "COMPUTATION"
   ]
 }

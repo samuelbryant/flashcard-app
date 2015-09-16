@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "E",
   "subjects": ["OPTICS"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 85072663489,
+    "dateString": "09/15/15 12:39 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1312.png",
   "id": 1312,
   "source": "GRE_2001",

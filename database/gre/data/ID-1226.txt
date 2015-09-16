@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "B",
   "subjects": ["RELATIVITY"],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 25028704897,
+    "dateString": "09/15/15 5:34 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1226.png",
   "id": 1226,
   "source": "SAMPLE_2",

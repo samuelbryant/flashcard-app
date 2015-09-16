@@ -2,10 +2,18 @@
   "notes": [],
   "answer": "B",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 95189285789,
+    "dateString": "09/15/15 12:24 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1193.png",
   "id": 1193,
   "source": "SAMPLE_3",
   "questionNumber": 93,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "WRONG",
+    "COMPUTATION"
+  ]
 }
