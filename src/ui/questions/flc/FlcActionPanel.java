@@ -14,11 +14,11 @@ import ui.core.components.FAButton;
 import ui.subcomponents.ActionPanel;
 
 
-public class FlcActionPanel extends ActionPanel<Flashcard, FlcCtrl> {
+class FlcActionPanel extends ActionPanel<Flashcard, FlcCtrl> {
   
   protected FAButton showButton;
   
-  public FlcActionPanel(FlcCtrl controller) {
+  FlcActionPanel(FlcCtrl controller) {
     super(controller);
   }
 

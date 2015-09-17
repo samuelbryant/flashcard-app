@@ -1,16 +1,15 @@
 package ui.questions.gre;
 
 import core.Constants;
-import java.awt.Color;
 import java.util.Observable;
 import models.Answer;
 import models.Question;
 import ui.core.components.FAButton;
 import ui.subcomponents.ActionPanel;
 
-public class GreActionPanel extends ActionPanel<Question, GreCtrl> {
+class GreActionPanel extends ActionPanel<Question, GreCtrl> {
   
-  public GreActionPanel(GreCtrl controller) {
+  GreActionPanel(GreCtrl controller) {
     super(controller);
   }
 

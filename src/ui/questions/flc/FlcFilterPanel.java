@@ -9,17 +9,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import models.Flashcard;
-import models.Question;
-import models.Source;
 import models.Subject;
 import models.Tag;
 import ui.core.components.FAComboBox;
-import ui.core.components.FALabel;
 import ui.subcomponents.FilterPanel;
 
-public class FlcFilterPanel extends FilterPanel<Flashcard, FlcCtrl> {
+class FlcFilterPanel extends FilterPanel<Flashcard, FlcCtrl> {
 
-  public FlcFilterPanel(FlcCtrl ctrl) {
+  FlcFilterPanel(FlcCtrl ctrl) {
     super(ctrl);
   }
   

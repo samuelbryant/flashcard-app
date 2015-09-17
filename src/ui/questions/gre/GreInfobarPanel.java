@@ -7,13 +7,13 @@ import models.Question;
 import ui.subcomponents.InfobarPanel;
 import ui.subcomponents.LabeledInfoBox;
 
-public class GreInfobarPanel
+class GreInfobarPanel
 extends InfobarPanel<Question, GreCtrl> {
 
   protected LabeledInfoBox listStatsLabel;
   protected LabeledInfoBox questionStatsLabel;
   
-  public GreInfobarPanel(GreCtrl ctrl) {
+  GreInfobarPanel(GreCtrl ctrl) {
     super(ctrl);
   }
   

@@ -15,9 +15,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import models.QType;
 import ui.questions.AppDisplay;
-import ui.questions.flc.FlcCtrl;
 import ui.questions.flc.FlcListDisplay;
-import ui.questions.gre.GreCtrl;
 import ui.questions.gre.GreListDisplay;
 
 /**
@@ -65,12 +63,10 @@ public final class ApplicationLauncher extends JFrame implements ActionListener 
     QType t = QType.valueOf(this.typeSelector.getSelectedItem().toString());
     
     if (t == QType.GRE) {
-      GreCtrl ctrl = new GreCtrl();
-      GreListDisplay disp = new GreListDisplay(ctrl, recordResponses, hideFilter, hideTagger);
+      GreListDisplay disp = new GreListDisplay(recordResponses, hideFilter, hideTagger);
       disp.go();
     } else {
-      FlcCtrl ctrl = new FlcCtrl();
-      FlcListDisplay disp = new FlcListDisplay(ctrl, recordResponses, hideFilter, hideTagger);
+      FlcListDisplay disp = new FlcListDisplay(recordResponses, hideFilter, hideTagger);
       disp.go();
     }
 

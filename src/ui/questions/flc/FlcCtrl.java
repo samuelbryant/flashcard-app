@@ -1,14 +1,13 @@
-/*
- * File Overview: TODO
- */
 package ui.questions.flc;
 
+import java.util.List;
 import models.Answer;
+import models.DatabaseIO;
 import models.Flashcard;
 import models.QType;
 import ui.questions.AppCtrlImpl;
 
-public class FlcCtrl extends AppCtrlImpl<Flashcard> {
+class FlcCtrl extends AppCtrlImpl<Flashcard> {
   
   // Settings variables.
 //  protected boolean recordAnswers = true;
@@ -37,7 +36,7 @@ public class FlcCtrl extends AppCtrlImpl<Flashcard> {
 //  protected double totalQuestionTime;
     protected int totalConfidenceScore;
   
-  public FlcCtrl() {
+  FlcCtrl() {
     super(new engine.ListFilter.NullFilter<Flashcard>(),
           new engine.ListSorter.IdSorter<Flashcard>());
     this.rememberAnswers = false;
@@ -118,6 +117,23 @@ public class FlcCtrl extends AppCtrlImpl<Flashcard> {
     } else {
       throw new NotStartedYetException();
     }
+  }
+  
+  /**
+   * Computes overall metric (0-1) of how well you know flashcards.
+   * @return Double from 0-1.
+   */
+  public double computeTotalProgress() {
+    List<Flashcard> flcs = DatabaseIO.getFlashcardDatabaseIO().get().getQuestions();
+    double totalScore = 0;
+    for (Flashcard f : flcs) {
+      if (f.hasAnswered()) {
+        totalScore += f.getLastResponseValue().getFlashcardAnswer();
+      }
+    }
+    int totalNum = flcs.size();
+    double maximum = totalNum * 5.0;
+    return (totalScore / maximum);
   }
 
   @Override

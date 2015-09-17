@@ -7,9 +7,9 @@ import java.awt.image.BufferedImage;
 import models.Question;
 import ui.subcomponents.QuestionPanel;
 
-public class GreQuestionPanel extends QuestionPanel<Question, GreCtrl> {
+class GreQuestionPanel extends QuestionPanel<Question, GreCtrl> {
 
-  public GreQuestionPanel(GreCtrl ctrl, boolean resize) {
+  GreQuestionPanel(GreCtrl ctrl, boolean resize) {
     super(ctrl, resize);
   }
 

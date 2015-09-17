@@ -8,11 +8,7 @@ import models.QType;
 import models.Question;
 import ui.questions.AppCtrlImpl;
 
-/**
- *
- * @author author
- */
-public class GreCtrl extends AppCtrlImpl<Question> {
+class GreCtrl extends AppCtrlImpl<Question> {
   
   // Settings variables.
 //  protected boolean recordAnswers = true;
@@ -40,7 +36,7 @@ public class GreCtrl extends AppCtrlImpl<Question> {
 //  protected double totalQuestionTime;
   protected int numberCorrect;
   
-  public GreCtrl() {
+  GreCtrl() {
     super(new engine.ListFilter.NullFilter<Question>(),
           new engine.ListSorter.IdSorter<Question>());
   }

@@ -19,19 +19,16 @@ import ui.core.components.FAComboBox;
 import ui.core.components.FALabel;
 import ui.subcomponents.FilterPanel;
 
-/**
- *
- * @author author
- */
-public class GreFilterPanel extends FilterPanel<Question, GreCtrl>{
+class GreFilterPanel extends FilterPanel<Question, GreCtrl>{
 
   protected FALabel sourceLabel;
   protected FAComboBox sourceCombobox;
   
-  public GreFilterPanel(GreCtrl controller) {
+  GreFilterPanel(GreCtrl controller) {
     super(controller);
   }
   
+  @Override
   public void buildComponents() {
     super.buildComponents();
     Source sources[] = Source.values();

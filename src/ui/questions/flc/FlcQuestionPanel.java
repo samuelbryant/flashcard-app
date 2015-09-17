@@ -9,10 +9,10 @@ import java.awt.image.BufferedImage;
 import models.Flashcard;
 import ui.subcomponents.QuestionPanel;
 
-public class FlcQuestionPanel extends QuestionPanel<Flashcard, FlcCtrl> 
+class FlcQuestionPanel extends QuestionPanel<Flashcard, FlcCtrl> 
 implements MouseListener {
 
-  public FlcQuestionPanel(FlcCtrl ctrl, boolean resize) {
+  FlcQuestionPanel(FlcCtrl ctrl, boolean resize) {
     super(ctrl, resize);
     this.addMouseListener(this);
   }
