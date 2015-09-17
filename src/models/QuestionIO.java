@@ -129,9 +129,13 @@ public abstract class QuestionIO<T extends AbstractQuestion> {
   //***** QUESTION DATA FILE READING METHODS
 
   private static Response _parseResponseJSON(JSONObject obj) {
+    Long responseTime = null;
+    if (obj.has("responseTime")) {
+      responseTime = obj.getLong("responseTime");
+    }
     return new Response(
         Answer.valueOf(obj.getString("response")),
-        obj.getLong("responseTime"),
+        responseTime,
         obj.getString("dateString"));
   }
 

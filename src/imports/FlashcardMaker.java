@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import models.Database;
@@ -59,6 +60,11 @@ public class FlashcardMaker extends JPanel implements MouseListener {
   
   private void nextImage() {
     this.imageIndex++;
+    if (this.imageIndex == this.images.length) {
+      System.out.println("OUT OF FILES, EXITING");
+      System.exit(0);
+    }
+    
     String fileName = this.images[imageIndex].getAbsolutePath();
     img = IO.loadImageOrDie(fileName);
     // Dimension dim = new Dimension(img.getWidth(), img.getHeight());
@@ -283,16 +289,40 @@ public class FlashcardMaker extends JPanel implements MouseListener {
     new Window();
   }
   
-  public static void main(String[] args) {
-    File srcDir = new File("imports/flashcards/real");
+  public static File[] chooseFiles(String baseDir) {
+    JFrame parent = new JFrame("select files");
+    parent.setSize(400, 400);
+    parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+    File baseDirectory = new File(baseDir);
+    JFileChooser chooser = new JFileChooser(baseDirectory);
+    chooser.setMultiSelectionEnabled(true);
+    
+    int acceptValue = chooser.showOpenDialog(parent);
+    if (acceptValue == JFileChooser.APPROVE_OPTION) {
+      File[] files = chooser.getSelectedFiles();
+      return files;
+    } else {
+      return null;
+    }
+  }
+  
+  public static File[] selectFilesFromDir(String sourceDir) {
+    File srcDir = new File(sourceDir);
     File[] images = srcDir.listFiles(new FilenameFilter() {
       @Override
       public boolean accept(File dir, String name) {
         return name.endsWith(".png");
       }
     });
-
-    FlashcardMaker fm = new FlashcardMaker(images);
+    return images;
+  }
+  
+  public static void main(String[] args) {
+    // File[] imageFiles = selectFilesFromDir("imports/flashcards/real")
+    File[] imageFiles = chooseFiles("imports/flashcards");
+    
+    FlashcardMaker fm = new FlashcardMaker(imageFiles);
     fm.display();
     fm.repaint();
     

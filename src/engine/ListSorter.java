@@ -177,6 +177,7 @@ public abstract class ListSorter <T extends AbstractQuestion> {
     sorters.put("Last answered", new LastAnsweredSorter<Flashcard>());
     sorters.put("Random", new RandomSorter<Flashcard>());
     sorters.put("None", new NullSorter<Flashcard>());
+    sorters.put("Quiz", new engine.FlashcardQuiz());
     return sorters;
   }
   

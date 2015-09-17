@@ -9,7 +9,7 @@ import models.Tag;
  *
  * @author sambryant
  */
-public class ListQuiz1 extends ListQuizSorter {
+public class ListQuiz1 extends ListQuizSorter<Question> {
 
   /**
    * Weighting scheme
@@ -70,6 +70,7 @@ public class ListQuiz1 extends ListQuizSorter {
       return +2;
     }
   }
+
 
 
 }

@@ -4,7 +4,6 @@
 package ui.questions.gre;
 
 import ui.questions.AppDisplay;
-import ui.subcomponents.FilterPanel;
 import ui.subcomponents.TaggerPanel;
 
 public class GreListDisplay extends AppDisplay<GreCtrl> {
@@ -13,7 +12,7 @@ public class GreListDisplay extends AppDisplay<GreCtrl> {
     super(ctrl, recordResponses, hideFilter, hideTagger);
     this.actionPanel = new GreActionPanel(ctrl);
     this.taggerPanel = new TaggerPanel(ctrl);
-    this.filterPanel = new FilterPanel(ctrl);
+    this.filterPanel = new GreFilterPanel(ctrl);
     this.infoPanel = new GreInfobarPanel(ctrl);
     this.questionPanel = new GreQuestionPanel(ctrl, true);
   }

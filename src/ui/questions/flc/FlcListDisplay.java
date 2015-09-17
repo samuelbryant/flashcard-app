@@ -18,8 +18,8 @@ public class FlcListDisplay extends AppDisplay<FlcCtrl> {
 
     this.taggerPanel = new TaggerPanel(this.ctrl);
     this.taggerPanel.buildComponents();
-
-    this.filterPanel = new FilterPanel(this.ctrl);
+    
+    this.filterPanel = new FlcFilterPanel(this.ctrl);
     this.filterPanel.buildComponents();
 
     this.infoPanel = new InfobarPanel(this.ctrl);
