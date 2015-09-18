@@ -1,11 +1,15 @@
 {
-  "notes": [],
+  "notes": ["Hyperfine baby\n\nproton-electron spin-orbit\ncoupling = 21 cm\n"],
   "answer": "C",
   "subjects": [
     "SPECIAL",
     "QM"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 5332224175,
+    "dateString": "09/16/15 5:56 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1079.png",
   "id": 1079,
   "source": "SAMPLE_1",

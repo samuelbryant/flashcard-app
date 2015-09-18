@@ -2,10 +2,20 @@
   "notes": [],
   "answer": "E",
   "subjects": ["WAVES"],
-  "responses": [],
+  "responses": [{
+    "response": "X",
+    "responseTime": 462576689240,
+    "dateString": "09/16/15 6:38 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1277.png",
   "id": 1277,
   "source": "SAMPLE_2",
   "questionNumber": 77,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "WRONG",
+    "STARRED",
+    "TIME",
+    "COMPUTATION"
+  ]
 }

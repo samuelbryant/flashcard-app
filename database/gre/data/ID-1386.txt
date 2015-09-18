@@ -1,14 +1,19 @@
 {
-  "notes": [],
+  "notes": [""],
   "answer": "E",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 266249176972,
+    "dateString": "09/16/15 5:20 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1386.png",
   "id": 1386,
   "source": "GRE_2001",
   "questionNumber": 86,
   "tags": [
     "WRONG",
-    "HARD"
+    "HARD",
+    "TIME"
   ]
 }

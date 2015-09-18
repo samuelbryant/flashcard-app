@@ -1,14 +1,19 @@
 {
-  "notes": [],
+  "notes": ["My method:\nConsidering integral:\n  int P(V) dV\n\n[1] Isothermal\n  PV = const\n       V --> 2V\n => P --> P/2\n\n[2] Adiabatic\n  PV^{5/3} = const\n    V --> 2V\n    P --> P/(2*2^(2/3)) < P/2\n\nTherefore, the work integral\nfor [1] will be greater"],
   "answer": "E",
   "subjects": ["THERMO"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 200429875014,
+    "dateString": "09/16/15 11:15 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1306.png",
   "id": 1306,
   "source": "GRE_2001",
   "questionNumber": 6,
   "tags": [
     "WRONG",
-    "HARD"
+    "HARD",
+    "STARRED"
   ]
 }

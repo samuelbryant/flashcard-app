@@ -1,17 +1,22 @@
 {
-  "notes": [],
+  "notes": ["If you compute kinetic\nenergy of COM, then you also\nhave to compute rotational\nkinetic energy about COM.\n\nIt's like a moving spring system.\n\n"],
   "answer": "C",
   "subjects": [
     "MECHANICS",
     "ROTATIONAL"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 226426004796,
+    "dateString": "09/17/15 3:50 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1326.png",
   "id": 1326,
   "source": "GRE_2001",
   "questionNumber": 26,
   "tags": [
     "WRONG",
-    "HARD"
+    "HARD",
+    "STARRED"
   ]
 }

@@ -1,11 +1,18 @@
 {
-  "notes": [],
+  "notes": ["You can figure out spin alignment\nfrom mu = gamma * S"],
   "answer": "A",
   "subjects": ["QM"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 94816779958,
+    "dateString": "09/17/15 3:16 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1145.png",
   "id": 1145,
   "source": "SAMPLE_3",
   "questionNumber": 45,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "STARRED"
+  ]
 }

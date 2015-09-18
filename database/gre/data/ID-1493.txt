@@ -5,7 +5,11 @@
     "MECHANICS",
     "OTHER"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 78788991852,
+    "dateString": "09/17/15 6:57 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1493.png",
   "id": 1493,
   "source": "GRE_1986",

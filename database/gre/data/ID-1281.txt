@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "D",
   "subjects": ["WAVES"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 20575112655,
+    "dateString": "09/17/15 11:00 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1281.png",
   "id": 1281,
   "source": "SAMPLE_2",

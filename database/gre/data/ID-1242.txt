@@ -2,10 +2,19 @@
   "notes": [],
   "answer": "D",
   "subjects": ["QM"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 175255940918,
+    "dateString": "09/17/15 9:03 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1242.png",
   "id": 1242,
   "source": "SAMPLE_2",
   "questionNumber": 42,
-  "tags": []
+  "tags": [
+    "HARD",
+    "NEED_FORMULA",
+    "TIME",
+    "STARRED"
+  ]
 }

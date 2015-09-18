@@ -2,10 +2,18 @@
   "notes": [],
   "answer": "E",
   "subjects": ["THERMO"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 56901949309,
+    "dateString": "09/16/15 12:49 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1232.png",
   "id": 1232,
   "source": "SAMPLE_2",
   "questionNumber": 32,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "WRONG",
+    "STARRED"
+  ]
 }

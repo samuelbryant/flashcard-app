@@ -2,10 +2,14 @@
   "notes": [],
   "answer": "D",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 78536474529,
+    "dateString": "09/16/15 12:00 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1308.png",
   "id": 1308,
   "source": "GRE_2001",
   "questionNumber": 8,
-  "tags": []
+  "tags": ["UNSURE"]
 }

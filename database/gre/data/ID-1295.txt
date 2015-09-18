@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "D",
   "subjects": ["RELATIVITY"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 72434561511,
+    "dateString": "09/16/15 11:27 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1295.png",
   "id": 1295,
   "source": "SAMPLE_2",
   "questionNumber": 95,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "STARRED"
+  ]
 }

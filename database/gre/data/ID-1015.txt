@@ -1,11 +1,19 @@
 {
-  "notes": [],
+  "notes": ["Be careful when using\nconservation of energy.\n\nNo energy is required to move\nthe image charge which means\nthat all energy changes must\nbe divided by two"],
   "answer": "A",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 132956795705,
+    "dateString": "09/17/15 9:58 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1015.png",
   "id": 1015,
   "source": "SAMPLE_1",
   "questionNumber": 15,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "WRONG",
+    "STARRED"
+  ]
 }

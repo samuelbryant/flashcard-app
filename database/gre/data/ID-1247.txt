@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "B",
   "subjects": ["QM"],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 8983872313,
+    "dateString": "09/16/15 12:13 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1247.png",
   "id": 1247,
   "source": "SAMPLE_2",

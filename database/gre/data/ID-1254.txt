@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "A",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 106437940709,
+    "dateString": "09/17/15 10:31 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1254.png",
   "id": 1254,
   "source": "SAMPLE_2",
   "questionNumber": 54,
-  "tags": []
+  "tags": [
+    "TIME",
+    "COMPUTATION"
+  ]
 }

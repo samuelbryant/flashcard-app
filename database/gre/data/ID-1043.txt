@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["1/2 a*t^2 baby"],
   "answer": "D",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 105020897317,
+    "dateString": "09/16/15 3:44 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1043.png",
   "id": 1043,
   "source": "SAMPLE_1",

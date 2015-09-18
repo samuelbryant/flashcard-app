@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "B",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 234668206723,
+    "dateString": "09/16/15 12:19 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1253.png",
   "id": 1253,
   "source": "SAMPLE_2",
   "questionNumber": 53,
-  "tags": []
+  "tags": [
+    "HARD",
+    "STARRED"
+  ]
 }

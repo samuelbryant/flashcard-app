@@ -5,10 +5,18 @@
     "SPECIAL",
     "RELATIVITY"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 108572398209,
+    "dateString": "09/16/15 6:17 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1135.png",
   "id": 1135,
   "source": "SAMPLE_3",
   "questionNumber": 35,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "DUMB_MISTAKE",
+    "TIME"
+  ]
 }

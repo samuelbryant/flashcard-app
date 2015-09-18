@@ -2,13 +2,14 @@
   "notes": [],
   "answer": "C",
   "subjects": ["THERMO"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 39374710443,
+    "dateString": "09/16/15 5:46 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1348.png",
   "id": 1348,
   "source": "GRE_2001",
   "questionNumber": 48,
-  "tags": [
-    "HARD",
-    "NEED_FORMULA"
-  ]
+  "tags": []
 }

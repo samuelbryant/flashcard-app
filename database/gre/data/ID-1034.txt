@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["Fastest way: consider planet\nframe:\n\nD_ship/v_missile = gamma_missile * t\n\nv_13 = 4/5 c\ngamma_13 = 5/3\nD/v_13 = gamma_13 * t\n\nD = v_13 * gamma_13 * t\n   = (4/5)*(5/3)*c = 4E8"],
   "answer": "C",
   "subjects": ["RELATIVITY"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 176129079177,
+    "dateString": "09/16/15 1:45 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1034.png",
   "id": 1034,
   "source": "SAMPLE_1",

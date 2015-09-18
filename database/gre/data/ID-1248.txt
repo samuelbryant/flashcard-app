@@ -5,7 +5,11 @@
     "SPECIAL",
     "LAB_METHODS"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 28981862951,
+    "dateString": "09/16/15 7:01 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1248.png",
   "id": 1248,
   "source": "SAMPLE_2",

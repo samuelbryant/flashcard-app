@@ -5,10 +5,17 @@
     "EM",
     "WAVES"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 131192461835,
+    "dateString": "09/16/15 3:52 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1361.png",
   "id": 1361,
   "source": "GRE_2001",
   "questionNumber": 61,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "UNSURE"
+  ]
 }

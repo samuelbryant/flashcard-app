@@ -1,11 +1,15 @@
 {
-  "notes": [],
+  "notes": ["4L/(1+2n)\n=> (2.4 / n odd) is a solution"],
   "answer": "C",
   "subjects": ["WAVES"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 47676382388,
+    "dateString": "09/17/15 8:59 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1066.png",
   "id": 1066,
   "source": "SAMPLE_1",
   "questionNumber": 66,
-  "tags": ["HARD"]
+  "tags": []
 }

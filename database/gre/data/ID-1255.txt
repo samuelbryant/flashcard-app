@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "E",
   "subjects": ["THERMO"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 94247616687,
+    "dateString": "09/16/15 11:58 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1255.png",
   "id": 1255,
   "source": "SAMPLE_2",
   "questionNumber": 55,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "COMPUTATION"
+  ]
 }

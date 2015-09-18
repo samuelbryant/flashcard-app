@@ -1,14 +1,19 @@
 {
-  "notes": [],
+  "notes": ["These add in recipricol:\n\n1/T + 1/T_2 = 1/T"],
   "answer": "D",
   "subjects": ["LAB_METHODS"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 52978705665,
+    "dateString": "09/16/15 1:03 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1366.png",
   "id": 1366,
   "source": "GRE_2001",
   "questionNumber": 66,
   "tags": [
     "WRONG",
-    "HARD"
+    "HARD",
+    "STARRED"
   ]
 }

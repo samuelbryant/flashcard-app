@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "D",
   "subjects": ["CIRCUITS"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 62273329468,
+    "dateString": "09/17/15 5:09 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1339.png",
   "id": 1339,
   "source": "GRE_2001",

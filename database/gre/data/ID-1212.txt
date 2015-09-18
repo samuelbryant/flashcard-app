@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "A",
   "subjects": ["LAB_METHODS"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 14365168422,
+    "dateString": "09/17/15 11:34 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1212.png",
   "id": 1212,
   "source": "SAMPLE_2",

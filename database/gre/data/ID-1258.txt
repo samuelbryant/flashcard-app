@@ -2,10 +2,18 @@
   "notes": [],
   "answer": "A",
   "subjects": ["QM"],
-  "responses": [],
+  "responses": [{
+    "response": "X",
+    "responseTime": 134764717504,
+    "dateString": "09/16/15 3:32 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1258.png",
   "id": 1258,
   "source": "SAMPLE_2",
   "questionNumber": 58,
-  "tags": []
+  "tags": [
+    "WRONG",
+    "HARD",
+    "TIME"
+  ]
 }

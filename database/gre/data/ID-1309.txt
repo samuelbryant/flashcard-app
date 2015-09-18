@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "A",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 28677661357,
+    "dateString": "09/17/15 5:08 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1309.png",
   "id": 1309,
   "source": "GRE_2001",

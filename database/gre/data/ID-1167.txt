@@ -2,10 +2,19 @@
   "notes": [],
   "answer": "B",
   "subjects": ["WAVES"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 20826711757,
+    "dateString": "09/17/15 10:10 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1167.png",
   "id": 1167,
   "source": "SAMPLE_3",
   "questionNumber": 67,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "WRONG",
+    "STARRED",
+    "DUMB_MISTAKE"
+  ]
 }

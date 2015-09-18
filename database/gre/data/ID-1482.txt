@@ -5,7 +5,11 @@
     "LAB_METHODS",
     "ATOMIC"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 23840451125,
+    "dateString": "09/17/15 4:17 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1482.png",
   "id": 1482,
   "source": "GRE_1986",

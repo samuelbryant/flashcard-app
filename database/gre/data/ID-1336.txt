@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": [""],
   "answer": "E",
   "subjects": ["THERMO"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 68455293001,
+    "dateString": "09/16/15 6:29 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1336.png",
   "id": 1336,
   "source": "GRE_2001",

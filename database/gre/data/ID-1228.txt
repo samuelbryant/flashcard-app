@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "D",
   "subjects": ["ROTATIONAL"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 121267784099,
+    "dateString": "09/16/15 7:01 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1228.png",
   "id": 1228,
   "source": "SAMPLE_2",
   "questionNumber": 28,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "TIME"
+  ]
 }

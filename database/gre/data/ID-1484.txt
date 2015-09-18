@@ -5,7 +5,11 @@
     "ATOMIC",
     "QM"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 38026226867,
+    "dateString": "09/16/15 6:47 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1484.png",
   "id": 1484,
   "source": "GRE_1986",

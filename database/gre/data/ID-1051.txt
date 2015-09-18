@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["Work in COM frame:\ninitially, momentum is zero,\nand energy is nonzero.\n\nTherefore, produced photon\nmust have energy.\nBut photons with energy also\ncarry momentum.\n=> momentum cannot be conserved"],
   "answer": "D",
   "subjects": ["SPECIAL"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 6183291074,
+    "dateString": "09/17/15 7:17 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1051.png",
   "id": 1051,
   "source": "SAMPLE_1",

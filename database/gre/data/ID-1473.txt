@@ -2,10 +2,14 @@
   "notes": [],
   "answer": "A",
   "subjects": ["WAVES"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 15716519941,
+    "dateString": "09/16/15 3:27 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1473.png",
   "id": 1473,
   "source": "GRE_1986",
   "questionNumber": 73,
-  "tags": ["HARD"]
+  "tags": []
 }

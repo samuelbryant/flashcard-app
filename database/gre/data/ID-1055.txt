@@ -1,11 +1,15 @@
 {
-  "notes": [],
+  "notes": [""],
   "answer": "C",
   "subjects": ["MECHANICS"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 51681126199,
+    "dateString": "09/16/15 12:43 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1055.png",
   "id": 1055,
   "source": "SAMPLE_1",
   "questionNumber": 55,
-  "tags": []
+  "tags": ["COMPUTATION"]
 }

@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "A",
   "subjects": ["QM"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 51522452117,
+    "dateString": "09/17/15 11:35 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1012.png",
   "id": 1012,
   "source": "SAMPLE_1",
   "questionNumber": 12,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "DUMB_MISTAKE"
+  ]
 }

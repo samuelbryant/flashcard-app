@@ -5,7 +5,11 @@
     "SPECIAL",
     "THERMO"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 13546420860,
+    "dateString": "09/17/15 7:05 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1451.png",
   "id": 1451,
   "source": "GRE_1986",

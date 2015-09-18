@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "A",
   "subjects": ["WAVES"],
-  "responses": [],
+  "responses": [{
+    "response": "X",
+    "responseTime": 56368231518,
+    "dateString": "09/16/15 12:14 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1500.png",
   "id": 1500,
   "source": "GRE_1986",
@@ -11,6 +15,7 @@
     "HARD",
     "UNSURE",
     "IMPORTANT",
-    "WRONG"
+    "WRONG",
+    "STARRED"
   ]
 }

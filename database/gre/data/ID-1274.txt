@@ -1,14 +1,18 @@
 {
   "notes": [],
   "answer": "D",
-  "subjects": [
-    "MECHANICS",
-    "FLUIDS"
-  ],
-  "responses": [],
+  "subjects": ["FLUIDS"],
+  "responses": [{
+    "response": "D",
+    "responseTime": 79374688531,
+    "dateString": "09/16/15 11:20 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1274.png",
   "id": 1274,
   "source": "SAMPLE_2",
   "questionNumber": 74,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "NEED_FORMULA"
+  ]
 }

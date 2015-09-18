@@ -1,11 +1,15 @@
 {
-  "notes": [],
+  "notes": ["Trick:\n\nwe want angle of slope of line\ntan(theta) = dy / dx\n\nsin(arctan(x/2)) = \n x/ (sqrt(x^2+4))"],
   "answer": "D",
   "subjects": [
     "MECHANICS",
     "OTHER"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 158867711156,
+    "dateString": "09/17/15 7:36 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1406.png",
   "id": 1406,
   "source": "GRE_1986",

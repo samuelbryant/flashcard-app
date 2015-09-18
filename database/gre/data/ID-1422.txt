@@ -5,7 +5,11 @@
     "EM",
     "RELATIVITY"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 11048339288,
+    "dateString": "09/16/15 5:31 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1422.png",
   "id": 1422,
   "source": "GRE_1986",

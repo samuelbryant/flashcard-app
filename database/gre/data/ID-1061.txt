@@ -1,11 +1,15 @@
 {
-  "notes": [],
+  "notes": ["Key:\nratio can ignore partition function:\n\nratio = e^(+B*C)/e^(-B*C)\nratio'= e^(2*B*C)/e^(-2*B*C)\nratio' = ratio^2"],
   "answer": "C",
   "subjects": [
     "QM",
     "THERMO"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 65015152651,
+    "dateString": "09/17/15 7:28 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1061.png",
   "id": 1061,
   "source": "SAMPLE_1",

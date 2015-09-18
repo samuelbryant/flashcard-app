@@ -5,10 +5,17 @@
     "EM",
     "CIRCUITS"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 129581111599,
+    "dateString": "09/16/15 2:55 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1494.png",
   "id": 1494,
   "source": "GRE_1986",
   "questionNumber": 94,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "STARRED"
+  ]
 }

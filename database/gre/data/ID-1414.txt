@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "A",
   "subjects": ["THERMO"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 9401963674,
+    "dateString": "09/17/15 6:53 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1414.png",
   "id": 1414,
   "source": "GRE_1986",

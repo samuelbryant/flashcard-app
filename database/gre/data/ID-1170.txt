@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "B",
   "subjects": ["OPTICS"],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 104086870246,
+    "dateString": "09/16/15 3:19 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1170.png",
   "id": 1170,
   "source": "SAMPLE_3",
   "questionNumber": 70,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "TIME"
+  ]
 }

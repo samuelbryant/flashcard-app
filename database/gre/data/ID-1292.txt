@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["Trick:\n\nSince each differential slice is\nan infinite sheet, its distance\nto region is irrelvant. Therefore\nwe can condense entire charge\ndistribution to a single sheet\nvia:\n\nsigma = int rho dz \n=> sigma = pa\nE = sigma/2 ep = pa/2ep"],
   "answer": "A",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 112860913968,
+    "dateString": "09/17/15 7:21 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1292.png",
   "id": 1292,
   "source": "SAMPLE_2",

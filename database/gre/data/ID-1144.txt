@@ -5,10 +5,19 @@
     "MECHANICS",
     "ROTATIONAL"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 388595366278,
+    "dateString": "09/17/15 10:38 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1144.png",
   "id": 1144,
   "source": "SAMPLE_3",
   "questionNumber": 44,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "WRONG",
+    "TIME",
+    "COMPUTATION"
+  ]
 }

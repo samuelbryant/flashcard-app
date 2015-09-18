@@ -1,14 +1,28 @@
 {
-  "notes": [],
+  "notes": ["Key:\nCurrent splits, but voltage doesnt\n"],
   "answer": "A",
-  "subjects": [
-    "EM",
-    "CIRCUITS"
+  "subjects": ["CIRCUITS"],
+  "responses": [
+    {
+      "response": "X",
+      "responseTime": 41715839803,
+      "dateString": "09/17/15 12:14 PM"
+    },
+    {
+      "response": "X",
+      "responseTime": 248322861461,
+      "dateString": "09/17/15 11:13 AM"
+    }
   ],
-  "responses": [],
   "databaseImageFilename": "database/gre/images/ID-1057.png",
   "id": 1057,
   "source": "SAMPLE_1",
   "questionNumber": 57,
-  "tags": ["HARD"]
+  "tags": [
+    "WRONG",
+    "HARD",
+    "IMPORTANT",
+    "COMPUTATION",
+    "STARRED"
+  ]
 }

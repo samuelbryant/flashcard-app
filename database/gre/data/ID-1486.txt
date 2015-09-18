@@ -5,7 +5,10 @@
     "LAB_METHODS",
     "EM"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "dateString": "09/16/15 6:28 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1486.png",
   "id": 1486,
   "source": "GRE_1986",

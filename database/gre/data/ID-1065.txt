@@ -1,11 +1,20 @@
 {
-  "notes": [],
+  "notes": ["Key:\n\nE = mc^2*gamma\ngives us a formula for boost\nfactor gamma:\n\ngamma = E/mc^2\n\nrest energy of m_pi boosted\nmust be it's energy in COM\nframe\n"],
   "answer": "E",
   "subjects": ["RELATIVITY"],
-  "responses": [],
+  "responses": [{
+    "response": "X",
+    "responseTime": 279546386145,
+    "dateString": "09/17/15 3:21 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1065.png",
   "id": 1065,
   "source": "SAMPLE_1",
   "questionNumber": 65,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "WRONG",
+    "IMPORTANT",
+    "STARRED"
+  ]
 }

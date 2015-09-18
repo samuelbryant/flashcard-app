@@ -5,7 +5,11 @@
     "MECHANICS",
     "ROTATIONAL"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 18300072278,
+    "dateString": "09/16/15 6:18 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1111.png",
   "id": 1111,
   "source": "SAMPLE_3",

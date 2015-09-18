@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "E",
   "subjects": ["ATOMIC"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 33775637540,
+    "dateString": "09/16/15 7:09 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1430.png",
   "id": 1430,
   "source": "GRE_1986",

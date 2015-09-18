@@ -5,7 +5,11 @@
     "EM",
     "CIRCUITS"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 37772759929,
+    "dateString": "09/17/15 11:49 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1464.png",
   "id": 1464,
   "source": "GRE_1986",

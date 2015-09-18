@@ -5,7 +5,11 @@
     "SPECIAL",
     "ATOMIC"
   ],
-  "responses": [],
+  "responses": [{
+    "response": "B",
+    "responseTime": 37091671892,
+    "dateString": "09/16/15 2:12 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1319.png",
   "id": 1319,
   "source": "GRE_2001",

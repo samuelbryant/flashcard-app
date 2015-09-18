@@ -2,10 +2,18 @@
   "notes": [],
   "answer": "A",
   "subjects": ["RELATIVITY"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 81266707403,
+    "dateString": "09/17/15 9:05 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1261.png",
   "id": 1261,
   "source": "SAMPLE_2",
   "questionNumber": 61,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "NEED_FORMULA",
+    "TIME"
+  ]
 }

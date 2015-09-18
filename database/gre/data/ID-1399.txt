@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["Use conservation of E, p\nInitially, we have\n photon: (E, E)\n electron: (m, 0)\n together: (E + m, E)\nAfterwards, we have:\n  each: (sqrt(m^2 + p^2), p)\n  together: 3((m^2+p^2)^(1/2), p)\n\np conservation:\n  E = 3p => p = E/3\nE conservation\n  E^2 + 2mE + m^2\n = 9m^2 + 9p^2\n=> E = 4m"],
   "answer": "D",
   "subjects": ["RELATIVITY"],
-  "responses": [],
+  "responses": [{
+    "response": "D",
+    "responseTime": 433424433078,
+    "dateString": "09/16/15 3:05 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1399.png",
   "id": 1399,
   "source": "GRE_2001",
@@ -10,6 +14,7 @@
   "tags": [
     "WRONG",
     "HARD",
-    "UNSURE"
+    "UNSURE",
+    "TIME"
   ]
 }

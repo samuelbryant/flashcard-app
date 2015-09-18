@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["Birefringent = x and y have\ndifferent indices of refraction."],
   "answer": "A",
   "subjects": ["WAVES"],
-  "responses": [],
+  "responses": [{
+    "response": "X",
+    "responseTime": 93534974984,
+    "dateString": "09/16/15 3:59 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1102.png",
   "id": 1102,
   "source": "SAMPLE_3",

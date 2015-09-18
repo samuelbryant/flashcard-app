@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "E",
   "subjects": ["THERMO"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 37260242162,
+    "dateString": "09/17/15 10:02 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1466.png",
   "id": 1466,
   "source": "GRE_1986",

@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["Fast method:\nnuclear => ~ 1 MeV\n\nE = hc / lambda\nlamba = hc/E\n   = 1240E-9/E6 ~ 1240 fm\ntoo small for visible, etc."],
   "answer": "A",
   "subjects": ["SPECIAL"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 73272462651,
+    "dateString": "09/16/15 7:17 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1364.png",
   "id": 1364,
   "source": "GRE_2001",

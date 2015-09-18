@@ -1,8 +1,12 @@
 {
-  "notes": [],
+  "notes": ["Other two are not normalizable"],
   "answer": "A",
   "subjects": ["QM"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 13496149776,
+    "dateString": "09/17/15 6:59 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1330.png",
   "id": 1330,
   "source": "GRE_2001",

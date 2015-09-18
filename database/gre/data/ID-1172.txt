@@ -1,8 +1,15 @@
 {
-  "notes": [],
+  "notes": ["Uncertainty principle gives:\n  (t)*(E) ~ hbar/2\n\nAnd einstein relation gives:\n  E = hbar * w  (units = eV)\n\nSo plugging 1 into 2:\n  hbar * w = hbar/(2t) ~ 10^-6 eV\n\nActual solution\nNatural line width is half-height\nwidth of E distribution\n  Gamma = 2 E"],
   "answer": "C",
-  "subjects": ["QM"],
-  "responses": [],
+  "subjects": [
+    "QM",
+    "LAB_METHODS"
+  ],
+  "responses": [{
+    "response": "C",
+    "responseTime": 144120415693,
+    "dateString": "09/16/15 10:33 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1172.png",
   "id": 1172,
   "source": "SAMPLE_3",

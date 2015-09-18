@@ -1,8 +1,15 @@
 {
   "notes": [],
   "answer": "C",
-  "subjects": ["THERMO"],
-  "responses": [],
+  "subjects": [
+    "THERMO",
+    "SPECIAL"
+  ],
+  "responses": [{
+    "response": "C",
+    "responseTime": 15874016178,
+    "dateString": "09/17/15 11:04 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1007.png",
   "id": 1007,
   "source": "SAMPLE_1",

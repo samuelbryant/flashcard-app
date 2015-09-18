@@ -1,11 +1,19 @@
 {
-  "notes": [],
+  "notes": ["Apply bound/surface charge\nThen apply gauss' law.\nIt's messy, but very doable"],
   "answer": "C",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 157715571297,
+    "dateString": "09/17/15 7:34 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1067.png",
   "id": 1067,
   "source": "SAMPLE_1",
   "questionNumber": 67,
-  "tags": ["HARD"]
+  "tags": [
+    "HARD",
+    "STARRED",
+    "COMPUTATION"
+  ]
 }

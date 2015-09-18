@@ -2,10 +2,14 @@
   "notes": [],
   "answer": "E",
   "subjects": ["SPECIAL"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 15877438660,
+    "dateString": "09/17/15 7:26 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1044.png",
   "id": 1044,
   "source": "SAMPLE_1",
   "questionNumber": 44,
-  "tags": ["HARD"]
+  "tags": ["UNSURE"]
 }

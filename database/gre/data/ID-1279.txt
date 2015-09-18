@@ -2,10 +2,19 @@
   "notes": [],
   "answer": "B",
   "subjects": ["EM"],
-  "responses": [],
+  "responses": [{
+    "response": "A",
+    "responseTime": 170568707985,
+    "dateString": "09/17/15 10:10 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1279.png",
   "id": 1279,
   "source": "SAMPLE_2",
   "questionNumber": 79,
-  "tags": []
+  "tags": [
+    "HARD",
+    "WRONG",
+    "STARRED",
+    "DUMB_MISTAKE"
+  ]
 }

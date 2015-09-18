@@ -2,10 +2,17 @@
   "notes": [],
   "answer": "C",
   "subjects": ["MECHANICS"],
-  "responses": [],
+  "responses": [{
+    "response": "C",
+    "responseTime": 150526114474,
+    "dateString": "09/17/15 11:43 AM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1293.png",
   "id": 1293,
   "source": "SAMPLE_2",
   "questionNumber": 93,
-  "tags": []
+  "tags": [
+    "TIME",
+    "COMPUTATION"
+  ]
 }

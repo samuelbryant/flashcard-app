@@ -2,7 +2,11 @@
   "notes": [],
   "answer": "B",
   "subjects": ["ROTATIONAL"],
-  "responses": [],
+  "responses": [{
+    "response": "E",
+    "responseTime": 74686461757,
+    "dateString": "09/17/15 4:50 PM"
+  }],
   "databaseImageFilename": "database/gre/images/ID-1213.png",
   "id": 1213,
   "source": "SAMPLE_2",
