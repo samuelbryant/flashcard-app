@@ -207,4 +207,12 @@ public class Question extends AbstractQuestion {
     System.out.println(q.getLastResponseValue());
   }
   
+  public boolean isWrongOrHard() {
+    if (hasAnswered() && hasAnsweredWrong()) {
+        return true;
+    } else {
+      return (hasTag(Tag.HARD) || hasTag(Tag.WRONG));
+    }
+  }
+  
 }

@@ -57,11 +57,9 @@ public class SubjectBreakdown {
       if (q.hasAnswered()) {
         numberAnswered++;
       }
-      if (q.hasAnswered() && q.hasAnsweredWrong()) {
+      if (q.isWrongOrHard()) {
         this.numberWrongOrHard++;
-      } else if (q.hasTag(Tag.HARD) || q.hasTag(Tag.WRONG)) {
-        this.numberWrongOrHard++;
-      } else if (q.hasAnswered()) {
+      } else {
         this.numberRightAndOkay++;
       }
     }

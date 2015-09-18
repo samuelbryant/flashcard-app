@@ -9,6 +9,7 @@ import java.util.Map;
 import models.AbstractQuestion;
 import models.Flashcard;
 import models.Question;
+import models.Tag;
 
 /**
  * Class used to sort lists of Questions in-place.
@@ -152,6 +153,40 @@ public abstract class ListSorter <T extends AbstractQuestion> {
     @Override
     public void sort(ArrayList<K> list) {}
   };
+  
+  public static final class WrongHardStarred extends ListSorter<Question> {
+    @Override
+    public void sort(ArrayList<Question> list) {
+      ArrayList<Question> listCopy = new ArrayList<>(list.size());
+      Collections.copy(listCopy, list);
+      list.clear();
+      for (Question q: listCopy) {
+        if (q.isWrongOrHard()) {
+          list.add(q);
+        } else if (q.hasTag(Tag.STARRED)) {
+          list.add(q);
+        }
+      }
+    }
+  };
+  
+  public static final class Warmup extends ListSorter<Question> {
+    @Override
+    public void sort(ArrayList<Question> list) {
+      ArrayList<Question> listCopy = new ArrayList<>(list.size());
+      Collections.copy(listCopy, list);
+      list.clear();
+      for (Question q: listCopy) {
+        if (q.isWrongOrHard()) {
+          list.add(q);
+        } else if (q.hasTag(Tag.STARRED)) {
+          list.add(q);
+        } else if (q.hasTag(Tag.COMPUTATION)) {
+          list.add(q);
+        }
+      }
+    }
+  };
 
   static void printList(ArrayList<Integer> list) {
     for (Integer i: list) {
@@ -168,6 +203,8 @@ public abstract class ListSorter <T extends AbstractQuestion> {
     sorters.put("None", new NullSorter<Question>());
     sorters.put("Wrong %", WRONG_PERCENTAGE_SORTER);
     sorters.put("Quiz 1", new engine.ListQuiz1());
+    sorters.put("Wrong/Hard/Starred", new WrongHardStarred());
+    sorters.put("Warmpup", new Warmup());
     return sorters;
   }
   

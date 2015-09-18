@@ -1,8 +1,6 @@
 package engine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import models.AbstractQuestion;
@@ -13,6 +11,7 @@ import models.Tag;
 
 /**
  * Class used to filter lists of Questions to create new lists.
+ * @param <T>
  */
 public abstract class ListFilter <T extends AbstractQuestion> {
 
@@ -122,6 +121,13 @@ public abstract class ListFilter <T extends AbstractQuestion> {
       return true;
     }
   };
+  
+  public static class WrongOrHardFIlter extends ListFilter<Question> {
+    @Override
+    public boolean accept(Question q) {
+      return q.isWrongOrHard();
+    }
+  }
 
   /**
    * ListFilter class which filters Question lists by the Source value of the Question instances.
