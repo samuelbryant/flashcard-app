@@ -1,0 +1,35 @@
+{
+  "databaseQuestionFilename": "database/flc/images/ID-1086-Q.png",
+  "notes": [],
+  "subjects": [],
+  "responses": [
+    {
+      "response": "B",
+      "responseTime": 27579470202,
+      "dateString": "09/18/15 7:27 PM"
+    },
+    {
+      "response": "B",
+      "responseTime": 41584974054,
+      "dateString": "09/18/15 7:14 PM"
+    },
+    {
+      "response": "B",
+      "responseTime": 96595127952,
+      "dateString": "09/18/15 7:13 PM"
+    },
+    {
+      "response": "D",
+      "responseTime": 51110379266,
+      "dateString": "09/18/15 5:33 PM"
+    },
+    {
+      "response": "D",
+      "responseTime": 9531801792,
+      "dateString": "09/16/15 4:32 PM"
+    }
+  ],
+  "id": 1086,
+  "databaseAnswerFilename": "database/flc/images/ID-1086-A.png",
+  "tags": ["STARRED"]
+}

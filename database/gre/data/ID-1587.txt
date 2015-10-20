@@ -1,15 +1,22 @@
 {
-  "notes": ["Use effective potential formula\nSet dV/dr = 0\nplug back into V,\nyou get 0"],
+  "notes": ["Use effective potential formula\nSet dV/dr = 0\nplug back into V,\nyou get 0\n\nAlso, since U ~ r^-2\n\nVirial theorem gives:\n  2<T> = -2<V>\n=> energy is 0\n\nWorks here because T, V are \nconstant, therefore\nT + V = <T> + <V>"],
   "answer": "C",
   "subjects": [
     "MECHANICS",
     "ROTATIONAL"
   ],
-  "responses": [{
-    "response": "C",
-    "responseTime": 91116061483,
-    "dateString": "09/11/15 8:09 AM"
-  }],
+  "responses": [
+    {
+      "response": "C",
+      "responseTime": 200713232316,
+      "dateString": "09/18/15 3:39 PM"
+    },
+    {
+      "response": "C",
+      "responseTime": 91116061483,
+      "dateString": "09/11/15 8:09 AM"
+    }
+  ],
   "databaseImageFilename": "database/gre/images/ID-1587.png",
   "id": 1587,
   "source": "GRE_1991",

@@ -1,15 +1,22 @@
 {
-  "notes": ["Stern Gerlach"],
+  "notes": ["Stern Gerlach\n"],
   "answer": "D",
   "subjects": [
     "QM",
     "ATOMIC"
   ],
-  "responses": [{
-    "response": "C",
-    "responseTime": 71845088502,
-    "dateString": "09/10/15 10:57 PM"
-  }],
+  "responses": [
+    {
+      "response": "D",
+      "responseTime": 45280170767,
+      "dateString": "09/18/15 3:45 PM"
+    },
+    {
+      "response": "C",
+      "responseTime": 71845088502,
+      "dateString": "09/10/15 10:57 PM"
+    }
+  ],
   "databaseImageFilename": "database/gre/images/ID-1611.png",
   "id": 1611,
   "source": "GRE_1996",

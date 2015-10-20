@@ -1,15 +1,19 @@
 {
   "notes": [],
   "answer": "D",
-  "subjects": [
-    "EM",
-    "CIRCUITS"
+  "subjects": ["EM"],
+  "responses": [
+    {
+      "response": "D",
+      "responseTime": 25302638111,
+      "dateString": "09/18/15 6:55 AM"
+    },
+    {
+      "response": "D",
+      "responseTime": 47174124146,
+      "dateString": "09/06/15 11:31 PM"
+    }
   ],
-  "responses": [{
-    "response": "D",
-    "responseTime": 47174124146,
-    "dateString": "09/06/15 11:31 PM"
-  }],
   "databaseImageFilename": "database/gre/images/ID-1016.png",
   "id": 1016,
   "source": "SAMPLE_1",

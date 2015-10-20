@@ -2,11 +2,18 @@
   "notes": ["This one is tricky, but it can be\nsimple\n\nthe key is \"constant speed\"\nwhich means that v_f = v_i\nin other words, all of the\npotential energy is lost to\nfriction.\n\nTherefore, the answer is just\nthe potential energy: mgh"],
   "answer": "B",
   "subjects": ["MECHANICS"],
-  "responses": [{
-    "response": "B",
-    "responseTime": 116303267553,
-    "dateString": "09/08/15 11:31 PM"
-  }],
+  "responses": [
+    {
+      "response": "B",
+      "responseTime": 25018973253,
+      "dateString": "09/18/15 4:05 PM"
+    },
+    {
+      "response": "B",
+      "responseTime": 116303267553,
+      "dateString": "09/08/15 11:31 PM"
+    }
+  ],
   "databaseImageFilename": "database/gre/images/ID-1606.png",
   "id": 1606,
   "source": "GRE_1996",

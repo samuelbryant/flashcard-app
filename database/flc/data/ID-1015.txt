@@ -2,7 +2,18 @@
   "databaseQuestionFilename": "database/flc/images/ID-1015-Q.png",
   "notes": [],
   "subjects": [],
-  "responses": [],
+  "responses": [
+    {
+      "response": "A",
+      "responseTime": 17526771398,
+      "dateString": "09/18/15 7:37 PM"
+    },
+    {
+      "response": "B",
+      "responseTime": 24429167570,
+      "dateString": "09/18/15 5:43 PM"
+    }
+  ],
   "id": 1015,
   "databaseAnswerFilename": "database/flc/images/ID-1015-A.png",
   "tags": []

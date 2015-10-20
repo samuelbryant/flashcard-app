@@ -2,12 +2,24 @@
   "databaseQuestionFilename": "database/flc/images/ID-1074-Q.png",
   "notes": [],
   "subjects": [],
-  "responses": [{
-    "response": "D",
-    "responseTime": 6362221534,
-    "dateString": "09/17/15 7:45 AM"
-  }],
+  "responses": [
+    {
+      "response": "B",
+      "responseTime": 21453578442,
+      "dateString": "09/18/15 7:19 PM"
+    },
+    {
+      "response": "C",
+      "responseTime": 22345652138,
+      "dateString": "09/18/15 7:08 PM"
+    },
+    {
+      "response": "D",
+      "responseTime": 6362221534,
+      "dateString": "09/17/15 7:45 AM"
+    }
+  ],
   "id": 1074,
   "databaseAnswerFilename": "database/flc/images/ID-1074-A.png",
-  "tags": []
+  "tags": ["STARRED"]
 }

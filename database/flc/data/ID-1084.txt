@@ -1,0 +1,20 @@
+{
+  "databaseQuestionFilename": "database/flc/images/ID-1084-Q.png",
+  "notes": [],
+  "subjects": [],
+  "responses": [
+    {
+      "response": "B",
+      "responseTime": 27355177280,
+      "dateString": "09/18/15 7:18 PM"
+    },
+    {
+      "response": "C",
+      "responseTime": 10347051715,
+      "dateString": "09/18/15 6:39 PM"
+    }
+  ],
+  "id": 1084,
+  "databaseAnswerFilename": "database/flc/images/ID-1084-A.png",
+  "tags": ["STARRED"]
+}

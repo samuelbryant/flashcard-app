@@ -2,8 +2,24 @@
   "databaseQuestionFilename": "database/flc/images/ID-1071-Q.png",
   "notes": [],
   "subjects": [],
-  "responses": [],
+  "responses": [
+    {
+      "response": "B",
+      "responseTime": 3395504895,
+      "dateString": "09/18/15 7:39 PM"
+    },
+    {
+      "response": "B",
+      "responseTime": 12779814256,
+      "dateString": "09/18/15 7:27 PM"
+    },
+    {
+      "response": "D",
+      "responseTime": 40778198334,
+      "dateString": "09/18/15 5:59 PM"
+    }
+  ],
   "id": 1071,
   "databaseAnswerFilename": "database/flc/images/ID-1071-A.png",
-  "tags": []
+  "tags": ["STARRED"]
 }

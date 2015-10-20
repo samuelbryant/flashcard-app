@@ -5,11 +5,18 @@
     "MATH",
     "EM"
   ],
-  "responses": [{
-    "response": "B",
-    "responseTime": 173522931596,
-    "dateString": "09/10/15 12:14 PM"
-  }],
+  "responses": [
+    {
+      "response": "A",
+      "responseTime": 71915371416,
+      "dateString": "09/18/15 3:23 PM"
+    },
+    {
+      "response": "B",
+      "responseTime": 173522931596,
+      "dateString": "09/10/15 12:14 PM"
+    }
+  ],
   "databaseImageFilename": "database/gre/images/ID-1643.png",
   "id": 1643,
   "source": "GRE_1996",

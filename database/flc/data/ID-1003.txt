@@ -2,8 +2,19 @@
   "databaseQuestionFilename": "database/flc/images/ID-1003-Q.png",
   "notes": [],
   "subjects": [],
-  "responses": [],
+  "responses": [
+    {
+      "response": "A",
+      "responseTime": 17434516999,
+      "dateString": "09/18/15 7:13 PM"
+    },
+    {
+      "response": "C",
+      "responseTime": 20934398534,
+      "dateString": "09/18/15 6:00 PM"
+    }
+  ],
   "id": 1003,
   "databaseAnswerFilename": "database/flc/images/ID-1003-A.png",
-  "tags": []
+  "tags": ["STARRED"]
 }
