@@ -71,6 +71,10 @@ public class ListQuiz1 extends ListQuizSorter<Question> {
     }
   }
 
+  @Override
+  protected void preprocess(ArrayList<Question> list) {
+  }
+
 
 
 }

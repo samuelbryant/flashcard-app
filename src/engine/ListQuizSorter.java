@@ -13,6 +13,8 @@ import models.AbstractQuestion;
 public abstract class ListQuizSorter<Q_TYPE extends AbstractQuestion> extends ListSorter<Q_TYPE> {
 
   ListQuizSorter() {}
+  
+  protected abstract void preprocess(ArrayList<Q_TYPE> list);
 
   /**
    *
@@ -28,6 +30,8 @@ public abstract class ListQuizSorter<Q_TYPE extends AbstractQuestion> extends Li
    */
   @Override
   public void sort(ArrayList<Q_TYPE> list) {
+    this.preprocess(list);
+    
     LinkedList<Q_TYPE> questionPool = new LinkedList<>();
 
     // Add each Q_TYPE to pool the number of times equal to its weight.

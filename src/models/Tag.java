@@ -42,7 +42,8 @@ public enum Tag {
   
   STARRED,
   
-  COMPUTATION;
+  COMPUTATION,
+  HIDE;
 
   /**
    *

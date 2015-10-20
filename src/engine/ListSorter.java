@@ -76,7 +76,7 @@ public abstract class ListSorter <T extends AbstractQuestion> {
    * ListSorter instance which sorts questions from least recently answered to most recently answered.
    * @param <K>
    */
-  public static final class LastAnsweredSorter<K extends AbstractQuestion> extends CompareSorter<K> {
+  public static class LastAnsweredSorter<K extends AbstractQuestion> extends CompareSorter<K> {
     public LastAnsweredSorter() {
       super(new Comparator<K>(){
         @Override
@@ -158,7 +158,9 @@ public abstract class ListSorter <T extends AbstractQuestion> {
     @Override
     public void sort(ArrayList<Question> list) {
       ArrayList<Question> listCopy = new ArrayList<>(list.size());
-      Collections.copy(listCopy, list);
+      for (Question q: list) {
+        listCopy.add(q);
+      }
       list.clear();
       for (Question q: listCopy) {
         if (q.isWrongOrHard()) {
@@ -199,6 +201,7 @@ public abstract class ListSorter <T extends AbstractQuestion> {
     Map<String, ListSorter<Question>> sorters = new HashMap<>();
     sorters.put("By ids", new IdSorter<Question>());
     sorters.put("Last answered", new LastAnsweredSorter<Question>());
+    sorters.put("Last answered fuzzed", new LastAnsweredFuzzSorter<Question>());
     sorters.put("Random", new RandomSorter<Question>());
     sorters.put("None", new NullSorter<Question>());
     sorters.put("Wrong %", WRONG_PERCENTAGE_SORTER);
